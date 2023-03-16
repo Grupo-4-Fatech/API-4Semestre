@@ -124,7 +124,15 @@ class UserController {
     }
 }
 
-  
+public async list(req: Request, res: Response): Promise<Response> {
+  const response: any = await AppDataSource.getRepository(User).find({
+      order: {
+          mail: 'asc'
+      }
+  });
+  return res.json(response);
 }
 
-export default new UserController();
+
+
+}export default new UserController();
