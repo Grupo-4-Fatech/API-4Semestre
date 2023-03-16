@@ -5,7 +5,6 @@ import UserController from "./UserController";
 
 export{
     Data,
-    
     Login,
     UserController
 };
