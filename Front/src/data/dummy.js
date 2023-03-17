@@ -129,13 +129,15 @@ export const links = [
         icon: <BsKanban />,
       },
       {
-        name: 'Open hotFlix',
+        name: 'Ticket',
         icon: <FiEdit />,
+
+        
       },
-      {
-        name: 'Open new feature',
-        icon: <FiEdit />,
-      },
+      // {
+      //   name: 'Open new feature',
+      //   icon: <FiEdit />,
+      // },
     ],
   }
   
