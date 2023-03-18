@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { MdOutlineCancel } from 'react-icons/md';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
@@ -7,16 +7,21 @@ import { links } from '../data/dummy';
 import { useStateContext } from '../contexts/ContextProvider';
 
 const Sidebar = () => {
-  const { currentColor, activeMenu, setActiveMenu, screenSize } = useStateContext();
+
+  const { currentColor, activeMenu, setActiveMenu, screenSize, currentMode } = useStateContext();
 
   const handleCloseSideBar = () => {
     if (activeMenu !== undefined && screenSize <= 900) {
       setActiveMenu(false);
     }
-  };
+  }
 
   const activeLink = 'flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg  text-white  text-md m-2';
   const normalLink = 'flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-md text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray m-2';
+
+  const logoLight = 'https://s3-sa-east-1.amazonaws.com/recrutai-dev/1647fba0-ea33-11eb-9826-8d3dd8a2a1d2/logo/1647fba0-ea33-11eb-9826-8d3dd8a2a1d2_1628785344229_54w.png'
+  const logoDark = 'https://uploads-ssl.webflow.com/60dcc4691817e11aa93685ab/636cfbef568f863947dd4951_logo-color.svg'
+
 
   return (
     <div className="ml-3 h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10">
@@ -30,7 +35,12 @@ const Sidebar = () => {
              text-slate-900">
 
               {/* Logo da ionicHelth */}
-              <img src="https://uploads-ssl.webflow.com/60dcc4691817e11aa93685ab/636cfbef568f863947dd4951_logo-color.svg" alt="Logotipo de IONIC Health" width="137" class="image-4" />
+  
+              {currentMode === 'Light' ? (
+                <img src={logoLight} alt="Logotipo de IONIC Health" width="137" className="image-4" />
+              ) : (
+                <img src={logoDark} alt="Logotipo de IONIC Health" width="137" className="image-4" />
+              )}
 
             </Link>
 
