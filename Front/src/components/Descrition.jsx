@@ -5,8 +5,8 @@ export default function Descrition() {
     return (
         <>
         <div className='pt-6'>
-        <label >Description</label>
-            <RichTextEditorComponent placeholder={'Write the description'} >
+        <label className="text-lg font-bold dark:text-black">Description</label>
+            <RichTextEditorComponent placeholder={'Write the description'}>
                 <Inject services={[HtmlEditor, Toolbar, Image, Link, QuickToolbar]} />
             </RichTextEditorComponent>
             </div>
