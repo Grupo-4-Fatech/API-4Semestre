@@ -8,7 +8,7 @@ import { useStateContext } from '../contexts/ContextProvider'
 export default function Chamado() {
     const { currentColor } = useStateContext();
     return (
-        <div className="relative m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
+        <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
             <Header category="Page" title="Ticket" />
             <Campo text="Title " id="Titulo" placeholder="Title" type="text" />
             <label className="text-lg font-bold dark:text-black">Classification</label>
@@ -19,7 +19,7 @@ export default function Chamado() {
             </select>
             <Descrition />
             <div className="mt-5 mb-5 flex bg-purple-500" >
-                <button style={{backgroundColor: currentColor, position:'absolute'}} class="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">
+                <button style={{backgroundColor: currentColor, position:'absolute'}} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">
                     <span className='pr-1'>Send</span>
                     <MdSend />
                 </button>
