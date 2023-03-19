@@ -18,7 +18,7 @@ export default function Chamado() {
                 <option>Feature</option>
             </select>
             <Descrition />
-            <div className="mt-5 mb-5 flex bg-purple-500" >
+            <div className="mt-5 mb-5 flex" >
                 <button style={{backgroundColor: currentColor, position:'absolute'}} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">
                     <span className='pr-1'>Send</span>
                     <MdSend />
