@@ -7,7 +7,7 @@ const AppDataSource = new DataSource({
     host: "localhost",
     port: 3001,
     username: "root",
-    password: "1903",
+    password: "fatec",
     database: "localhost",
     synchronize: true,
     logging: false,
