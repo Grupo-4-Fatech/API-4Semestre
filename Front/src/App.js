@@ -4,10 +4,11 @@ import { FiSettings } from 'react-icons/fi';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
 import { Navbar, Footer, Sidebar, ThemeSettings, UserProfile } from './components';
-import { Kanban , Customers} from './pages';
+import { Kanban, Customers } from './pages';
 import './App.css';
 
 import { useStateContext } from './contexts/ContextProvider';
+import Chamado from './pages/Chamado';
 
 const App = () => {
   const { setCurrentColor, setCurrentMode, currentMode, activeMenu, currentColor, themeSettings, setThemeSettings } = useStateContext();
@@ -63,11 +64,12 @@ const App = () => {
             <div>
               {themeSettings && (<ThemeSettings />)}
 
-              <Routes>               
-                <Route path="/" element={(<Customers/>)} />              
+              <Routes>
+                <Route path="/" element={(<Customers />)} />
                 <Route path="/kanban" element={<Kanban />} />
-                <Route path="/customers" element={<Customers />} />           
-               
+                <Route path="/customers" element={<Customers />} />
+                <Route path="/Ticket" element={<Chamado />} />
+
 
               </Routes>
             </div>

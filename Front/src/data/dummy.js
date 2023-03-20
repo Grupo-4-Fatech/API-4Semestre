@@ -34,11 +34,6 @@ export const kanbanGrid = [
     keyField: 'InProgress',
     allowToggle: true },
 
-  { headerText: 'Testing',
-    keyField: 'Testing',
-    allowToggle: true,
-    isExpanded: false },
-
   { headerText: 'Done',
     keyField: 'Close',
     allowToggle: true },
@@ -129,13 +124,15 @@ export const links = [
         icon: <BsKanban />,
       },
       {
-        name: 'Open hotFlix',
+        name: 'Ticket',
         icon: <FiEdit />,
+
+        
       },
-      {
-        name: 'Open new feature',
-        icon: <FiEdit />,
-      },
+      // {
+      //   name: 'Open new feature',
+      //   icon: <FiEdit />,
+      // },
     ],
   }
   
