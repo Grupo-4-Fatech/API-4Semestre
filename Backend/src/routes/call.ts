@@ -7,7 +7,7 @@ const routes = Router();
 
 
 routes.post("/create", CallController.create); 
-// routes.patch("/update", CallController.custom);
+routes.patch("/update", CallController.update);
 routes.delete("/delete", CallController.delete);
 routes.get("/list",CallController.list);
 // routes.get("/status",CallController.status);

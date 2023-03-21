@@ -48,6 +48,41 @@ class UserController {
         return res.json(usuario);
 
     }
+    public async update(req: Request, res: Response): Promise<Response> {
+        const { id, firstName, lastName, age } = req.body;
+     
+        const usuario: any = await AppDataSource.manager.findOneBy(User, { id }).catch((e) => {
+          return { error: "Identificador inválido" };
+        })
+        if (usuario && usuario.id) {
+          if (firstName !== "") {
+            usuario.firstName = firstName;
+          }
+          if (lastName !== "") {
+            usuario.lastName = lastName;
+          }
+          if (age !== "") {
+            usuario.age = age;
+          }
+          const r = await AppDataSource.manager.save(User, usuario).catch((e) => {
+            // testa se o e-mail é repetido
+            if (/(firstName)[\s\S]+(already exists)/.test(e.detail)) {
+              return ({ error: 'first name already exists' });
+            }
+            return e;
+          })
+          if (!r.error) {
+            return res.json({ id: usuario.id, firstName: usuario.firstName });
+          }
+          return res.json(r);
+        }
+        else if (usuario && usuario.error) {
+          return res.json(firstName)
+        }
+        else {
+          return res.json({ error: "Usuário não localizado" });
+        }
+      }
 
 
     public async delete(req: Request, res: Response): Promise<Response> {

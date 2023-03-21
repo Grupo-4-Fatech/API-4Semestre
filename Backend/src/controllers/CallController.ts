@@ -15,6 +15,42 @@ class CallController {
         });
         return res.json(response);
     }
+    public async update(req: Request, res: Response): Promise<Response> {
+        const { id, title, type, description, status } = req.body;
+        const call: any = await AppDataSource.manager.findOneBy(Call, { id }).catch((e) => {
+          return { error: "Identificador inválido" };
+        })
+        if (call && call.id) {
+          if (title !== "") {
+            call.title = title;
+          }
+          if (type !== "") {
+            call.type = type;
+          }
+          if (description !== "") {
+            call.description = description;
+          }
+          if (status !== "") {
+            call.status = status;
+          }
+          const r = await AppDataSource.manager.save(Call, call).catch((e) => {
+            if (/(title)[\s\S]+(already exists)/.test(e.detail)) {
+              return ({ error: ' title already exists' });
+            }
+            return e;
+          })
+          if (!r.error) {
+            return res.json({ id: call.id, mail: call.mail });
+          }
+          return res.json(r);
+        }
+        else if (call && call.error) {
+          return res.json(title)
+        }
+        else {
+          return res.json({ error: "Usuário não localizado" });
+        }
+      }
 
 
 

@@ -17,6 +17,7 @@
     "@syncfusion/ej2-react-popups": "^19.4.52",
     "@syncfusion/ej2-react-richtexteditor": "^19.4.50",
     "@syncfusion/ej2-react-schedule": "^19.4.50",
+    "concurrently": "^7.6.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
@@ -27,8 +28,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server": "cd.. && cd Backend && npm run dev",
+    "dev": "concurrently --kill-others-on-fail \"npm start\" \"npm run server\""
   },
+  "proxy": "http://localhost:3001/",
   "eslintConfig": {
     "extends": [
       "react-app",
