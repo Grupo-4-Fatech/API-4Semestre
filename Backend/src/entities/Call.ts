@@ -1,20 +1,20 @@
 import {Entity, Column, PrimaryGeneratedColumn} from  'typeorm'
 
-@Entity({name:"call"})
+@Entity()
 export class Call {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column("varchar2", {length: 200})
+    @Column( {})
     title: string;
 
-    @Column("varchar2", {length: 12})
+    @Column( {})
     type: string;
 
-    @Column("varchar2", {length: 600})
+    @Column({})
     description: string;
 
-    @Column("varchar2", {length: 10})
+    @Column( {})
     status: string;
 
 } 

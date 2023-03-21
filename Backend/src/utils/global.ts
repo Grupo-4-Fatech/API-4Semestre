@@ -14,7 +14,6 @@ export function IsUndefined(isnull: any){
 }
 
 export function GlobalCallQuery(id?: number, type?: string, title?: string, status?: string): string{
-    var
     
     return '';
 }
