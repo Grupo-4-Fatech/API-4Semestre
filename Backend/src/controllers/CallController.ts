@@ -5,7 +5,6 @@ import { IsUndefined } from "../utils/global";
 
 
 class CallController {
-    private callRepository = AppDataSource.getRepository("call")
 
     async list(req: Request, res: Response): Promise<Response> {
         const response: any = await AppDataSource.getRepository(Call).find({
@@ -54,18 +53,17 @@ class CallController {
 
 
 
-    async status(req: Request, res: Response, next: NextFunction){
-        const status = req.params.status
+    async status(req: Request, res: Response): Promise<Response>{
+        const {status} = req.body;
+        const callRepository = AppDataSource.getRepository(Call)
 
-        const call = await this.callRepository.findOne({
-            where: {status}
-        })
+        const call = await callRepository.findBy({status: status})
 
-        if(!call){
-            return "Not Found"
+        if(IsUndefined(status)){
+          return res.json(status);
         }
 
-        return status;
+        return res.json(call);
     }
 
     public async one(req: Request, res: Response): Promise<Response> {

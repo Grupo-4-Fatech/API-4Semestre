@@ -10,7 +10,7 @@ routes.post("/create", CallController.create);
 routes.patch("/update", CallController.update);
 routes.delete("/delete", CallController.delete);
 routes.get("/list",CallController.list);
-// routes.get("/status",CallController.status);
+routes.get("/status", CallController.status);
 
 
 
