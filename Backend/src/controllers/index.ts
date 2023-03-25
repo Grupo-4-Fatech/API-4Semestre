@@ -1,9 +1,6 @@
-
-import UserController from "./UserController";
-import CallController from "./CallController";
+import TicketController from "./TicketController";
 
 export{
-    UserController,
-    CallController
+    TicketController
 
 };

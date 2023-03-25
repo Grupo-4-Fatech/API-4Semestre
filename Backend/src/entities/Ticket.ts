@@ -1,7 +1,7 @@
 import {Entity, Column, PrimaryGeneratedColumn} from  'typeorm'
 
 @Entity()
-export class Call {
+export class Ticket {
     @PrimaryGeneratedColumn()
     id: number
 
