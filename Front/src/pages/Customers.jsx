@@ -1,33 +1,43 @@
 import React from 'react';
-import { GridComponent, ColumnsDirective, ColumnDirective, Page, Selection, Inject, Edit, Toolbar, Sort, Filter } from '@syncfusion/ej2-react-grids';
-
-import { customersData, customersGrid } from '../data/dummy';
-import { Header } from '../components';
+import { useStateContext } from '../contexts/ContextProvider'
 
 const Customers = () => {
-  const selectionsettings = { persistSelection: true };
-  const toolbarOptions = ['Delete'];
-  const editing = { allowDeleting: true, allowEditing: true };
-
-  return (
+    const { currentColor } = useStateContext();
+    const headers = ['Title', 'Classification', 'Status', 'Edit', 'File']
+    const data = ['Conexão banco de dados','Hotfix','Em fila'] 
+    return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-      <Header category="Page" title="Customers" />
-      <GridComponent
-        dataSource={customersData}
-        enableHover={false}
-        allowPaging
-        pageSettings={{ pageCount: 5 }}
-        selectionSettings={selectionsettings}
-        toolbar={toolbarOptions}
-        editSettings={editing}
-        allowSorting
-      >
-        <ColumnsDirective>
-          {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-          {customersGrid.map((item, index) => <ColumnDirective key={index} {...item} />)}
-        </ColumnsDirective>
-        <Inject services={[Page, Selection, Toolbar, Edit, Sort, Filter]} />
-      </GridComponent>
+      
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:text-gray-400 content-center">
+            <tr>
+                {headers.map((header) => 
+                    <th scope="col" class="px-6 py-3"> 
+                        {header}
+                    </th>)}
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="bg-white hover:bg-gray-50 dark:hover:bg-gray-300 content-center">
+                {data.map((dat) => 
+                        <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
+                            {dat}
+                        </td>)}
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
+                    <button style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Edit</button>
+                </td>
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
+                <button className="bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">File</button>
+                </td>
+                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
+                </td>
+                
+            </tr>
+        </tbody>
+    </table>
+</div>
+
     </div>
   );
 };

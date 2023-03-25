@@ -1,9 +1,6 @@
 import React from 'react';
 import {  FiEdit } from 'react-icons/fi';
 import { BsKanban,BsCurrencyDollar} from 'react-icons/bs';
-import avatar from './avatar.jpg';
-import avatar2 from './avatar2.jpg';
-
 
 export const gridOrderImage = (props) => (
   <div>
@@ -53,65 +50,12 @@ const customerGridImage = (props) => (
   </div>
 );
 
-const customerGridStatus = (props) => (
+const ticketGridStatus = (props) => (
   <div className="flex gap-2 justify-center items-center text-gray-700 capitalize">
     <p style={{ background: props.StatusBg }} className="rounded-full h-3 w-3" />
     <p>{props.Status}</p>
   </div>
 );
-
-
-
-
-
-
-
-
-
-
-
-export const customersGrid = [
-  { type: 'checkbox', width: '50' },
-  { headerText: 'Name',
-    width: '150',
-    template: customerGridImage,
-    textAlign: 'Center' },
-  { field: 'ProjectName',
-    headerText: 'Project Name',
-    width: '150',
-    textAlign: 'Center' },
-  { field: 'Status',
-    headerText: 'Status',
-    width: '130',
-    format: 'yMd',
-    textAlign: 'Center',
-    template: customerGridStatus },
-  {
-    field: 'Weeks',
-    headerText: 'Weeks',
-    width: '100',
-    format: 'C2',
-    textAlign: 'Center' },
-  { field: 'Budget',
-    headerText: 'Budget',
-    width: '100',
-    format: 'yMd',
-    textAlign: 'Center' },
-
-  { field: 'Location',
-    headerText: 'Location',
-    width: '150',
-    textAlign: 'Center' },
-
-  { field: 'CustomerID',
-    headerText: 'Customer ID',
-    width: '120',
-    textAlign: 'Center',
-    isPrimaryKey: true,
-  },
-
-];
-
 
 
 // SideBar 
@@ -176,27 +120,36 @@ export const userProfileData = [
 ];
 
 
-export const customersData = [ 
+export const ticketsData = [ 
   {
-    EmployeeID: 4,
-    Name: 'Penjani Inyene',
-    Title: 'Marketing Head',
-    HireDate: '01/02/2021',
-    Country: 'USA',
-    ReportsTo: 'Carson',
-    EmployeeImage:
-      avatar,
+    TicketName: 'Conexão banco de dados',
+    Classification: 'Hotfix',
+    Status: 'Em fila',
+    Actions: [],
+    //ReportsTo: 'Carson',
   },
   {
-    EmployeeID: 5,
-    Name: 'Miron Vitold',
-    Title: 'HR',
-    HireDate: '01/02/2021',
-    Country: 'USA',
-    ReportsTo: 'Carson',
-    EmployeeImage:
-      avatar2,
+    TicketName: 'Página de suporte',
+    Classification: 'Feature',
+    Status: 'Em andamento',
+    Actions: []
+    //ReportsTo: 'Carson',
   },
+  {
+    TicketName: 'Puxando id ticket',
+    Classification: 'Feature',
+    Status: 'Arquivado',
+    Actions: []
+    //ReportsTo: 'Carson',
+  },
+  {
+    TicketName: 'bruninha',
+    Classification: 'Hotfix',
+    Status: 'Aprovado',
+    Actions: []
+    //ReportsTo: 'Carson',
+  },
+
 ];
 
 export const contextMenuItems = [
