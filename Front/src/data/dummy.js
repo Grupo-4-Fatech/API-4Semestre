@@ -1,5 +1,6 @@
 import React from 'react';
 import {  FiEdit } from 'react-icons/fi';
+import { MdOutlineViewAgenda } from 'react-icons/md';
 import { BsKanban,BsCurrencyDollar} from 'react-icons/bs';
 
 export const gridOrderImage = (props) => (
@@ -64,19 +65,20 @@ export const links = [
     title: 'Pages',
     links: [
       {
+        title: 'Kanban',
         name: 'kanban',
         icon: <BsKanban />,
       },
       {
-        name: 'Ticket',
-        icon: <FiEdit />,
-
-        
+        title: 'Open Ticket',
+        name: 'ticket',
+        icon: <FiEdit />,        
       },
-      // {
-      //   name: 'Open new feature',
-      //   icon: <FiEdit />,
-      // },
+      {
+        title: 'View Ticket',
+        name: 'ViewTicket',
+        icon: <MdOutlineViewAgenda />,
+      },
     ],
   }
   
