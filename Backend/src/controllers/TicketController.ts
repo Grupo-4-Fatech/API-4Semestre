@@ -67,9 +67,10 @@ class TicketController {
     }
 
     public async one(req: Request, res: Response): Promise<Response> {
-        const { id } = req.body;
+        const id  = parseInt(req.params.id);
         const usuario: any = await AppDataSource.manager.findOneBy(Ticket, { id }).catch((e) => {
         })
+        console.log(usuario)
         return res.json(usuario);
     }
 

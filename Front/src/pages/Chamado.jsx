@@ -19,7 +19,7 @@ export default function Chamado() {
     const { id } = useParams();
     function CreateTicket(e){
        if(id){
-        fetch("/call/update", {
+        fetch("/ticket/update", {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
@@ -30,7 +30,7 @@ export default function Chamado() {
         })
 
        }else{
-        fetch("/call/create", {
+        fetch("/ticket/create", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
@@ -44,7 +44,7 @@ export default function Chamado() {
     
     function getData(){
         if(id){
-             fetch("/call/get/"+id, {
+             fetch("/ticket/get/"+id, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
