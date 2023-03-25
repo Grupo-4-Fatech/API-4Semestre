@@ -69,6 +69,7 @@ const App = () => {
                 <Route path="/kanban" element={<Kanban />} />
                 <Route path="/viewticket" element={<ViewTicket />} />
                 <Route path="/Ticket" element={<Chamado />} />
+                <Route path="/Ticket/:id" element={<Chamado />} />
 
 
               </Routes>
