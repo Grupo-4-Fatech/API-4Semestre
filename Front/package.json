@@ -30,7 +30,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "cd.. && cd Backend && npm run dev",
-    "dev": "concurrently --kill-others-on-fail \"npm start\" \"npm run server\""
+    "dev": "concurrently --kill-others-on-fail \"npm start\" \"npm run server\""
   },
   "proxy": "http://localhost:3001/",
   "eslintConfig": {
