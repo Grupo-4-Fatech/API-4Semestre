@@ -4,7 +4,7 @@ import { FiSettings } from 'react-icons/fi';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
 import { Navbar, Footer, Sidebar, ThemeSettings, UserProfile } from './components';
-import { Kanban, Customers } from './pages';
+import { Kanban, ViewTicket } from './pages';
 import './App.css';
 
 import { useStateContext } from './contexts/ContextProvider';
@@ -65,9 +65,9 @@ const App = () => {
               {themeSettings && (<ThemeSettings />)}
 
               <Routes>
-                <Route path="/" element={(<Customers />)} />
+                <Route path="/" element={(<ViewTicket />)} />
                 <Route path="/kanban" element={<Kanban />} />
-                <Route path="/customers" element={<Customers />} />
+                <Route path="/viewticket" element={<ViewTicket />} />
                 <Route path="/Ticket" element={<Chamado />} />
 
 

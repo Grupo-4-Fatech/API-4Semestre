@@ -119,39 +119,6 @@ export const userProfileData = [
   },
 ];
 
-
-export const ticketsData = [ 
-  {
-    TicketName: 'Conexão banco de dados',
-    Classification: 'Hotfix',
-    Status: 'Em fila',
-    Actions: [],
-    //ReportsTo: 'Carson',
-  },
-  {
-    TicketName: 'Página de suporte',
-    Classification: 'Feature',
-    Status: 'Em andamento',
-    Actions: []
-    //ReportsTo: 'Carson',
-  },
-  {
-    TicketName: 'Puxando id ticket',
-    Classification: 'Feature',
-    Status: 'Arquivado',
-    Actions: []
-    //ReportsTo: 'Carson',
-  },
-  {
-    TicketName: 'bruninha',
-    Classification: 'Hotfix',
-    Status: 'Aprovado',
-    Actions: []
-    //ReportsTo: 'Carson',
-  },
-
-];
-
 export const contextMenuItems = [
   'AutoFit',
   'AutoFitAll',
