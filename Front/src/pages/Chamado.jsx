@@ -44,21 +44,21 @@ export default function Chamado() {
     
     function getData(){
         if(id){
-             fetch("/ticket/get/"+id, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-            }
-        }).then((resposta) => resposta.json()).then((data) => {
-            console.log(data)
-            if(data!= null){
-                setTitle(data.title);
-                setHtmlString(data.description)
-                setType(data.type)
-                setStatus(data.status)
-            }
-            setButton("Update")
-        })
+            fetch("/ticket/get/"+id, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                }
+            }).then((resposta) => resposta.json()).then((data) => {
+                console.log(data)
+                if(data!= null){
+                    setTitle(data.title);
+                    setHtmlString(data.description)
+                    setType(data.type)
+                    setStatus(data.status)
+                }
+                setButton("Update")
+            })
         }
     }
     useEffect(()=>{getData()}, [])

@@ -97,7 +97,7 @@ class TicketController {
                 status: ticket.status
             });
         }
-        return res.json(ticket);
+        return res.json({error:"Error while saving the ticket"});
 
     }
 
@@ -119,6 +119,10 @@ class TicketController {
         }
 
         
+    }
+    public async getAll(req: Request, res: Response): Promise<Response> {
+      const ticket: any = await AppDataSource.manager.query("SELECT id, type, title FROM ticket")
+      return res.json(ticket)
     }
 
 
