@@ -47,7 +47,7 @@ class TicketController {
           return res.json(title)
         }
         else {
-          return res.json({ error: "Usuário não localizado" });
+          return res.json({ error: "Ticket não localizado" });
         }
       }
 
@@ -115,7 +115,7 @@ class TicketController {
             return res.json(ticket)
         }
         else {
-            return res.json({ error: "Usuario não localizado" })
+            return res.json({ error: "Ticket não localizado" })
         }
 
         
