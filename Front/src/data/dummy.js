@@ -75,9 +75,15 @@ export const links = [
         icon: <FiEdit />,        
       },
       {
-        title: 'View Ticket',
+        title: 'View Tickets',
         name: 'ViewTicket',
         icon: <MdOutlineViewAgenda />,
+      },
+      {
+        title: 'Archived Tickets',
+        name: 'ArchivedTicket',
+        icon: <MdOutlineViewAgenda />,
+
       },
     ],
   }
