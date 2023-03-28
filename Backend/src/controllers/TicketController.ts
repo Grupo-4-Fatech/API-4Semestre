@@ -149,6 +149,9 @@ class TicketController {
         return res.json({ error: "Ticket not found" });
       }
     }
-
+    public async getKanbanItem(req: Request, res: Response): Promise<Response> {
+      const ticket: any = await AppDataSource.manager.query("SELECT id, type, title, status FROM ticket WHERE status NOT IN (1,2)")
+      return res.json(ticket)
+    }
 
 }export default new TicketController();

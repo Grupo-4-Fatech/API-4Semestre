@@ -36,23 +36,24 @@ const ViewTicket = () => {
                 'Content-Type': 'application/json;charset=utf-8'
             },
             body: JSON.stringify({ id: id, status: status })
-        }).then((resposta) => resposta.json()).then((data) => {
-            if (data.error) {
+        }).then((resposta) => resposta.json()).then((response) => {
+            if (response.error) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Ticket not archived',
                 })
             }
             else {
-                var updateData = data.filter(item=> item.id != id)
-                setData(updateData)
+               
                 Swal.fire({
                     icon: 'success',
                     title: 'Ticket archived successfully',
                 })
+                var updateData = data.filter(item=> item.id != id)
+                setData(updateData)
 
             }
-            console.log(data)
+         
         })
         
 
@@ -64,20 +65,21 @@ const ViewTicket = () => {
                 'Content-Type': 'application/json;charset=utf-8'
             },
             body: JSON.stringify({ id: id, status: status })
-        }).then((resposta) => resposta.json()).then((data) => {
-            if (data.error) {
+        }).then((resposta) => resposta.json()).then((response) => {
+            if (response.error) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Ticket not archived',
                 })
             }
             else {
-                var updateData = data.filter(item=> item.id != id)
-                setData(updateData)
+                
                 Swal.fire({
                     icon: 'success',
                     title: 'Ticket archived successfully',
                 })
+                var updateData = data.filter(item=> item.id != id)
+                setData(updateData)
                 
             }
            

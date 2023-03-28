@@ -24,16 +24,16 @@ export const gridOrderStatus = (props) => (
 );
 
 export const kanbanGrid = [
-  { headerText: 'To Do',
-    keyField: 'Open',
+  { headerText: 'New',
+    keyField: 'New',
     allowToggle: true },
 
-  { headerText: 'In Progress',
-    keyField: 'InProgress',
+  { headerText: 'On Hold',
+    keyField: 'OnHold',
     allowToggle: true },
 
   { headerText: 'Done',
-    keyField: 'Close',
+    keyField: 'Done',
     allowToggle: true },
 ];
 
