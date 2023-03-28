@@ -121,8 +121,33 @@ class TicketController {
         
     }
     public async getAll(req: Request, res: Response): Promise<Response> {
-      const ticket: any = await AppDataSource.manager.query("SELECT id, type, title FROM ticket")
+      var status = req.params.status
+      const ticket: any = await AppDataSource.manager.query("SELECT id, type, title FROM ticket where status = "+ status)
       return res.json(ticket)
+    }
+    public async updateStatus(req: Request, res: Response): Promise<Response> {
+      const { id, status } = req.body;
+      const ticket: any = await AppDataSource.manager.findOneBy(Ticket, { id }).catch((e) => {
+        return { error: "Identificador inválido" };
+      })
+      if (ticket && ticket.id) {
+        if (status !== "") {
+          ticket.status = status;
+        }
+        const r = await AppDataSource.manager.save(ticket, ticket).catch((e) => {
+          return e;
+        })
+        if (!r.error) {
+          return res.json({ id: ticket.id });
+        }
+        return res.json(r);
+      }
+      else if (ticket && ticket.error) {
+        return res.json({error:"Updating the status"})
+      }
+      else {
+        return res.json({ error: "Ticket not found" });
+      }
     }
 
 

@@ -8,7 +8,7 @@ const ViewTicket = () => {
     const headers = ['Title', 'Classification', 'Edit', 'Archive', 'Approved']
     const [data, setData] = useState([])
     function getData(){
-        fetch("/ticket/getAll/", {
+        fetch("/ticket/getAll/1", {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
@@ -29,35 +29,60 @@ const ViewTicket = () => {
         })
     }
 
-    const Aproved = (title, newStatus) => {
-            const updateData = data.map(item => {
-                if (item.title === title) {
-                    return {...item, status: newStatus=3};
-            }else {
+    const Aproved = (id, status) => {
+        fetch("/ticket/updateStatus", {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({ id: id, status: status })
+        }).then((resposta) => resposta.json()).then((data) => {
+            if (data.error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Ticket not archived',
+                })
+            }
+            else {
+                var updateData = data.filter(item=> item.id != id)
+                setData(updateData)
                 Swal.fire({
                     icon: 'success',
-                    title: 'Approved with success',
+                    title: 'Ticket archived successfully',
                 })
-                return item
+
             }
-            })
-            setData(updateData)
+            console.log(data)
+        })
+        
 
     }
-    const Archive = (title, newStatus) => {
-        const updateData = data.map(item => {
-            if (item.title === title) {
-                return {...item, status: newStatus=2};
+    const Archive = (id, status) => {
+        fetch("/ticket/updateStatus", {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({ id: id, status: status })
+        }).then((resposta) => resposta.json()).then((data) => {
+            if (data.error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Ticket not archived',
+                })
+            }
+            else {
+                var updateData = data.filter(item=> item.id != id)
+                setData(updateData)
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Ticket archived successfully',
+                })
                 
-        }else {
-            Swal.fire({
-                icon: 'success',
-                title: 'Archived with success'
-            })
-            return item
-        }
+            }
+           
         })
-        setData(updateData)
+        
 
     }
     useEffect(()=>{
@@ -91,10 +116,10 @@ return (
                                 <button onClick={()=> {window.location.href = "/ticket/"+ dat.id}} style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Edit</button>
                             </td>
                             <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                <button onClick ={(e)=> Archive(dat.title)} className="bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Archive</button>
+                                <button onClick ={(e)=> Archive(dat.id, 2)} className="bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Archive</button>
                             </td>
                             <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                <button onClick={(e)=> Aproved(dat.title)} className="bg-green-500 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Aproved</button>
+                                <button onClick={(e)=> Aproved(dat.id, 3)} className="bg-green-500 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Aproved</button>
                             </td>
                             <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
                             </td>

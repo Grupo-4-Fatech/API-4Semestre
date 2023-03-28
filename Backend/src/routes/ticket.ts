@@ -11,7 +11,8 @@ routes.patch("/update", TicketController.update);
 routes.delete("/delete", TicketController.delete);
 routes.get("/list",TicketController.list);
 routes.get("/status", TicketController.status);
-routes.get("/getAll", TicketController.getAll)
+routes.get("/getAll/:status", TicketController.getAll)
+routes.patch("/updateStatus", TicketController.updateStatus)
 
 
 

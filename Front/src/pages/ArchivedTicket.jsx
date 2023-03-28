@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useStateContext } from '../contexts/ContextProvider'
 const Swal = require('sweetalert2')
 
@@ -7,30 +7,61 @@ const ViewTicket = () => {
     const { currentColor } = useStateContext();
 
     const headers = ['Title', 'Classification', 'Restore']
-    const [data, setData] = useState([
-        { title: 'Conexão banco de dados', classification: 'Hotfix'},
-        { title: 'Página de suporte', classification: 'Feature',  },
-        { title: 'Puxando Id Ticket', classification: 'Feature',  },
-        { title: 'Criação Ticket', classification: 'Hotfix',  },
-    ])
+    const [data, setData] = useState([])
+    function getData(){
+        fetch("/ticket/getAll/2", {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            }
+        }).then((resposta) => resposta.json()).then((data) => {
+            var tickets = []
+           data.forEach(element => {
+            tickets.push({
+                id: element.id,
+                title: element.title,
+                classification: element.type == 1? "HOTFIX": "FEATURE",
 
-const restore = (title, newStatus) => {
-    const updateData = data.map(item => {
-        if (item.title === title) {
-            return {...item, status: newStatus='In holding'};
+            })
             
-    }else {
-        Swal.fire({
-            icon: 'success',
-            title: 'Restored successfully',
+            
+           });
+           setData(tickets)
         })
-        return item
     }
-    })
-    setData(updateData)
+    const restore = (id, status) => {
+        fetch("/ticket/updateStatus", {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({ id: id, status: status })
+        }).then((resposta) => resposta.json()).then((data) => {
+            if (data.error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Ticket not restored',
+                })
+            }
+            else {
+                var updateData = data.filter(item=> item.id != id)
+                setData(updateData)
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Ticket restored successfully',
+                })
 
-}
-return (
+            }
+            console.log(data)
+        })
+      
+
+    }
+
+    useEffect(()=>{
+        getData();
+    }, [])
+    return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -54,7 +85,7 @@ return (
                             </td>
                             
                             <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                <button onClick ={(e)=> restore(dat.title)} className="bg-green-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Restore</button>
+                                <button onClick ={(e)=> restore(dat.id, 1)} className="bg-green-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Restore</button>
                             </td>
                             <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
                             </td>
