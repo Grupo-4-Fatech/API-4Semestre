@@ -47,7 +47,7 @@ const ViewTicket = () => {
                
                 Swal.fire({
                     icon: 'success',
-                    title: 'Ticket archived successfully',
+                    title: 'Ticket approved successfully',
                 })
                 var updateData = data.filter(item=> item.id != id)
                 setData(updateData)

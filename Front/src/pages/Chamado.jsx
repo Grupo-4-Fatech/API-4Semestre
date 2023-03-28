@@ -6,45 +6,31 @@ import { Header } from '../components'
 import { useStateContext } from '../contexts/ContextProvider'
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
-// import validator from 'validator';
+import { validador } from '../utils/validador';
 const Swal = require('sweetalert2')
 
 
-
-
 export default function Chamado() {
-    function validarTitulo() {
-        const titulo = document.getElementById("Titulo");
-        if (titulo.value === null) {
-            return false
-        } if (titulo.value === "") {
-            return false
-        } return true
-    }
-    function validarSelect() {
-        const classifacation = document.getElementById("select")
-        if (classifacation.value === "default") {
-            return false
-        } return true
-    }
     const { currentColor } = useStateContext();
     const [hmtlString, setHtmlString] = useState("")
+    console.log(hmtlString);
     const [title, setTitle] = useState("")
     const [type, setType] = useState("default")
     const [button, setButton] = useState("Send")
     const [status, setStatus] = useState("1")
     const { id } = useParams();
     function CreateTicket(e) {
-
-        if (!validarTitulo()) {
+        const titulo = document.getElementById("Titulo");
+        if (validador.estaVazio(titulo.value)) {
             Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
+                title: 'Something is worng',
                 text: 'Please write the title',
             })
             return
         }
-        else if (!validarSelect()) {
+        const classification = document.getElementById("select")
+        if (validador.selectEstaDefault(classification)) {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -52,15 +38,14 @@ export default function Chamado() {
             })
             return
         }
-        // else if (validator.isEmpty(hmtlString)) {
-        //     //alert('q')
-        //     Swal.fire({
-        //         icon: 'error',
-        //         title: 'Oops...',
-        //         text: 'PAARA DE DAR ERRO KCT',
-        //     })
-        //     return
-        // }
+        if (validador.estaVazio(hmtlString)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Please write or put a image',
+            })
+            return
+        }
         if (id) {
             fetch("/ticket/update", {
                 method: 'PATCH',
@@ -138,8 +123,8 @@ export default function Chamado() {
             <label className="text-lg font-bold dark:text-black">Classification</label>
             <select id="select" onChange={(e) => setType(e.target.value)} defaultValue={type} className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
                 <option value="default" disabled>Select an option:</option>
-                <option value="1" selected={type == "1"} >Hotfix</option>
-                <option value="2" selected={type == "2"}>Feature</option>
+                <option value="1" selected={type === "1"} >Hotfix</option>
+                <option value="2" selected={type === "2"}>Feature</option>
             </select>
             <Descrition value={hmtlString} setValue={setHtmlString} />
 
@@ -150,9 +135,7 @@ export default function Chamado() {
                 </button>
             </div>
             <div>
-
             </div>
         </div>
-
     )
 }
