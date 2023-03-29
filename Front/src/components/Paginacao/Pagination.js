@@ -35,11 +35,8 @@ const Pagination = props => {
     <nav>
       <ul
         className='inline-flex items-center -space-x-px'
-      > {currentPage === 0 || paginationRange.length < 2 ?
-        <li onClick={onPrevious}>
-          <button className="h-10 block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700"
-            disabled><BsArrowLeft /></button>
-        </li>
+      > {currentPage === 1 ?
+        ''
         :
         <li onClick={onPrevious}>
           <button className="h-10 block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700"
@@ -66,10 +63,7 @@ const Pagination = props => {
           }
         })}
         {currentPage === lastPage ?
-          <li onClick={onNext}>
-            <button className="h-10 block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700"
-            disabled><BsArrowRight /></button>
-          </li>
+          ''
           :
           <li onClick={onNext}>
             <button className="h-10 block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700"
