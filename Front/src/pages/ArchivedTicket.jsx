@@ -67,28 +67,27 @@ const ViewTicket = () => {
     }, [])
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:text-gray-400 content-center">
+            <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:text-gray-400 content-center">
                         <tr>
                             {headers.map((header) =>
-                                <th scope="col" class="px-6 py-3">
+                                <th scope="col" className="px-6 py-3" key={header}>
                                     {header}
                                 </th>)}
                         </tr>
                     </thead>
                     <tbody>
                         {currentTableData.map((dat) =>
-                            <tr class="bg-white hover:bg-gray-50 dark:hover:bg-gray-300 content-center">
-                                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
+                            <tr className="bg-white hover:bg-gray-50 dark:hover:bg-gray-300 content-center">
+                                <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
                                     {dat.title}
                                 </td>
-                                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
+                                <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
                                     {dat.classification}
                                 </td>
 
-                                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
+                                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
                                     <button onClick={(e) => restore(dat.id, 1)} className="bg-green-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Restore</button>
                                 </td>
                                 <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
@@ -98,14 +97,13 @@ const ViewTicket = () => {
                         )}
                     </tbody>
                 </table>
-                <Pagination
-                    currentPage={currentPage}
-                    totalCount={data.length}
-                    pageSize={PageSize}
-                    onPageChange={page => setCurrentPage(page)}
-                />
             </div>
-
+            <Pagination
+                currentPage={currentPage}
+                totalCount={data.length}
+                pageSize={PageSize}
+                onPageChange={page => setCurrentPage(page)}
+            />
         </div>
     );
 };
