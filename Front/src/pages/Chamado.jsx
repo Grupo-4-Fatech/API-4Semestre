@@ -13,7 +13,6 @@ const Swal = require('sweetalert2')
 export default function Chamado() {
     const { currentColor } = useStateContext();
     const [hmtlString, setHtmlString] = useState("")
-    console.log(hmtlString);
     const [title, setTitle] = useState("")
     const [type, setType] = useState("default")
     const [button, setButton] = useState("Send")
@@ -68,7 +67,6 @@ export default function Chamado() {
                     })
 
                 }
-                console.log(data)
             })
 
         } else {
@@ -91,7 +89,6 @@ export default function Chamado() {
                     })
 
                 }
-                console.log(data)
             })
         }
     }
@@ -104,7 +101,6 @@ export default function Chamado() {
                     'Content-Type': 'application/json;charset=utf-8'
                 }
             }).then((resposta) => resposta.json()).then((data) => {
-                console.log(data)
                 if (data != null) {
                     setTitle(data.title);
                     setHtmlString(data.description)

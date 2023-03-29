@@ -38,7 +38,6 @@ export default function Kanban () {
   }
 
   function getStatus(status){
-    console.log(status)
     var newStatus = "";
     if(status == 5){
         newStatus = 'Done'
@@ -52,7 +51,6 @@ export default function Kanban () {
   }
 
   const changeStatus = (id, newStatus) => {
-    console.log(newStatus)
     var status = "";
     if(newStatus == "OnHold"){
       status = 4
@@ -69,7 +67,7 @@ export default function Kanban () {
         },
         body: JSON.stringify({ id: id, status: status })
     }).then((resposta) => resposta.json()).then((response) => {
-      console.log(response)
+      
     })
     
 
