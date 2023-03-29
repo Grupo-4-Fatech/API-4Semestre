@@ -32,6 +32,7 @@ const Pagination = props => {
 
   let lastPage = paginationRange[paginationRange.length - 1];
   return (
+    <div className="grid place-items-center pt-5" >
     <nav>
       <ul
         className='inline-flex items-center -space-x-px'
@@ -72,6 +73,7 @@ const Pagination = props => {
         }
       </ul>
     </nav>
+    </div>
   );
 };
 
