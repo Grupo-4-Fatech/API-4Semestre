@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { useStateContext } from '../contexts/ContextProvider'
+import React, { useState, useEffect, useMemo } from 'react';
+import Pagination from '../components/Paginacao/Pagination';
 const Swal = require('sweetalert2')
+
+let PageSize = 5;
 
 
 const ViewTicket = () => {
-    const { currentColor } = useStateContext();
-
+    const [currentPage, setCurrentPage] = useState(1);
     const headers = ['Title', 'Classification', 'Restore']
     const [data, setData] = useState([])
-    function getData(){
+    function getData() {
         fetch("/ticket/getAll/2", {
             method: 'GET',
             headers: {
@@ -16,17 +17,17 @@ const ViewTicket = () => {
             }
         }).then((resposta) => resposta.json()).then((data) => {
             var tickets = []
-           data.forEach(element => {
-            tickets.push({
-                id: element.id,
-                title: element.title,
-                classification: element.type == 1? "HOTFIX": "FEATURE",
+            data.forEach(element => {
+                tickets.push({
+                    id: element.id,
+                    title: element.title,
+                    classification: element.type == 1 ? "HOTFIX" : "FEATURE",
 
-            })
-            
-            
-           });
-           setData(tickets)
+                })
+
+
+            });
+            setData(tickets)
         })
     }
     const restore = (id, status) => {
@@ -44,61 +45,69 @@ const ViewTicket = () => {
                 })
             }
             else {
-                
+
                 Swal.fire({
                     icon: 'success',
                     title: 'Ticket restored successfully',
                 })
-                var updateData = data.filter(item=> item.id != id)
+                var updateData = data.filter(item => item.id != id)
                 setData(updateData)
-
             }
-           
         })
-      
-
     }
 
-    useEffect(()=>{
+    const currentTableData = useMemo(() => {
+        const firstPageIndex = (currentPage - 1) * PageSize;
+        const lastPageIndex = firstPageIndex + PageSize;
+        return data.slice(firstPageIndex, lastPageIndex)
+    }, [currentPage]);
+
+    useEffect(() => {
         getData();
     }, [])
     return (
-    <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
+        <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
 
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:text-gray-400 content-center">
-                    <tr>
-                        {headers.map((header) =>
-                            <th scope="col" class="px-6 py-3">
-                                {header}
-                            </th>)}
-                    </tr>
-                </thead>
-                <tbody>
-                    {data.map((dat) =>
-                        <tr class="bg-white hover:bg-gray-50 dark:hover:bg-gray-300 content-center">
-                            <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                {dat.title}
-                            </td>
-                            <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                {dat.classification}
-                            </td>
-                            
-                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                <button onClick ={(e)=> restore(dat.id, 1)} className="bg-green-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Restore</button>
-                            </td>
-                            <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                            </td>
-
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:text-gray-400 content-center">
+                        <tr>
+                            {headers.map((header) =>
+                                <th scope="col" class="px-6 py-3">
+                                    {header}
+                                </th>)}
                         </tr>
-                    )}
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody>
+                        {currentTableData.map((dat) =>
+                            <tr class="bg-white hover:bg-gray-50 dark:hover:bg-gray-300 content-center">
+                                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
+                                    {dat.title}
+                                </td>
+                                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
+                                    {dat.classification}
+                                </td>
 
-    </div>
-);
+                                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
+                                    <button onClick={(e) => restore(dat.id, 1)} className="bg-green-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Restore</button>
+                                </td>
+                                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
+                                </td>
+
+                            </tr>
+                        )}
+                    </tbody>
+                </table>
+                <Pagination
+                    currentPage={currentPage}
+                    totalCount={data.length}
+                    pageSize={PageSize}
+                    onPageChange={page => setCurrentPage(page)}
+                />
+            </div>
+
+        </div>
+    );
 };
 
 export default ViewTicket;
