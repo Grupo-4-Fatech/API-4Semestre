@@ -56,7 +56,31 @@ const ArchivedTicket = () => {
         })
     }
 
-    const deleteTicket = (id) => { }
+    const deleteTicket = (id) => {
+        fetch("/ticket/delete", {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({ id: id })
+        }).then((resposta) => resposta.json()).then((response) => {
+            if (response.error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Ticket failed to delete!',
+                })
+            }
+            else {
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Ticket deleted!',
+                })
+                var deleteData = data.filter(item => item.id != id)
+                setData(deleteData)
+            }
+        })
+    }
 
     const currentTableData = useMemo(() => {
         const firstPageIndex = (currentPage - 1) * PageSize;
