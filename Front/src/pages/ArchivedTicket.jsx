@@ -7,7 +7,7 @@ let PageSize = 5;
 
 const ViewTicket = () => {
     const [currentPage, setCurrentPage] = useState(1);
-    const headers = ['Title', 'Classification', 'Restore']
+    const headers = ['Title', 'Classification', 'Restore','Delete']
     const [data, setData] = useState([])
     function getData() {
         fetch("/ticket/getAll/2", {
@@ -56,6 +56,8 @@ const ViewTicket = () => {
         })
     }
 
+    const deleteTicket = (id) => {}
+
     const currentTableData = useMemo(() => {
         const firstPageIndex = (currentPage - 1) * PageSize;
         const lastPageIndex = firstPageIndex + PageSize;
@@ -90,6 +92,12 @@ const ViewTicket = () => {
                                 <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
                                     <button onClick={(e) => restore(dat.id, 1)} className="bg-green-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Restore</button>
                                 </td>
+
+                                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
+                                    <button onClick={(e) => deleteTicket(dat.id)} className="bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Delete</button>
+                                </td>
+
+
                                 <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
                                 </td>
 
