@@ -137,14 +137,13 @@ const ViewTicket = () => {
                         })}
                     </tbody>
                 </table>
-                <Pagination
-                    currentPage={currentPage}
-                    totalCount={data.length}
-                    pageSize={PageSize}
-                    onPageChange={page => setCurrentPage(page)}
-                />
             </div>
-
+            <Pagination
+                currentPage={currentPage}
+                totalCount={data.length}
+                pageSize={PageSize}
+                onPageChange={page => setCurrentPage(page)}
+            />
         </div>
     );
 };
