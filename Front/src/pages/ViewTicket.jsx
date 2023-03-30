@@ -23,7 +23,7 @@ const ViewTicket = () => {
                 tickets.push({
                     id: element.id,
                     title: element.title,
-                    classification: element.type === 1 ? "HOTFIX" : "FEATURE",
+                    classification: element.type == 1 ? "HOTFIX" : "FEATURE",
 
                 })
 
