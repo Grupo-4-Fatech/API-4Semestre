@@ -6,7 +6,7 @@ import { Header } from '../components'
 import { useStateContext } from '../contexts/ContextProvider'
 import { useState } from 'react';
 import { validador } from '../utils/validador';
-import { useParams, useNavigate, Navigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const Swal = require('sweetalert2')
 
@@ -32,6 +32,14 @@ export default function UpdateTicket() {
                 icon: 'error',
                 title: 'Ticket Failed!',
                 text: 'Please write a title',
+            })
+            return
+        }
+        if (validador.tamanhoTexto(titulo.value)){
+            Swal.fire({
+                icon: 'error',
+                title: 'Ticket Failed!',
+                text: 'Title size is too big',
             })
             return
         }
