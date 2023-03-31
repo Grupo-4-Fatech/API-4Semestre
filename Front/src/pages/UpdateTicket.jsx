@@ -4,42 +4,51 @@ import Campo from '../components/Campo'
 import Descrition from '../components/Descrition'
 import { Header } from '../components'
 import { useStateContext } from '../contexts/ContextProvider'
-import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { validador } from '../utils/validador';
+import { useParams, useNavigate, Navigate } from 'react-router-dom';
+
 const Swal = require('sweetalert2')
 
-export default function UpdateTicket({ id }) {
-    window.location.href = "/ticket/" + id
+export default function UpdateTicket() {
+    const { id } = useParams();
     const { currentColor } = useStateContext();
     const [hmtlString, setHtmlString] = useState("")
     const [title, setTitle] = useState("")
     const [type, setType] = useState("")
     const [status, setStatus] = useState("1")
-    function UpdateTicket(e) {
+
+    let location = useNavigate();
+    function comeback() {
+        location('/viewticket');
+    }
+
+    function UpdateTicket() {
         const titulo = document.getElementById("Titulo");
+        const classification = document.getElementById("select");
+
         if (validador.estaVazio(titulo.value)) {
             Swal.fire({
                 icon: 'error',
-                title: 'Something is worng',
-                text: 'Please write the title',
+                title: 'Ticket Failed!',
+                text: 'Please write a title',
             })
             return
         }
-        const classification = document.getElementById("select")
+        
         if (validador.selectEstaDefault(classification)) {
             Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
-                text: 'Please Select a classification',
+                title: 'Ticket Failed!',
+                text: 'Please select a classification',
             })
             return
         }
         if (validador.estaVazio(hmtlString)) {
             Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
-                text: 'Please write or put a image',
+                title: 'Ticket Failed!',
+                text: 'Please write a description',
             })
             return
         }
@@ -62,9 +71,14 @@ export default function UpdateTicket({ id }) {
                     Swal.fire({
                         icon: 'success',
                         title: 'Updated successfully',
-                    })
+                    }).then((result) => result.isConfirmed ? comeback() : '')
 
                 }
+            })
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'User not found!',
             })
         }
     }
@@ -86,16 +100,17 @@ export default function UpdateTicket({ id }) {
             })
         }
     }
+
     useEffect(() => { getData() }, [])
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-            <Header category="Page" title="SAMIRAAAAAAAAA" />
+            <Header category="Page" title="Update Ticket" />
             <Campo text="Title" id="Titulo" placeholder="Title" type={"text"} value={title} setValue={setTitle} />
             <label className="text-lg font-bold dark:text-black">Classification</label>
             <select id="select" onChange={(e) => setType(e.target.value)} defaultValue={type} className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
                 <option value="default" disabled>Select an option:</option>
-                <option value="1" selected={type === "1"} >Hotfix</option>
-                <option value="2" selected={type === "2"}>Feature</option>
+                <option value="1" >Hotfix</option>
+                <option value="2" >Feature</option>
             </select>
             <Descrition value={hmtlString} setValue={setHtmlString} />
 

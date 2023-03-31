@@ -146,7 +146,7 @@ class TicketController {
     }
   }
   public async getKanbanItem(req: Request, res: Response): Promise<Response> {
-    const ticket: any = await AppDataSource.manager.query("SELECT id, type, title, status FROM ticket WHERE status NOT IN (1,2)")
+    const ticket: any = await AppDataSource.manager.query("SELECT id, type, title, status, description FROM ticket WHERE status NOT IN (1,2)")
     return res.json(ticket)
   }
 
