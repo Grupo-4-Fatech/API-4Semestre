@@ -5,6 +5,11 @@ export const validador = {
     },
     selectEstaDefault(elementoSelect) {
         return elementoSelect.value === "default"
+    },
+    tamanhoTexto(texto){
+        if (texto.length <= 50){
+            return false
+        }return true
     }
 }
 

@@ -18,7 +18,7 @@ export default function Chamado() {
 
     let location = useNavigate();
     function comeback() {
-        location(-1);
+        location('/viewticket');
     }
 
     function CreateTicket() {
@@ -30,6 +30,14 @@ export default function Chamado() {
                 icon: 'error',
                 title: 'Ticket Failed!',
                 text: 'Please write a title',
+            })
+            return
+        }
+        if (validador.tamanhoTexto(titulo.value)){
+            Swal.fire({
+                icon: 'error',
+                title: 'Ticket Failed!',
+                text: 'Title size is too big',
             })
             return
         }
