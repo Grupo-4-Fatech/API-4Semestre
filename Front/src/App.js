@@ -9,6 +9,7 @@ import './App.css';
 
 import { useStateContext } from './contexts/ContextProvider';
 import Chamado from './pages/Chamado';
+import UpdateTicket from './pages/UpdateTicket';
 
 const App = () => {
   const { setCurrentColor, setCurrentMode, currentMode, activeMenu, currentColor, themeSettings, setThemeSettings } = useStateContext();
@@ -68,8 +69,8 @@ const App = () => {
                 <Route path="/" element={(<ViewTicket />)} />
                 <Route path="/kanban" element={<Kanban />} />
                 <Route path="/viewticket" element={<ViewTicket />} />
-                <Route path="/Ticket" element={<Chamado />} />
-                <Route path="/Ticket/:id" element={<Chamado />} />
+                <Route path="/Ticket/create" element={<Chamado />} />
+                <Route path="/Ticket/update/:id" element={<UpdateTicket />} />
                 <Route path="/ArchivedTicket" element={<ArchivedTicket/>}/>
 
               </Routes>
