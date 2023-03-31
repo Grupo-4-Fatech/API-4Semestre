@@ -71,7 +71,7 @@ export const links = [
       },
       {
         title: 'Open Ticket',
-        name: 'ticket',
+        name: 'ticket/create',
         icon: <FiEdit />,        
       },
       {
@@ -83,7 +83,6 @@ export const links = [
         title: 'Archived Tickets',
         name: 'ArchivedTicket',
         icon: <MdOutlineViewAgenda />,
-
       },
     ],
   }
