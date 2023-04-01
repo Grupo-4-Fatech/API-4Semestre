@@ -131,21 +131,22 @@ export default function Kanban() {
             <div
               className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
             >
-              <div className="relative w-auto my-6 mx-auto max-w-3xl">
+              <div className="relative w-4/6 my-6">
                 {/*content*/}
                 <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                   {/*header*/}
-                  <div className="relative items-start justify-between p-5 pb-0 border-b border-solid border-slate-200 rounded-t">
-                    <h3 className="text-3xl font-semibold p-1">
-                      {ticket.title}
-                    </h3>
-                    <div className='px-2'>
+                  <div className="flex p-5 pb-0 border-b border-solid border-slate-200 rounded-t">
+                  <div className='px-2'>
                       {ticket.classification == 'Hotfix' ?
                         <span class="p-1 text-[13px] rounded-full bg-red-500 text-white">{ticket.classification}</span>
                         :
                         <span class="p-1 text-[13px] rounded-full bg-cyan-400 text-white">{ticket.classification}</span>
                       }
                     </div>
+                    <h3 className="text-1 font-semibold px2 text-left">
+                      {ticket.title}
+                    </h3>
+                    
                     <button
                       className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                       onClick={() => setShowModal(false)}
@@ -156,7 +157,8 @@ export default function Kanban() {
                     </button>
                   </div>
                   {/*body*/}
-                  <div id='description' className="relative p-6 flex-auto" dangerouslySetInnerHTML={{ __html: ticket.description }} />
+                  
+                  <div id='description' className="relative max-h-72 p-6 max-w-3x1 overflow-scroll m-6" dangerouslySetInnerHTML={{ __html: ticket.description }} />
                   {/*footer*/}
                   <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                     <button
