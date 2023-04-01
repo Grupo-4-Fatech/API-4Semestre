@@ -80,7 +80,7 @@ export default function Kanban() {
   }
 
   function cardTemplate(props) {
-    var color = props.Type == "Hotfix" ? "rgb(31, 207, 198)" : "rgba(225, 30, 30, 0.813)"
+    var color = props.Type == "Hotfix" ? "rgba(225, 30, 30, 0.813)" : "rgb(31, 207, 198)"
     return (<div style={{ borderLeft: "solid 2.5px", color: color }} className="card-template ">
       <div className='e-card-content'>
         <table className="card-template-wrap" >
@@ -89,7 +89,7 @@ export default function Kanban() {
               <td className="CardMod" >{props.Title}</td>
             </tr>
             <tr >
-              <td className="CardHeader">{props.Type }</td>
+              <td className="CardHeader">{props.Type}</td>
             </tr>
           </tbody>
         </table>
