@@ -19,25 +19,25 @@ export default function Kanban() {
       var tickets = []
       data.forEach(element => {
         if (
-            element.title.toLowerCase().includes(searchTerm.toLowerCase()) 
-          ){
-        tickets.push({
-          Id: element.id,
-          Title: element.title,
-          Status: getStatus(element.status),
-          Summary: element.description,
-          Type: element.type == 1 ? "Hotfix" : "Feature",
-          Priority: '',
-          Tags: '',
-          Estimate: 1,
-          Assignee: '',
-          RankId: 2,
-          Color: '#1F88E5',
-          ClassName: 'e-others, e-critical, e-janet-leverling',
+          element.title.toLowerCase().includes(searchTerm.toLowerCase())
+        ) {
+          tickets.push({
+            Id: element.id,
+            Title: element.title,
+            Status: getStatus(element.status),
+            Summary: element.description,
+            Type: element.type == 1 ? "Hotfix" : "Feature",
+            Priority: '',
+            Tags: '',
+            Estimate: 1,
+            Assignee: '',
+            RankId: 2,
+            Color: '#1F88E5',
+            ClassName: 'e-others, e-critical, e-janet-leverling',
 
-        })
+          })
 
-      }
+        }
       });
       setData(tickets)
     })
@@ -80,20 +80,17 @@ export default function Kanban() {
   }
 
   function cardTemplate(props) {
-    var color = props.Type == "Hotfix" ? "red" : "blue"
-    return (<div style={{ borderLeft: "solid 2.5px " + color }} className="card-template">
+    var color = props.Type == "Hotfix" ? "rgb(31, 207, 198)" : "rgba(225, 30, 30, 0.813)"
+    return (<div style={{ borderLeft: "solid 2.5px", color: color }} className="card-template ">
       <div className='e-card-content'>
         <table className="card-template-wrap" >
           <tbody >
-            <tr>
-              <td style={{ color: color, fontSize: "1.2em", backgroundColor: "white", textDecoration: "underline" }}>{props.Type + " " + props.Id}</td>
+            <tr >
+              <td className="CardMod" >{props.Title}</td>
             </tr>
-
-            <tr>
-              <td className="CardHeader" style={{ color: "black", fontSize: "1.2em", backgroundColor: "white" }} >{props.Title}</td>
-
+            <tr >
+              <td className="CardHeader">{props.Type }</td>
             </tr>
-
           </tbody>
         </table>
       </div>
@@ -112,16 +109,16 @@ export default function Kanban() {
       <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
         <Header category="App" title="Kanban" />
         <div className="block relative pl-2.5">
-                <span className="h-full absolute inset-y-0 flex items-center pl-2">
-                    <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current text-gray-500">
-                        <path
-                            d="M10 4a6 6 0 100 12 6 6 0 000-12zm-8 6a8 8 0 1114.32 4.906l5.387 5.387a1 1 0 01-1.414 1.414l-5.387-5.387A8 8 0 012 10z">
-                        </path>
-                    </svg>
-                </span>
-                <input placeholder="Search" onChange={(e) => setSearchTerm(e.target.value)}
-                    className="appearance-none rounded-r-lg border border-gray-400 border-b block pl-8 pr-6 py-2 w-44 bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
-            </div>
+          <span className="h-full absolute inset-y-0 flex items-center pl-2">
+            <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current text-gray-500">
+              <path
+                d="M10 4a6 6 0 100 12 6 6 0 000-12zm-8 6a8 8 0 1114.32 4.906l5.387 5.387a1 1 0 01-1.414 1.414l-5.387-5.387A8 8 0 012 10z">
+              </path>
+            </svg>
+          </span>
+          <input placeholder="Search" onChange={(e) => setSearchTerm(e.target.value)}
+            className="appearance-none rounded-r-lg border border-gray-400 border-b block pl-8 pr-6 py-2 w-44 bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
+        </div>
         <KanbanComponent
           id="kanban"
           keyField="Status"
@@ -149,7 +146,7 @@ export default function Kanban() {
                 <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                   {/*header*/}
                   <div className="flex p-5 pb-0 border-b border-solid border-slate-200 rounded-t">
-                  <div className='px-2'>
+                    <div className='px-2'>
                       {ticket.classification == 'Hotfix' ?
                         <span class="p-1 text-[13px] rounded-full bg-red-500 text-white">{ticket.classification}</span>
                         :
@@ -159,7 +156,7 @@ export default function Kanban() {
                     <h3 className="text-1 font-semibold px2 text-left">
                       {ticket.title}
                     </h3>
-                    
+
                     <button
                       className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                       onClick={() => setShowModal(false)}
@@ -170,7 +167,7 @@ export default function Kanban() {
                     </button>
                   </div>
                   {/*body*/}
-                  
+
                   <div id='description' className="relative max-h-72 p-6 max-w-3x1 overflow-scroll m-6" dangerouslySetInnerHTML={{ __html: ticket.description }} />
                   {/*footer*/}
                   <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
