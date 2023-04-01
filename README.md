@@ -72,7 +72,7 @@ Com esses recursos, a single-page application de criação de tickets e usuário
 
 ## 📉 Gráfico Burndown
 
-- <a href="docs/">**Sprint 1**</a>
+- <a href="docs/Burndown Geral - sprint 1.pdf">**Sprint 1**</a>
 - <a href="docs/">**Sprint 2**</a>
 - <a href="docs/">**Sprint 3**</a>
 - <a href="docs/">**Sprint 4**</a>
