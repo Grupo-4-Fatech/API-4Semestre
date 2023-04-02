@@ -1,7 +1,7 @@
 import AppDataSource from "../data-source";
 import { Request, Response } from 'express';
 import { Ticket } from "../entities/Ticket";
-import { IsUndefined, cleanDB } from "../utils/global";
+import { IsUndefined } from "../utils/global";
 
 
 class TicketController {

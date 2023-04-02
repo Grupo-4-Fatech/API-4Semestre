@@ -56,12 +56,15 @@
 .e-input-group.e-control-wrapper.e-error:not(.e-float-icon-left) {
   border: none;
 }
+
 /* Css Kanban */
 .e-kanban .e-kanban-content .e-content-row .e-content-cells .e-card-wrapper .e-card {
   font-family: 'Open Sans', sans-serif;
   font-style: normal;
   font-weight: 600;
+  border-radius: 8px;
 }
+
 .e-kanban .e-kanban-content .e-content-row .e-content-cells .e-card-wrapper .e-card .e-card-content .card-template-wrap .CardHeader {
   background-color: white;
   font-size: 14px;
@@ -71,13 +74,15 @@
   background-color: white;
   font-size: 16px;  
   color: black;  
+
 }
-.e-kanban .e-kanban-content .e-content-row .e-content-cells .e-card-wrapper .e-card .e-card-content .card-template-wrap .CardMod:hover {
+/* .e-kanban .e-kanban-content .e-content-row .e-content-cells .e-card-wrapper .e-card .e-card-content .card-template-wrap .CardMod:hover {
   background-color: rgba(231, 227, 227, 0.993)
 }
 .e-kanban .e-kanban-content .e-content-row .e-content-cells .e-card-wrapper .e-card .e-card-content .card-template-wrap .CardHeader:hover {
   background-color: rgba(231, 227, 227, 0.993)
 }
-.e-kanban .e-kanban-content .e-content-row .e-content-cells .e-card-wrapper .e-card :hover {
+*/
+/* .e-kanban .e-kanban-content .e-content-row .e-content-cells .e-card-wrapper .e-card :hover {
   background-color: rgba(231, 227, 227, 0.993)
-}
+}  */
