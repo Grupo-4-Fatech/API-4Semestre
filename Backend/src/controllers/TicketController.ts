@@ -1,7 +1,7 @@
 import AppDataSource from "../data-source";
 import { Request, Response } from 'express';
 import { Ticket } from "../entities/Ticket";
-import { IsUndefined } from "../utils/global";
+import { IsUndefined, cleanDB } from "../utils/global";
 
 
 class TicketController {
@@ -116,6 +116,13 @@ class TicketController {
 
 
   }
+
+  public async deleteAll(req: Request, res: Response): Promise<Response>{
+    const r = await AppDataSource.getRepository(Ticket);
+    await r.clear()
+    return res.json(r.count)
+  }
+
   public async getAll(req: Request, res: Response): Promise<Response> {
     var status = req.params.status
     const ticket: any = await AppDataSource.manager.query("SELECT id, type, title FROM ticket where status = " + status)
@@ -149,5 +156,6 @@ class TicketController {
     const ticket: any = await AppDataSource.manager.query("SELECT id, type, title, status, description FROM ticket WHERE status NOT IN (1,2)")
     return res.json(ticket)
   }
+
 
 } export default new TicketController();
