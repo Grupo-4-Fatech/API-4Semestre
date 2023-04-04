@@ -2,9 +2,10 @@ import React from 'react'
 import { useStateContext } from '../contexts/ContextProvider';
 
 export default function Login() {
+    
 
     //Mode
-    const { currentMode } = useStateContext();
+    const { currentMode, setLogin } = useStateContext();
     const logoLight = 'https://s3-sa-east-1.amazonaws.com/recrutai-dev/1647fba0-ea33-11eb-9826-8d3dd8a2a1d2/logo/1647fba0-ea33-11eb-9826-8d3dd8a2a1d2_1628785344229_54w.png'
     const logoDark = 'https://uploads-ssl.webflow.com/60dcc4691817e11aa93685ab/636cfbef568f863947dd4951_logo-color.svg'
     if (currentMode == 'Light') {
@@ -14,32 +15,36 @@ export default function Login() {
         document.documentElement.classList.remove('light')
         document.documentElement.classList.add('dark')
     }
+    setLogin(false);
 
     //Login
     const Swal = require('sweetalert2')
-    var handleSubmit = function () {
-        var dados = {}
-        dados.email = document.getElementById('email').value;
-        dados.senha = document.getElementById('password').value
-        console.log(dados)
-        fetch("/Logar", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-            },
-            body: JSON.stringify(dados)
-        }).then((resposta) => resposta.json()).then((data) => {
+    var handleSubmit = function (e) {
+        e.preventDefault();
+        
+        window.location.href = "/viewTicket"
+        // var dados = {}
+        // dados.email = document.getElementById('email').value;
+        // dados.senha = document.getElementById('password').value
+        // console.log(dados)
+        // fetch("/Logar", {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json;charset=utf-8'
+        //     },
+        //     body: JSON.stringify(dados)
+        // }).then((resposta) => resposta.json()).then((data) => {
 
-            if (data.ok) {
-                window.location.href = '/app'
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Incorrect Login!',
-                    text: 'Login or password are wrong.',
-                })
-            }
-        })
+        //     if (data.ok) {
+        //         window.location.href = '/app'
+        //     } else {
+        //         Swal.fire({
+        //             icon: 'error',
+        //             title: 'Incorrect Login!',
+        //             text: 'Login or password are wrong.',
+        //         })
+        //     }
+        // })
     }
 
     return (
