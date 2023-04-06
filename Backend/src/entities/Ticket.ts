@@ -7,10 +7,10 @@ export class Ticket {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column( {})
+    @Column({})
     title: string;
 
-    @Column( {})
+    @Column({})
     type: string;
 
     @Column({})
