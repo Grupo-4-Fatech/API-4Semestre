@@ -1,4 +1,6 @@
-import {Entity, Column, PrimaryGeneratedColumn} from  'typeorm'
+import {Entity, Column, PrimaryGeneratedColumn, ManyToMany} from  'typeorm'
+import { Teams } from './Teams';
+import { InspectionGroup } from './InspectionGroup';
 
 @Entity()
 export class Ticket {
@@ -16,5 +18,11 @@ export class Ticket {
 
     @Column( {})
     status: string;
+
+    @ManyToMany(() => Teams, (teams) => teams.id)
+    teams: Teams[]
+
+    @ManyToMany(() => InspectionGroup, (inspectionGroup) => inspectionGroup.id)
+    inspectionGroup: InspectionGroup;
 
 } 
