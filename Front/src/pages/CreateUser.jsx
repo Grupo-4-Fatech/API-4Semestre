@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { MdSend } from 'react-icons/md';
 import Campo from '../components/Campo'
-import Descrition from '../components/Descrition'
 import { Header } from '../components'
 import { useStateContext } from '../contexts/ContextProvider'
 import { useNavigate } from 'react-router-dom';
