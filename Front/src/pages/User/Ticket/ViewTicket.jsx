@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import Pagination from '../components/Paginacao/Pagination';
-import { useStateContext } from '../contexts/ContextProvider'
+import Pagination from '../../../components/Paginacao/Pagination';
+import { useStateContext } from '../../../contexts/ContextProvider'
 const Swal = require('sweetalert2')
 
 let PageSize = 5;

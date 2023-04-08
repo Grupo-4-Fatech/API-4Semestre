@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { MdSend } from 'react-icons/md';
-import Campo from '../components/Campo'
-import { Header } from '../components'
-import { useStateContext } from '../contexts/ContextProvider'
+import Campo from '../../components/Campo'
+import { Header } from '../../components'
+import { useStateContext } from '../../contexts/ContextProvider'
 import { useNavigate } from 'react-router-dom';
-import { validador } from '../utils/validador';
+import { validador } from '../../utils/validador';
 const Swal = require('sweetalert2')
 
 

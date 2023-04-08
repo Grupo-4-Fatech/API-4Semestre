@@ -1,16 +1,18 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import Pagination from '../components/Paginacao/Pagination';
+import React, { useEffect, useState, useMemo } from 'react';
+import Pagination from '../../../components/Paginacao/Pagination';
+import { useStateContext } from '../../../contexts/ContextProvider'
 const Swal = require('sweetalert2')
 
 let PageSize = 5;
 
-const ArchivedTicket = () => {
+const ViewTicket = () => {
+    const { currentColor } = useStateContext();
     const [currentPage, setCurrentPage] = useState(1);
-    const headers = ['Title', 'Classification', 'Restore', 'Delete']
+    const headers = ['Title', 'Classification', 'Edit', 'Archive', 'Approved']
     const [data, setData] = useState([])
     const [searchTerm, setSearchTerm] = useState('');
     function getData() {
-        fetch("/ticket/getAll/2", {
+        fetch("/ticket/getAll/1", {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
@@ -30,7 +32,7 @@ const ArchivedTicket = () => {
             setData(tickets)
         })
     }
-    const restore = (id, status) => {
+    const Aproved = (id, status) => {
         fetch("/ticket/updateStatus", {
             method: 'PATCH',
             headers: {
@@ -41,44 +43,49 @@ const ArchivedTicket = () => {
             if (response.error) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Ticket not restored',
+                    title: 'Ticket not archived',
                 })
             }
             else {
 
                 Swal.fire({
                     icon: 'success',
-                    title: 'Ticket restored successfully',
+                    title: 'Ticket approved successfully',
                 })
                 var updateData = data.filter(item => item.id != id)
                 setData(updateData)
-            }
-        })
-    }
 
-    const deleteTicket = (id) => {
-        fetch("/ticket/delete", {
-            method: 'DELETE',
+            }
+
+        })
+
+
+    }
+    const Archive = (id, status) => {
+        fetch("/ticket/updateStatus", {
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
-            body: JSON.stringify({ id: id })
+            body: JSON.stringify({ id: id, status: status })
         }).then((resposta) => resposta.json()).then((response) => {
             if (response.error) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Ticket failed to delete!',
+                    title: 'Ticket not archived',
                 })
             }
             else {
 
                 Swal.fire({
                     icon: 'success',
-                    title: 'Ticket deleted!',
+                    title: 'Ticket archived successfully',
                 })
-                var deleteData = data.filter(item => item.id != id)
-                setData(deleteData)
+                var updateData = data.filter(item => item.id != id)
+                setData(updateData)
+
             }
+
         })
     }
 
@@ -95,6 +102,7 @@ const ArchivedTicket = () => {
     useEffect(() => {
         getData();
     }, [])
+
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
             <div className="block relative">
@@ -106,7 +114,7 @@ const ArchivedTicket = () => {
                     </svg>
                 </span>
                 <input placeholder="Search" onChange={(e) => setSearchTerm(e.target.value)}
-                    className="appearance-none rounded-r rounded-l sm:rounded-l-none border border-gray-400 border-b block pl-8 pr-6 py-2 w-44 bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
+                    className="appearance-none rounded-r-lg border border-gray-400 border-b block pl-8 pr-6 py-2 w-44 bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
             </div>
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -119,28 +127,30 @@ const ArchivedTicket = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {currentTableData.map((dat) =>
-                            <tr key={dat.id} className="bg-white hover:bg-gray-50 dark:hover:bg-gray-300 content-center">
-                                <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                    {dat.title}
-                                </td>
-                                <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                    {dat.classification}
-                                </td>
+                        {currentTableData.map(dat => {
+                            return (
+                                <tr key={dat.id} className="bg-white hover:bg-gray-50 dark:hover:bg-gray-300 content-center">
+                                    <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
+                                        {dat.title}
+                                    </td>
+                                    <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
+                                        {dat.classification}
+                                    </td>
 
-                                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                    <button onClick={(e) => restore(dat.id, 1)} className="bg-green-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Restore</button>
-                                </td>
-
-                                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                    <button onClick={(e) => deleteTicket(dat.id)} className="bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Delete</button>
-                                </td>
-
-                                <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                </td>
-
-                            </tr>
-                        )}
+                                    <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
+                                        <button onClick={() => { window.location.href = "/ticket/update/" + dat.id }} style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Edit</button>
+                                    </td>
+                                    <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
+                                        <button onClick={(e) => Archive(dat.id, 2)} className="bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Archive</button>
+                                    </td>
+                                    <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
+                                        <button onClick={(e) => Aproved(dat.id, 3)} className="bg-green-500 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Aproved</button>
+                                    </td>
+                                    <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
+                                    </td>
+                                </tr>
+                            );
+                        })}
                     </tbody>
                 </table>
             </div>
@@ -154,4 +164,4 @@ const ArchivedTicket = () => {
     );
 };
 
-export default ArchivedTicket;
+export default ViewTicket;
