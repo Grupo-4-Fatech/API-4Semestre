@@ -1,5 +1,5 @@
 import React from 'react';
-import {  FiEdit, FiUserPlus } from 'react-icons/fi';
+import {  FiEdit, FiUserPlus, FiUsers } from 'react-icons/fi';
 import { MdOutlineViewAgenda } from 'react-icons/md';
 import { BsKanban,BsCurrencyDollar} from 'react-icons/bs';
 
@@ -96,6 +96,16 @@ export const links = [
       },
     ]
 
+  },
+  {
+    title: 'Teams',
+    links: [
+     {
+      title: 'Create Teams',
+        name: 'teams/create',
+        icon: <FiUsers />
+      }
+    ]
   }
   
 ];

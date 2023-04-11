@@ -4,7 +4,7 @@ import { FiSettings } from 'react-icons/fi';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
 import { Navbar, Footer, Sidebar, ThemeSettings, UserProfile } from './components';
-import {Kanban, Login, ViewTicket, ArchivedTicket } from './pages';
+import {Kanban, Login, ViewTicket, ArchivedTicket, CreateTeams } from './pages';
 import './App.css';
 
 import { useStateContext } from './contexts/ContextProvider';
@@ -75,6 +75,7 @@ const App = () => {
                 <Route path="/Ticket/create" element={<Chamado />} />
                 <Route path="/Ticket/update/:id" element={<UpdateTicket />} />
                 <Route path="/ArchivedTicket" element={<ArchivedTicket/>}/>
+                <Route path="/teams/create" element={<CreateTeams/>}/>
 
               </Routes>
             </div>
