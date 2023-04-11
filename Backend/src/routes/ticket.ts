@@ -3,6 +3,7 @@ import { TicketController } from "../controllers";
 
 
 
+
 const routes = Router();
 
 routes.get("/get/:id", TicketController.one)

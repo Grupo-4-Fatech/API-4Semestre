@@ -15,40 +15,20 @@ class TicketController {
     return res.json(response);
   }
   public async update(req: Request, res: Response): Promise<Response> {
-    const { id, title, type, description, status } = req.body;
-    const ticket: any = await AppDataSource.manager.findOneBy(Ticket, { id }).catch((e) => {
-      return { error: "Identificador inválido" };
-    })
-    if (ticket && ticket.id) {
-      if (title !== "") {
-        ticket.title = title;
-      }
-      if (type !== "") {
-        ticket.type = type;
-      }
-      if (description !== "") {
-        ticket.description = description;
-      }
-      if (status !== "") {
-        ticket.status = status;
-      }
-      const r = await AppDataSource.manager.save(ticket, ticket).catch((e) => {
-        if (/(title)[\s\S]+(already exists)/.test(e.detail)) {
-          return ({ error: ' title already exists' });
-        }
-        return e;
-      })
-      if (!r.error) {
-        return res.json({ id: ticket.id });
-      }
-      return res.json(r);
-    }
-    else if (ticket && ticket.error) {
-      return res.json(title)
-    }
-    else {
-      return res.json({ error: "Ticket não localizado" });
-    }
+    const { id, title, type, description, status } = req.body;       
+     const ticketRepository = AppDataSource.getRepository(Ticket)
+     const ticketToUpdate = await ticketRepository.findOneBy({
+         id: id,
+     })
+     ticketToUpdate.title=title;
+     ticketToUpdate.type=type;
+     ticketToUpdate.description=description;
+     ticketToUpdate.status=status;
+     
+     await ticketRepository.save(ticketToUpdate)
+     return res.json(ticketToUpdate)
+     
+
   }
 
   async status(req: Request, res: Response): Promise<Response> {
@@ -156,6 +136,6 @@ class TicketController {
     const ticket: any = await AppDataSource.manager.query("SELECT id, type, title, status, description FROM ticket WHERE status NOT IN (1,2)")
     return res.json(ticket)
   }
-
+  
 
 } export default new TicketController();
