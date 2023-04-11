@@ -3,19 +3,25 @@ import { Header } from '../../components'
 import { MdSend } from 'react-icons/md';
 import { useStateContext } from '../../contexts/ContextProvider'
 import Select from '../../components/Select';
+import SelectMult from '../../components/Select';
 
 
 
 
 
 export default function CreateTeams() {
+    const options = [
+        { value: 'chocolate', label: 'Chocolate' },
+        { value: 'strawberry', label: 'Strawberry' },
+        { value: 'vanilla', label: 'Vanilla' }
+      ]
 
     const { currentColor } = useStateContext();
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
             <Header category="Page" title="Teams" />
             <Campo text="Team name" placeholder="Name" type={"text"} />
-            <Select dados={['Antonio', 'João']} text={'Slect user'} />
+            <SelectMult  dados={options} text={'Select the users'}/>
             <div className='my-6'> <Campo text="Description" placeholder="Description" type={"text"} /></div>
 
             <div className="mt-5 mb-5 flex" >
