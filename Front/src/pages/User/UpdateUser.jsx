@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { MdSend } from 'react-icons/md';
 import Campo from '../../components/Campo'
 import { Header } from '../../components'

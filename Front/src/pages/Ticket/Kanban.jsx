@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { KanbanComponent, ColumnsDirective, ColumnDirective } from '@syncfusion/ej2-react-kanban';
 
-import { kanbanGrid } from '../../../data/dummy';
-import { Header } from '../../../components';
+import { kanbanGrid } from '../../data/dummy';
+import { Header } from '../../components';
 
 export default function Kanban() {
   const [showModal, setShowModal] = React.useState(false);

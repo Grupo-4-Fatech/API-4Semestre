@@ -4,13 +4,13 @@ import { FiSettings } from 'react-icons/fi';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
 import { Navbar, Footer, Sidebar, ThemeSettings, UserProfile } from './components';
-import { ArchivedTicket ,Kanban, Login, ViewTicket } from './pages';
+import {Kanban, Login, ViewTicket, ArchivedTicket } from './pages';
 import './App.css';
 
 import { useStateContext } from './contexts/ContextProvider';
-import Chamado from './pages/Chamado';
-import UpdateTicket from './pages/UpdateTicket';
-import CreateUser from './pages/CreateUser';
+import Chamado from './pages/Ticket/Chamado';
+import UpdateTicket from './pages/Ticket/UpdateTicket';
+import CreateUser from './pages/User/CreateUser';
 
 const App = () => {
   const { setCurrentColor, setCurrentMode, currentMode, activeMenu, currentColor, themeSettings, setThemeSettings , isLogged} = useStateContext();
