@@ -1,4 +1,4 @@
-import {Entity, Column, PrimaryGeneratedColumn, ManyToMany} from  'typeorm'
+import {Entity, Column, PrimaryGeneratedColumn, ManyToMany, ManyToOne} from  'typeorm'
 import { Teams } from './Teams';
 import { InspectionGroup } from './InspectionGroup';
 
@@ -22,7 +22,7 @@ export class Ticket {
     @ManyToMany(() => Teams, (teams) => teams.id)
     teams: Teams[]
 
-    @ManyToMany(() => InspectionGroup, (inspectionGroup) => inspectionGroup.id)
+    @ManyToOne(() => InspectionGroup, (inspectionGroup) => inspectionGroup.id)
     inspectionGroup: InspectionGroup;
 
 } 

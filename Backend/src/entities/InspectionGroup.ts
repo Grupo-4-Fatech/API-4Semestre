@@ -1,4 +1,4 @@
-import { Entity, JoinColumn, JoinTable, ManyToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Teams } from "./Teams";
 import { Ticket } from "./Ticket";
 
@@ -12,7 +12,7 @@ export class InspectionGroup{
 @JoinColumn()
 teams: Teams
 
-@ManyToMany(() => Ticket, (ticket) => ticket.id)
+@ManyToOne(() => Ticket, (ticket) => ticket.id)
 @JoinTable()
 ticket: Ticket[]
 

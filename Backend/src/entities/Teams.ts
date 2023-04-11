@@ -14,6 +14,6 @@ export class Teams{
 
     @ManyToMany(() => User, (user) => user.id)
     @JoinTable()
-    users: User[]
+    users: User
 
 }
