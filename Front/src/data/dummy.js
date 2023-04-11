@@ -1,5 +1,5 @@
 import React from 'react';
-import {  FiEdit } from 'react-icons/fi';
+import {  FiEdit, FiUserPlus } from 'react-icons/fi';
 import { MdOutlineViewAgenda } from 'react-icons/md';
 import { BsKanban,BsCurrencyDollar} from 'react-icons/bs';
 
@@ -62,7 +62,7 @@ const ticketGridStatus = (props) => (
 // SideBar 
 export const links = [ 
   {
-    title: 'Pages',
+    title: 'Ticket',
     links: [
       {
         title: 'Kanban',
@@ -85,6 +85,17 @@ export const links = [
         icon: <MdOutlineViewAgenda />,
       },
     ],
+  },
+  {
+    title: 'User',
+    links: [
+      {
+        title: 'Create User',
+        name: 'user/create',
+        icon: <FiUserPlus />,
+      },
+    ]
+
   }
   
 ];
@@ -260,5 +271,3 @@ export const kanbanData = [
     ClassName: 'e-story, e-high, e-margaret-hamilt',
   }
 ];
-
-
