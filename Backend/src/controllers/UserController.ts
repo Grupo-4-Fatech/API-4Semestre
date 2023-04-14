@@ -10,7 +10,7 @@ class UserController {
         return res.json(response);
     }
     public async update(req: Request, res: Response): Promise<Response> {
-        const { id, name, email, password } = req.body;
+        const { id, name, email, password, gender } = req.body;
         const userRepository = AppDataSource.getRepository(User)
         const userToUpdate = await userRepository.findOneBy({
             id: id,
@@ -18,17 +18,19 @@ class UserController {
         userToUpdate.name = name;
         userToUpdate.email = email;
         userToUpdate.password = password;
+        userToUpdate.gender = gender;
 
         await userRepository.save(userToUpdate)
         return res.json(userToUpdate)
     }
     public async create(req: Request, res: Response): Promise<Response> {
-        const { name, email, password } = req.body;
+        const { name, email, password, gender } = req.body;
 
         const obj = new User();
         obj.name = name;
         obj.email = email;
         obj.password = password;
+        obj.gender = gender;
 
         const user: any = await AppDataSource.manager.save(User, obj).catch((e) => {
 
@@ -39,7 +41,8 @@ class UserController {
                 id: user.id,
                 name: user.name,
                 email: user.email,
-                password: user.password
+                password: user.password,
+                gender: user.gender
             });
         }
         return res.json({ error: "Erro para salvar o usuario" });
