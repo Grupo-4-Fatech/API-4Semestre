@@ -5,6 +5,7 @@ import { Header } from '../../components'
 import { useStateContext } from '../../contexts/ContextProvider'
 import { useNavigate, useParams } from 'react-router-dom';
 import { validador } from '../../utils/validador';
+import Selecta from '../../components/sel';
 const Swal = require('sweetalert2')
 
 
@@ -14,6 +15,10 @@ export default function UpdateUser() {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const options = [
+    { value: 'masculino', label: 'Masculino' },
+    { value: 'feminino', label: 'Feminino' }
+]
 
   let location = useNavigate();
   function comeback() {
@@ -103,6 +108,8 @@ export default function UpdateUser() {
       <Header category="Page" title="User" />
       <Campo text="Name" id="name" placeholder="Name" type={"text"} value={name} setName={setName} />
       <Campo text="Email" id="email" placeholder="Email" type={"text"} value={email} setEmail={setEmail} />
+      <Selecta id="select" dados={options} text={'Select the gender'} />
+
       <Campo text="Password" id="password" placeholder="*****" type={"password"} value={password} setPassword={setPassword} />
 
       <div className="mt-5 mb-5 flex" >

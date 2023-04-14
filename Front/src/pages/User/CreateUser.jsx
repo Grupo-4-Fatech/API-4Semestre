@@ -13,8 +13,8 @@ const Swal = require('sweetalert2')
 export default function CreateUser() {
     const { currentColor } = useStateContext();
     const options = [
-        { value: 'homi', label: 'Cabra macho' },
-        { value: 'muie', label: 'muie' }
+        { value: 'masculino', label: 'Masculino' },
+        { value: 'feminino', label: 'Feminino' }
     ]
 
     let location = useNavigate();
@@ -26,7 +26,6 @@ export default function CreateUser() {
         const name = document.getElementById("name");
         const email = document.getElementById("email");
         const password = document.getElementById("password");
-        const select = document.getElementById("select")
 
 
         if (validador.estaVazio(name.value)) {
