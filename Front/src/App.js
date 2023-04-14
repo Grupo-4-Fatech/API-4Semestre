@@ -11,6 +11,9 @@ import { useStateContext } from './contexts/ContextProvider';
 import Chamado from './pages/Ticket/Chamado';
 import UpdateTicket from './pages/Ticket/UpdateTicket';
 import CreateUser from './pages/User/CreateUser';
+import CreateCrew from './pages/Crew/createCrew';
+import UpdateCrew from './pages/Crew/updateCrew';
+import ViewCrew from './pages/Crew/viewCrew';
 
 const App = () => {
   const { setCurrentColor, setCurrentMode, currentMode, activeMenu, currentColor, themeSettings, setThemeSettings , isLogged} = useStateContext();
@@ -76,6 +79,9 @@ const App = () => {
                 <Route path="/Ticket/update/:id" element={<UpdateTicket />} />
                 <Route path="/ArchivedTicket" element={<ArchivedTicket/>}/>
                 <Route path="/teams/create" element={<CreateTeams/>}/>
+                <Route path="/crew/create" element={<CreateCrew/>}/>
+                <Route path="/crew/update" element={<UpdateCrew/>}/>
+                <Route path="/crew/viewCrew" element={<ViewCrew/>}/>
 
               </Routes>
             </div>

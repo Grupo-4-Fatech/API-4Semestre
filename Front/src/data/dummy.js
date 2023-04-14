@@ -103,8 +103,23 @@ export const links = [
      {
       title: 'Create Teams',
         name: 'teams/create',
-        icon: <FiUsers />
+        icon: <FiUserPlus />
       }
+    ]
+  },
+  {
+    title: 'Crew',
+    links: [
+     {
+      title: 'Create Crew',
+        name: 'crew/create',
+        icon: <FiUserPlus />
+      },
+        {
+          title: 'View Crew',
+            name: 'crew/viewCrew',
+            icon: <FiUsers />
+          }
     ]
   }
   
