@@ -106,11 +106,18 @@ export const links = [
   {
     title: 'Teams',
     links: [
-     {
-      title: 'Create Teams',
-        name: 'teams/create',
-        icon: <FiUserPlus />
-      }
+      {
+        title: 'Create Teams',
+          name: 'teams/create',
+          icon: <FiUserPlus />
+        },
+        
+       {
+        title: 'View Teams',
+          name: 'teams/view',
+          icon: <FiUsers />
+        }
+      
     ]
   },
   {
