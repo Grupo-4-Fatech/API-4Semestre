@@ -2,11 +2,7 @@ import Select from 'react-select'
 import makeAnimated from 'react-select/animated'
 
 const animated = makeAnimated()
-
 function SelectMult({ dados, text }) {
-
-
-
   return (
     <>
       <label className="text-lg font-bold dark:text-black " >{text}</label>
@@ -16,7 +12,6 @@ function SelectMult({ dados, text }) {
       isSearchable = {true}
       closeMenuOnSelect= {false}
       components={animated}    
-
       options={dados} />
     </>
   )

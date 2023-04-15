@@ -17,7 +17,7 @@ export default function UpdateTeams() {
     const { currentColor } = useStateContext();
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
-    const [selectMult, setSelectMult] = useState("")
+    const [selectMult, setSelectMult] = useState([])
 
     function CriaTime(){
         const nome = document.getElementById("tituloTime");
@@ -29,7 +29,7 @@ export default function UpdateTeams() {
 
             Swal.fire({
                 icon: 'error',
-                title: 'Create tesms Failed!',
+                title: 'Update Teams Failed!',
                 text: 'Please write a name',
             })
             return
@@ -37,7 +37,7 @@ export default function UpdateTeams() {
         if (validador.tamanhoTexto(nome.value)){
             Swal.fire({
                 icon: 'error',
-                title: 'Create Teams Failed!',
+                title: 'Update Teams Failed!',
                 text: 'Name size is too big',
             })
             return
@@ -46,7 +46,7 @@ export default function UpdateTeams() {
 
             Swal.fire({
                 icon: 'error',
-                title: 'Create Tams Failed!',
+                title: 'Update Teams Failed!',
                 text: 'Please write a description',
             })
             return
@@ -63,7 +63,7 @@ export default function UpdateTeams() {
 
             <div className="mt-5 mb-5 flex" >
                 <button  onClick={() => CriaTime()} style={{ backgroundColor: currentColor, position: 'absolute' }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" >
-                    <span className='pr-1'>Create</span>
+                    <span className='pr-1'>Update</span>
                     <MdSend />
                 </button>
             </div>

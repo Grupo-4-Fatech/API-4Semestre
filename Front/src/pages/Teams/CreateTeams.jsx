@@ -38,7 +38,7 @@ export default function CreateTeams() {
 
             Swal.fire({
                 icon: 'error',
-                title: 'Create tesms Failed!',
+                title: 'Create Teams Failed!',
                 text: 'Please write a name',
             })
             return
@@ -55,7 +55,7 @@ export default function CreateTeams() {
 
             Swal.fire({
                 icon: 'error',
-                title: 'Create Tams Failed!',
+                title: 'Create Teams Failed!',
                 text: 'Please write a description',
             })
             return
