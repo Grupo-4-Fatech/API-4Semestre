@@ -1,7 +1,8 @@
 import React from 'react';
 import {  FiEdit, FiUserPlus, FiUsers } from 'react-icons/fi';
-import { MdOutlineViewAgenda } from 'react-icons/md';
+import { MdOutlineViewAgenda, MdOutlinePermContactCalendar } from 'react-icons/md';
 import { BsKanban,BsCurrencyDollar} from 'react-icons/bs';
+import { icon } from '@fortawesome/fontawesome-svg-core';
 
 export const gridOrderImage = (props) => (
   <div>
@@ -94,6 +95,11 @@ export const links = [
         name: 'user/create',
         icon: <FiUserPlus />,
       },
+      {
+        title: 'View User',
+        name: 'user/view',
+        icon: <MdOutlinePermContactCalendar />
+      }
     ]
 
   },
@@ -181,8 +187,6 @@ export const contextMenuItems = [
   'NextPage',
 ];
 export const kanbanData = [
- 
-  
   {
     Id: 'Task 3',
     Title: 'Task - 29003',

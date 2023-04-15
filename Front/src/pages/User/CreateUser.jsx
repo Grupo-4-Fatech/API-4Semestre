@@ -25,6 +25,7 @@ export default function CreateUser() {
     function CreateTicket() {
         const name = document.getElementById("name");
         const email = document.getElementById("email");
+        const gender = document.getElementById('gender');
         const password = document.getElementById("password");
 
 
@@ -67,7 +68,7 @@ export default function CreateUser() {
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
-            body: JSON.stringify({ name: name, email: email, password: password })
+            body: JSON.stringify({ name: name, email: email, gender: gender, password: password })
         }).then((resposta) => resposta.json()).then((data) => {
             if (data.error) {
                 Swal.fire({
