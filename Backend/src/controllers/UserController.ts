@@ -4,35 +4,35 @@ import { User } from "../entities/Users";
 
 
 class UserController {
-    async list(req: Request, res: Response): Promise<Response> {
+    async listUser(req: Request, res: Response): Promise<Response> {
         const response: any = await AppDataSource.getRepository(User).find({
         });
         return res.json(response);
     }
-    public async update(req: Request, res: Response): Promise<Response> {
+    public async updateUser(req: Request, res: Response): Promise<Response> {
         const { id, name, email, password, gender } = req.body;
-        const userRepository = AppDataSource.getRepository(User)
-        const userToUpdate = await userRepository.findOneBy({
+        const collection = AppDataSource.getRepository(User)
+        const renew = await collection.findOneBy({
             id: id,
         })
-        userToUpdate.name = name;
-        userToUpdate.email = email;
-        userToUpdate.password = password;
-        userToUpdate.gender = gender;
+        renew.name = name;
+        renew.email = email;
+        renew.password = password;
+        renew.gender = gender;
 
-        await userRepository.save(userToUpdate)
-        return res.json(userToUpdate)
+        await collection.save(renew)
+        return res.json(renew)
     }
-    public async create(req: Request, res: Response): Promise<Response> {
+    public async createUser(req: Request, res: Response): Promise<Response> {
         const { name, email, password, gender } = req.body;
 
-        const obj = new User();
-        obj.name = name;
-        obj.email = email;
-        obj.password = password;
-        obj.gender = gender;
+        const object = new User();
+        object.name = name;
+        object.email = email;
+        object.password = password;
+        object.gender = gender;
 
-        const user: any = await AppDataSource.manager.save(User, obj).catch((e) => {
+        const user: any = await AppDataSource.manager.save(User, object).catch((e) => {
 
         })
         if (user.id) {
@@ -48,7 +48,7 @@ class UserController {
         return res.json({ error: "Erro para salvar o usuario" });
 
     }
-    public async delete(req: Request, res: Response): Promise<Response> {
+    public async deleteUser(req: Request, res: Response): Promise<Response> {
         const { id } = req.body
         const user: any = await AppDataSource.manager.findOneBy(User, { id }).catch((e) => {
             return { error: "Identificador inválido" }
