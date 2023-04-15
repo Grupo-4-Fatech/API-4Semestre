@@ -31,9 +31,11 @@ class UserController {
         object.email = email;
         object.password = password;
         object.gender = gender;
+        console.log(object)
 
         const user: any = await AppDataSource.manager.save(User, object).catch((e) => {
-
+            return res.json({error:"Erro saving user"
+            });
         })
         if (user.id) {
 

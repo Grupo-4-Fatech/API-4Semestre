@@ -14,6 +14,7 @@ import CreateUser from './pages/User/CreateUser';
 import CreateCrew from './pages/Crew/createCrew';
 import UpdateCrew from './pages/Crew/updateCrew';
 import ViewCrew from './pages/Crew/viewCrew';
+import UpdateUser from './pages/User/UpdateUser'
 
 const App = () => {
   const { setCurrentColor, setCurrentMode, currentMode, activeMenu, currentColor, themeSettings, setThemeSettings , isLogged} = useStateContext();
@@ -83,6 +84,7 @@ const App = () => {
                 <Route path="/crew/create" element={<CreateCrew/>}/>
                 <Route path="/crew/update" element={<UpdateCrew/>}/>
                 <Route path="/crew/viewCrew" element={<ViewCrew/>}/>
+                <Route path="/user/update/:id" element={<UpdateUser/>}/>
 
               </Routes>
             </div>

@@ -11,19 +11,37 @@ const ViewUser = () => {
     const headers = ['Name', 'Email', 'Gender', 'Update', 'Delete']
     const [data, setData] = useState([])
     const [searchTerm, setSearchTerm] = useState('');
-    
+
     const currentTableData = useMemo(() => {
         const firstPageIndex = (currentPage - 1) * PageSize;
         const lastPageIndex = firstPageIndex + PageSize;
         return data
             .filter((dat) =>
-                dat.title.toLowerCase().includes(searchTerm.toLowerCase())
+                dat.name.toLowerCase().includes(searchTerm.toLowerCase())
             )
             .slice(firstPageIndex, lastPageIndex)
     }, [currentPage, data, searchTerm]);
-
+    function getData() {
+        fetch("/user/list", {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            }
+        }).then((resposta) => resposta.json()).then((data) => {
+            var users = []
+            data.forEach(element => {
+                users.push({
+                    id: element.id,
+                    name: element.name,
+                    email: element.email,
+                })
+            });
+            setData(users)
+        })
+    }
     useEffect(() => {
-        
+        getData();
+
     }, [])
 
     return (
@@ -54,10 +72,10 @@ const ViewUser = () => {
                             return (
                                 <tr key={dat.id} className="bg-white hover:bg-gray-50 dark:hover:bg-gray-300 content-center">
                                     <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                        {dat.title}
+                                        {dat.name}
                                     </td>
                                     <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                        {dat.classification}
+                                        {dat.email}
                                     </td>
 
                                     <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
