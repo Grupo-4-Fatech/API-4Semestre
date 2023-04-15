@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useStateContext } from '../contexts/ContextProvider';
 
 export default function Login() {
@@ -21,31 +21,45 @@ export default function Login() {
     const Swal = require('sweetalert2')
     var handleSubmit = function (e) {
         e.preventDefault();
-        
-        window.location.href = "/viewTicket"
-        // var dados = {}
-        // dados.email = document.getElementById('email').value;
-        // dados.senha = document.getElementById('password').value
-        // console.log(dados)
-        // fetch("/Logar", {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json;charset=utf-8'
-        //     },
-        //     body: JSON.stringify(dados)
-        // }).then((resposta) => resposta.json()).then((data) => {
+        var dados = {}
+        dados.email = document.getElementById('email').value;
+        dados.password = document.getElementById('password').value
+        console.log(dados)
+        fetch("/Login/Login", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(dados)
+        }).then((resposta) => resposta.json()).then((data) => {
 
-        //     if (data.ok) {
-        //         window.location.href = '/app'
-        //     } else {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Incorrect Login!',
-        //             text: 'Login or password are wrong.',
-        //         })
-        //     }
-        // })
+            if (data.error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'ERROR',
+                    text: data.error
+                })
+            } else {
+                window.location.href = "/viewTicket"
+            }
+        })
     }
+    function checkCookies(){
+        fetch("/Login/CheckCookies", {
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            }
+        }).then((resposta) => resposta.json()).then((data) => {
+            if(data){
+                window.location.href = "/viewTicket"
+            }
+        })
+    }
+
+    useEffect(()=>{
+        checkCookies();
+    }, [])
 
     return (
         <section className="bg-gray-50 dark:bg-gray-900">
@@ -69,7 +83,7 @@ export default function Login() {
                                 <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
                                 <input type="password" id="password" name="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
                             </div>
-                            <div className="flex items-center justify-between">
+                            {/* <div className="flex items-center justify-between">
                                 <div className="flex items-start">
                                     <div className="flex items-center h-5">
                                         <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required="" />
@@ -79,7 +93,7 @@ export default function Login() {
                                     </div>
                                 </div>
                                 <a href="#" className="text-sm font-medium text-primary-600 hover:underline dark:text-gray-200">Forgot password?</a>
-                            </div>
+                            </div> */}
                             <button type="submit" onClick={handleSubmit} className="w-full text-white bg-cyan-600 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center hover:bg-cyan-700 active:bg-cyan-700">Sign in</button>
                         </form>
                     </div>

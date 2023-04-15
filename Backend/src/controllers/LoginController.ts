@@ -1,14 +1,39 @@
-// import AppDataSource from "../data-source";
-// import { Request, Response } from 'express';
-// import { User } from "../entities/Users";
-// import * as jwt from "jsonwebtoken";
+import AppDataSource from "../data-source";
+import { Request, Response } from 'express';
+import { User } from "../entities/Users";
+import * as jwt from "jsonwebtoken";
 
 
-// class LoginController {
-//     async listUser(req: Request, res: Response): Promise<Response> {
-//         const response: any = await AppDataSource.getRepository(User).find({
-//         });
-//         return res.json(response);
-//     }
-// }
-// export default new LoginController();
+class LoginController {
+    async login(req: Request, res: Response): Promise<Response> {
+        const { email, password } = req.body;
+        console.log(password)
+        const user: any = await AppDataSource.manager.findOneBy(User, { email }).catch((e) => {
+            return res.json({ error: "Email not found" })
+        })
+        if (user) {
+            if (user.password == password) {
+                var userJwt = jwt.sign(email, process.env.JWT_SECRET)
+                res.cookie("jwt", userJwt);
+                return res.json(true);
+            } else {
+                return res.json({ error: "Incorrect password" })
+            }
+        }else{
+            return res.json({ error: "Email not found" })
+        }
+    }
+
+    async checkCookies(req: Request, res: Response): Promise<Response> {
+        var value =  jwt.decode(req.cookies.jwt)
+        var hasValue = value != "" &&  value != null ? true : false;
+        return res.json(hasValue)
+    }
+    async logOut(req: Request, res: Response): Promise<Response> {
+
+        res.cookie("jwt", null);
+        return res.json(true);
+
+    }
+}
+export default new LoginController();
