@@ -1,12 +1,16 @@
 import AppDataSource from "../data-source";
 import { Request, Response } from 'express';
 import { User } from "../entities/Users";
+import * as jwt from "jsonwebtoken";
+import { Not } from "typeorm";
 
 
 class UserController {
     async listUser(req: Request, res: Response): Promise<Response> {
-        const response: any = await AppDataSource.getRepository(User).find({
+        var email =  jwt.decode(req.cookies.jwt)
+        const response: any = await AppDataSource.getRepository(User).find({where:{email:Not(email?email.toString():"")}
         });
+      
         return res.json(response);
     }
     public async updateUser(req: Request, res: Response): Promise<Response> {
