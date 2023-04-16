@@ -6,10 +6,24 @@ export const validador = {
     selectEstaDefault(elementoSelect) {
         return elementoSelect.value === "default"
     },
-    tamanhoTexto(texto){
-        if (texto.length <= 50){
+    selectEstaVazio(elementoSelect) {
+        return elementoSelect === null
+    },
+    tamanhoTexto(texto) {
+        if (texto.length <= 50) {
             return false
-        }return true
+        } return true
+    },
+    validarEmail(email) {
+        const emailRegex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+?$/i
+        return emailRegex.test(email)
+
+    },
+    tamanhoSenha(senha) {
+        if (senha.length <= 9 || senha.length >= 15) {
+            return false
+        } 
+        return true
     }
 }
 

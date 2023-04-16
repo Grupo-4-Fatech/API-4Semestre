@@ -45,6 +45,14 @@ export default function CreateUser() {
             })
             return
         }
+        if(!validador.validarEmail(email.value)){
+            Swal.fire({
+                icon: 'error',
+                title: 'Create User Failed!',
+                text: 'Email must have @ and .com',
+            })
+            return
+        }
         if (validador.tamanhoTexto(email.value)) {
             Swal.fire({
                 icon: 'error',
@@ -53,11 +61,27 @@ export default function CreateUser() {
             })
             return
         }
+        if (validador.selectEstaDefault(gender)){
+            Swal.fire({
+                icon: 'error',
+                title: 'Create User Failed!',
+                text: 'Please select a gender',
+            })
+            return
+        }
         if (validador.estaVazio(password.value)) {
             Swal.fire({
                 icon: 'error',
                 title: 'Create User Failed!',
                 text: 'Please write a password',
+            })
+            return
+        }
+        if (!validador.tamanhoSenha(password.value)){
+            Swal.fire({
+                icon: 'error',
+                title: 'Create User Failed!',
+                text: 'Password cannot be less than 8 and cannot be more than 15',
             })
             return
         }

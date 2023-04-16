@@ -21,21 +21,19 @@ export default function CreateTeams() {
         { value: '6', label: 'Andre' },
         { value: '7', label: 'Dionísio' }
 
-      ]
+    ]
 
     const { currentColor } = useStateContext();
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
     const [selectMult, setSelectMult] = useState([])
+    
 
-    function CriaTime(){
-        const nome = document.getElementById("tituloTime");
-        const selectMult = document.getElementById("integrantesDoTime");
-        const description = document.getElementById("descriçãoTime");
+
+    function CriaTime() {
         console.log(selectMult);
 
-        if (validador.estaVazio(nome.value)) {
-
+        if (validador.estaVazio(name)) {
             Swal.fire({
                 icon: 'error',
                 title: 'Create Teams Failed!',
@@ -43,7 +41,7 @@ export default function CreateTeams() {
             })
             return
         }
-        if (validador.tamanhoTexto(nome.value)){
+        if (validador.tamanhoTexto(name)) {
             Swal.fire({
                 icon: 'error',
                 title: 'Create Teams Failed!',
@@ -51,7 +49,7 @@ export default function CreateTeams() {
             })
             return
         }
-        if (validador.estaVazio(description.value)) {
+        if (validador.estaVazio(description)) {
 
             Swal.fire({
                 icon: 'error',
@@ -67,11 +65,11 @@ export default function CreateTeams() {
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
             <Header category="Page" title="Teams" />
             <Campo id="tituloTime" text="Team name" placeholder="Name" type={"text"} value={name} setValue={setName} />
-            <SelectMult id="integrantesDoTime" dados={options} text={'Select the users'} value={description} setValue={el => setDescription(el)}/>
-            <div className='my-6'> <Campo id='descriçãoTime' text="Description" placeholder="Description" type={"text"} value={selectMult} setValue={setSelectMult}/></div>
+            <SelectMult id="integrantesDoTime" dados={options} text={'Select the users'} value={selectMult} setValue={setSelectMult} />
+            <div className='my-6'> <Campo id='descriçãoTime' text="Description" placeholder="Description" type={"text"} value={description} setValue={setDescription} /></div>
 
             <div className="mt-5 mb-5 flex" >
-                <button  onClick={() => CriaTime()} style={{ backgroundColor: currentColor, position: 'absolute' }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" >
+                <button onClick={() => CriaTime()} style={{ backgroundColor: currentColor, position: 'absolute' }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" >
                     <span className='pr-1'>Create</span>
                     <MdSend />
                 </button>
