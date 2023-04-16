@@ -23,15 +23,21 @@ export default function CreateTeams() {
 
     ]
 
-    const { currentColor } = useStateContext();
+    const { currentColor, selectMult, setSelectMult } = useStateContext();
     const [name, setName] = useState("")
-    const [description, setDescription] = useState("")
-    const [selectMult, setSelectMult] = useState([])
-    
+    const [description, setDescription] = useState("");
 
 
-    function CriaTime() {
-        console.log(selectMult);
+
+    function CriaTime() {    
+        if (selectMult.length === 0) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Create Teams Failed!',
+                text: 'Please add a user',
+            })
+            return
+        }
 
         if (validador.estaVazio(name)) {
             Swal.fire({
