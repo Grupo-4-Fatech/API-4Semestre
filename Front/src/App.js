@@ -4,13 +4,19 @@ import { FiSettings } from 'react-icons/fi';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
 import { Navbar, Footer, Sidebar, ThemeSettings, UserProfile } from './components';
-import { ArchivedTicket ,Kanban, Login, ViewTicket } from './pages';
+import {Kanban, Login, ViewTicket, ArchivedTicket, CreateTeams, ViewUser } from './pages';
 import './App.css';
 
 import { useStateContext } from './contexts/ContextProvider';
-import Chamado from './pages/Chamado';
-import UpdateTicket from './pages/UpdateTicket';
-import CreateUser from './pages/CreateUser';
+import Chamado from './pages/Ticket/Chamado';
+import UpdateTicket from './pages/Ticket/UpdateTicket';
+import CreateUser from './pages/User/CreateUser';
+import CreateCrew from './pages/Crew/createCrew';
+import UpdateCrew from './pages/Crew/updateCrew';
+import ViewCrew from './pages/Crew/viewCrew';
+import UpdateUser from './pages/User/UpdateUser';
+import ViewTeams from './pages/Teams/ViewTeams';
+import UpdateTeams from './pages/Teams/UpdateTeams';
 
 const App = () => {
   const { setCurrentColor, setCurrentMode, currentMode, activeMenu, currentColor, themeSettings, setThemeSettings , isLogged} = useStateContext();
@@ -70,11 +76,19 @@ const App = () => {
                 <Route path="/" element={(<Login/>)} />
                 <Route path="/user/create" element={<CreateUser />} />
                 <Route path="/user/update/:id" element={<UpdateTicket />} />
+                <Route path='user/view' element={<ViewUser />} />
                 <Route path="/kanban" element={<Kanban />} />
                 <Route path="/viewticket" element={<ViewTicket />} />
                 <Route path="/Ticket/create" element={<Chamado />} />
                 <Route path="/Ticket/update/:id" element={<UpdateTicket />} />
                 <Route path="/ArchivedTicket" element={<ArchivedTicket/>}/>
+                <Route path="/teams/create" element={<CreateTeams/>}/>
+                <Route path="/crew/create" element={<CreateCrew/>}/>
+                <Route path="/crew/update" element={<UpdateCrew/>}/>
+                <Route path="/crew/viewCrew" element={<ViewCrew/>}/>
+                <Route path="/user/update/:id" element={<UpdateUser/>}/>
+                <Route path='/teams/view' element={<ViewTeams/>} />
+                <Route path='/teams/update' element={<UpdateTeams/>} />
 
               </Routes>
             </div>

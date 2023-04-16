@@ -1,49 +1,15 @@
-import React, { useEffect, useState, useMemo } from 'react';
-import Pagination from '../../components/Paginacao/Pagination';
 import { useStateContext } from '../../contexts/ContextProvider'
-const Swal = require('sweetalert2')
 
-let PageSize = 5;
 
-const ViewUser = () => {
+
+
+const ViewCrew = () => {
     const { currentColor } = useStateContext();
-    const [currentPage, setCurrentPage] = useState(1);
-    const headers = ['Name', 'Email', 'Gender', 'Update', 'Delete']
-    const [data, setData] = useState([])
-    const [searchTerm, setSearchTerm] = useState('');
-
-    const currentTableData = useMemo(() => {
-        const firstPageIndex = (currentPage - 1) * PageSize;
-        const lastPageIndex = firstPageIndex + PageSize;
-        return data
-            .filter((dat) =>
-                dat.name.toLowerCase().includes(searchTerm.toLowerCase())
-            )
-            .slice(firstPageIndex, lastPageIndex)
-    }, [currentPage, data, searchTerm]);
-    function getData() {
-        fetch("/user/list", {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-            }
-        }).then((resposta) => resposta.json()).then((data) => {
-            var users = []
-            data.forEach(element => {
-                users.push({
-                    id: element.id,
-                    name: element.name,
-                    email: element.email,
-                })
-            });
-            setData(users)
-        })
-    }
-    useEffect(() => {
-        getData();
-
-    }, [])
-
+    const headers = ['Crew Name', 'Description','Edit','Delete']
+    const teste = [
+        {id: 1, nome: 'abc', descricao: "teste"},
+        {id: 2, nome: 'asd', descricao: "teste2"}
+    ]
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
             <div className="block relative">
@@ -54,7 +20,7 @@ const ViewUser = () => {
                         </path>
                     </svg>
                 </span>
-                <input placeholder="Search" onChange={(e) => setSearchTerm(e.target.value)}
+                <input placeholder="Search"
                     className="appearance-none rounded-r-lg border border-gray-400 border-b block pl-8 pr-6 py-2 w-44 bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
             </div>
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -68,21 +34,21 @@ const ViewUser = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {currentTableData.map(dat => {
+                        {teste.map(dat => {
                             return (
                                 <tr key={dat.id} className="bg-white hover:bg-gray-50 dark:hover:bg-gray-300 content-center">
                                     <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                        {dat.name}
+                                        {dat.nome}
                                     </td>
                                     <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                        {dat.email}
+                                        {dat.descricao}
                                     </td>
 
                                     <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                        <button onClick={() => { window.location.href = "/user/update/" + dat.id }} style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Update</button>
+                                        <button style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Edit</button>
                                     </td>
                                     <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                        <button className="bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Delete</button>
+                                        <button  className="bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Delete</button>
                                     </td>
                                     <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
                                     </td>
@@ -92,14 +58,8 @@ const ViewUser = () => {
                     </tbody>
                 </table>
             </div>
-            <Pagination
-                currentPage={currentPage}
-                totalCount={data.length}
-                pageSize={PageSize}
-                onPageChange={page => setCurrentPage(page)}
-            />
         </div>
     );
 };
 
-export default ViewUser;
+export default ViewCrew;
