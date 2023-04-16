@@ -8,6 +8,7 @@ const routes = Router()
 
 routes.use("/ticket", ticket);
 routes.use("/user", user);
+routes.use("/teams", teams);
 
 
 routes.use((req: Request, res: Response) => res.json({ error: "Requisição desconhecida" }));

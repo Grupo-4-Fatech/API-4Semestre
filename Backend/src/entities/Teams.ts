@@ -10,10 +10,8 @@ export class Teams{
     @Column()
     name: string
 
-
-
     @ManyToMany(() => User, (user) => user.id)
     @JoinTable()
-    users: User
+    users: Array<User>
 
 }
