@@ -1,5 +1,5 @@
 import AppDataSource from "../data-source";
-import { Request, Response } from 'express';
+import { Request, Response, response } from 'express';
 import { User } from "../entities/Users";
 import * as jwt from "jsonwebtoken";
 import { Not } from "typeorm";
@@ -13,6 +13,14 @@ class UserController {
       
         return res.json(response);
     }
+    async profileUser(req: Request, res: Response): Promise<Response> {
+        var email =  jwt.decode(req.cookies.jwt)
+        const response: any = await AppDataSource.getRepository(User).findOne({where:{email:email?email.toString():""}
+       
+        });
+        return res.json(response);
+    }
+    
     public async updateUser(req: Request, res: Response): Promise<Response> {
         const { id, name, email, password, gender } = req.body;
         const collection = AppDataSource.getRepository(User)

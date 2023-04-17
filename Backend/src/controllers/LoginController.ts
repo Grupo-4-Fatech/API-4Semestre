@@ -28,6 +28,7 @@ class LoginController {
         var value =  jwt.decode(req.cookies.jwt)
         var hasValue = value != "" &&  value != null ? true : false;
         return res.json(hasValue)
+        
     }
     async logOut(req: Request, res: Response): Promise<Response> {
 
