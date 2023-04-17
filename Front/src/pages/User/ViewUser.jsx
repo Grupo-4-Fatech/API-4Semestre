@@ -8,7 +8,7 @@ let PageSize = 5;
 const ViewUser = () => {
     const { currentColor } = useStateContext();
     const [currentPage, setCurrentPage] = useState(1);
-    const headers = ['Name', 'Email', 'Gender', 'Update', 'Delete']
+    const headers = ['Name', 'Email', 'Role', 'Update', 'Delete']
     const [data, setData] = useState([])
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -34,6 +34,7 @@ const ViewUser = () => {
                     id: element.id,
                     name: element.name,
                     email: element.email,
+                    role: element.role == 1 ?"DIRECTOR": element.role == 2? "ADMIN": "REQUESTER"
                 })
             });
             setData(users)
@@ -78,7 +79,7 @@ const ViewUser = () => {
                                         {dat.email}
                                     </td>
                                     <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                        {dat.gender}
+                                        {dat.role}
                                     </td>
 
                                     <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">

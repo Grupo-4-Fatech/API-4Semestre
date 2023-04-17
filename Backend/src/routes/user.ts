@@ -8,6 +8,7 @@ routes.post("/create", UserController.createUser);
 routes.patch("/update", UserController.updateUser);
 routes.delete("/delete", UserController.deleteUser);
 routes.get("/list",UserController.listUser);
+routes.get("/getUsers", UserController.getUsers)
 
 
 export default routes;

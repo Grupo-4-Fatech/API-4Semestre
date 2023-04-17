@@ -14,7 +14,7 @@ class UserController {
         return res.json(response);
     }
     public async updateUser(req: Request, res: Response): Promise<Response> {
-        const { id, name, email, password, gender } = req.body;
+        const { id, name, email, password, gender,role } = req.body;
         const collection = AppDataSource.getRepository(User)
         const renew = await collection.findOneBy({
             id: id,
@@ -23,19 +23,20 @@ class UserController {
         renew.email = email;
         renew.password = password;
         renew.gender = gender;
+        renew.role = role;
 
         await collection.save(renew)
         return res.json(renew)
     }
     public async createUser(req: Request, res: Response): Promise<Response> {
-        const { name, email, password, gender } = req.body;
+        const { name, email, password, gender, role } = req.body;
 
         const object = new User();
         object.name = name;
         object.email = email;
         object.password = password;
         object.gender = gender;
-        console.log(object)
+        object.role = role;
 
         const user: any = await AppDataSource.manager.save(User, object).catch((e) => {
             return res.json({error:"Erro saving user"
@@ -72,6 +73,10 @@ class UserController {
         }
 
 
+    }
+    async getUsers(req: Request, res: Response): Promise<Response> {
+        const response: any = await AppDataSource.getRepository(User).find({});
+        return res.json(response);
     }
 
 } export default new UserController();

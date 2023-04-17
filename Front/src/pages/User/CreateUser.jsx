@@ -27,6 +27,7 @@ export default function CreateUser() {
         const email = document.getElementById("email");
         const gender = document.getElementById("gender");
         const password = document.getElementById("password");
+        const role = document.getElementById("role");
 
 
         if (validador.estaVazio(name.value)) {
@@ -85,13 +86,21 @@ export default function CreateUser() {
             })
             return
         }
+        if (validador.selectEstaDefault(role)){
+            Swal.fire({
+                icon: 'error',
+                title: 'Create User Failed!',
+                text: 'Please select a role',
+            })
+            return
+        }
 
         fetch("/user/create", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
-            body: JSON.stringify({ name: name.value, email: email.value, gender: gender.value, password: password.value })
+            body: JSON.stringify({ name: name.value, email: email.value, gender: gender.value, password: password.value, role: role.value })
         }).then((resposta) => resposta.json()).then((data) => {
             if (data.error) {
                 Swal.fire({
@@ -119,6 +128,17 @@ export default function CreateUser() {
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
             </select>
+            <div className='mt-5'>
+            <label className="text-lg font-bold dark:text-black " >Select a role</label>
+            <select id="role" defaultValue='default' className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
+                <option value="default" disabled selected>Select an option:</option>
+                <option value="1">Director</option>
+                <option value="2">Admin</option>
+                <option value="2">Requester</option>
+            </select>
+
+            </div>
+          
             <div className='my-6'><Campo text="Password" id="password" placeholder="*****" type={"password"} /></div>
             <div className="mt-5 mb-5 flex" >
                 <button style={{ backgroundColor: currentColor, position: 'absolute' }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" onClick={CreateUser}>
