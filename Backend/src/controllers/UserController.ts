@@ -38,8 +38,7 @@ class UserController {
         console.log(object)
 
         const user: any = await AppDataSource.manager.save(User, object).catch((e) => {
-            return res.json({error:"Erro saving user"
-            });
+            return res.json({error:"Error saving user"});
         })
         if (user.id) {
 
@@ -51,13 +50,13 @@ class UserController {
                 gender: user.gender
             });
         }
-        return res.json({ error: "Erro para salvar o usuario" });
+        return res.json({ error: "Error saving user" });
 
     }
     public async deleteUser(req: Request, res: Response): Promise<Response> {
         const { id } = req.body
         const user: any = await AppDataSource.manager.findOneBy(User, { id }).catch((e) => {
-            return { error: "Identificador inválido" }
+            return { error: "invalid identifier" }
         })
 
         if (user && user.id) {
@@ -68,7 +67,7 @@ class UserController {
             return res.json(user)
         }
         else {
-            return res.json({ error: "User não localizado" })
+            return res.json({ error: "User not found" })
         }
 
 
