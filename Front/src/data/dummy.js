@@ -66,11 +66,6 @@ export const links = [
     title: 'Ticket',
     links: [
       {
-        title: 'Kanban',
-        name: 'kanban',
-        icon: <BsKanban />,
-      },
-      {
         title: 'Open Ticket',
         name: 'ticket/create',
         icon: <FiEdit />,        
@@ -116,21 +111,26 @@ export const links = [
         title: 'View Teams',
           name: 'teams/view',
           icon: <FiUsers />
-        }
+        },
+        {
+          title: 'Kanban',
+          name: 'kanban',
+          icon: <BsKanban />,
+        },
       
     ]
   },
   {
-    title: 'Crew',
+    title: 'Group',
     links: [
      {
-      title: 'Create Crew',
-        name: 'crew/create',
+      title: 'Create Group',
+        name: 'group/create',
         icon: <FiUserPlus />
       },
         {
-          title: 'View Crew',
-            name: 'crew/viewCrew',
+          title: 'View Group',
+            name: 'group/viewGroup',
             icon: <FiUsers />
           }
     ]

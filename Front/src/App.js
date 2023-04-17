@@ -11,9 +11,9 @@ import { useStateContext } from './contexts/ContextProvider';
 import Chamado from './pages/Ticket/Chamado';
 import UpdateTicket from './pages/Ticket/UpdateTicket';
 import CreateUser from './pages/User/CreateUser';
-import CreateCrew from './pages/Crew/createCrew';
-import UpdateCrew from './pages/Crew/updateCrew';
-import ViewCrew from './pages/Crew/viewCrew';
+import CreateGroup from './pages/Group/createGroup';
+import UpdateGroup from './pages/Group/updateGroup';
+import ViewGroup from './pages/Group/viewGroup';
 import UpdateUser from './pages/User/UpdateUser';
 import ViewTeams from './pages/Teams/ViewTeams';
 import UpdateTeams from './pages/Teams/UpdateTeams';
@@ -77,7 +77,7 @@ const App = () => {
               <Routes>
                 <Route path="/" element={(<Login />)} />
                 <Route path="/user/create" element={<CreateUser />} />
-                <Route path="/user/update/:id" element={<UpdateTicket />} />
+                <Route path="/Ticket/update/:id" element={<UpdateTicket />} />
                 <Route path='user/view' element={<ViewUser />} />
                 <Route path="/kanban" element={<Kanban />} />
                 <Route path="/viewticket" element={<ViewTicket />} />
@@ -85,9 +85,9 @@ const App = () => {
                 <Route path="/Ticket/update/:id" element={<UpdateTicket />} />
                 <Route path="/ArchivedTicket" element={<ArchivedTicket />} />
                 <Route path="/teams/create" element={<CreateTeams />} />
-                <Route path="/crew/create" element={<CreateCrew />} />
-                <Route path="/crew/update" element={<UpdateCrew />} />
-                <Route path="/crew/viewCrew" element={<ViewCrew />} />
+                <Route path="/group/create" element={<CreateGroup />} />
+                <Route path="/group/update" element={<UpdateGroup />} />
+                <Route path="/group/viewGroup" element={<ViewGroup />} />
                 <Route path="/user/update/:id" element={<UpdateUser />} />
                 <Route path='/teams/view' element={<ViewTeams />} />
                 <Route path='/teams/update' element={<UpdateTeams />} />

@@ -36,7 +36,7 @@ export default function Login() {
             if (data.error) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'ERROR',
+                    title: 'Incorret Login',
                     text: data.error
                 })
             } else {

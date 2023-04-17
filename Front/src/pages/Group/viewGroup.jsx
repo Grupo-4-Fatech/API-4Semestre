@@ -1,17 +1,16 @@
 import { useStateContext } from '../../contexts/ContextProvider'
+import { Header } from "../../components";
 
-
-
-
-const ViewCrew = () => {
+const ViewGroup = () => {
     const { currentColor } = useStateContext();
-    const headers = ['Crew Name', 'Description','Edit','Delete']
+    const headers = ['Group Name', 'Edit', 'Delete']
     const teste = [
-        {id: 1, nome: 'abc', descricao: "teste"},
-        {id: 2, nome: 'asd', descricao: "teste2"}
+        { id: 1, nome: 'abc', },
+        { id: 2, nome: 'asd', }
     ]
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
+            <Header category="Page" title="View Group" />
             <div className="block relative">
                 <span className="h-full absolute inset-y-0 left-0 flex items-center pl-2">
                     <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current text-gray-500">
@@ -39,16 +38,12 @@ const ViewCrew = () => {
                                 <tr key={dat.id} className="bg-white hover:bg-gray-50 dark:hover:bg-gray-300 content-center">
                                     <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
                                         {dat.nome}
-                                    </td>
-                                    <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                        {dat.descricao}
-                                    </td>
-
+                                    </td>                           
                                     <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
                                         <button style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Edit</button>
                                     </td>
                                     <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                        <button  className="bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Delete</button>
+                                        <button className="bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Delete</button>
                                     </td>
                                     <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
                                     </td>
@@ -62,4 +57,4 @@ const ViewCrew = () => {
     );
 };
 
-export default ViewCrew;
+export default ViewGroup;
