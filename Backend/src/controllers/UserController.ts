@@ -1,5 +1,5 @@
 import AppDataSource from "../data-source";
-import { Request, Response, response } from 'express';
+import { Request, Response } from 'express';
 import { User } from "../entities/Users";
 import * as jwt from "jsonwebtoken";
 import { Not } from "typeorm";
@@ -20,7 +20,6 @@ class UserController {
         });
         return res.json(response);
     }
-    
     public async updateUser(req: Request, res: Response): Promise<Response> {
         const { id, name, email, password, gender } = req.body;
         const collection = AppDataSource.getRepository(User)
@@ -46,7 +45,8 @@ class UserController {
         console.log(object)
 
         const user: any = await AppDataSource.manager.save(User, object).catch((e) => {
-            return res.json({error:"Error saving user"});
+            return res.json({error:"Erro saving user"
+            });
         })
         if (user.id) {
 
@@ -58,13 +58,13 @@ class UserController {
                 gender: user.gender
             });
         }
-        return res.json({ error: "Error saving user" });
+        return res.json({ error: "Erro para salvar o usuario" });
 
     }
     public async deleteUser(req: Request, res: Response): Promise<Response> {
         const { id } = req.body
         const user: any = await AppDataSource.manager.findOneBy(User, { id }).catch((e) => {
-            return { error: "invalid identifier" }
+            return { error: "Identificador inválido" }
         })
 
         if (user && user.id) {
@@ -75,7 +75,7 @@ class UserController {
             return res.json(user)
         }
         else {
-            return res.json({ error: "User not found" })
+            return res.json({ error: "User não localizado" })
         }
 
 
