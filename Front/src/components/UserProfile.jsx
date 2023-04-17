@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MdOutlineCancel } from 'react-icons/md';
 import { Button } from '.';
 import { userProfileData } from '../data/dummy';
@@ -29,8 +29,10 @@ const UserProfile = () => {
       setUser(user)
     })
   }
-  profileUser()
-
+  
+  useEffect(() => {
+    profileUser()
+  },[])
 
   return (
     <div className="nav-item absolute right-1 top-16 bg-white dark:bg-[#42464D] p-8 rounded-lg w-96">
