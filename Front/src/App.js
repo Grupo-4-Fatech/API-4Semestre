@@ -17,6 +17,7 @@ import ViewCrew from './pages/Crew/viewCrew';
 import UpdateUser from './pages/User/UpdateUser';
 import ViewTeams from './pages/Teams/ViewTeams';
 import UpdateTeams from './pages/Teams/UpdateTeams';
+import NotFound from './pages/Not_found/NotFound';
 
 const App = () => {
   const { setCurrentColor, setCurrentMode, currentMode, activeMenu, currentColor, themeSettings, setThemeSettings , isLogged} = useStateContext();
@@ -89,6 +90,7 @@ const App = () => {
                 <Route path="/user/update/:id" element={<UpdateUser/>}/>
                 <Route path='/teams/view' element={<ViewTeams/>} />
                 <Route path='/teams/update' element={<UpdateTeams/>} />
+                <Route path='*' element ={<NotFound/>} />
 
               </Routes>
             </div>

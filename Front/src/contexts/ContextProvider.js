@@ -16,7 +16,7 @@ export const ContextProvider = ({ children }) => {
   const [activeMenu, setActiveMenu] = useState(true);
   const [isClicked, setIsClicked] = useState(initialState);
   const [isLogged, setLogin] = useState(true);
-  const [selectMult, setSelectMult] = useState([''])
+  const [selectMult, setSelectMult] = useState(['']);
 
   const setMode = (e) => {
     setCurrentMode(e.target.value);
