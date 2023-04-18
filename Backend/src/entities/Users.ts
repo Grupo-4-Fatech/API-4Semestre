@@ -21,7 +21,8 @@ export class User{
 
     @Column()
     gender: string;
-
+    @Column()
+    role:number
     @ManyToMany(() => Teams, (team) => team.users)
     team: Array<Teams>
 
