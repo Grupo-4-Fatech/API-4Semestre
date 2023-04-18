@@ -6,20 +6,13 @@ import SelectMult from '../../components/Select';
 import { useEffect, useState } from 'react';
 import { validador } from "../../utils/validador";
 const Swal = require('sweetalert2')
-
-
-
-
-
-export default function CreateTeams() {
-    
+export default function CreateTree() {
     const { currentColor } = useStateContext();
     const [selectMult, setSelectMult] = useState([])
     const [name, setName] = useState("")
-    const group = document.getElementById("group")
     const [description, setDescription] = useState("");
     const [data, setData] = useState([])
-    function getUser(){
+    function getUser() {
         fetch("/user/getUsers", {
             method: 'GET',
             headers: {
@@ -37,9 +30,7 @@ export default function CreateTeams() {
         })
     }
 
-
-
-    function CriaTime() {    
+    function CriaTime() {
         if (selectMult.length === 0) {
             Swal.fire({
                 icon: 'error',
@@ -65,22 +56,6 @@ export default function CreateTeams() {
             })
             return
         }
-        if (selectMult.length === 0) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Create Teams Failed!',
-                text: 'Please add a user',
-            })
-            return
-        }
-        if (validador.selectEstaDefault(group)) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Create Teams Failed!',
-                text: 'Please select a group',
-            })
-            return
-        }
         if (validador.estaVazio(description)) {
 
             Swal.fire({
@@ -92,20 +67,39 @@ export default function CreateTeams() {
         }
 
     }
-    useEffect(()=>{getUser()},[])
+    useEffect(() => { getUser() }, [])
 
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-            <Header category="Page" title="Teams" />
-            <Campo id="tituloTime" text="Team name" placeholder="Name" type={"text"} value={name} setValue={setName} />
-            <SelectMult id="integrantesDoTime" dados={data} text={'Select the users'} value={selectMult} setValue={setSelectMult} />
-            <div className='mt-5'><label className="text-lg font-bold dark:text-black " >Select a Group</label>
-                <select id="group" defaultValue='default' className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
-                    <option value="default" disabled selected>Select an option:</option>
-                    <option value="group">Fatech</option>
-                </select></div>
-            <div className='my-6'> <Campo id='descriçãoTime' text="Description" placeholder="Description" type={"text"} value={description} setValue={setDescription} /></div>
+            <Header category="Page" title="Tree" />
+            <div>
+                <h1 className='text-lg font-bold dark:text-black'>
+                    RISK ANALYSIS
+                </h1>
+                <div className='ml-2'>
+                    <SelectMult id="integrantesDoTime" dados={data} text={'Select the users'} value={selectMult} setValue={setSelectMult} />
 
+                </div>
+            </div>
+            <div>
+                <h1 className='text-lg font-bold dark:text-black'>
+                    IMPACT ANALYSIS
+                </h1>
+                <div className='ml-2'>
+                    <SelectMult id="integrantesDoTime" dados={data} text={'Select the users'} value={selectMult} setValue={setSelectMult} />
+
+                </div>
+
+            </div>
+            <div>
+                <h1 className='text-lg font-bold dark:text-black'>
+                    COST ANALYSIS
+                </h1>
+                <div className='ml-2'>
+                    <SelectMult id="integrantesDoTime" dados={data} text={'Select the users'} value={selectMult} setValue={setSelectMult} />
+
+                </div>
+            </div>
             <div className="mt-5 mb-5 flex" >
                 <button onClick={() => CriaTime()} style={{ backgroundColor: currentColor, position: 'absolute' }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" >
                     <span className='pr-1'>Create</span>

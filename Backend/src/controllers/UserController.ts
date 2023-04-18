@@ -21,28 +21,29 @@ class UserController {
         return res.json(response);
     }
     public async updateUser(req: Request, res: Response): Promise<Response> {
-        const { id, name, email, password, gender } = req.body;
+        const { id, name, email, password, gender,role } = req.body;
         const collection = AppDataSource.getRepository(User)
         const renew = await collection.findOneBy({
             id: id,
         })
         renew.name = name;
         renew.email = email;
-        renew.password = password;
+        renew.password = renew.password;
         renew.gender = gender;
+        renew.role = role;
 
         await collection.save(renew)
         return res.json(renew)
     }
     public async createUser(req: Request, res: Response): Promise<Response> {
-        const { name, email, password, gender } = req.body;
+        const { name, email, password, gender, role } = req.body;
 
         const object = new User();
         object.name = name;
         object.email = email;
         object.password = password;
         object.gender = gender;
-        console.log(object)
+        object.role = role;
 
         const user: any = await AppDataSource.manager.save(User, object).catch((e) => {
             return res.json({error:"Erro saving user"
@@ -79,6 +80,17 @@ class UserController {
         }
 
 
+    }
+    async getUsers(req: Request, res: Response): Promise<Response> {
+        const response: any = await AppDataSource.getRepository(User).find({});
+        return res.json(response);
+    }
+    async getUser(req: Request, res: Response): Promise<Response> {
+        const id = parseInt(req.params.id)
+        const user: any = await AppDataSource.getRepository(User).findOne({where:{id:id}}).catch((e) => {
+            return { error: "Identificador inválido" }
+        })
+        return res.json(user);
     }
 
 } export default new UserController();

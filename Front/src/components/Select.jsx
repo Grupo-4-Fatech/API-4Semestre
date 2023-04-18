@@ -4,8 +4,7 @@ import { useStateContext } from '../contexts/ContextProvider'
 
 
 const animated = makeAnimated()
-function SelectMult({ dados, text }) {
-  const {  setSelectMult } = useStateContext();
+function SelectMult({ dados, text , setValue}) {
   return (
     <>
       <label className="text-lg font-bold dark:text-black " >{text}</label>
@@ -14,7 +13,7 @@ function SelectMult({ dados, text }) {
       isClearable = {true}
       isSearchable = {true}
       closeMenuOnSelect= {false}
-      onChange={el => setSelectMult(el)}
+      onChange={el => setValue(el)}
       components={animated}    
       options={dados} />
     </>

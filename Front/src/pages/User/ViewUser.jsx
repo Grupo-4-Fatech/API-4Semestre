@@ -10,7 +10,7 @@ let PageSize = 5;
 const ViewUser = () => {
     const { currentColor } = useStateContext();
     const [currentPage, setCurrentPage] = useState(1);
-    const headers = ['Name', 'Email','Role', 'Gender', 'Update', 'Delete']
+    const headers = ['Name', 'Email', 'Role', 'Update', 'Delete']
     const [data, setData] = useState([])
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -36,6 +36,7 @@ const ViewUser = () => {
                     id: element.id,
                     name: element.name,
                     email: element.email,
+                    role: element.role == 1 ? "DIRECTOR" : element.role == 2 ? "ADMIN" : "REQUESTER"
                 })
             });
             setData(users)
@@ -83,10 +84,6 @@ const ViewUser = () => {
                                     <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
                                         {dat.role}
                                     </td>
-                                    <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                        {dat.gender}
-                                    </td>
-
                                     <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
                                         <button onClick={() => { window.location.href = "/user/update/" + dat.id }} style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Update</button>
                                     </td>
