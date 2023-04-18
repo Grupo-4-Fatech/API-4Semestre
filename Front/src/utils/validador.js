@@ -20,7 +20,7 @@ export const validador = {
 
     },
     tamanhoSenha(senha) {
-        if (senha.length <= 9 || senha.length >= 15) {
+        if (senha.length < 9 || senha.length > 15) {
             return false
         } 
         return true

@@ -19,6 +19,7 @@ import ViewTeams from './pages/Teams/ViewTeams';
 import UpdateTeams from './pages/Teams/UpdateTeams';
 import NotFound from './pages/Not_found/NotFound';
 import CreateTree from './pages/Tree/CreateTree';
+import UpdateProfile from "./pages/User/UpdateProfile";
 
 
 const App = () => {
@@ -91,6 +92,7 @@ const App = () => {
                 <Route path="/group/update" element={<UpdateGroup />} />
                 <Route path="/group/viewGroup" element={<ViewGroup />} />
                 <Route path="/user/update/:id" element={<UpdateUser />} />
+                <Route path="/user/updateProfile" element={<UpdateProfile />} />
                 <Route path='/teams/view' element={<ViewTeams />} />
                 <Route path='/teams/update' element={<UpdateTeams />} />
                 <Route path='/tree/create' element={<CreateTree/>} />

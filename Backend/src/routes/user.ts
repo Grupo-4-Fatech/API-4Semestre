@@ -6,11 +6,12 @@ const routes = Router();
 
 routes.post("/create", UserController.createUser); 
 routes.patch("/update", UserController.updateUser);
-routes.delete("/delete", UserController.deleteUser);
+routes.delete("/delete/:id", UserController.deleteUser);
 routes.get("/list",UserController.listUser);
 routes.get("/getUsers", UserController.getUsers);
 routes.get("/profile",UserController.profileUser);
 routes.get("/get/:id", UserController.getUser)
+routes.patch("/updateProfile", UserController.updateProfile)
 
 
 export default routes;

@@ -35,6 +35,31 @@ class UserController {
         await collection.save(renew)
         return res.json(renew)
     }
+    public async updateProfile(req: Request, res: Response): Promise<Response> {
+        const { id, name, email, password, oldPassword, gender,role, changePassword } = req.body;
+        const collection = AppDataSource.getRepository(User)
+        const renew = await collection.findOneBy({
+            id: id,
+        })
+
+        if(!renew){
+            return res.json({error:"User not found"})
+        }
+        if(changePassword){
+            if(oldPassword != renew.password){
+                return res.json({error:"Wrong password"})
+            }
+            renew.password = password
+
+        }
+        renew.name = name;
+        renew.email = email;
+        renew.gender = gender;
+        renew.role = role;
+
+        await collection.save(renew)
+        return res.json(renew)
+    }
     public async createUser(req: Request, res: Response): Promise<Response> {
         const { name, email, password, gender, role } = req.body;
 
@@ -63,8 +88,9 @@ class UserController {
 
     }
     public async deleteUser(req: Request, res: Response): Promise<Response> {
-        const { id } = req.body
-        const user: any = await AppDataSource.manager.findOneBy(User, { id }).catch((e) => {
+        const id  = parseInt(req.params.id)
+        console.log(id + " iddddddddddddddddd")
+        const user: any = await AppDataSource.getRepository(User).findOneBy({id:id}).catch((e) => {
             return { error: "Identificador inválido" }
         })
 
