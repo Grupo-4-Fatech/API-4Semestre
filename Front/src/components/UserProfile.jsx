@@ -52,7 +52,7 @@ const UserProfile = () => {
         {user && (
           <div>
             <p className="font-semibold text-xl dark:text-gray-200"> {user.name} </p>
-            <p className="text-gray-500 text-sm dark:text-gray-400">  Developer   </p>
+            {/* <p className="text-gray-500 text-sm dark:text-gray-400">  Developer   </p> */}
             <p className="text-gray-500 text-sm font-semibold dark:text-gray-400"> {user.email} </p>
           </div>
 
@@ -61,7 +61,7 @@ const UserProfile = () => {
 
       <div>
         {userProfileData.map((item, index) => (
-          <div key={index} className="flex gap-5 border-b-1 border-color p-4 hover:bg-light-gray cursor-pointer  dark:hover:bg-[#42464D]">
+          <div onClick={() => window.location.href = "/user/update/" + user.id} key={index} className="flex gap-5 border-b-1 border-color p-4 hover:bg-light-gray cursor-pointer  dark:hover:bg-[#42464D]">
             <button
               onClick={()=> window.location.href = "/user/updateProfile"}
               type="button"
