@@ -24,7 +24,7 @@ class TicketController {
      ticketToUpdate.type=type;
      ticketToUpdate.description=description;
      ticketToUpdate.status=status;
-     ticketToUpdate.inspectionGroups=inspectionGroups;
+     ticketToUpdate.inspectionGroup = inspectionGroups;
 
      
      await ticketRepository.save(ticketToUpdate)
@@ -61,7 +61,7 @@ class TicketController {
     obj.title = title;
     obj.description = description;
     obj.status = status;
-    obj.inspectionGroups = inspectionGroups
+    obj.inspectionGroup = inspectionGroups
 
     const ticket: any = await AppDataSource.manager.save(Ticket, obj).catch((e) => {
 

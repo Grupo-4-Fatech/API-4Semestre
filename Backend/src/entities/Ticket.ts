@@ -8,10 +8,8 @@ export class Ticket {
     id: number
 
     @Column({})
-    @Column({})
     title: string;
 
-    @Column({})
     @Column({})
     type: string;
 
