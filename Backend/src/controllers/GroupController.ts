@@ -8,7 +8,7 @@ class GroupController {
 
   public async create(req: Request, res: Response): Promise<Response> {
 
-    const {funcao, descricao, userId } = req.body;
+    const {name, descricao, userId } = req.body;
 
     const userTable = await AppDataSource.getRepository(User);
 
@@ -16,7 +16,7 @@ class GroupController {
 
 
     const obj = new InspectionGroup();
-    obj.funcao = funcao;
+    obj.name = name;
     obj.descricao = descricao;
     obj.users = [user];
 
@@ -27,7 +27,7 @@ class GroupController {
   if (inspectionGroup.id) {
     return res.json({
 
-      funcao: inspectionGroup.funcao,
+      name: inspectionGroup.name,
       descricao: inspectionGroup.descricao,
       userId: inspectionGroup.userId
 
@@ -67,7 +67,7 @@ class GroupController {
 
 
     public async update(req: Request, res: Response): Promise<Response> {
-    const { id, funcao, descricao,userId  } = req.body;   
+    const { id, name, descricao,userId  } = req.body;   
 
     
     const userTable = await AppDataSource.getRepository(User);
@@ -80,7 +80,7 @@ class GroupController {
          id: id,
      })
    
-     obj.funcao = funcao;
+     obj.name = name;
      obj.descricao = descricao;
      obj.users = [user];
      

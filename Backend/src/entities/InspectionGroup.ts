@@ -10,7 +10,7 @@ export class InspectionGroup {
     id: number
 
     @Column({})
-    funcao: String
+    name: String
 
     @Column({})
     descricao: String

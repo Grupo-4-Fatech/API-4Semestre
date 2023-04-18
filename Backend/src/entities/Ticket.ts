@@ -23,7 +23,7 @@ export class Ticket {
     @ManyToMany(() => Teams, (teams) => teams.id)
     teams: Teams[]
 
-    @ManyToMany(() => InspectionGroup, (inspectionGroup) => inspectionGroup.id)
+    @ManyToOne(() => InspectionGroup, (inspectionGroup) => inspectionGroup.id)
     inspectionGroup: InspectionGroup;
 
     @ManyToOne(() => User, (user) => user.id)
