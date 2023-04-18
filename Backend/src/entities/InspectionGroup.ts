@@ -1,4 +1,4 @@
-import { Entity, Column, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToOne, PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Teams } from "./Teams";
 import { Ticket } from "./Ticket";
 import { User } from "./Users";
@@ -15,7 +15,7 @@ export class InspectionGroup {
     @Column({})
     descricao: String
 
-    @OneToMany(()=> Ticket, (ticket)=> ticket.inspectionGroups)
+    @OneToMany(()=> Ticket, (ticket)=> ticket.inspectionGroup)
     @JoinTable()
     ticket: Array<Ticket>
 

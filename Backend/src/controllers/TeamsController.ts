@@ -1,7 +1,5 @@
 import AppDataSource from "../data-source";
 import { Request, Response } from 'express';
-import { Ticket } from "../entities/Ticket";
-import { IsUndefined } from "../utils/global";
 import { User } from "../entities/Users";
 import { Teams } from "../entities/Teams";
 import e = require("express");
@@ -10,19 +8,14 @@ class TeamsController{
     
     
   public async create(req: Request, res: Response): Promise<Response> {
-    const { userId, name } = req.body;
-
-    const userTable = await AppDataSource.getRepository(User);
-
-    const user = await userTable.findOneBy({id: userId});
-
+    const { name } = req.body;
+    
       const obj = new Teams();
           obj.name = name;
-          obj.users = [user];
 
       await AppDataSource.getRepository(Teams).save(obj).catch((e) => res.json(e));
       
-    return res.json(userId);
+    return res.json(obj);
   }
 
   public async insert(req: Request, res: Response): Promise<Response> {
@@ -47,15 +40,19 @@ class TeamsController{
   }
 
   public async removeUser(req: Request, res: Response): Promise<Response>{
-    const { teamName, userId } = req.body;
+      const { teamName, userId } = req.body;
 
-    const userToRemove = await AppDataSource.getRepository(Teams).findBy({users: userId});
+      const teams = await AppDataSource.getRepository(Teams);
 
-    const team = await AppDataSource.getRepository(Teams).findBy({name: teamName})
+      const userToRemove = await teams.findBy({users: userId, name: teamName});
 
-    return res.json(userToRemove);
+      teams.remove(userToRemove);
+
+      return res.json(userToRemove);
   }
 
+  public async getTeamsBy(){
+  }
 
 }
 export default new TeamsController();
