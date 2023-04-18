@@ -40,7 +40,7 @@ class GroupController {
   public async delete(req: Request, res: Response): Promise<Response> {
     const { id } = req.body
     const inspectionGroup : any = await AppDataSource.manager.findOneBy(InspectionGroup, { id }).catch((e) => {
-      return { error: "Identificador inválido" }
+      return { error: "Invalid identifier" }
     })
 
     if (inspectionGroup && inspectionGroup.id) {
@@ -51,7 +51,7 @@ class GroupController {
       return res.json(inspectionGroup)
     }
     else {
-      return res.json({ error: "Group não localizado" })
+      return res.json({ error: "group not found" })
     }
 
 

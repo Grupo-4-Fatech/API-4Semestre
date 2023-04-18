@@ -87,7 +87,7 @@ class TicketController {
   public async delete(req: Request, res: Response): Promise<Response> {
     const { id } = req.body
     const ticket: any = await AppDataSource.manager.findOneBy(Ticket, { id }).catch((e) => {
-      return { error: "Identificador inválido" }
+      return { error: "invalid identifier" }
     })
 
     if (ticket && ticket.id) {
@@ -98,7 +98,7 @@ class TicketController {
       return res.json(ticket)
     }
     else {
-      return res.json({ error: "Ticket não localizado" })
+      return res.json({ error: "Ticket not found" })
     }
 
 
@@ -118,7 +118,7 @@ class TicketController {
   public async updateStatus(req: Request, res: Response): Promise<Response> {
     const { id, status } = req.body;
     const ticket: any = await AppDataSource.manager.findOneBy(Ticket, { id }).catch((e) => {
-      return { error: "Identificador inválido" };
+      return { error: "invalid identifier" };
     })
     if (ticket && ticket.id) {
       if (status !== "") {

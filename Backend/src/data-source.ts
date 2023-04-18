@@ -13,10 +13,10 @@ const AppDataSource = new DataSource({
 
 AppDataSource.initialize()
     .then(() => {
-        console.log("Data Source inicializado!")
+        console.log("Data Source initialized!")
     })
     .catch((e) => {
-        console.error("Erro na inicialização do Data Source:", e)
+        console.error("Data Source initialization error:", e)
     });
 
 export default AppDataSource;

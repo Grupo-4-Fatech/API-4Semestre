@@ -71,7 +71,7 @@ class UserController {
         object.role = role;
 
         const user: any = await AppDataSource.manager.save(User, object).catch((e) => {
-            return res.json({error:"Erro saving user"
+            return res.json({error:"Error saving user"
             });
         })
         if (user.id) {
@@ -84,14 +84,14 @@ class UserController {
                 gender: user.gender
             });
         }
-        return res.json({ error: "Erro para salvar o usuario" });
+        return res.json({ error: "Error saving user" });
 
     }
     public async deleteUser(req: Request, res: Response): Promise<Response> {
         const id  = parseInt(req.params.id)
-        console.log(id + " iddddddddddddddddd")
+        console.log(id + " id")
         const user: any = await AppDataSource.getRepository(User).findOneBy({id:id}).catch((e) => {
-            return { error: "Identificador inválido" }
+            return { error: "Invalid identifier" }
         })
 
         if (user && user.id) {
@@ -102,7 +102,7 @@ class UserController {
             return res.json(user)
         }
         else {
-            return res.json({ error: "User não localizado" })
+            return res.json({ error: "User not found" })
         }
 
 
@@ -114,7 +114,7 @@ class UserController {
     async getUser(req: Request, res: Response): Promise<Response> {
         const id = parseInt(req.params.id)
         const user: any = await AppDataSource.getRepository(User).findOne({where:{id:id}}).catch((e) => {
-            return { error: "Identificador inválido" }
+            return { error: "Invalid identifier" }
         })
         return res.json(user);
     }
