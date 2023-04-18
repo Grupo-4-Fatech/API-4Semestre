@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { RiNotification3Line } from 'react-icons/ri';
 import { MdKeyboardArrowDown } from 'react-icons/md';
@@ -27,6 +27,18 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
 
 const Navbar = () => {
   const { currentColor, activeMenu, setActiveMenu, handleClick, isClicked, setScreenSize, screenSize } = useStateContext();
+  const [user, setUser] = useState(null)
+  function profileUser() {
+    fetch("/user/profile", {
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      }
+    }).then((resposta) => resposta.json()).then((user) => {
+      setUser(user)
+    })
+  }
+  
 
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);
@@ -39,6 +51,7 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
+    profileUser()
     if (screenSize <= 900) {
       setActiveMenu(false);
     } else {
@@ -60,12 +73,15 @@ const Navbar = () => {
             className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
             onClick={() => handleClick('userProfile')}
           >
+           {user && (
             <p>
               <span className="text-gray-400 text-14">Hi,</span>{' '}
               <span className="text-gray-400 font-bold ml-1 text-14">
-                Nome Usu
+                {user.name}
               </span>
             </p>
+           )}
+            
             <MdKeyboardArrowDown className="text-gray-400 text-14" />
           </div>
         </TooltipComponent>

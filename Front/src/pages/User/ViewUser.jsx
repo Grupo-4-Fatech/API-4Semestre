@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import Pagination from '../../components/Paginacao/Pagination';
 import { useStateContext } from '../../contexts/ContextProvider'
+import { Header } from '../../components'
+
 const Swal = require('sweetalert2')
 
 let PageSize = 5;
@@ -34,7 +36,7 @@ const ViewUser = () => {
                     id: element.id,
                     name: element.name,
                     email: element.email,
-                    role: element.role == 1 ?"DIRECTOR": element.role == 2? "ADMIN": "REQUESTER"
+                    role: element.role == 1 ? "DIRECTOR" : element.role == 2 ? "ADMIN" : "REQUESTER"
                 })
             });
             setData(users)
@@ -47,6 +49,7 @@ const ViewUser = () => {
 
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
+            <Header category="Page" title="View User" />
             <div className="block relative">
                 <span className="h-full absolute inset-y-0 left-0 flex items-center pl-2">
                     <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current text-gray-500">
@@ -81,7 +84,6 @@ const ViewUser = () => {
                                     <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
                                         {dat.role}
                                     </td>
-
                                     <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
                                         <button onClick={() => { window.location.href = "/user/update/" + dat.id }} style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Update</button>
                                     </td>

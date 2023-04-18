@@ -13,6 +13,13 @@ class UserController {
       
         return res.json(response);
     }
+    async profileUser(req: Request, res: Response): Promise<Response> {
+        var email =  jwt.decode(req.cookies.jwt)
+        const response: any = await AppDataSource.getRepository(User).findOne({where:{email:email?email.toString():""}
+       
+        });
+        return res.json(response);
+    }
     public async updateUser(req: Request, res: Response): Promise<Response> {
         const { id, name, email, password, gender,role } = req.body;
         const collection = AppDataSource.getRepository(User)
@@ -21,7 +28,7 @@ class UserController {
         })
         renew.name = name;
         renew.email = email;
-        renew.password = password;
+        renew.password = renew.password;
         renew.gender = gender;
         renew.role = role;
 
@@ -77,6 +84,13 @@ class UserController {
     async getUsers(req: Request, res: Response): Promise<Response> {
         const response: any = await AppDataSource.getRepository(User).find({});
         return res.json(response);
+    }
+    async getUser(req: Request, res: Response): Promise<Response> {
+        const id = parseInt(req.params.id)
+        const user: any = await AppDataSource.getRepository(User).findOne({where:{id:id}}).catch((e) => {
+            return { error: "Identificador inválido" }
+        })
+        return res.json(user);
     }
 
 } export default new UserController();

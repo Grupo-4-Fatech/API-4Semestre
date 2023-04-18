@@ -12,9 +12,11 @@ const Swal = require('sweetalert2')
 
 
 export default function CreateTeams() {
+    
     const { currentColor } = useStateContext();
     const [selectMult, setSelectMult] = useState([])
     const [name, setName] = useState("")
+    const group = document.getElementById("group")
     const [description, setDescription] = useState("");
     const [data, setData] = useState([])
     function getUser(){
@@ -34,7 +36,9 @@ export default function CreateTeams() {
             setData(users)
         })
     }
-    
+
+
+
     function CriaTime() {    
         if (selectMult.length === 0) {
             Swal.fire({
@@ -61,6 +65,22 @@ export default function CreateTeams() {
             })
             return
         }
+        if (selectMult.length === 0) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Create Teams Failed!',
+                text: 'Please add a user',
+            })
+            return
+        }
+        if (validador.selectEstaDefault(group)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Create Teams Failed!',
+                text: 'Please select a group',
+            })
+            return
+        }
         if (validador.estaVazio(description)) {
 
             Swal.fire({
@@ -79,6 +99,11 @@ export default function CreateTeams() {
             <Header category="Page" title="Teams" />
             <Campo id="tituloTime" text="Team name" placeholder="Name" type={"text"} value={name} setValue={setName} />
             <SelectMult id="integrantesDoTime" dados={data} text={'Select the users'} value={selectMult} setValue={setSelectMult} />
+            <div className='mt-5'><label className="text-lg font-bold dark:text-black " >Select a Group</label>
+                <select id="group" defaultValue='default' className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
+                    <option value="default" disabled selected>Select an option:</option>
+                    <option value="group">Fatech</option>
+                </select></div>
             <div className='my-6'> <Campo id='descriçãoTime' text="Description" placeholder="Description" type={"text"} value={description} setValue={setDescription} /></div>
 
             <div className="mt-5 mb-5 flex" >

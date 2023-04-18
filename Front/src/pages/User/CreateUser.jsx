@@ -5,8 +5,6 @@ import { Header } from '../../components'
 import { useStateContext } from '../../contexts/ContextProvider'
 import { useNavigate } from 'react-router-dom';
 import { validador } from '../../utils/validador';
-import SelectMult from '../../components/Select';
-import Selecta from '../../components/sel';
 const Swal = require('sweetalert2')
 
 
@@ -26,15 +24,21 @@ export default function CreateUser() {
         const name = document.getElementById("name");
         const email = document.getElementById("email");
         const gender = document.getElementById("gender");
+        const role = document.getElementById("role")
         const password = document.getElementById("password");
-        const role = document.getElementById("role");
-
-
         if (validador.estaVazio(name.value)) {
             Swal.fire({
                 icon: 'error',
                 title: 'Create User Failed!',
                 text: 'Please write a name',
+            })
+            return
+        }
+        if(validador.tamanhoTexto(name.value)){
+            Swal.fire({
+                icon: 'error',
+                title: 'Create User Failed!',
+                text: 'Name size is too big',
             })
             return
         }
@@ -58,7 +62,7 @@ export default function CreateUser() {
             Swal.fire({
                 icon: 'error',
                 title: 'Create User Failed!',
-                text: 'email size is too big',
+                text: 'Email size is too big',
             })
             return
         }
@@ -120,8 +124,8 @@ export default function CreateUser() {
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
             <Header category="Page" title="User" />
-            <Campo text="Name" id="name" placeholder="Name" type={"text"} />
-            <Campo text="Email" id="email" placeholder="Email" type={"text"} />
+            <Campo text="Name" id="name" placeholder="Name" type="text" />
+            <Campo text="Email" id="email" placeholder="Email" type="text" />
             <label className="text-lg font-bold dark:text-black " >Select a gender</label>
             <select id="gender" defaultValue='default' className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
                 <option value="default" disabled selected>Select an option:</option>

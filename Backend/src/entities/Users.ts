@@ -1,4 +1,6 @@
-import {Entity, PrimaryGeneratedColumn, Column} from 'typeorm';
+import {Entity, PrimaryGeneratedColumn, Column, ManyToMany} from 'typeorm';
+import { Teams } from './Teams';
+import { InspectionGroup } from './InspectionGroup';
 
 
 
@@ -19,8 +21,12 @@ export class User{
 
     @Column()
     gender: string;
-
     @Column()
     role:number
+    @ManyToMany(() => Teams, (team) => team.users)
+    team: Array<Teams>
+
+    @ManyToMany(() => InspectionGroup, (inspectionGroup) => inspectionGroup.users)
+    inspectionGroup: Array<InspectionGroup>
 
 }
