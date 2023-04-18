@@ -52,7 +52,6 @@ class TeamsController{
   }
 
   public async getTeamsBy(){
-     
   }
 
 }

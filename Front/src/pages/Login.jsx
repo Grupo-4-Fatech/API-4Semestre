@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useStateContext } from '../contexts/ContextProvider';
 
 export default function Login() {
-    
+
 
     //Mode
     const { currentMode, setLogin } = useStateContext();
@@ -36,7 +36,7 @@ export default function Login() {
             if (data.error) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'ERROR',
+                    title: 'Incorret Login',
                     text: data.error
                 })
             } else {
@@ -44,20 +44,21 @@ export default function Login() {
             }
         })
     }
-    function checkCookies(){
+    // Função para obter o valor de um cookie pelo nome
+    
+    function checkCookies() {
         fetch("/Login/CheckCookies", {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             }
         }).then((resposta) => resposta.json()).then((data) => {
-            if(data){
+            if (data) {
                 window.location.href = "/viewTicket"
             }
         })
     }
-
-    useEffect(()=>{
+    useEffect(() => {
         checkCookies();
     }, [])
 

@@ -1,19 +1,26 @@
-import { Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Teams } from "./Teams";
 import { Ticket } from "./Ticket";
+import { User } from "./Users";
 
 
 @Entity()
-export class InspectionGroup{
+export class InspectionGroup {
     @PrimaryGeneratedColumn()
     id: number
 
-@OneToOne(() => Teams)
-@JoinColumn()
-teams: Teams
+    @Column({})
+    funcao: String
 
-@ManyToOne(() => Ticket, (ticket) => ticket.id)
-@JoinTable()
-ticket: Ticket[]
+    @Column({})
+    descricao: String
+
+    @OneToMany(()=> Ticket, (ticket)=> ticket.inspectionGroup)
+    @JoinTable()
+    ticket: Array<Ticket>
+
+    @ManyToMany(() => User, (user) => user.id)
+    @JoinTable()
+    users: Array<User>
 
 }

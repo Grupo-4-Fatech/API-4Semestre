@@ -13,6 +13,13 @@ class UserController {
       
         return res.json(response);
     }
+    async profileUser(req: Request, res: Response): Promise<Response> {
+        var email =  jwt.decode(req.cookies.jwt)
+        const response: any = await AppDataSource.getRepository(User).findOne({where:{email:email?email.toString():""}
+       
+        });
+        return res.json(response);
+    }
     public async updateUser(req: Request, res: Response): Promise<Response> {
         const { id, name, email, password, gender } = req.body;
         const collection = AppDataSource.getRepository(User)

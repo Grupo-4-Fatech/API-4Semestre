@@ -1,5 +1,6 @@
 import {Entity, PrimaryGeneratedColumn, Column, ManyToMany} from 'typeorm';
 import { Teams } from './Teams';
+import { InspectionGroup } from './InspectionGroup';
 
 
 
@@ -23,5 +24,8 @@ export class User{
 
     @ManyToMany(() => Teams, (team) => team.users)
     team: Array<Teams>
+
+    @ManyToMany(() => InspectionGroup, (inspectionGroup) => inspectionGroup.users)
+    inspectionGroup: Array<InspectionGroup>
 
 }
