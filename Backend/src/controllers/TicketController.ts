@@ -54,14 +54,17 @@ class TicketController {
   }
 
   public async create(req: Request, res: Response): Promise<Response> {
-    const { type, title, description, status, inspectionGroups  } = req.body;
+    const { type, title, description, status, inspectionGroups, userId  } = req.body;
+
+
 
     const obj = new Ticket();
     obj.type = type;
     obj.title = title;
     obj.description = description;
     obj.status = status;
-    obj.inspectionGroup = inspectionGroups
+    obj.inspectionGroup = inspectionGroups;
+    obj.user = userId;
 
     const ticket: any = await AppDataSource.manager.save(Ticket, obj).catch((e) => {
 
