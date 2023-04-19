@@ -81,7 +81,7 @@ const App = () => {
 
               <Routes>
                 <Route path="/" element={(<Login />)} />
-                <Route path="/user/create" element={<CreateUser />} />
+                {/* <Route path="/user/create" element={<CreateUser />} />
                 <Route path="/Ticket/update/:id" element={<UpdateTicket />} />
                 <Route path='user/view' element={<ViewUser />} />
                 <Route path="/kanban" element={<Kanban />} />
@@ -97,8 +97,8 @@ const App = () => {
                 <Route path="/user/updateProfile" element={<UpdateProfile />} />
                 <Route path='/teams/view' element={<ViewTeams />} />
                 <Route path='/teams/update' element={<UpdateTeams />} />
-                <Route path='/tree/create' element={<CreateTree />} />
-                {/* <Route path="/user/create" element={<PrivateRoute><CreateUser /></PrivateRoute>} />
+                <Route path='/tree/create' element={<CreateTree />} /> */}
+                <Route path="/user/create" element={<PrivateRoute><CreateUser /></PrivateRoute>} />
                 <Route path="/Ticket/update/:id" element={<PrivateRoute><UpdateTicket /></PrivateRoute>} />
                 <Route path='user/view' element={<PrivateRoute><ViewUser /></PrivateRoute>} />
                 <Route path="/kanban" element={<PrivateRoute> <Kanban /> </PrivateRoute>} />
@@ -114,7 +114,7 @@ const App = () => {
                 <Route path="/user/updateProfile" element={<PrivateRoute><UpdateProfile /></PrivateRoute>} />
                 <Route path='/teams/view' element={<PrivateRoute><ViewTeams /></PrivateRoute>} />
                 <Route path='/teams/update' element={<PrivateRoute><UpdateTeams /></PrivateRoute>} />
-                <Route path='/tree/create' element={<PrivateRoute><CreateTree /></PrivateRoute>} /> */}
+                <Route path='/tree/create' element={<PrivateRoute><CreateTree /></PrivateRoute>} />
                 <Route path='*' element={<NotFound />} />
               </Routes>
             </div>
