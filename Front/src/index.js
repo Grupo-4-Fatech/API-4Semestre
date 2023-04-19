@@ -7,8 +7,10 @@ import AutenticacaoProvider from './contexts/ContextUsuLogado.tsx';
 
 
 ReactDOM.render(
+    <AutenticacaoProvider>
         <ContextProvider>
             <App />
-        </ContextProvider>,
+        </ContextProvider>
+    </AutenticacaoProvider>,
     document.getElementById('root')
 )
