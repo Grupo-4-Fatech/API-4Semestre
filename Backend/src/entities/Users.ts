@@ -3,8 +3,6 @@ import { Teams } from './Teams';
 import { InspectionGroup } from './InspectionGroup';
 import { Ticket } from './Ticket';
 
-
-
 @Entity()
 export class User{
 
@@ -33,6 +31,6 @@ export class User{
     inspectionGroup: Array<InspectionGroup>
 
     @OneToMany(() => Ticket, (ticket) => ticket.id)
-    ticket: Array<Ticket>
+    ticket: Ticket[];
 
 }

@@ -2,18 +2,25 @@ import AppDataSource from "../data-source";
 import { Request, Response } from 'express';
 import { Ticket } from "../entities/Ticket";
 import { IsUndefined } from "../utils/global";
+import * as jwt from "jsonwebtoken";
+import UserController from "./UserController";
+import { User } from "../entities/Users";
 
 
 class TicketController {
 
   async list(req: Request, res: Response): Promise<Response> {
-    const response: any = await AppDataSource.getRepository(Ticket).find({
-      order: {
-        id: 'asc'
-      }
-    });
-    return res.json(response);
+    let email =  jwt.decode(req.cookies.jwt);
+    const user = await AppDataSource.getRepository(User).findOneBy({email:email.toString()})
+
+    const ticketTable = await AppDataSource.getRepository(Ticket)
+
+    const ticket = await ticketTable.findBy({user: false})
+
+    return res.json("");
   }
+
+
   public async update(req: Request, res: Response): Promise<Response> {
     const { id, title, type, description, status, inspectionGroups } = req.body;       
      const ticketRepository = AppDataSource.getRepository(Ticket)
@@ -56,7 +63,9 @@ class TicketController {
   public async create(req: Request, res: Response): Promise<Response> {
     const { type, title, description, status, inspectionGroups, userId  } = req.body;
 
+    const userTable = await AppDataSource.getRepository(User);
 
+    const userToInsert = await userTable.findOneBy({id: userId})
 
     const obj = new Ticket();
     obj.type = type;
@@ -64,7 +73,7 @@ class TicketController {
     obj.description = description;
     obj.status = status;
     obj.inspectionGroup = inspectionGroups;
-    obj.user = userId;
+    obj.user = [userToInsert]
 
     const ticket: any = await AppDataSource.manager.save(Ticket, obj).catch((e) => {
 

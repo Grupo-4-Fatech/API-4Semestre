@@ -27,7 +27,6 @@ export class Ticket {
     inspectionGroup: InspectionGroup;
 
     @ManyToOne(() => User, (user) => user.id)
-    @JoinTable()
-    user: User []
+    user: Array<User>;
 
 } 
