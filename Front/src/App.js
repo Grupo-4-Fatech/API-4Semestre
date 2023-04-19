@@ -20,6 +20,8 @@ import UpdateTeams from './pages/Teams/UpdateTeams';
 import NotFound from './pages/Not_found/NotFound';
 import CreateTree from './pages/Tree/CreateTree';
 import UpdateProfile from "./pages/User/UpdateProfile";
+import PrivateRoute from './routes/PrivateRoute';
+
 
 
 const App = () => {
@@ -79,31 +81,29 @@ const App = () => {
 
               <Routes>
                 <Route path="/" element={(<Login />)} />
-                <Route path="/user/create" element={<CreateUser />} />
-                <Route path="/Ticket/update/:id" element={<UpdateTicket />} />
-                <Route path='user/view' element={<ViewUser />} />
-                <Route path="/kanban" element={<Kanban />} />
-                <Route path="/viewticket" element={<ViewTicket />} />
-                <Route path="/Ticket/create" element={<Chamado />} />
-                <Route path="/Ticket/update/:id" element={<UpdateTicket />} />
-                <Route path="/ArchivedTicket" element={<ArchivedTicket />} />
-                <Route path="/teams/create" element={<CreateTeams />} />
-                <Route path="/group/create" element={<CreateGroup />} />
-                <Route path="/group/update" element={<UpdateGroup />} />
-                <Route path="/group/viewGroup" element={<ViewGroup />} />
-                <Route path="/user/update/:id" element={<UpdateUser />} />
-                <Route path="/user/updateProfile" element={<UpdateProfile />} />
-                <Route path='/teams/view' element={<ViewTeams />} />
-                <Route path='/teams/update' element={<UpdateTeams />} />
-                <Route path='/tree/create' element={<CreateTree/>} />
+                <Route path="/user/create" element={<PrivateRoute><CreateUser /></PrivateRoute>} />
+                <Route path="/Ticket/update/:id" element={<PrivateRoute><UpdateTicket /></PrivateRoute>} />
+                <Route path='user/view' element={<PrivateRoute><ViewUser /></PrivateRoute>} />
+                <Route path="/kanban" element={<PrivateRoute> <Kanban /> </PrivateRoute>} />
+                <Route path="/viewticket" element={<PrivateRoute><ViewTicket /></PrivateRoute>} />
+                <Route path="/Ticket/create" element={<PrivateRoute><Chamado /></PrivateRoute>} />
+                <Route path="/Ticket/update/:id" element={<PrivateRoute><UpdateTicket /></PrivateRoute>} />
+                <Route path="/ArchivedTicket" element={<PrivateRoute><ArchivedTicket /></PrivateRoute>} />
+                <Route path="/teams/create" element={<PrivateRoute><CreateTeams /></PrivateRoute>} />
+                <Route path="/group/create" element={<PrivateRoute><CreateGroup /></PrivateRoute>} />
+                <Route path="/group/update" element={<PrivateRoute><UpdateGroup /></PrivateRoute>} />
+                <Route path="/group/viewGroup" element={<PrivateRoute><ViewGroup /></PrivateRoute>} />
+                <Route path="/user/update/:id" element={<PrivateRoute><UpdateUser /></PrivateRoute>} />
+                <Route path="/user/updateProfile" element={<PrivateRoute><UpdateProfile /></PrivateRoute>} />
+                <Route path='/teams/view' element={<PrivateRoute><ViewTeams /></PrivateRoute>} />
+                <Route path='/teams/update' element={<PrivateRoute><UpdateTeams /></PrivateRoute>} />
+                <Route path='/tree/create' element={<PrivateRoute><CreateTree /></PrivateRoute>} />
                 <Route path='*' element={<NotFound />} />
-               
-
               </Routes>
             </div>
             <Footer />
           </div>
-        </div>
+        </div> 
       </BrowserRouter>
     </div>
   );

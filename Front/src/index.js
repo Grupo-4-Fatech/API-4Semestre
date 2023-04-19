@@ -3,10 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css'
 import App from './App';
 import { ContextProvider } from './contexts/ContextProvider'
+import AutenticacaoProvider from './contexts/ContextUsuLogado.tsx';
+
 
 ReactDOM.render(
-    <ContextProvider>
-        <App />
-    </ContextProvider>,
+    <AutenticacaoProvider>
+        <ContextProvider>
+            <App />
+        </ContextProvider>
+    </AutenticacaoProvider>,
     document.getElementById('root')
 )
