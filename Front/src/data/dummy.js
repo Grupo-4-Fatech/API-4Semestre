@@ -1,7 +1,7 @@
 import React from 'react';
-import {  FiEdit, FiUserPlus, FiUsers, FiUser } from 'react-icons/fi';
+import { FiEdit, FiUserPlus, FiUsers, FiUser } from 'react-icons/fi';
 import { MdOutlineViewAgenda, MdOutlinePermContactCalendar } from 'react-icons/md';
-import { BsKanban,} from 'react-icons/bs';
+import { BsKanban, } from 'react-icons/bs';
 import { icon } from '@fortawesome/fontawesome-svg-core';
 
 export const gridOrderImage = (props) => (
@@ -25,17 +25,23 @@ export const gridOrderStatus = (props) => (
 );
 
 export const kanbanGrid = [
-  { headerText: 'New',
+  {
+    headerText: 'New',
     keyField: 'New',
-    allowToggle: true },
+    allowToggle: true
+  },
 
-  { headerText: 'On Hold',
+  {
+    headerText: 'On Hold',
     keyField: 'OnHold',
-    allowToggle: true },
+    allowToggle: true
+  },
 
-  { headerText: 'Done',
+  {
+    headerText: 'Done',
     keyField: 'Done',
-    allowToggle: true },
+    allowToggle: true
+  },
 ];
 
 const customerGridImage = (props) => (
@@ -61,24 +67,27 @@ const ticketGridStatus = (props) => (
 
 
 // SideBar 
-export const links = [ 
+export const links = [
   {
     title: 'Ticket',
     links: [
       {
         title: 'Open Ticket',
         name: 'ticket/create',
-        icon: <FiEdit />,        
+        icon: <FiEdit />,
+        permission: 3,
       },
       {
         title: 'View Tickets',
         name: 'ViewTicket',
         icon: <MdOutlineViewAgenda />,
+        permission: 3,
       },
       {
         title: 'Archived Tickets',
         name: 'ArchivedTicket',
         icon: <MdOutlineViewAgenda />,
+        permission: 2,
       },
     ],
   },
@@ -89,11 +98,13 @@ export const links = [
         title: 'Create User',
         name: 'user/create',
         icon: <FiUserPlus />,
+        permission: 1,
       },
       {
         title: 'View User',
         name: 'user/view',
-        icon: <MdOutlinePermContactCalendar />
+        icon: <MdOutlinePermContactCalendar />,
+        permission: 1,
       }
     ]
 
@@ -103,39 +114,44 @@ export const links = [
     links: [
       {
         title: 'Create Teams',
-          name: 'teams/create',
-          icon: <FiUserPlus />
-        },
-        
-       {
+        name: 'teams/create',
+        icon: <FiUserPlus />,
+        permission: 1,
+      },
+
+      {
         title: 'View Teams',
-          name: 'teams/view',
-          icon: <FiUsers />
-        },
-        {
-          title: 'Kanban',
-          name: 'kanban',
-          icon: <BsKanban />,
-        },
-      
+        name: 'teams/view',
+        icon: <FiUsers />,
+        permission: 1,
+      },
+      {
+        title: 'Kanban',
+        name: 'kanban',
+        icon: <BsKanban />,
+        permission: 1,
+      },
+
     ]
   },
   {
     title: 'Group',
     links: [
-     {
-      title: 'Create Group',
+      {
+        title: 'Create Group',
         name: 'group/create',
-        icon: <FiUserPlus />
+        icon: <FiUserPlus />,
+        permission: 1,
       },
-        {
-          title: 'View Group',
-            name: 'group/viewGroup',
-            icon: <FiUsers />
-          }
+      {
+        title: 'View Group',
+        name: 'group/viewGroup',
+        icon: <FiUsers />,
+        permission: 1,
+      }
     ]
   }
-  
+
 ];
 
 export const themeColors = [
