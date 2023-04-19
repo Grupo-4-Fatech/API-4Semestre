@@ -5,7 +5,6 @@ import React from "react";
 
 const PrivateRoute = ({ children }) => {
     const { usuario } = useAutenticacao();
-    console.log("asdas " , usuario);
     if (!usuario) {
         return <Navigate to="/" replace />
     }

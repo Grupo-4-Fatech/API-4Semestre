@@ -138,7 +138,7 @@ export default function CreateUser() {
                 <option value="default" disabled selected>Select an option:</option>
                 <option value="1">Director</option>
                 <option value="2">Admin</option>
-                <option value="2">Requester</option>
+                <option value="3">Requester</option>
             </select>
 
             </div>
