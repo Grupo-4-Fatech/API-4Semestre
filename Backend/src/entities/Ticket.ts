@@ -20,7 +20,7 @@ export class Ticket {
     @Column( {})
     status: string;
 
-    @ManyToMany(() => Teams, (teams) => teams.id)
+    @ManyToOne(() => Teams, (teams) => teams.id)
     teams: Teams[]
 
     @ManyToOne(() => InspectionGroup, (inspectionGroup) => inspectionGroup.id)

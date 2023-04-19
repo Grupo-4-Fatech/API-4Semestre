@@ -88,9 +88,9 @@ class UserController {
 
     }
     public async deleteUser(req: Request, res: Response): Promise<Response> {
-        const id  = parseInt(req.params.id)
-        console.log(id + " id")
-        const user: any = await AppDataSource.getRepository(User).findOneBy({id:id}).catch((e) => {
+        const { userId } = req.body;
+
+        const user: any = await AppDataSource.getRepository(User).findOneBy({id:userId}).catch((e) => {
             return { error: "Invalid identifier" }
         })
 
