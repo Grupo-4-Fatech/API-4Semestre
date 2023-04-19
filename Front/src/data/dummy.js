@@ -1,7 +1,7 @@
 import React from 'react';
-import {  FiEdit, FiUserPlus, FiUsers } from 'react-icons/fi';
+import {  FiEdit, FiUserPlus, FiUsers, FiUser } from 'react-icons/fi';
 import { MdOutlineViewAgenda, MdOutlinePermContactCalendar } from 'react-icons/md';
-import { BsKanban,BsCurrencyDollar} from 'react-icons/bs';
+import { BsKanban,} from 'react-icons/bs';
 import { icon } from '@fortawesome/fontawesome-svg-core';
 
 export const gridOrderImage = (props) => (
@@ -167,7 +167,7 @@ export const themeColors = [
 
 export const userProfileData = [
   {
-    icon: <BsCurrencyDollar />,
+    icon: <FiUser />,
     title: 'My Profile',
     desc: 'Account Settings',
     iconColor: '#03C9D7',

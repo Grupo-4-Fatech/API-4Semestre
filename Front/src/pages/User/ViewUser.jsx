@@ -42,6 +42,31 @@ const ViewUser = () => {
             setData(users)
         })
     }
+    function deleteUser(id) {
+        fetch("/user/delete/" + id, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            }
+        }).then((res) => res.json()).then((response) => {
+            if (response.error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'User not deleted',
+                })
+            }
+            else {
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'User deleted successfully',
+                })
+                var updateData = data.filter(item => item.id != id)
+                setData(updateData)
+            }
+        })
+
+    }
     useEffect(() => {
         getData();
 
@@ -88,7 +113,7 @@ const ViewUser = () => {
                                         <button onClick={() => { window.location.href = "/user/update/" + dat.id }} style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Update</button>
                                     </td>
                                     <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                        <button className="bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Delete</button>
+                                        <button className="bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" onClick={() => deleteUser(dat.id)}>Delete</button>
                                     </td>
                                     <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
                                     </td>

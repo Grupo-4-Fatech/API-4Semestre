@@ -22,7 +22,7 @@ class TicketController {
 
 
   public async update(req: Request, res: Response): Promise<Response> {
-    const { id, title, type, description, status, inspectionGroups } = req.body;       
+    const { id, title, type, description, status, inspectionGroup } = req.body;       
      const ticketRepository = AppDataSource.getRepository(Ticket)
      const ticketToUpdate = await ticketRepository.findOneBy({
          id: id,
@@ -31,7 +31,7 @@ class TicketController {
      ticketToUpdate.type=type;
      ticketToUpdate.description=description;
      ticketToUpdate.status=status;
-     ticketToUpdate.inspectionGroup = inspectionGroups;
+     ticketToUpdate.inspectionGroup = inspectionGroup;
 
      
      await ticketRepository.save(ticketToUpdate)
@@ -61,7 +61,7 @@ class TicketController {
   }
 
   public async create(req: Request, res: Response): Promise<Response> {
-    const { type, title, description, status, inspectionGroups, userId  } = req.body;
+    const { type, title, description, status, inspectionGroup, userId  } = req.body;
 
     const userTable = await AppDataSource.getRepository(User);
 
@@ -72,8 +72,8 @@ class TicketController {
     obj.title = title;
     obj.description = description;
     obj.status = status;
-    obj.inspectionGroup = inspectionGroups;
-    obj.user = [userToInsert]
+    obj.inspectionGroup = inspectionGroup;
+    obj.user = userId;
 
     const ticket: any = await AppDataSource.manager.save(Ticket, obj).catch((e) => {
 
@@ -86,7 +86,7 @@ class TicketController {
         title: ticket.title,
         description: ticket.description,
         status: ticket.status,
-        inspectionGroups: ticket.inspectionGroups
+        inspectionGroup: ticket.inspectionGroup
       });
     }
     return res.json({ error: "Error while saving the ticket" });
@@ -96,7 +96,7 @@ class TicketController {
   public async delete(req: Request, res: Response): Promise<Response> {
     const { id } = req.body
     const ticket: any = await AppDataSource.manager.findOneBy(Ticket, { id }).catch((e) => {
-      return { error: "Identificador inválido" }
+      return { error: "invalid identifier" }
     })
 
     if (ticket && ticket.id) {
@@ -107,7 +107,7 @@ class TicketController {
       return res.json(ticket)
     }
     else {
-      return res.json({ error: "Ticket não localizado" })
+      return res.json({ error: "Ticket not found" })
     }
 
 
@@ -127,7 +127,7 @@ class TicketController {
   public async updateStatus(req: Request, res: Response): Promise<Response> {
     const { id, status } = req.body;
     const ticket: any = await AppDataSource.manager.findOneBy(Ticket, { id }).catch((e) => {
-      return { error: "Identificador inválido" };
+      return { error: "invalid identifier" };
     })
     if (ticket && ticket.id) {
       if (status !== "") {

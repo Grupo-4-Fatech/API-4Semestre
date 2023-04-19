@@ -12,14 +12,14 @@ const Swal = require('sweetalert2')
 
 
 export default function CreateTeams() {
-    
+
     const { currentColor } = useStateContext();
     const [selectMult, setSelectMult] = useState([])
     const [name, setName] = useState("")
     const group = document.getElementById("group")
     const [description, setDescription] = useState("");
     const [data, setData] = useState([])
-    function getUser(){
+    function getUser() {
         fetch("/user/getUsers", {
             method: 'GET',
             headers: {
@@ -39,7 +39,7 @@ export default function CreateTeams() {
 
 
 
-    function CriaTime() {    
+    function CriaTime() {
         if (selectMult.length === 0) {
             Swal.fire({
                 icon: 'error',
@@ -92,7 +92,7 @@ export default function CreateTeams() {
         }
 
     }
-    useEffect(()=>{getUser()},[])
+    useEffect(() => { getUser() }, [])
 
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
