@@ -3,10 +3,12 @@ import { MdOutlineCancel } from 'react-icons/md';
 import { Button } from '.';
 import { userProfileData } from '../data/dummy';
 import { useStateContext } from '../contexts/ContextProvider';
+import { useAutenticacao } from '../contexts/ContextUsuLogado.tsx';
 
 const UserProfile = () => {
   const { currentColor } = useStateContext();
-  const [user, setUser] = useState(null)
+  const {usuario} = useAutenticacao()
+  
   function logOut() {
     fetch("/Login/LogOut", {
       method: 'get',
@@ -19,20 +21,6 @@ const UserProfile = () => {
       }
     })
   }
-  function profileUser() {
-    fetch("/user/profile", {
-      method: 'get',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      }
-    }).then((resposta) => resposta.json()).then((user) => {
-      setUser(user)
-    })
-  }
-  
-  useEffect(() => {
-    profileUser()
-  },[])
 
   return (
     <div className="nav-item absolute right-1 top-16 bg-white dark:bg-[#42464D] p-8 rounded-lg w-96">
@@ -49,11 +37,11 @@ const UserProfile = () => {
       <div className="flex gap-5 items-center mt-6 border-color border-b-1 pb-6">
 
         {/* Perfil do usuário */}
-        {user && (
+        {usuario && (
           <div>
-            <p className="font-semibold text-xl dark:text-gray-200"> {user.name} </p>
+            <p className="font-semibold text-xl dark:text-gray-200"> {usuario.name} </p>
             {/* <p className="text-gray-500 text-sm dark:text-gray-400">  Developer   </p> */}
-            <p className="text-gray-500 text-sm font-semibold dark:text-gray-400"> {user.email} </p>
+            <p className="text-gray-500 text-sm font-semibold dark:text-gray-400"> {usuario.email} </p>
           </div>
 
         )}
@@ -61,7 +49,7 @@ const UserProfile = () => {
 
       <div>
         {userProfileData.map((item, index) => (
-          <div onClick={() => window.location.href = "/user/update/" + user.id} key={index} className="flex gap-5 border-b-1 border-color p-4 hover:bg-light-gray cursor-pointer  dark:hover:bg-[#42464D]">
+          <div onClick={() => window.location.href = "/user/update/" + usuario.id} key={index} className="flex gap-5 border-b-1 border-color p-4 hover:bg-light-gray cursor-pointer  dark:hover:bg-[#42464D]">
             <button
               onClick={()=> window.location.href = "/user/updateProfile"}
               type="button"

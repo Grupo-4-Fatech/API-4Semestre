@@ -7,6 +7,8 @@ import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
 import { Notification, UserProfile } from '.';
 import { useStateContext } from '../contexts/ContextProvider';
+import { useAutenticacao } from '../contexts/ContextUsuLogado.tsx';
+
 
 const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
   <TooltipComponent content={title} position="BottomCenter">
@@ -27,19 +29,7 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
 
 const Navbar = () => {
   const { currentColor, activeMenu, setActiveMenu, handleClick, isClicked, setScreenSize, screenSize } = useStateContext();
-  const [user, setUser] = useState(null)
-  function profileUser() {
-    fetch("/user/profile", {
-      method: 'get',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      }
-    }).then((resposta) => resposta.json()).then((user) => {
-      setUser(user)
-    })
-  }
-  
-
+  const { usuario } = useAutenticacao()
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);
 
@@ -51,7 +41,7 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    profileUser()
+
     if (screenSize <= 900) {
       setActiveMenu(false);
     } else {
@@ -66,28 +56,28 @@ const Navbar = () => {
 
       <NavButton title="Menu" customFunc={handleActiveMenu} color={currentColor} icon={<AiOutlineMenu />} />
       <div className="flex">
-        
+
         <NavButton title="Notification" dotColor="rgb(254, 201, 15)" customFunc={() => handleClick('notification')} color={currentColor} icon={<RiNotification3Line />} />
         <TooltipComponent content="Profile" position="BottomCenter">
           <div
             className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
             onClick={() => handleClick('userProfile')}
           >
-           {user && (
-            <p>
-              <span className="text-gray-400 text-14">Hi,</span>{' '}
-              <span className="text-gray-400 font-bold ml-1 text-14">
-                {user.name}
-              </span>
-            </p>
-           )}
-            
+            {usuario && (
+              <p>
+                <span className="text-gray-400 text-14">Hi,</span>{' '}
+                <span className="text-gray-400 font-bold ml-1 text-14">
+                  {usuario.name}
+                </span>
+              </p>
+            )}
+
             <MdKeyboardArrowDown className="text-gray-400 text-14" />
           </div>
         </TooltipComponent>
 
-        
-        
+
+
         {isClicked.notification && (<Notification />)}
         {isClicked.userProfile && (<UserProfile />)}
       </div>
