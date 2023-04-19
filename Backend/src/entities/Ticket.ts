@@ -20,14 +20,13 @@ export class Ticket {
     @Column( {})
     status: string;
 
-    @ManyToMany(() => Teams, (teams) => teams.id)
+    @ManyToOne(() => Teams, (teams) => teams.id)
     teams: Teams[]
 
     @ManyToOne(() => InspectionGroup, (inspectionGroup) => inspectionGroup.id)
     inspectionGroup: InspectionGroup;
 
     @ManyToOne(() => User, (user) => user.id)
-    @JoinTable()
-    user: User []
+    user: Array<User>;
 
 } 
