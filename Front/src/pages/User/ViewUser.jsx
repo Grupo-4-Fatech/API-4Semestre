@@ -43,13 +43,14 @@ const ViewUser = () => {
         })
     }
     function deleteUser(id) {
-        fetch("/user/delete/" + id, {
+        fetch("/user/delete", {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
-            }
+            },
+            body: JSON.stringify({id:id})
         }).then((res) => res.json()).then((response) => {
-            if (response.error) {
+            if (response.driverError) {
                 Swal.fire({
                     icon: 'error',
                     title: 'User not deleted',
