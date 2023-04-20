@@ -126,9 +126,9 @@ export default function Kanban() {
               className="appearance-none rounded-r-lg border border-gray-400 border-b block pl-8 pr-6 py-2 w-44 bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
           </div>
           <div className='mr-3 ' >
-            <select id="gender" class="flex-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">              <option value="default" disabled selected>Select a Team:</option>
+            {/* <select id="gender" class="flex-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">              <option value="default" disabled selected>Select a Team:</option>
               <option value="team">Dev</option>
-            </select>
+            </select> */}
           </div>
         </div>
         <KanbanComponent
