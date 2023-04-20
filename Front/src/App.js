@@ -81,23 +81,6 @@ const App = () => {
 
               <Routes>
                 <Route path="/" element={(<Login />)} />
-                {/* <Route path="/user/create" element={<CreateUser />} />
-                <Route path="/Ticket/update/:id" element={<UpdateTicket />} />
-                <Route path='user/view' element={<ViewUser />} />
-                <Route path="/kanban" element={<Kanban />} />
-                <Route path="/viewticket" element={<ViewTicket />} />
-                <Route path="/Ticket/create" element={<Chamado />} />
-                <Route path="/Ticket/update/:id" element={<UpdateTicket />} />
-                <Route path="/ArchivedTicket" element={<ArchivedTicket />} />
-                <Route path="/teams/create" element={<CreateTeams />} />
-                <Route path="/group/create" element={<CreateGroup />} />
-                <Route path="/group/update" element={<UpdateGroup />} />
-                <Route path="/group/viewGroup" element={<ViewGroup />} />
-                <Route path="/user/update/:id" element={<UpdateUser />} />
-                <Route path="/user/updateProfile" element={<UpdateProfile />} />
-                <Route path='/teams/view' element={<ViewTeams />} />
-                <Route path='/teams/update' element={<UpdateTeams />} />
-                <Route path='/tree/create' element={<CreateTree />} /> */}
                 <Route path="/user/create" element={<PrivateRoute><CreateUser /></PrivateRoute>} />
                 <Route path="/Ticket/update/:id" element={<PrivateRoute><UpdateTicket /></PrivateRoute>} />
                 <Route path='user/view' element={<PrivateRoute><ViewUser /></PrivateRoute>} />

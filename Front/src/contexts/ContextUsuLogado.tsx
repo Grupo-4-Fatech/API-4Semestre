@@ -12,6 +12,7 @@ export default function AutenticacaoProvider({ children }) {
       }
     }).then((resposta) => resposta.json()).then((user) => {
       setUsuario(user)
+      console.log(user);
       localStorage.setItem('user', JSON.stringify(user));
     })
   }
