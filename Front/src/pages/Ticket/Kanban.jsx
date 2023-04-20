@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { KanbanComponent, ColumnsDirective, ColumnDirective } from '@syncfusion/ej2-react-kanban';
-
 import { kanbanGrid } from '../../data/dummy';
 import { Header } from '../../components';
+import { useAutenticacao } from '../../contexts/ContextUsuLogado.tsx';
 
 export default function Kanban() {
   const [showModal, setShowModal] = React.useState(false);
   const [data, setData] = useState([])
   const [ticket, setTicket] = useState({ title: '', description: ``, classification: '' })
   const [searchTerm, setSearchTerm] = useState('');
+
+  const { usuario } = useAutenticacao();
+  const userPermission = usuario?.role
+
+  const isDraggable = userPermission !== 3;
   function getData() {
     fetch("/ticket/getKanbanItem", {
       method: 'GET',
@@ -131,6 +136,7 @@ export default function Kanban() {
           keyField="Status"
           cardSettings={{ headerField: 'Id', template: cardTemplate.bind(this) }}
           dataSource={data}
+          allowDragAndDrop={isDraggable}
           dialogOpen={DialogOpen.bind(this)}
           dragStop={(e) => { changeStatus(e.data[0].Id, e.data[0].Status); }}
           cardDoubleClick={(e) => { setTicket({ title: e.data.Title, description: e.data.Summary, classification: e.data.Type }); setShowModal(true); }}
