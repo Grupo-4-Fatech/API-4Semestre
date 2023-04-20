@@ -1,14 +1,17 @@
 import TeamsController from "./TeamsController";
 import TicketController from "./TicketController";
 import UserController from "./UserController";
-import GroupController from "./GroupController";
+import InspectionGroupController from "./InspectionGroupController";
 import LoginController from "./LoginController";
+import GroupController from "./GroupController";
+
 export{
     TicketController,
     UserController,
     TeamsController,
-    GroupController,
-    LoginController
+    InspectionGroupController,
+    LoginController,
+    GroupController
     
 
 };
