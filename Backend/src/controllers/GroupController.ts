@@ -1,99 +1,79 @@
 import AppDataSource from "../data-source";
 import { Request, Response } from 'express';
-import { InspectionGroup } from "../entities/InspectionGroup";
-import { User } from "../entities/Users";
+import { Group } from "../entities/Group";
+
 
 class GroupController {
 
 
-  public async create(req: Request, res: Response): Promise<Response> {
-
-    const {name, descricao, userId } = req.body;
-
-    const userTable = await AppDataSource.getRepository(User);
-
-    const user = await userTable.findOneBy({id: userId});
-
-
-    const obj = new InspectionGroup();
-    obj.name = name;
-    obj.descricao = descricao;
-    obj.users = [user];
-
-
-    const inspectionGroup: any = await AppDataSource.getRepository(InspectionGroup).save(obj).catch((e) => {
-
-  });
-  if (inspectionGroup.id) {
-    return res.json({
-
-      name: inspectionGroup.name,
-      descricao: inspectionGroup.descricao,
-      userId: inspectionGroup.userId
-
+    public async create(req: Request, res: Response): Promise<Response> {
+      const {name, descricao } = req.body;
+  
+      const obj = new Group();
+      obj.name = name;
+      obj.descricao = descricao;
+  
+  
+      const group: any = await AppDataSource.getRepository(Group).save(obj).catch((e) => {
+  
     });
-  }
-  return res.json({ error: "Error while saving the Group" });
- 
+    if (group.id) {
 
-  }
-  public async delete(req: Request, res: Response): Promise<Response> {
-    const { id } = req.body
-    const inspectionGroup : any = await AppDataSource.manager.findOneBy(InspectionGroup, { id }).catch((e) => {
-      return { error: "Invalid identifier" }
-    })
-
-    if (inspectionGroup && inspectionGroup.id) {
-      const r = await AppDataSource.manager.remove(InspectionGroup, inspectionGroup).catch((e) => e.message)
-      return res.json(r)
+      return res.json({
+        name: group.name,
+        descricao: group.descricao
+      });
     }
-    else if (inspectionGroup && inspectionGroup.error) {
-      return res.json(inspectionGroup)
-    }
-    else {
-      return res.json({ error: "group not found" })
-    }
-
-
-  }
-  async list(req: Request, res: Response): Promise<Response> {
-    const response: any = await AppDataSource.getRepository(InspectionGroup).find({
-      order: {
-        id: 'asc'
-      }
-    });
-    return res.json(response);
-  }
-
-
-    public async update(req: Request, res: Response): Promise<Response> {
-    const { id, name, descricao,userId  } = req.body;   
-
-    
-    const userTable = await AppDataSource.getRepository(User);
-
-    const user = await userTable.findOneBy({id: userId});
-
-     const inspectionGroup = AppDataSource.getRepository(InspectionGroup)
-
-     const obj = await inspectionGroup.findOneBy({
-         id: id,
-     })
+    return res.json({ error: "Error while saving the Group" });
    
-     obj.name = name;
-     obj.descricao = descricao;
-     obj.users = [user];
+  
+    }
+    public async delete(req: Request, res: Response): Promise<Response> {
+      const { id } = req.body
+      const group : any = await AppDataSource.manager.findOneBy(Group, { id }).catch((e) => {
+        return { error: "Invalid identifier" }
+      })
+  
+      if (group && group.id) {
+        const r = await AppDataSource.manager.remove(Group, group).catch((e) => e.message)
+        return res.json(r)
+      }
+      else if (group && group.error) {
+        return res.json(group)
+      }
+      else {
+        return res.json({ error: "group not found" })
+      }
+  
+  
+    }
+    async list(req: Request, res: Response): Promise<Response> {
+      const response: any = await AppDataSource.getRepository(Group).find({
+        order: {
+          id: 'asc'
+        }
+      });
+      return res.json(response);
+    }
+  
+  
+      public async update(req: Request, res: Response): Promise<Response> {
+      const { id, name, descricao  } = req.body;   
+  
+       const group = AppDataSource.getRepository(Group)
+  
+       const obj = await group.findOneBy({
+           id: id,
+       })
      
-     await inspectionGroup.save(obj)
-     return res.json(obj)
-     
-
-  }
-
-
-} export default new GroupController()
-
-
-
-
-
+       obj.name = name;
+       obj.descricao = descricao;
+      
+       
+       await group.save(obj)
+       return res.json(obj)
+       
+    }
+  
+  
+  } export default new GroupController()
