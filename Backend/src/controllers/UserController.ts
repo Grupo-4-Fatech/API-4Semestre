@@ -88,18 +88,15 @@ class UserController {
 
     }
     public async deleteUser(req: Request, res: Response): Promise<Response> {
-        const { userId } = req.body;
+        const { id } = req.body;
 
-        const user: any = await AppDataSource.getRepository(User).findOneBy({id:userId}).catch((e) => {
+        const user: any = await AppDataSource.getRepository(User).findOneBy({id:id}).catch((e) => {
             return { error: "Invalid identifier" }
         })
 
         if (user && user.id) {
-            const r = await AppDataSource.manager.remove(User, user).catch((e) => e.message)
+            const r = await AppDataSource.manager.remove(User, user).catch((e) => e)
             return res.json(r)
-        }
-        else if (user && user.error) {
-            return res.json(user)
         }
         else {
             return res.json({ error: "User not found" })
