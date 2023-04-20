@@ -129,7 +129,7 @@ export const links = [
         title: 'Kanban',
         name: 'kanban',
         icon: <BsKanban />,
-        permission: 1,
+        permission: 3,
       },
 
     ]

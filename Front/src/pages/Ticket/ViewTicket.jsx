@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import Pagination from '../../components/Paginacao/Pagination';
 import { useStateContext } from '../../contexts/ContextProvider'
 import { Header } from '../../components'
+import { useAutenticacao } from '../../contexts/ContextUsuLogado.tsx';
 
 const Swal = require('sweetalert2')
 
@@ -13,6 +14,11 @@ const ViewTicket = () => {
     const headers = ['Title', 'Classification', 'Edit', 'Archive', 'Approved']
     const [data, setData] = useState([])
     const [searchTerm, setSearchTerm] = useState('');
+
+    const { usuario } = useAutenticacao();
+
+    const userPermission = usuario?.role
+
     function getData() {
         fetch("/ticket/getAll/1", {
             method: 'GET',
@@ -123,11 +129,18 @@ const ViewTicket = () => {
                 <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:text-gray-400 content-center">
                         <tr>
-                            {headers.map((header) =>
-                                <th scope="col" className="px-6 py-3" key={header}>
-                                    {header}
-                                </th>)}
+                            {headers.map((header, index) => {
+                                if (userPermission === 3 && index >= 3) {
+                                    return null;
+                                }
+                                return (
+                                    <th scope="col" className="px-6 py-3" key={header}>
+                                        {header}
+                                    </th>
+                                );
+                            })}
                         </tr>
+
                     </thead>
                     <tbody>
                         {currentTableData.map(dat => {
@@ -143,18 +156,28 @@ const ViewTicket = () => {
                                     <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
                                         <button onClick={() => { window.location.href = "/ticket/update/" + dat.id }} style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Edit</button>
                                     </td>
-                                    <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                        <button onClick={(e) => Archive(dat.id, 2)} className="bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Archive</button>
-                                    </td>
-                                    <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                        <button onClick={(e) => Aproved(dat.id, 3)} className="bg-green-500 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Aproved</button>
-                                    </td>
+
+                                    {/* Verificação para ocultar o botão 'Archive' */}
+                                    {userPermission !== 3 && (
+                                        <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
+                                            <button onClick={(e) => Archive(dat.id, 2)} className='bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20'>Archive</button>
+                                        </td>
+                                    )}
+
+                                    {/* Verificação para ocultar o botão 'Approved' */}
+                                    {userPermission !== 3 && (
+                                        <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
+                                            <button onClick={(e) => Aproved(dat.id, 3)} className='bg-green-500 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20'>Approved</button>
+                                        </td>
+                                    )}
+
                                     <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
                                     </td>
                                 </tr>
                             );
                         })}
                     </tbody>
+
                 </table>
             </div>
             <Pagination
