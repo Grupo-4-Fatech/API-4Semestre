@@ -1,9 +1,13 @@
 import { useStateContext } from '../../contexts/ContextProvider'
 import { Header } from "../../components";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
+import Pagination from '../../components/Paginacao/Pagination';
+
 const Swal = require('sweetalert2')
+
 const ViewGroup = () => {
     const { currentColor } = useStateContext();
+    const [currentPage, setCurrentPage] = useState(1);
     const headers = ['Group Name', 'Edit', 'Delete']
     const [data, setData] = useState([])
     const [searchTerm, setSearchTerm] = useState('');
@@ -57,6 +61,19 @@ const ViewGroup = () => {
         })
 
     }
+
+    const currentTableData = useMemo(() => {
+        const firstPageIndex = (currentPage - 1) * 5;
+        const lastPageIndex = firstPageIndex + 5;
+        return data
+            .filter((dat) =>
+                dat.nome.toLowerCase().includes(searchTerm.toLowerCase())
+            )
+            .slice(firstPageIndex, lastPageIndex)
+    }, [currentPage, data, searchTerm]);
+
+    console.log(currentTableData)
+
     useEffect(() => {
         getData();
 
@@ -86,7 +103,7 @@ const ViewGroup = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map(dat => {
+                        {currentTableData.map(dat => {
                             return (
                                 <tr key={dat.id} className="bg-white hover:bg-gray-50 dark:hover:bg-gray-300 content-center">
                                     <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
@@ -106,6 +123,12 @@ const ViewGroup = () => {
                     </tbody>
                 </table>
             </div>
+            <Pagination
+                currentPage={currentPage}
+                totalCount={data.length}
+                pageSize={5}
+                onPageChange={page => setCurrentPage(page)}
+            />
         </div>
     );
 };

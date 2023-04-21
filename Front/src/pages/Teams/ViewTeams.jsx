@@ -1,16 +1,14 @@
-import React from 'react'
 import { useStateContext } from '../../contexts/ContextProvider'
 import { Header } from '../../components'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
+import Pagination from '../../components/Paginacao/Pagination';
+
 const Swal = require('sweetalert2')
+
 export default function ViewTeams() {
     const { currentColor } = useStateContext();
+    const [currentPage, setCurrentPage] = useState(1);
     const headers = ['Teams Name', 'Edit', 'Delete']
-    const teste = [
-        { id: 1, nome: 'Front end', descricao: "Fazer layout" },
-        { id: 2, nome: 'Back end', descricao: "Fazer controllers" },
-        { id: 2, nome: 'Banco de dados', descricao: "Modelagem de banco" }
-    ]
     const [data, setData] = useState([])
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -61,6 +59,17 @@ export default function ViewTeams() {
         })
 
     }
+
+    const currentTableData = useMemo(() => {
+        const firstPageIndex = (currentPage - 1) * 5;
+        const lastPageIndex = firstPageIndex + 5;
+        return data
+            .filter((dat) =>
+                dat.name.toLowerCase().includes(searchTerm.toLowerCase())
+            )
+            .slice(firstPageIndex, lastPageIndex)
+    }, [currentPage, data, searchTerm]);
+
     useEffect(() => {
         getData();
 
@@ -90,7 +99,7 @@ export default function ViewTeams() {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map(dat => {
+                        {currentTableData.map(dat => {
                             return (
                                 <tr key={dat.id} className="bg-white hover:bg-gray-50 dark:hover:bg-gray-300 content-center">
                                     <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
@@ -111,6 +120,12 @@ export default function ViewTeams() {
                     </tbody>
                 </table>
             </div>
+            <Pagination
+                currentPage={currentPage}
+                totalCount={data.length}
+                pageSize={5}
+                onPageChange={page => setCurrentPage(page)}
+            />
         </div>
 
     );

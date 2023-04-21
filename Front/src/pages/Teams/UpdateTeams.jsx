@@ -72,7 +72,7 @@ export default function UpdateTeams() {
             Swal.fire({
                 icon: 'error',
                 title: 'Create Teams Failed!',
-                text: 'Please add a user',
+                text: 'Please add an user',
             })
             return
         }
