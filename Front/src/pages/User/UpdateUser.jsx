@@ -31,7 +31,7 @@ export default function UpdateUser() {
     if (validador.estaVazio(name.value)) {
       Swal.fire({
         icon: 'error',
-        title: 'Create User Failed!',
+        title: 'Update User Failed!',
         text: 'Please write a name',
       })
       return
@@ -39,7 +39,7 @@ export default function UpdateUser() {
     if (validador.tamanhoTexto(name.value)) {
       Swal.fire({
         icon: 'error',
-        title: 'Create User Failed!',
+        title: 'Update User Failed!',
         text: 'Name size is too big',
       })
       return
@@ -47,7 +47,7 @@ export default function UpdateUser() {
     if (validador.estaVazio(email.value)) {
       Swal.fire({
         icon: 'error',
-        title: 'Create User Failed!',
+        title: 'Update User Failed!',
         text: 'Please write a email',
       })
       return
@@ -55,7 +55,7 @@ export default function UpdateUser() {
     if (!validador.validarEmail(email.value)) {
       Swal.fire({
         icon: 'error',
-        title: 'Create User Failed!',
+        title: 'Update User Failed!',
         text: 'Email must have @ and .com',
       })
       return
@@ -63,7 +63,7 @@ export default function UpdateUser() {
     if (validador.tamanhoTexto(email.value)) {
       Swal.fire({
         icon: 'error',
-        title: 'Create User Failed!',
+        title: 'Update User Failed!',
         text: 'Email size is too big',
       })
       return
@@ -71,7 +71,7 @@ export default function UpdateUser() {
     if (validador.selectEstaDefault(role.value)) {
       Swal.fire({
         icon: 'error',
-        title: 'Create User Failed!',
+        title: 'Update User Failed!',
         text: 'Please select a role',
       })
       return
@@ -79,7 +79,7 @@ export default function UpdateUser() {
     if (validador.tamanhoTexto(role.value)) {
       Swal.fire({
         icon: 'error',
-        title: 'Create User Failed!',
+        title: 'Update User Failed!',
         text: 'Role size is too big',
       })
       return
@@ -87,7 +87,7 @@ export default function UpdateUser() {
     if (validador.selectEstaDefault(gender)) {
       Swal.fire({
         icon: 'error',
-        title: 'Create User Failed!',
+        title: 'Update User Failed!',
         text: 'Please select a gender',
       })
       return
