@@ -139,9 +139,9 @@ export default function CreateTeams() {
             <SelectMult id="integrantesDoTime" dados={data} text={'Select the users'} value={selectMult} setValue={setSelectMult} />
             <div className='mt-5'><label className="text-lg font-bold dark:text-black " >Select a Group</label>
                 <select id="group" defaultValue='default' className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
-                    <option value="default" disabled selected>Select an option:</option>
+                    <option value="default" disabled>Select an option:</option>
                     {groups.map((ele) => {
-                        return (<option value={ele.id}>{ele.nome}</option>)
+                        return (<option key={ele.id} value={ele.id}>{ele.nome}</option>)
                     })}
 
                 </select></div>

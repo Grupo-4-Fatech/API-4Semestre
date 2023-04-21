@@ -128,14 +128,14 @@ export default function CreateUser() {
             <Campo text="Email" id="email" placeholder="Email" type="text" />
             <label className="text-lg font-bold dark:text-black " >Select a gender</label>
             <select id="gender" defaultValue='default' className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
-                <option value="default" disabled selected>Select an option:</option>
+                <option value="default" disabled>Select an option:</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
             </select>
             <div className='mt-5'>
             <label className="text-lg font-bold dark:text-black " >Select a role</label>
             <select id="role" defaultValue='default' className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
-                <option value="default" disabled selected>Select an option:</option>
+                <option value="default" disabled>Select an option:</option>
                 <option value="1">Director</option>
                 <option value="2">Admin</option>
                 <option value="3">Requester</option>
