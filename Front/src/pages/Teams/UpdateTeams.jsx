@@ -123,7 +123,6 @@ export default function UpdateTeams() {
             }
         }).then((resposta) => resposta.json()).then((data) => {
             if (data != null) {
-                console.log(data)
                 setName(data[0].name);
                 setDescription(data[0].description);
                 setTeamGroup(data[0].group.id);

@@ -125,7 +125,6 @@ export default function UpdateUser() {
         }
       }).then((resposta) => resposta.json()).then((data) => {
         if (data != null) {
-          console.log(data)
           setName(data.name);
           setEmail(data.email)
           setGender(data.gender)

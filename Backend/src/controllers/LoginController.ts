@@ -7,7 +7,6 @@ import * as jwt from "jsonwebtoken";
 class LoginController {
     async login(req: Request, res: Response): Promise<Response> {
         const { email, password } = req.body;
-        console.log(password)
         const user: any = await AppDataSource.manager.findOneBy(User, { email }).catch((e) => {
             return res.json({ error: "Email not found" })
         })

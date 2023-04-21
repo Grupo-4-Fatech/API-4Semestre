@@ -11,8 +11,6 @@ class TeamsController {
 
   public async create(req: Request, res: Response): Promise<Response> {
     const { name, description, group, users } = req.body;
-    console.log("useeeers")
-    console.log(users)
     const grouP = AppDataSource.getRepository(Group)
     const objG = await grouP.findOneBy({
       id: group,
@@ -21,8 +19,6 @@ class TeamsController {
     obj.name = name;
     obj.description = description;
     obj.group = objG;
-    console.log(obj)
-
 
     const teams: any = await AppDataSource.getRepository(Teams).save(obj).catch((e) => {
 
@@ -30,7 +26,6 @@ class TeamsController {
     if (teams.id) {
 
       var response = await new TeamsController().insertUsers(teams.id, users)
-      console.log(response)
       if (response) {
         return res.json("sucess")
       }

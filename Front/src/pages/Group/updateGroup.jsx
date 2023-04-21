@@ -22,7 +22,6 @@ const UpdateGroup = () => {
     function updateGroup() {
         const nome = document.getElementById("Titulo")
         const description = document.getElementById("Desc")
-        console.log(nome.value);
         if (validador.estaVazio(nome.value)) {
             Swal.fire({
                 icon: 'error',
@@ -80,7 +79,6 @@ const UpdateGroup = () => {
           }
         }).then((resposta) => resposta.json()).then((data) => {
           if (data != null) {
-            console.log(data)
             setName(data.name);
             setDescription(data.descricao);
           }

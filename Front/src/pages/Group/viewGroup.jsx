@@ -42,7 +42,6 @@ const ViewGroup = () => {
             },
             body: JSON.stringify({ id: id })
         }).then((res) => res.json()).then((response) => {
-            console.log(response);
             if (response.error) {
                 Swal.fire({
                     icon: 'error',
@@ -71,8 +70,6 @@ const ViewGroup = () => {
             )
             .slice(firstPageIndex, lastPageIndex)
     }, [currentPage, data, searchTerm]);
-
-    console.log(currentTableData)
 
     useEffect(() => {
         getData();

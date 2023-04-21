@@ -24,7 +24,6 @@ export default function Login() {
         var dados = {}
         dados.email = document.getElementById('email').value;
         dados.password = document.getElementById('password').value
-        console.log(dados)
         fetch("/Login/Login", {
             method: 'POST',
             headers: {

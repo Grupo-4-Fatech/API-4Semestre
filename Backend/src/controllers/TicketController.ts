@@ -156,7 +156,6 @@ class TicketController {
     var query = "SELECT id, type, title, status, description FROM ticket WHERE status NOT IN (1,2)";
     let email = jwt.decode(req.cookies.jwt);
     const user = await AppDataSource.getRepository(User).findOneBy({ email: email ? email.toString() : "" });
-    console.log(user)
     if (user && user.role && user.role == 3) {
       query = "SELECT id, type, title, status, description FROM ticket WHERE status NOT IN (1,2) and userId = " + user.id;
     }

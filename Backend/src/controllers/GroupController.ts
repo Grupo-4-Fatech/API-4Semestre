@@ -82,7 +82,6 @@ class GroupController {
   }
   public async get(req: Request, res: Response): Promise<Response> {
     const id  = parseInt(req.params.id);
-    console.log(id)
     const group = AppDataSource.getRepository(Group)
 
     const obj = await group.findOneBy({

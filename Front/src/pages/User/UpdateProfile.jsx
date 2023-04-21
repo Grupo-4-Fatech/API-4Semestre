@@ -104,7 +104,6 @@ export default function UpdateProfile() {
         return
       }
       if (!validador.tamanhoSenha(password.value)) {
-        console.log(oldPassword.value)
         Swal.fire({
           icon: 'error',
           title: 'Create User Failed!',

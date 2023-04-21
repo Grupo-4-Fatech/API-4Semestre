@@ -20,7 +20,6 @@ const CreateGroup = () => {
     function createGroup() {
         const nome = document.getElementById("Titulo")
         const description = document.getElementById("Desc")
-        console.log(nome.value);
         if (validador.estaVazio(nome.value)) {
 
             Swal.fire({
