@@ -1,13 +1,59 @@
 import { useStateContext } from '../../contexts/ContextProvider'
 import { Header } from "../../components";
-
+import { useState , useEffect} from 'react';
+const Swal = require('sweetalert2')
 const ViewGroup = () => {
     const { currentColor } = useStateContext();
     const headers = ['Group Name', 'Edit', 'Delete']
-    const teste = [
-        { id: 1, nome: 'abc', },
-        { id: 2, nome: 'asd', }
-    ]
+    const [data, setData] = useState([])
+
+    function getData() {
+        fetch("/group/list", {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            }
+        }).then((resposta) => resposta.json()).then((data) => {
+            var group = []
+            data.forEach(element => {
+                group.push({
+                    id: element.id,
+                    nome: element.name
+                 })
+            });
+            setData(group)
+        })
+    }
+    function deleteGroup(id) {
+        fetch("/group/delete", {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({id:id})
+        }).then((res) => res.json()).then((response) => {
+            if (response.driverError) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Group not deleted',
+                })
+            }
+            else {
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Group deleted successfully',
+                })
+                var updateData = data.filter(item => item.id != id)
+                setData(updateData)
+            }
+        })
+
+    }
+    useEffect(() => {
+        getData();
+
+    }, [])
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
             <Header category="Page" title="View Group" />
@@ -33,17 +79,17 @@ const ViewGroup = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {teste.map(dat => {
+                        {data.map(dat => {
                             return (
                                 <tr key={dat.id} className="bg-white hover:bg-gray-50 dark:hover:bg-gray-300 content-center">
                                     <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
                                         {dat.nome}
                                     </td>                           
                                     <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                        <button style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Edit</button>
+                                        <button style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" onClick={()=> window.location.href ="/group/update/"+ dat.id}>Edit</button>
                                     </td>
                                     <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                        <button className="bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Delete</button>
+                                        <button className="bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" onClick={()=>deleteGroup(dat.id)}>Delete</button>
                                     </td>
                                     <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
                                     </td>

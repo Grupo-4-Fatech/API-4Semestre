@@ -1,15 +1,64 @@
 import React from 'react'
 import { useStateContext } from '../../contexts/ContextProvider'
 import { Header } from '../../components'
-
+import { useState , useEffect} from 'react';
+const Swal = require('sweetalert2')
 export default function ViewTeams() {
     const { currentColor } = useStateContext();
-    const headers = ['Teams Name', 'Description','Edit','Delete']
+    const headers = ['Teams Name','Edit','Delete']
     const teste = [
         {id: 1, nome: 'Front end', descricao: "Fazer layout"},
         {id: 2, nome: 'Back end', descricao: "Fazer controllers"},
         {id: 2, nome: 'Banco de dados', descricao: "Modelagem de banco"}
     ]
+    const [data, setData] = useState([])
+
+    function getData() {
+        fetch("/teams/list", {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            }
+        }).then((resposta) => resposta.json()).then((data) => {
+            var group = []
+            data.forEach(element => {
+                group.push({
+                    id: element.id,
+                    name: element.name
+                 })
+            });
+            setData(group)
+        })
+    }
+    function deleteUser(id) {
+        fetch("/teams/delete/"+id, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            }
+        }).then((res) => res.json()).then((response) => {
+            if (response.driverError) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Team not deleted',
+                })
+            }
+            else {
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Team deleted successfully',
+                })
+                var updateData = data.filter(item => item.id != id)
+                setData(updateData)
+            }
+        })
+
+    }
+    useEffect(() => {
+        getData();
+
+    }, [])
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
         <Header category="Page" title="View Teams" />
@@ -35,21 +84,18 @@ export default function ViewTeams() {
                         </tr>
                     </thead>
                     <tbody>
-                        {teste.map(dat => {
+                        {data.map(dat => {
                             return (
                                 <tr key={dat.id} className="bg-white hover:bg-gray-50 dark:hover:bg-gray-300 content-center">
                                     <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                        {dat.nome}
-                                    </td>
-                                    <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                        {dat.descricao}
+                                        {dat.name}
                                     </td>
 
                                     <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                        <button style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Edit</button>
+                                        <button style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" onClick={()=>window.location.href="/teams/update/"+dat.id}>Edit</button>
                                     </td>
                                     <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                        <button  className="bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Delete</button>
+                                        <button  className="bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" onClick={()=> deleteUser(dat.id) }>Delete</button>
                                     </td>
                                     <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
                                     </td>

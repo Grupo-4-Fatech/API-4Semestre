@@ -5,14 +5,18 @@ import { useState } from 'react';
 import { useStateContext } from '../../contexts/ContextProvider'
 import Campo from "../../components/Campo";
 import { validador } from "../../utils/validador";
+import { useNavigate } from 'react-router-dom';
 const Swal = require('sweetalert2')
 
 const CreateGroup = () => {
     const { currentColor } = useStateContext();
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
+    let location = useNavigate();
+    function comeback() {
+        location("/group/viewGroup")
+    }
 
-  
     function createGroup() {
         const nome = document.getElementById("Titulo")
         const description = document.getElementById("Desc")
@@ -43,6 +47,27 @@ const CreateGroup = () => {
             })
             return
         }
+
+        fetch("/group/create", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({ name: nome.value, descricao:description.value })
+        }).then((resposta) => resposta.json()).then((data) => {
+            if (data.error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Failed to create new group',
+                })
+            } else {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Created successfully',
+                }).then((result) => result.isConfirmed ? comeback() : '')
+
+            }
+        })
     }
 
 

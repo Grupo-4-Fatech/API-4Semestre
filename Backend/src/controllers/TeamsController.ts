@@ -4,17 +4,24 @@ import { User } from "../entities/Users";
 import { Teams } from "../entities/Teams";
 import e = require("express");
 import { Ticket } from "../entities/Ticket";
+import { Group } from "../entities/Group";
 
 class TeamsController {
 
 
   public async create(req: Request, res: Response): Promise<Response> {
-    const { name, description, group } = req.body;
-
+    const { name, description, group, users } = req.body;
+    console.log("useeeers")
+    console.log(users)
+    const grouP = AppDataSource.getRepository(Group)
+    const objG = await grouP.findOneBy({
+      id: group,
+    })
     const obj = new Teams();
     obj.name = name;
     obj.description = description;
-    obj.group = group;
+    obj.group = objG;
+    console.log(obj)
 
 
     const teams: any = await AppDataSource.getRepository(Teams).save(obj).catch((e) => {
@@ -22,36 +29,34 @@ class TeamsController {
     });
     if (teams.id) {
 
-      return res.json({
-        name: teams.name,
-        descricao: teams.descricao,
-        group: teams.group
-      });
+      var response = await new TeamsController().insertUsers(teams.id, users)
+      console.log(response)
+      if (response) {
+        return res.json("sucess")
+      }
     }
     return res.json({ error: "Error while saving the Group" });
 
 
   }
 
-  public async insertUsers(req: Request, res: Response): Promise<Response> {
-    const { teamName, userId } = req.body;
-
+  public async insertUsers(teamId, userId) {
     const userTable = await AppDataSource.getRepository(User);
-    const team: Teams = await AppDataSource.getRepository(Teams).findOneBy({ name: teamName });
 
+    const team: Teams = await AppDataSource.getRepository(Teams).findOneBy({ id: teamId });
 
     const users: Array<User> = []
 
-    userId.forEach(async (id) => {
-      const user = await userTable.findOneBy({ id: id });
+    userId.forEach(async (u) => {
+      const user = await userTable.findOneBy({ id: u.value });
       users.push(user);
     });
 
     team.users = users;
 
-    await AppDataSource.getRepository(Teams).save(team);
+    var result = await AppDataSource.getRepository(Teams).save(team);
 
-    return res.json(userId);
+    return result;
   }
 
   public async insertTickets(req: Request, res: Response): Promise<Response> {
@@ -87,13 +92,89 @@ class TeamsController {
   }
 
   public async getTeamsBy(req: Request, res: Response): Promise<Response> {
-    const { name } = req.body;
+    const { id } = req.body;
 
     const teamsTable = AppDataSource.getRepository(Teams);
 
-    const team = teamsTable.findOneBy({ name: name });
+    const team = teamsTable.findOneBy({ id: id });
 
     return res.json(team);
+  }
+  async list(req: Request, res: Response): Promise<Response> {
+    const response: any = await AppDataSource.getRepository(Teams).find({
+      order: {
+        id: 'asc'
+      }
+    });
+    return res.json(response);
+  }
+  async deleteTeam(req: Request, res: Response): Promise<Response> {
+    const id = parseInt(req.params.id)
+    const teams = await AppDataSource.getRepository(Teams);
+
+    const userToRemove = await teams.findBy({ id: id });
+
+    teams.remove(userToRemove);
+
+    return res.json(userToRemove);
+
+  }
+  async get(req: Request, res: Response): Promise<Response> {
+    const id = parseInt(req.params.id)
+    const teamService = await AppDataSource.getRepository(Teams);
+
+    const team = await teamService.find({
+      where: { id: id }, relations: {
+        users: true,
+        group: true
+      },
+    });
+
+
+
+    return res.json(team);
+
+  }
+  public async update(req: Request, res: Response): Promise<Response> {
+    const { id, name, description, group, users } = req.body;
+    const grouP = AppDataSource.getRepository(Group)
+    const objG = await grouP.findOneBy({
+      id: group,
+    })
+    const userTable = await AppDataSource.getRepository(User);
+    const teamService = await AppDataSource.getRepository(Teams);
+
+    const team = await teamService.findOne({
+      where: { id: id }, relations: {
+        users: true,
+        group: true
+      },
+    });
+
+    if (team) {
+      team.name = name;
+      team.group = objG;
+      team.description = description
+      const userList: Array<User> = []
+
+      users.forEach(async (u) => {
+        const user = await userTable.findOneBy({ id: u.value });
+        userList.push(user);
+      });
+
+      team.users = userList;
+
+      var response = await teamService.save(team);
+      if (response) {
+        return res.json(true)
+      } else {
+        return res.json({ error: "Error" })
+      }
+    }
+
+    return res.json({ error: "Error while saving the Group" });
+
+
   }
 
 }

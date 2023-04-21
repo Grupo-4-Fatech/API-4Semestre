@@ -91,12 +91,12 @@ const App = () => {
                 <Route path="/ArchivedTicket" element={<PrivateRoute><ArchivedTicket /></PrivateRoute>} />
                 <Route path="/teams/create" element={<PrivateRoute><CreateTeams /></PrivateRoute>} />
                 <Route path="/group/create" element={<PrivateRoute><CreateGroup /></PrivateRoute>} />
-                <Route path="/group/update" element={<PrivateRoute><UpdateGroup /></PrivateRoute>} />
+                <Route path="/group/update/:id" element={<PrivateRoute><UpdateGroup /></PrivateRoute>} />
                 <Route path="/group/viewGroup" element={<PrivateRoute><ViewGroup /></PrivateRoute>} />
                 <Route path="/user/update/:id" element={<PrivateRoute><UpdateUser /></PrivateRoute>} />
                 <Route path="/user/updateProfile" element={<PrivateRoute><UpdateProfile /></PrivateRoute>} />
                 <Route path='/teams/view' element={<PrivateRoute><ViewTeams /></PrivateRoute>} />
-                <Route path='/teams/update' element={<PrivateRoute><UpdateTeams /></PrivateRoute>} />
+                <Route path='/teams/update/:id' element={<PrivateRoute><UpdateTeams /></PrivateRoute>} />
                 <Route path='/tree/create' element={<PrivateRoute><CreateTree /></PrivateRoute>} />
                 <Route path='*' element={<NotFound />} />
               </Routes>
