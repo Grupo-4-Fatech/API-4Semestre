@@ -26,9 +26,9 @@ Com esses recursos, a single-page application de criação de tickets e usuário
 
 > Requisitos Funcionais
 
-- [ ] Cadastros de grupos de usuários;
-- [ ] Permissão por grupo e por usuário;
-- [ ] Usuários devem ter distinção por times;
+- [X] Cadastros de grupos de usuários;
+- [X] Permissão por grupo e por usuário;
+- [X] Usuários devem ter distinção por times;
 - [X] Fila de chamados por time;
 - [X] Configuração e personalização de formulários de chamados;
 - [ ] Árvore de decisão para escalonamento de chamados;
@@ -43,7 +43,7 @@ Com esses recursos, a single-page application de criação de tickets e usuário
  ## 📅 Cronograma das Sprints 
 
  - - [X] **1° Sprint:**</a> 13/03/2023 a 02/04/2023<br>
- - - [ ] **2° Sprint:**</a> 03/04/2023 a 23/04/2023
+ - - [X] **2° Sprint:**</a> 03/04/2023 a 23/04/2023
  - - [ ] **3° Sprint:**</a> 24/04/2023 a 14/05/2023
  - - [ ] **4°Sprint:** 15/05/2023 a 04/06/2023
  - - [ ] **Feira de Soluções:** 13/06 e 14/06/2023
@@ -72,8 +72,8 @@ Com esses recursos, a single-page application de criação de tickets e usuário
 
 ## 📉 Gráfico Burndown
 
-- <a href="docs/Burndown Geral - sprint 1.pdf">**Sprint 1**</a>
-- <a href="docs/">**Sprint 2**</a>
+- <a href="docs/sprint1/Burndown Geral - sprint 1.pdf">**Sprint 1**</a>
+- <a href="docs/sprint2/">**Sprint 2**</a>
 - <a href="docs/">**Sprint 3**</a>
 - <a href="docs/">**Sprint 4**</a>
  
