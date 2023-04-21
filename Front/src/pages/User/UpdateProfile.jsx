@@ -33,7 +33,7 @@ export default function UpdateProfile() {
     if (validador.estaVazio(name.value)) {
       Swal.fire({
         icon: 'error',
-        title: 'Create User Failed!',
+        title: 'Update User Failed!',
         text: 'Please write a name',
       })
       return
@@ -41,7 +41,7 @@ export default function UpdateProfile() {
     if (validador.tamanhoTexto(name.value)) {
       Swal.fire({
         icon: 'error',
-        title: 'Create User Failed!',
+        title: 'Update User Failed!',
         text: 'Name size is too big',
       })
       return
@@ -49,7 +49,7 @@ export default function UpdateProfile() {
     if (validador.estaVazio(email.value)) {
       Swal.fire({
         icon: 'error',
-        title: 'Create User Failed!',
+        title: 'Update User Failed!',
         text: 'Please write a email',
       })
       return
@@ -57,7 +57,7 @@ export default function UpdateProfile() {
     if (!validador.validarEmail(email.value)) {
       Swal.fire({
         icon: 'error',
-        title: 'Create User Failed!',
+        title: 'Update User Failed!',
         text: 'Email must have @ and .com',
       })
       return
@@ -65,7 +65,7 @@ export default function UpdateProfile() {
     if (validador.tamanhoTexto(email.value)) {
       Swal.fire({
         icon: 'error',
-        title: 'Create User Failed!',
+        title: 'Update User Failed!',
         text: 'Email size is too big',
       })
       return
@@ -73,7 +73,7 @@ export default function UpdateProfile() {
     if (validador.selectEstaDefault(gender)) {
       Swal.fire({
         icon: 'error',
-        title: 'Create User Failed!',
+        title: 'Update User Failed!',
         text: 'Please select a gender',
       })
       return
@@ -82,7 +82,7 @@ export default function UpdateProfile() {
       if (validador.estaVazio(oldPassword.value)) {
         Swal.fire({
           icon: 'error',
-          title: 'Create User Failed!',
+          title: 'Update User Failed!',
           text: 'Please write the old password',
         })
         return
@@ -90,7 +90,7 @@ export default function UpdateProfile() {
       if (!validador.tamanhoSenha(oldPassword.value)) {
         Swal.fire({
           icon: 'error',
-          title: 'Create User Failed!',
+          title: 'Update User Failed!',
           text: 'Old Password cannot be less than 8 and cannot be more than 15',
         })
         return
@@ -98,7 +98,7 @@ export default function UpdateProfile() {
       if (validador.estaVazio(password.value)) {
         Swal.fire({
           icon: 'error',
-          title: 'Create User Failed!',
+          title: 'Update User Failed!',
           text: 'Please write a new password',
         })
         return
@@ -106,8 +106,16 @@ export default function UpdateProfile() {
       if (!validador.tamanhoSenha(password.value)) {
         Swal.fire({
           icon: 'error',
-          title: 'Create User Failed!',
+          title: 'Update User Failed!',
           text: 'New Password cannot be less than 8 and cannot be more than 15',
+        })
+        return
+      }
+      if(validador.senhaIgual(password.value,oldPassword)){
+        Swal.fire({
+          icon: 'error',
+          title: 'Update User Failed!',
+          text: 'New Password cannot be same as old password ',
         })
         return
       }

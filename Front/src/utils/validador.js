@@ -24,6 +24,12 @@ export const validador = {
             return false
         } 
         return true
+    },
+    senhaIgual(senha,senha2){
+        if (senha === senha2){
+            return false
+        } 
+        return true
     }
 }
 

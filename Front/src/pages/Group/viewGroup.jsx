@@ -46,6 +46,7 @@ const ViewGroup = () => {
                 Swal.fire({
                     icon: 'error',
                     title: 'Group cannot be deleted',
+                    text: 'Before delete the group, check if the group has a team.'
                 })
             }
             else {
