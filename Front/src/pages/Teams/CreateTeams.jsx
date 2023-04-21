@@ -19,7 +19,7 @@ export default function CreateTeams() {
     const group = document.getElementById("group")
     const [description, setDescription] = useState("");
     const [data, setData] = useState([])
-    const [groups, setGroup]= useState([])
+    const [groups, setGroup] = useState([])
     function getUser() {
         fetch("/user/getUsers", {
             method: 'GET',
@@ -49,25 +49,16 @@ export default function CreateTeams() {
                 groups.push({
                     id: element.id,
                     nome: element.name
-                 })
+                })
             });
             setGroup(groups)
         })
     }
-  
+
 
 
 
     function CriaTime() {
-        if (selectMult.length === 0) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Create Teams Failed!',
-                text: 'Please add a user',
-            })
-            return
-        }
-
         if (validador.estaVazio(name)) {
             Swal.fire({
                 icon: 'error',
@@ -109,12 +100,20 @@ export default function CreateTeams() {
             })
             return
         }
+        if (validador.tamanhoTexto(description)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Create Teams Failed!',
+                text: 'Description size is too big',
+            })
+            return
+        }
         fetch("/teams/create", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
-            body: JSON.stringify({ name:name, description:description, group:group.value , users: selectMult })
+            body: JSON.stringify({ name: name, description: description, group: group.value, users: selectMult })
         }).then((resposta) => resposta.json()).then((data) => {
             if (data.error) {
                 Swal.fire({
@@ -141,10 +140,10 @@ export default function CreateTeams() {
             <div className='mt-5'><label className="text-lg font-bold dark:text-black " >Select a Group</label>
                 <select id="group" defaultValue='default' className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
                     <option value="default" disabled selected>Select an option:</option>
-                    {groups.map((ele)=>{
+                    {groups.map((ele) => {
                         return (<option value={ele.id}>{ele.nome}</option>)
                     })}
-                    
+
                 </select></div>
             <div className='my-6'> <Campo id='descriçãoTime' text="Description" placeholder="Description" type={"text"} value={description} setValue={setDescription} /></div>
 

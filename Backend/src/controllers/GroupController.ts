@@ -1,6 +1,7 @@
 import AppDataSource from "../data-source";
 import { Request, Response } from 'express';
 import { Group } from "../entities/Group";
+import { Teams } from "../entities/Teams";
 
 
 class GroupController {
@@ -35,8 +36,13 @@ class GroupController {
     })
 
     if (group && group.id) {
-      const r = await AppDataSource.manager.remove(Group, group).catch((e) => e.message)
-      return res.json(r)
+      const verTime = await AppDataSource.manager.find(Teams, {where:{group}} )
+      if (verTime.length == 0){
+        const r = await AppDataSource.manager.remove(Group, group).catch((e) => e.message)
+        return res.json(r)
+      }
+      return res.json({ error: "group cannot be deleted" })
+     
     }
     else if (group && group.error) {
       return res.json(group)

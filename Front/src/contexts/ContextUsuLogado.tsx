@@ -18,7 +18,6 @@ export default function AutenticacaoProvider({ children }) {
   }
   const [usuario, setUsuario] = useState(() => {
     const user = JSON.parse(localStorage.getItem('user')||"{}");
-    
     return user || {};
   })
 

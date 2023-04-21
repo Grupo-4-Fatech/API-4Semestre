@@ -50,7 +50,7 @@ const ViewUser = () => {
             },
             body: JSON.stringify({id:id})
         }).then((res) => res.json()).then((response) => {
-            if (response.driverError) {
+            if (response.error) {
                 Swal.fire({
                     icon: 'error',
                     title: 'User not deleted',
