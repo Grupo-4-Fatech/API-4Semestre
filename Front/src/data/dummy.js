@@ -2,7 +2,6 @@ import React from 'react';
 import { FiEdit, FiUserPlus, FiUsers, FiUser } from 'react-icons/fi';
 import { MdOutlineViewAgenda, MdOutlinePermContactCalendar } from 'react-icons/md';
 import { BsKanban, } from 'react-icons/bs';
-import { icon } from '@fortawesome/fontawesome-svg-core';
 
 export const gridOrderImage = (props) => (
   <div>
@@ -113,14 +112,14 @@ export const links = [
     title: 'Teams',
     links: [
       {
-        title: 'Create Teams',
+        title: 'Create Team',
         name: 'teams/create',
         icon: <FiUserPlus />,
         permission: 1,
       },
 
       {
-        title: 'View Teams',
+        title: 'View Team',
         name: 'teams/view',
         icon: <FiUsers />,
         permission: 1,
