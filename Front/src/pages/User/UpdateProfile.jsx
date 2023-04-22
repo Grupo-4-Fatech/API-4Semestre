@@ -169,7 +169,7 @@ export default function UpdateProfile() {
       <Campo text="Name" id="name" placeholder="Name" type={"text"} value={name} setValue={setName} />
       <Campo text="Email" id="email" placeholder="Email" type={"text"} value={email} setValue={setEmail} />
       <label className="text-lg font-bold dark:text-black " >Select a gender</label>
-      <select id="gender" value={gender} onChange={(e) => setGender(e.target.value)} defaultValue='default' className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
+      <select id="gender" value={gender} onChange={(e) => setGender(e.target.value)} className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
         <option value="default" disabled>Select an option:</option>
         <option value="Male">Male</option>
         <option value="Female">Female</option>
