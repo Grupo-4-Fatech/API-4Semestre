@@ -55,7 +55,7 @@ export default function UpdateTeams() {
         if (validador.estaVazio(name)) {
             Swal.fire({
                 icon: 'error',
-                title: 'Create Teams Failed!',
+                title: 'Update Teams Failed!',
                 text: 'Please write a name',
             })
             return
@@ -63,7 +63,7 @@ export default function UpdateTeams() {
         if (validador.tamanhoTexto(name)) {
             Swal.fire({
                 icon: 'error',
-                title: 'Create Teams Failed!',
+                title: 'Update Teams Failed!',
                 text: 'Name size is too big',
             })
             return
@@ -71,7 +71,7 @@ export default function UpdateTeams() {
         if (selectMult.length === 0) {
             Swal.fire({
                 icon: 'error',
-                title: 'Create Teams Failed!',
+                title: 'Update Teams Failed!',
                 text: 'Please add an user',
             })
             return
@@ -79,7 +79,7 @@ export default function UpdateTeams() {
         if (validador.selectEstaDefault(group)) {
             Swal.fire({
                 icon: 'error',
-                title: 'Create Teams Failed!',
+                title: 'Update Teams Failed!',
                 text: 'Please select a group',
             })
             return
@@ -88,7 +88,7 @@ export default function UpdateTeams() {
 
             Swal.fire({
                 icon: 'error',
-                title: 'Create Teams Failed!',
+                title: 'Update Teams Failed!',
                 text: 'Please write a description',
             })
             return
@@ -103,7 +103,7 @@ export default function UpdateTeams() {
             if (data.error) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Failed to create update team',
+                    title: 'Failed to update team',
                 })
             } else {
                 Swal.fire({
