@@ -3,19 +3,20 @@ import { MdSend } from 'react-icons/md';
 import Campo from '../../components/Campo'
 import { Header } from '../../components'
 import { useStateContext } from '../../contexts/ContextProvider'
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { validador } from '../../utils/validador';
 const Swal = require('sweetalert2')
 
 
 export default function UpdateProfile() {
-  const { id } = useParams();
   const { currentColor } = useStateContext();
+  const [id, setId] = useState('')
+  const [oldPassword, setOldPassword] = useState('')
+  const [password, setNewPassword] = useState('')
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [gender, setGender] = useState("default")
   const [isChecked, setIsChecked] = useState(false)
-
 
   let location = useNavigate();
   function comeback() {
@@ -111,7 +112,7 @@ export default function UpdateProfile() {
         })
         return
       }
-      if(validador.senhaIgual(password.value,oldPassword)){
+      if(!validador.senhaIgual(password.value,oldPassword.value)){
         Swal.fire({
           icon: 'error',
           title: 'Update User Failed!',
@@ -126,7 +127,7 @@ export default function UpdateProfile() {
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
       },
-      body: JSON.stringify({ id: id, name: name.value, email: email.value, password: password?password.value:"", oldPassword: oldPassword?oldPassword.value:"", changePassword: isChecked })
+      body: JSON.stringify({ id: id, name: name.value, gender: gender.value, email: email.value, password: password?password.value:"", oldPassword: oldPassword?oldPassword.value:"", changePassword: isChecked })
     }).then((resposta) => resposta.json()).then((data) => {
       if (data.error) {
         Swal.fire({
@@ -155,6 +156,7 @@ export default function UpdateProfile() {
         setName(data.name);
         setEmail(data.email)
         setGender(data.gender)
+        setId(data.id)
       }
     })
 
@@ -179,8 +181,8 @@ export default function UpdateProfile() {
 
       {
         isChecked ? (<>
-          <div className='my-6'> <Campo text="Old Password" id="oldPassword" placeholder="*****" type={"password"} /> </div>
-          <div className='my-6'> <Campo text="New Password" id="password" placeholder="*****" type={"password"} /> </div>
+          <div className='my-6'> <Campo text="Old Password" id="oldPassword" placeholder="*****" type={"password"} value={oldPassword} setValue={setOldPassword} /> </div>
+          <div className='my-6'> <Campo text="New Password" id="password" placeholder="*****" type={"password"} value={password} setValue={setNewPassword} /> </div>
         </>
         ) : (<></>)
       }
