@@ -72,22 +72,28 @@ Com esses recursos, a single-page application de criação de tickets e usuário
 
 ## Demonstração em Gif 2ª Sprint
 
- Diferença de Acesso
+ <ul> <li> <strong>Diferença de Acesso </strong> </li> </ul>
+</br>
 ![acesso 2](https://user-images.githubusercontent.com/88494278/234423871-d3f89e16-bd6d-4e34-b6bc-a781753dedcb.gif)
 
-Alteração de Usuario Logado
+<ul> <li> <strong> Alteração de Usuario Logado</strong> </li> </ul>
+</br>
 ![alterar usuario](https://user-images.githubusercontent.com/88494278/234423979-d78debd3-fa44-419f-a5d8-f2caba9947e3.gif)
 
-Crud de Equipes
+<ul> <li> <strong>Crud de Equipes</strong> </li> </ul>
+</br>
 ![equipe](https://user-images.githubusercontent.com/88494278/234424115-0382f130-44c0-402e-a4a2-9cb9eb085422.gif)
 
- Crud de Usuarios
+ <ul> <li> <strong> Crud de Usuarios</strong> </li> </ul>
+</br>
 ![user d](https://user-images.githubusercontent.com/88494278/234424169-3d93db4d-0a81-4ea7-8580-77546297baa2.gif)
 
- Crud Ticket
+ <ul> <li> <strong> Crud Ticket </strong> </li> </ul>
+</br>
 ![ticket](https://user-images.githubusercontent.com/88494278/234424273-c5649e07-4c20-4474-bb28-86bff3b26882.gif)
 
- Crud de Times e Equipes
+ <ul> <li> <strong> Crud de Times e Equipes </strong> </li> </ul>
+</br>
 ![time e equipe](https://user-images.githubusercontent.com/88494278/234424395-568db1af-74ee-42d6-9559-c646488496fb.gif)
 
 
