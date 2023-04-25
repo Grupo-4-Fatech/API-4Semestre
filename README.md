@@ -78,7 +78,7 @@ Com esses recursos, a single-page application de criação de tickets e usuário
 # Alteração de Usuario Logado
 ![alterar usuario](https://user-images.githubusercontent.com/88494278/234423979-d78debd3-fa44-419f-a5d8-f2caba9947e3.gif)
 
-# Crud de Equipes
+# Crud Grupos
 ![equipe](https://user-images.githubusercontent.com/88494278/234424115-0382f130-44c0-402e-a4a2-9cb9eb085422.gif)
 
 # Crud de Usuarios
