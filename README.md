@@ -70,10 +70,33 @@ Com esses recursos, a single-page application de criação de tickets e usuário
 
 </br>
 
+## Demonstração em Gif 1ª Sprint
+
+<ul> <li> <strong> Crud de Ticket </strong> </li> </ul>
+![Crud ticket](https://user-images.githubusercontent.com/88494278/234429611-526b58f7-a275-415d-afa0-3939cdc65101.gif)
+
+<ul> <li> <strong> Cadastro de Ticket </strong> </li> </ul>
+![open ticket](https://user-images.githubusercontent.com/88494278/234429671-e8609d2b-8063-4849-9f40-66e09e629c50.gif)
+
+<ul> <li> <strong> Aprovado ou Arquivado </strong> </li> </ul>
+![Archive or Approved](https://user-images.githubusercontent.com/88494278/234429786-f4fa151e-bd7a-4041-9a4c-553cb63b8362.gif)
+
+<ul> <li> <strong> Kanban </strong> </li> </ul>
+![Kanban](https://user-images.githubusercontent.com/88494278/234429816-b5c4fb7d-3192-457c-ba9a-d116c29efcae.gif)
+
+<ul> <li> <strong> Arquivado </strong> </li> </ul>
+![Archive ticket](https://user-images.githubusercontent.com/88494278/234429871-0de3acab-df6d-4d2e-91f3-e8cfc252a3bb.gif)
+
+
+
+
+
+
+
 ## 📉 Gráfico Burndown
 
 - <a href="docs/sprint1/Burndown Geral - sprint 1.pdf">**Sprint 1**</a>
-- <a href="docs/sprint2/Burndown Geral - sprint 2.pdf">**Sprint 2**</a>
+- <a>**Sprint 2**</a>
 - <a href="docs/">**Sprint 3**</a>
 - <a href="docs/">**Sprint 4**</a>
  
