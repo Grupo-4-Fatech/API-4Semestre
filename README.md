@@ -70,7 +70,28 @@ Com esses recursos, a single-page application de criação de tickets e usuário
 
 </br>
 
-## 2ª Entrega
+## 2ª Sprint Entrega
+
+# Diferença de Acesso
+![acesso 2](https://user-images.githubusercontent.com/88494278/234423871-d3f89e16-bd6d-4e34-b6bc-a781753dedcb.gif)
+
+# Alteração de Usuario Logado
+![alterar usuario](https://user-images.githubusercontent.com/88494278/234423979-d78debd3-fa44-419f-a5d8-f2caba9947e3.gif)
+
+# Crud de Equipes
+![equipe](https://user-images.githubusercontent.com/88494278/234424115-0382f130-44c0-402e-a4a2-9cb9eb085422.gif)
+
+# Crud de Usuarios
+![user d](https://user-images.githubusercontent.com/88494278/234424169-3d93db4d-0a81-4ea7-8580-77546297baa2.gif)
+
+# Crud Ticket
+![ticket](https://user-images.githubusercontent.com/88494278/234424273-c5649e07-4c20-4474-bb28-86bff3b26882.gif)
+
+# Crud de Times e Equipes
+![time e equipe](https://user-images.githubusercontent.com/88494278/234424395-568db1af-74ee-42d6-9559-c646488496fb.gif)
+
+
+
 
 
 
