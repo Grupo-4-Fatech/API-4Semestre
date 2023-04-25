@@ -88,10 +88,6 @@ Com esses recursos, a single-page application de criação de tickets e usuário
 
 ![user d](https://user-images.githubusercontent.com/88494278/234424169-3d93db4d-0a81-4ea7-8580-77546297baa2.gif)
 
- <ul> <li> <strong> Crud Ticket </strong> </li> </ul>
-
-![ticket](https://user-images.githubusercontent.com/88494278/234424273-c5649e07-4c20-4474-bb28-86bff3b26882.gif)
-
  <ul> <li> <strong> Crud de Times e Equipes </strong> </li> </ul>
 
 ![time e equipe](https://user-images.githubusercontent.com/88494278/234424395-568db1af-74ee-42d6-9559-c646488496fb.gif)
