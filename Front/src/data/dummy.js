@@ -1,7 +1,7 @@
 import React from 'react';
-import { FiEdit, FiUserPlus, FiUsers, FiUser } from 'react-icons/fi';
-import { MdOutlineViewAgenda, MdOutlinePermContactCalendar } from 'react-icons/md';
-import { BsKanban, } from 'react-icons/bs';
+import {  FiEdit } from 'react-icons/fi';
+import { MdOutlineViewAgenda } from 'react-icons/md';
+import { BsKanban,BsCurrencyDollar} from 'react-icons/bs';
 
 export const gridOrderImage = (props) => (
   <div>
@@ -24,23 +24,17 @@ export const gridOrderStatus = (props) => (
 );
 
 export const kanbanGrid = [
-  {
-    headerText: 'New',
+  { headerText: 'New',
     keyField: 'New',
-    allowToggle: true
-  },
+    allowToggle: true },
 
-  {
-    headerText: 'On Hold',
+  { headerText: 'On Hold',
     keyField: 'OnHold',
-    allowToggle: true
-  },
+    allowToggle: true },
 
-  {
-    headerText: 'Done',
+  { headerText: 'Done',
     keyField: 'Done',
-    allowToggle: true
-  },
+    allowToggle: true },
 ];
 
 const customerGridImage = (props) => (
@@ -66,91 +60,33 @@ const ticketGridStatus = (props) => (
 
 
 // SideBar 
-export const links = [
+export const links = [ 
   {
-    title: 'Ticket',
+    title: 'Pages',
     links: [
+      {
+        title: 'Kanban',
+        name: 'kanban',
+        icon: <BsKanban />,
+      },
       {
         title: 'Open Ticket',
         name: 'ticket/create',
-        icon: <FiEdit />,
-        permission: 3,
+        icon: <FiEdit />,        
       },
       {
         title: 'View Tickets',
         name: 'ViewTicket',
         icon: <MdOutlineViewAgenda />,
-        permission: 3,
       },
       {
         title: 'Archived Tickets',
         name: 'ArchivedTicket',
         icon: <MdOutlineViewAgenda />,
-        permission: 2,
       },
     ],
-  },
-  {
-    title: 'User',
-    links: [
-      {
-        title: 'Create User',
-        name: 'user/create',
-        icon: <FiUserPlus />,
-        permission: 1,
-      },
-      {
-        title: 'View User',
-        name: 'user/view',
-        icon: <MdOutlinePermContactCalendar />,
-        permission: 1,
-      }
-    ]
-
-  },
-  {
-    title: 'Teams',
-    links: [
-      {
-        title: 'Create Team',
-        name: 'teams/create',
-        icon: <FiUserPlus />,
-        permission: 1,
-      },
-
-      {
-        title: 'View Team',
-        name: 'teams/view',
-        icon: <FiUsers />,
-        permission: 1,
-      },
-      {
-        title: 'Kanban',
-        name: 'kanban',
-        icon: <BsKanban />,
-        permission: 3,
-      },
-
-    ]
-  },
-  {
-    title: 'Group',
-    links: [
-      {
-        title: 'Create Group',
-        name: 'group/create',
-        icon: <FiUserPlus />,
-        permission: 1,
-      },
-      {
-        title: 'View Group',
-        name: 'group/viewGroup',
-        icon: <FiUsers />,
-        permission: 1,
-      }
-    ]
   }
-
+  
 ];
 
 export const themeColors = [
@@ -182,7 +118,7 @@ export const themeColors = [
 
 export const userProfileData = [
   {
-    icon: <FiUser />,
+    icon: <BsCurrencyDollar />,
     title: 'My Profile',
     desc: 'Account Settings',
     iconColor: '#03C9D7',
@@ -209,6 +145,8 @@ export const contextMenuItems = [
   'NextPage',
 ];
 export const kanbanData = [
+ 
+  
   {
     Id: 'Task 3',
     Title: 'Task - 29003',
@@ -322,3 +260,5 @@ export const kanbanData = [
     ClassName: 'e-story, e-high, e-margaret-hamilt',
   }
 ];
+
+

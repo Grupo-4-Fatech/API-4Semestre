@@ -1,17 +1,14 @@
-import {Entity, Column, PrimaryGeneratedColumn, ManyToMany, OneToMany, ManyToOne, JoinTable} from  'typeorm'
-import { Teams } from './Teams';
-import { InspectionGroup } from './InspectionGroup';
-import { User } from './Users';
+import {Entity, Column, PrimaryGeneratedColumn} from  'typeorm'
 
 @Entity()
 export class Ticket {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column({})
+    @Column( {})
     title: string;
 
-    @Column({})
+    @Column( {})
     type: string;
 
     @Column({})
@@ -19,14 +16,5 @@ export class Ticket {
 
     @Column( {})
     status: string;
-
-    @ManyToOne(() => Teams, (teams) => teams.id)
-    teams: Teams[]
-
-    @ManyToOne(() => InspectionGroup, (inspectionGroup) => inspectionGroup.id)
-    inspectionGroup: InspectionGroup;
-
-    @ManyToOne(() => User, (user) => user.id)
-    user: User;
 
 } 

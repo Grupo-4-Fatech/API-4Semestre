@@ -1,19 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { KanbanComponent, ColumnsDirective, ColumnDirective } from '@syncfusion/ej2-react-kanban';
-import { kanbanGrid } from '../../data/dummy';
-import { Header } from '../../components';
-import { useAutenticacao } from '../../contexts/ContextUsuLogado.tsx';
+
+import { kanbanGrid } from '../data/dummy';
+import { Header } from '../components';
 
 export default function Kanban() {
   const [showModal, setShowModal] = React.useState(false);
   const [data, setData] = useState([])
   const [ticket, setTicket] = useState({ title: '', description: ``, classification: '' })
   const [searchTerm, setSearchTerm] = useState('');
-
-  const { usuario } = useAutenticacao();
-  const userPermission = usuario?.role
-
-  const isDraggable = userPermission !== 3;
   function getData() {
     fetch("/ticket/getKanbanItem", {
       method: 'GET',
@@ -113,30 +108,22 @@ export default function Kanban() {
     <>
       <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
         <Header category="App" title="Kanban" />
-        <div className='flex '>
-          <div className="flex-1 block relative pl-2.5 ">
-            <span className="h-full absolute inset-y-0 flex items-center pl-2">
-              <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current text-gray-500">
-                <path
-                  d="M10 4a6 6 0 100 12 6 6 0 000-12zm-8 6a8 8 0 1114.32 4.906l5.387 5.387a1 1 0 01-1.414 1.414l-5.387-5.387A8 8 0 012 10z">
-                </path>
-              </svg>
-            </span>
-            <input placeholder="Search" onChange={(e) => setSearchTerm(e.target.value)}
-              className="appearance-none rounded-r-lg border border-gray-400 border-b block pl-8 pr-6 py-2 w-44 bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
-          </div>
-          <div className='mr-3 ' >
-            {/* <select id="gender" class="flex-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">              <option value="default" disabled selected>Select a Team:</option>
-              <option value="team">Dev</option>
-            </select> */}
-          </div>
+        <div className="block relative pl-2.5">
+          <span className="h-full absolute inset-y-0 flex items-center pl-2">
+            <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current text-gray-500">
+              <path
+                d="M10 4a6 6 0 100 12 6 6 0 000-12zm-8 6a8 8 0 1114.32 4.906l5.387 5.387a1 1 0 01-1.414 1.414l-5.387-5.387A8 8 0 012 10z">
+              </path>
+            </svg>
+          </span>
+          <input placeholder="Search" onChange={(e) => setSearchTerm(e.target.value)}
+            className="appearance-none rounded-r-lg border border-gray-400 border-b block pl-8 pr-6 py-2 w-44 bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
         </div>
         <KanbanComponent
           id="kanban"
           keyField="Status"
           cardSettings={{ headerField: 'Id', template: cardTemplate.bind(this) }}
           dataSource={data}
-          allowDragAndDrop={isDraggable}
           dialogOpen={DialogOpen.bind(this)}
           dragStop={(e) => { changeStatus(e.data[0].Id, e.data[0].Status); }}
           cardDoubleClick={(e) => { setTicket({ title: e.data.Title, description: e.data.Summary, classification: e.data.Type }); setShowModal(true); }}

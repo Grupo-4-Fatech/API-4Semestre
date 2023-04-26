@@ -1,26 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { MdOutlineCancel } from 'react-icons/md';
+
 import { Button } from '.';
 import { userProfileData } from '../data/dummy';
 import { useStateContext } from '../contexts/ContextProvider';
-import { useAutenticacao } from '../contexts/ContextUsuLogado.tsx';
 
 const UserProfile = () => {
   const { currentColor } = useStateContext();
-  const {usuario} = useAutenticacao()
-  
-  function logOut() {
-    fetch("/Login/LogOut", {
-      method: 'get',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      }
-    }).then((resposta) => resposta.json()).then((data) => {
-      if (data) {
-        window.location.href = "/"
-      }
-    })
-  }
 
   return (
     <div className="nav-item absolute right-1 top-16 bg-white dark:bg-[#42464D] p-8 rounded-lg w-96">
@@ -35,23 +21,19 @@ const UserProfile = () => {
         />
       </div>
       <div className="flex gap-5 items-center mt-6 border-color border-b-1 pb-6">
-
-        {/* Perfil do usuário */}
-        {usuario && (
-          <div>
-            <p className="font-semibold text-xl dark:text-gray-200"> {usuario.name} </p>
-            {/* <p className="text-gray-500 text-sm dark:text-gray-400">  Developer   </p> */}
-            <p className="text-gray-500 text-sm font-semibold dark:text-gray-400"> {usuario.email} </p>
-          </div>
-
-        )}
+       
+       {/* Perfil do usuário */}
+        <div>
+          <p className="font-semibold text-xl dark:text-gray-200"> Nome Usu </p>
+          <p className="text-gray-500 text-sm dark:text-gray-400">  Developer   </p>
+          <p className="text-gray-500 text-sm font-semibold dark:text-gray-400"> info@shop.com </p>
+        </div>
       </div>
-
+      
       <div>
         {userProfileData.map((item, index) => (
-          <div onClick={() => window.location.href = "/user/updateProfile"} key={index} className="flex gap-5 border-b-1 border-color p-4 hover:bg-light-gray cursor-pointer  dark:hover:bg-[#42464D]">
+          <div key={index} className="flex gap-5 border-b-1 border-color p-4 hover:bg-light-gray cursor-pointer  dark:hover:bg-[#42464D]">
             <button
-              onClick={()=> window.location.href = "/user/updateProfile"}
               type="button"
               style={{ color: item.iconColor, backgroundColor: item.iconBg }}
               className=" text-xl rounded-lg p-3 hover:bg-light-gray"
@@ -67,14 +49,13 @@ const UserProfile = () => {
         ))}
       </div>
       <div className="mt-5">
-        <button
-          type="button"
-          onClick={() => logOut()}
-          style={{ backgroundColor: `${currentColor}`, color: "white", borderRadius: "10px" }}
-          className={`p-3 w-full hover:drop-shadow-xl `}
-        >
-          LogOut
-        </button>
+        <Button
+          color="white"
+          bgColor={currentColor}
+          text="Logout"
+          borderRadius="10px"
+          width="full"
+        />
       </div>
     </div>
 

@@ -2,42 +2,53 @@ import AppDataSource from "../data-source";
 import { Request, Response } from 'express';
 import { Ticket } from "../entities/Ticket";
 import { IsUndefined } from "../utils/global";
-import * as jwt from "jsonwebtoken";
-import UserController from "./UserController";
-import { User } from "../entities/Users";
 
 
 class TicketController {
 
   async list(req: Request, res: Response): Promise<Response> {
-    let email = jwt.decode(req.cookies.jwt);
-    const user = await AppDataSource.getRepository(User).findOneBy({ email: email ? email.toString() : "" })
-
-    const ticketTable = await AppDataSource.getRepository(Ticket)
-
-    const ticket = await ticketTable.findBy({ user: false })
-
-    return res.json("");
+    const response: any = await AppDataSource.getRepository(Ticket).find({
+      order: {
+        id: 'asc'
+      }
+    });
+    return res.json(response);
   }
-
-
   public async update(req: Request, res: Response): Promise<Response> {
-    const { id, title, type, description, status, inspectionGroup } = req.body;
-    const ticketRepository = AppDataSource.getRepository(Ticket)
-    const ticketToUpdate = await ticketRepository.findOneBy({
-      id: id,
+    const { id, title, type, description, status } = req.body;
+    const ticket: any = await AppDataSource.manager.findOneBy(Ticket, { id }).catch((e) => {
+      return { error: "Identificador inválido" };
     })
-    ticketToUpdate.title = title;
-    ticketToUpdate.type = type;
-    ticketToUpdate.description = description;
-    ticketToUpdate.status = status;
-    ticketToUpdate.inspectionGroup = inspectionGroup;
-
-
-    await ticketRepository.save(ticketToUpdate)
-    return res.json(ticketToUpdate)
-
-
+    if (ticket && ticket.id) {
+      if (title !== "") {
+        ticket.title = title;
+      }
+      if (type !== "") {
+        ticket.type = type;
+      }
+      if (description !== "") {
+        ticket.description = description;
+      }
+      if (status !== "") {
+        ticket.status = status;
+      }
+      const r = await AppDataSource.manager.save(ticket, ticket).catch((e) => {
+        if (/(title)[\s\S]+(already exists)/.test(e.detail)) {
+          return ({ error: ' title already exists' });
+        }
+        return e;
+      })
+      if (!r.error) {
+        return res.json({ id: ticket.id });
+      }
+      return res.json(r);
+    }
+    else if (ticket && ticket.error) {
+      return res.json(title)
+    }
+    else {
+      return res.json({ error: "Ticket não localizado" });
+    }
   }
 
   async status(req: Request, res: Response): Promise<Response> {
@@ -61,21 +72,16 @@ class TicketController {
   }
 
   public async create(req: Request, res: Response): Promise<Response> {
-    const { type, title, description, status, inspectionGroup } = req.body;
+    const { type, title, description, status } = req.body;
 
-    let email = jwt.decode(req.cookies.jwt);
-
-    const user = await AppDataSource.getRepository(User).findOneBy({ email: email ? email.toString() : "" })
-
-    const obj = new Ticket()
+    const obj = new Ticket();
     obj.type = type;
     obj.title = title;
     obj.description = description;
     obj.status = status;
-    obj.user = user;
 
     const ticket: any = await AppDataSource.manager.save(Ticket, obj).catch((e) => {
-      return res.json({ error: "Error while saving the ticket" });
+
     })
     if (ticket.id) {
 
@@ -87,14 +93,14 @@ class TicketController {
         status: ticket.status
       });
     }
-
+    return res.json({ error: "Error while saving the ticket" });
 
   }
 
   public async delete(req: Request, res: Response): Promise<Response> {
     const { id } = req.body
     const ticket: any = await AppDataSource.manager.findOneBy(Ticket, { id }).catch((e) => {
-      return { error: "invalid identifier" }
+      return { error: "Identificador inválido" }
     })
 
     if (ticket && ticket.id) {
@@ -105,13 +111,13 @@ class TicketController {
       return res.json(ticket)
     }
     else {
-      return res.json({ error: "Ticket not found" })
+      return res.json({ error: "Ticket não localizado" })
     }
 
 
   }
 
-  public async deleteAll(req: Request, res: Response): Promise<Response> {
+  public async deleteAll(req: Request, res: Response): Promise<Response>{
     const r = await AppDataSource.getRepository(Ticket);
     await r.clear()
     return res.json(r.count)
@@ -119,19 +125,13 @@ class TicketController {
 
   public async getAll(req: Request, res: Response): Promise<Response> {
     var status = req.params.status
-    var query = "SELECT id, type, title FROM ticket where status = " + status;
-    let email = jwt.decode(req.cookies.jwt);
-    const user = await AppDataSource.getRepository(User).findOneBy({ email: email ? email.toString() : "" });
-    if (user && user.role && user.role == 3) {
-      query = "SELECT id, type, title FROM ticket where status = " + status + " and userId = " + user.id;
-    }
-    const ticket: any = await AppDataSource.manager.query(query)
+    const ticket: any = await AppDataSource.manager.query("SELECT id, type, title FROM ticket where status = " + status)
     return res.json(ticket)
   }
   public async updateStatus(req: Request, res: Response): Promise<Response> {
     const { id, status } = req.body;
     const ticket: any = await AppDataSource.manager.findOneBy(Ticket, { id }).catch((e) => {
-      return { error: "invalid identifier" };
+      return { error: "Identificador inválido" };
     })
     if (ticket && ticket.id) {
       if (status !== "") {
@@ -153,13 +153,7 @@ class TicketController {
     }
   }
   public async getKanbanItem(req: Request, res: Response): Promise<Response> {
-    var query = "SELECT id, type, title, status, description FROM ticket WHERE status NOT IN (1,2)";
-    let email = jwt.decode(req.cookies.jwt);
-    const user = await AppDataSource.getRepository(User).findOneBy({ email: email ? email.toString() : "" });
-    if (user && user.role && user.role == 3) {
-      query = "SELECT id, type, title, status, description FROM ticket WHERE status NOT IN (1,2) and userId = " + user.id;
-    }
-    const ticket: any = await AppDataSource.manager.query(query)
+    const ticket: any = await AppDataSource.manager.query("SELECT id, type, title, status, description FROM ticket WHERE status NOT IN (1,2)")
     return res.json(ticket)
   }
 
