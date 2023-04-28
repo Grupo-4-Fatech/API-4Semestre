@@ -43,7 +43,7 @@ Com esses recursos, a single-page application de criação de tickets e usuário
  ## 📅 Cronograma das Sprints 
 
  - - [X] **1° Sprint:**</a> 13/03/2023 a 02/04/2023<br>
- - - [X] **2° Sprint:**</a> 03/04/2023 a 23/04/2023
+ - - [ ] **2° Sprint:**</a> 03/04/2023 a 23/04/2023
  - - [ ] **3° Sprint:**</a> 24/04/2023 a 14/05/2023
  - - [ ] **4°Sprint:** 15/05/2023 a 04/06/2023
  - - [ ] **Feira de Soluções:** 13/06 e 14/06/2023
