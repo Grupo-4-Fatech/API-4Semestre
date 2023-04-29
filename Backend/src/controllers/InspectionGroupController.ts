@@ -33,14 +33,14 @@ class InspectionGroupController {
 
     });
   }
-  return res.json({ error: "Error while saving the Group" });
+  return res.json({ error: "Erro ao salvar o Grupo" });
  
 
   }
   public async delete(req: Request, res: Response): Promise<Response> {
     const { id } = req.body
     const inspectionGroup : any = await AppDataSource.manager.findOneBy(InspectionGroup, { id }).catch((e) => {
-      return { error: "Invalid identifier" }
+      return { error: "Identificador inválido" }
     })
 
     if (inspectionGroup && inspectionGroup.id) {
@@ -51,7 +51,7 @@ class InspectionGroupController {
       return res.json(inspectionGroup)
     }
     else {
-      return res.json({ error: "group not found" })
+      return res.json({ error: "grupo não encontrado" })
     }
 
 

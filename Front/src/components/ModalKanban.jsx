@@ -44,7 +44,7 @@ const ModalKanban = ({ title, description, classification }) => {
                     type="button"
                     onClick={() => setShowModal(false)}
                   >
-                    Close
+                    Fechar
                   </button>
                 </div>
               </div>

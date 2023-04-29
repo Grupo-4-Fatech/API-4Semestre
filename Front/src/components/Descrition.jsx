@@ -8,7 +8,7 @@ export default function Descrition({ value, setValue }) {
     return (
         <>
             <div className='pt-6'>
-                <label className="text-lg font-bold dark:text-black">Description</label>
+                <label className="text-lg font-bold dark:text-black">Descrição</label>
                 <RichTextEditorComponent id='teste' placeholder={'Write the description'} ref={(richEditor) => { rteObject = richEditor }} onBlur={(e) => { setValue(rteObject.getHtml()) }} value={value} insertImageSettings={{saveFormat:"Base64"}}>
                     <Inject services={[HtmlEditor, Toolbar, Image, Link, QuickToolbar,]} />
                 </RichTextEditorComponent>

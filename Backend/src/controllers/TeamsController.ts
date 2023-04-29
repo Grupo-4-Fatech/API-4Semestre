@@ -27,10 +27,10 @@ class TeamsController {
 
       var response = await new TeamsController().insertUsers(teams.id, users)
       if (response) {
-        return res.json("sucess")
+        return res.json("sucesso")
       }
     }
-    return res.json({ error: "Error while saving the Group" });
+    return res.json({ error: "Erro ao salvar o Grupo" });
 
 
   }
@@ -163,11 +163,11 @@ class TeamsController {
       if (response) {
         return res.json(true)
       } else {
-        return res.json({ error: "Error" })
+        return res.json({ error: "Erro" })
       }
     }
 
-    return res.json({ error: "Error while saving the Group" });
+    return res.json({ error: "Erro ao salvar o Grupo" });
 
 
   }

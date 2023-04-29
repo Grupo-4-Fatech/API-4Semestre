@@ -122,7 +122,7 @@ export default function Kanban() {
                 </path>
               </svg>
             </span>
-            <input placeholder="Search" onChange={(e) => setSearchTerm(e.target.value)}
+            <input placeholder="Procurar" onChange={(e) => setSearchTerm(e.target.value)}
               className="appearance-none rounded-r-lg border border-gray-400 border-b block pl-8 pr-6 py-2 w-44 bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
           </div>
           <div className='mr-3 ' >
@@ -189,7 +189,7 @@ export default function Kanban() {
                       type="button"
                       onClick={() => setShowModal(false)}
                     >
-                      Close
+                      Fechou
                     </button>
 
                   </div>

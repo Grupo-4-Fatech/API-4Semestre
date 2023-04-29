@@ -51,14 +51,14 @@ const ViewTicket = () => {
             if (response.error) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Ticket not archived',
+                    title: 'Ticket não arquivado',
                 })
             }
             else {
 
                 Swal.fire({
                     icon: 'success',
-                    title: 'Ticket approved successfully',
+                    title: 'Ticket aprovado com sucesso',
                 })
                 var updateData = data.filter(item => item.id != id)
                 setData(updateData)
@@ -80,14 +80,14 @@ const ViewTicket = () => {
             if (response.error) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Ticket not archived',
+                    title: 'Ticket não arquivado',
                 })
             }
             else {
 
                 Swal.fire({
                     icon: 'success',
-                    title: 'Ticket archived successfully',
+                    title: 'Ticket arquivado com sucesso',
                 })
                 var updateData = data.filter(item => item.id != id)
                 setData(updateData)
@@ -113,7 +113,7 @@ const ViewTicket = () => {
 
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-            <Header category="Page" title="View Ticket" />
+            <Header category="Page" title="Vizualização Ticket" />
             <div className="block relative">
                 <span className="h-full absolute inset-y-0 left-0 flex items-center pl-2">
                     <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current text-gray-500">
@@ -122,7 +122,7 @@ const ViewTicket = () => {
                         </path>
                     </svg>
                 </span>
-                <input placeholder="Search" onChange={(e) => setSearchTerm(e.target.value)}
+                <input placeholder="Procurar" onChange={(e) => setSearchTerm(e.target.value)}
                     className="appearance-none rounded-r-lg border border-gray-400 border-b block pl-8 pr-6 py-2 w-44 bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
             </div>
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -154,20 +154,20 @@ const ViewTicket = () => {
                                     </td>
 
                                     <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                        <button onClick={() => { window.location.href = "/ticket/update/" + dat.id }} style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Edit</button>
+                                        <button onClick={() => { window.location.href = "/ticket/update/" + dat.id }} style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Editar</button>
                                     </td>
 
                                     {/* Verificação para ocultar o botão 'Archive' */}
                                     {userPermission !== 3 && (
                                         <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                            <button onClick={(e) => Archive(dat.id, 2)} className='bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20'>Archive</button>
+                                            <button onClick={(e) => Archive(dat.id, 2)} className='bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20'>Arquivo</button>
                                         </td>
                                     )}
 
                                     {/* Verificação para ocultar o botão 'Approved' */}
                                     {userPermission !== 3 && (
                                         <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                            <button onClick={(e) => Aproved(dat.id, 3)} className='bg-green-500 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20'>Approved</button>
+                                            <button onClick={(e) => Aproved(dat.id, 3)} className='bg-green-500 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20'>Aprovado</button>
                                         </td>
                                     )}
 

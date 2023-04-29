@@ -25,14 +25,14 @@ class GroupController {
         descricao: group.descricao
       });
     }
-    return res.json({ error: "Error while saving the Group" });
+    return res.json({ error: "Erro ao salvar o Grupo" });
 
 
   }
   public async delete(req: Request, res: Response): Promise<Response> {
     const { id } = req.body
     const group: any = await AppDataSource.manager.findOneBy(Group, { id }).catch((e) => {
-      return { error: "Invalid identifier" }
+      return { error: "identificador inválido" }
     })
 
     if (group && group.id) {
@@ -41,14 +41,14 @@ class GroupController {
         const r = await AppDataSource.manager.remove(Group, group).catch((e) => e.message)
         return res.json(r)
       }
-      return res.json({ error: "group cannot be deleted" })
+      return res.json({ error: "grupo não pode ser deletado" })
      
     }
     else if (group && group.error) {
       return res.json(group)
     }
     else {
-      return res.json({ error: "group not found" })
+      return res.json({ error: "grupo não encontrado" })
     }
 
 

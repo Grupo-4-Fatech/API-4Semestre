@@ -55,32 +55,32 @@ export default function UpdateTeams() {
         if (validador.estaVazio(name)) {
             Swal.fire({
                 icon: 'error',
-                title: 'Update Teams Failed!',
-                text: 'Please write a name',
+                title: 'Falha na atualização das equipes!',
+                text: 'Por favor, escreva um nome',
             })
             return
         }
         if (validador.tamanhoTexto(name)) {
             Swal.fire({
                 icon: 'error',
-                title: 'Update Teams Failed!',
-                text: 'Name size is too big',
+                title: 'Falha na atualização das equipes!',
+                text: 'O tamanho do nome é muito grande',
             })
             return
         }
         if (selectMult.length === 0) {
             Swal.fire({
                 icon: 'error',
-                title: 'Update Teams Failed!',
-                text: 'Please add an user',
+                title: 'Falha na atualização das equipes!',
+                text: 'Adicione um usuário',
             })
             return
         }
         if (validador.selectEstaDefault(group)) {
             Swal.fire({
                 icon: 'error',
-                title: 'Update Teams Failed!',
-                text: 'Please select a group',
+                title: 'Falha na atualização das equipes!',
+                text: 'Selecione um grupo',
             })
             return
         }
@@ -88,8 +88,8 @@ export default function UpdateTeams() {
 
             Swal.fire({
                 icon: 'error',
-                title: 'Update Teams Failed!',
-                text: 'Please write a description',
+                title: 'Falha na atualização das equipes!',
+                text: 'Por favor, escreva uma descrição',
             })
             return
         }
@@ -103,12 +103,12 @@ export default function UpdateTeams() {
             if (data.error) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Failed to update team',
+                    title: 'Falha ao atualizar a equipe',
                 })
             } else {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Updated successfully',
+                    title: 'Atualizado com sucesso',
                 }).then((result) => result.isConfirmed ? window.location.href = "/teams/view" : '')
 
             }
@@ -149,21 +149,21 @@ export default function UpdateTeams() {
 
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-            <Header category="Page" title="Update Teams" />
-            <Campo id="tituloTime" text="Team name" placeholder="Name" type={"text"} value={name} setValue={setName} />
-            <SelectMult id="integrantesDoTime" dados={data} text={'Select the users'} value={selectMult} setValue={setSelectMult} />
-            <div className='mt-5'><label className="text-lg font-bold dark:text-black " >Select a Group</label>
+            <Header category="Page" title="Atualizar equipes" />
+            <Campo id="tituloTime" text="Nome do time" placeholder="Nome" type={"text"} value={name} setValue={setName} />
+            <SelectMult id="integrantesDoTime" dados={data} text={'Selecione os usuários'} value={selectMult} setValue={setSelectMult} />
+            <div className='mt-5'><label className="text-lg font-bold dark:text-black " >Selecione um grupo</label>
                 <select onChange={(e)=> setTeamGroup(e.target.value)}id="group" value={teamGroup} defaultValue={teamGroup} className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
                     <option value="default" disabled>Select an option:</option>
                     {groups.map((ele) => {
                         return (<option key={ele.id} value={ele.id}>{ele.nome}</option>)
                     })}
                 </select></div>
-            <div className='my-6'> <Campo id='descriçãoTime' text="Description" placeholder="Description" type={"text"} value={description} setValue={setDescription} /></div>
+            <div className='my-6'> <Campo id='descriçãoTime' text="Descrição" placeholder="Descrição" type={"text"} value={description} setValue={setDescription} /></div>
 
             <div className="mt-5 mb-5 flex" >
                 <button onClick={() => CriaTime()} style={{ backgroundColor: currentColor, position: 'absolute' }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" >
-                    <span className='pr-1'>Update</span>
+                    <span className='pr-1'>Atualizar</span>
                     <MdSend />
                 </button>
             </div>

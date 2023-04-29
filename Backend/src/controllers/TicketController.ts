@@ -75,7 +75,7 @@ class TicketController {
     obj.user = user;
 
     const ticket: any = await AppDataSource.manager.save(Ticket, obj).catch((e) => {
-      return res.json({ error: "Error while saving the ticket" });
+      return res.json({ error: "Erro ao salvar o ticket" });
     })
     if (ticket.id) {
 
@@ -94,7 +94,7 @@ class TicketController {
   public async delete(req: Request, res: Response): Promise<Response> {
     const { id } = req.body
     const ticket: any = await AppDataSource.manager.findOneBy(Ticket, { id }).catch((e) => {
-      return { error: "invalid identifier" }
+      return { error: "identificador inválido" }
     })
 
     if (ticket && ticket.id) {
@@ -105,7 +105,7 @@ class TicketController {
       return res.json(ticket)
     }
     else {
-      return res.json({ error: "Ticket not found" })
+      return res.json({ error: "Chamado não encontrado" })
     }
 
 
@@ -131,7 +131,7 @@ class TicketController {
   public async updateStatus(req: Request, res: Response): Promise<Response> {
     const { id, status } = req.body;
     const ticket: any = await AppDataSource.manager.findOneBy(Ticket, { id }).catch((e) => {
-      return { error: "invalid identifier" };
+      return { error: "identificador inválido" };
     })
     if (ticket && ticket.id) {
       if (status !== "") {
@@ -146,10 +146,10 @@ class TicketController {
       return res.json(r);
     }
     else if (ticket && ticket.error) {
-      return res.json({ error: "Updating the status" })
+      return res.json({ error: "Atualizando o status" })
     }
     else {
-      return res.json({ error: "Ticket not found" });
+      return res.json({ error: "Chamado não encontrado" });
     }
   }
   public async getKanbanItem(req: Request, res: Response): Promise<Response> {

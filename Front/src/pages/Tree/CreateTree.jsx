@@ -34,8 +34,8 @@ export default function CreateTree() {
         if (selectMult.length === 0) {
             Swal.fire({
                 icon: 'error',
-                title: 'Create Teams Failed!',
-                text: 'Please add an user',
+                title: 'Falha ao criar equipes!',
+                text: 'Adicione um usuário',
             })
             return
         }
@@ -43,16 +43,16 @@ export default function CreateTree() {
         if (validador.estaVazio(name)) {
             Swal.fire({
                 icon: 'error',
-                title: 'Create Teams Failed!',
-                text: 'Please write a name',
+                title: 'Falha ao criar equipes!',
+                text: 'Por favor, escreva um nome',
             })
             return
         }
         if (validador.tamanhoTexto(name)) {
             Swal.fire({
                 icon: 'error',
-                title: 'Create Teams Failed!',
-                text: 'Name size is too big',
+                title: 'Falha ao criar equipes!',
+                text: 'O tamanho do nome é muito grande',
             })
             return
         }
@@ -60,8 +60,8 @@ export default function CreateTree() {
 
             Swal.fire({
                 icon: 'error',
-                title: 'Create Teams Failed!',
-                text: 'Please write a description',
+                title: 'Falha ao criar equipes!',
+                text: 'Por favor, escreva uma descrição',
             })
             return
         }
@@ -71,32 +71,32 @@ export default function CreateTree() {
 
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-            <Header category="Page" title="Tree" />
+            <Header category="Page" title="árvore" />
             <div>
                 <h1 className='text-lg font-bold dark:text-black'>
-                    RISK ANALYSIS
+                ANÁLISE DE RISCO
                 </h1>
                 <div className='ml-2'>
-                    <SelectMult id="integrantesDoTime" dados={data} text={'Select the users'} value={selectMult} setValue={setSelectMult} />
+                    <SelectMult id="integrantesDoTime" dados={data} text={'Selecione os usuários'} value={selectMult} setValue={setSelectMult} />
 
                 </div>
             </div>
             <div>
                 <h1 className='text-lg font-bold dark:text-black'>
-                    IMPACT ANALYSIS
+                ANÁLISE DE IMPACTO
                 </h1>
                 <div className='ml-2'>
-                    <SelectMult id="integrantesDoTime" dados={data} text={'Select the users'} value={selectMult} setValue={setSelectMult} />
+                    <SelectMult id="integrantesDoTime" dados={data} text={'Selecione os usuários'} value={selectMult} setValue={setSelectMult} />
 
                 </div>
 
             </div>
             <div>
                 <h1 className='text-lg font-bold dark:text-black'>
-                    COST ANALYSIS
+                ANÁLISE DE CUSTO
                 </h1>
                 <div className='ml-2'>
-                    <SelectMult id="integrantesDoTime" dados={data} text={'Select the users'} value={selectMult} setValue={setSelectMult} />
+                    <SelectMult id="integrantesDoTime" dados={data} text={'Selecione os usuários'} value={selectMult} setValue={setSelectMult} />
 
                 </div>
             </div>

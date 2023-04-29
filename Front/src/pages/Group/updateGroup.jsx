@@ -25,16 +25,16 @@ const UpdateGroup = () => {
         if (validador.estaVazio(nome.value)) {
             Swal.fire({
                 icon: 'error',
-                title: 'Update Crew Failed!',
-                text: 'Please write a name',
+                title: 'Falha na atualização da equipe!',
+                text: 'Por favor, escreva um nome',
             })
             return
         }
         if (validador.tamanhoTexto(nome.value)) {
             Swal.fire({
                 icon: 'error',
-                title: 'Update Crew Failed!',
-                text: 'Name size is too big',
+                title: 'Falha na atualização da equipe!',
+                text: 'O tamanho do nome é muito grande',
             })
             return
         }
@@ -42,8 +42,8 @@ const UpdateGroup = () => {
 
             Swal.fire({
                 icon: 'error',
-                title: 'Update Crew Failed!',
-                text: 'Please write a description',
+                title: 'Falha na atualização da equipe!',
+                text: 'Por favor, escreva uma descrição',
             })
             return
         }
@@ -57,14 +57,14 @@ const UpdateGroup = () => {
             if (data.error) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Updated not successful',
+                    title: 'Atualizado sem sucesso',
                 })
             }
             else {
 
                 Swal.fire({
                     icon: 'success',
-                    title: 'Updated successfully',
+                    title: 'Atualizado com sucesso',
                 }).then((result) => result.isConfirmed ? comeback() : '')
 
             }
@@ -90,12 +90,12 @@ const UpdateGroup = () => {
 
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-            <Header category="Page" title="Update Group" />
-            <Campo id="Titulo" text="Group name" placeholder="Write the Name" type={"text"} value={name} setValue={setName} />
-            <Campo id="Desc" text="Description" placeholder="Write the description" type={"text"} value={description} setValue={setDescription} />
+            <Header category="Page" title="Atualizar grupo" />
+            <Campo id="Titulo" text="Nome do grupo" placeholder="Escreva o nome" type={"text"} value={name} setValue={setName} />
+            <Campo id="Desc" text="Descrição" placeholder="Escreva a descrição" type={"text"} value={description} setValue={setDescription} />
             <div className="mt-5 mb-5 flex" >
                 <button onClick={() => updateGroup()} style={{ backgroundColor: currentColor, position: 'absolute' }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" >
-                    <span className='pr-1'>Update</span>
+                    <span className='pr-1'>Atualizar</span>
                     <MdSend />
                 </button>
             </div>
