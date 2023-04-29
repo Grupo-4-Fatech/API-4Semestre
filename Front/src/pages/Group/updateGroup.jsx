@@ -90,7 +90,7 @@ const UpdateGroup = () => {
 
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-            <Header category="Page" title="Atualizar grupo" />
+            <Header category="Pagina" title="Atualizar grupo" />
             <Campo id="Titulo" text="Nome do grupo" placeholder="Escreva o nome" type={"text"} value={name} setValue={setName} />
             <Campo id="Desc" text="Descrição" placeholder="Escreva a descrição" type={"text"} value={description} setValue={setDescription} />
             <div className="mt-5 mb-5 flex" >

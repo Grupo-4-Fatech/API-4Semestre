@@ -11,7 +11,7 @@ let PageSize = 5;
 const ViewTicket = () => {
     const { currentColor } = useStateContext();
     const [currentPage, setCurrentPage] = useState(1);
-    const headers = ['Title', 'Classification', 'Edit', 'Archive', 'Approved']
+    const headers = ['Titulo', 'Classificação', 'Editar', 'Arquivar', 'Aprovado']
     const [data, setData] = useState([])
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -113,7 +113,7 @@ const ViewTicket = () => {
 
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-            <Header category="Page" title="Vizualização Ticket" />
+            <Header category="Pagina" title="Vizualização Ticket" />
             <div className="block relative">
                 <span className="h-full absolute inset-y-0 left-0 flex items-center pl-2">
                     <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current text-gray-500">

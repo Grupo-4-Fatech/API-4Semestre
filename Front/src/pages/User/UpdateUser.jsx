@@ -137,7 +137,7 @@ export default function UpdateUser() {
   useEffect(() => { getData() }, [])
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-      <Header category="Page" title="Update User" />
+      <Header category="Pagina" title="Alterar Usuário" />
       <Campo text="Nome" id="name" placeholder="Nome" type={"text"} value={name} setValue={setName} />
       <Campo text="Email" id="email" placeholder="Email" type={"text"} value={email} setValue={setEmail} />
       <label className="text-lg font-bold dark:text-black " >Selecione um gênero</label>

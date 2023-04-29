@@ -149,7 +149,7 @@ export default function UpdateTeams() {
 
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-            <Header category="Page" title="Atualizar equipes" />
+            <Header category="Pagina" title="Atualizar equipes" />
             <Campo id="tituloTime" text="Nome do time" placeholder="Nome" type={"text"} value={name} setValue={setName} />
             <SelectMult id="integrantesDoTime" dados={data} text={'Selecione os usuários'} value={selectMult} setValue={setSelectMult} />
             <div className='mt-5'><label className="text-lg font-bold dark:text-black " >Selecione um grupo</label>

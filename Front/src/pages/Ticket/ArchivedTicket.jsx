@@ -8,7 +8,7 @@ let PageSize = 5;
 
 const ArchivedTicket = () => {
     const [currentPage, setCurrentPage] = useState(1);
-    const headers = ['Title', 'Classification', 'Restore', 'Delete']
+    const headers = ['Titulo', 'Classificação', 'Restaurar', 'Deletar']
     const [data, setData] = useState([])
     const [searchTerm, setSearchTerm] = useState('');
     function getData() {
@@ -99,7 +99,7 @@ const ArchivedTicket = () => {
     }, [])
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-            <Header category="Page" title="Exibir ticket arquivado" />
+            <Header category="Pagina" title="Tickets arquivados" />
             <div className="block relative">
                 <span className="h-full absolute inset-y-0 left-0 flex items-center pl-2">
                     <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current text-gray-500">
