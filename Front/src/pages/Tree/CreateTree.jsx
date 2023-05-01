@@ -1,4 +1,4 @@
-import Campo from '../../components/Campo'
+
 import { Header } from '../../components'
 import { MdSend } from 'react-icons/md';
 import { useStateContext } from '../../contexts/ContextProvider'
@@ -7,11 +7,11 @@ import { useEffect, useState } from 'react';
 import { validador } from "../../utils/validador";
 const Swal = require('sweetalert2')
 export default function CreateTree() {
+
     const { currentColor } = useStateContext();
-    const [selectMult, setSelectMult] = useState([])
-    const [name, setName] = useState("")
-    const [description, setDescription] = useState("");
+    const [selectMult, setSelectMult] = useState([]);
     const [data, setData] = useState([])
+
     function getUser() {
         fetch("/user/getUsers", {
             method: 'GET',
@@ -31,6 +31,7 @@ export default function CreateTree() {
     }
 
     function CriaTime() {
+
         if (selectMult.length === 0) {
             Swal.fire({
                 icon: 'error',
@@ -40,31 +41,6 @@ export default function CreateTree() {
             return
         }
 
-        if (validador.estaVazio(name)) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Create Teams Failed!',
-                text: 'Please write a name',
-            })
-            return
-        }
-        if (validador.tamanhoTexto(name)) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Create Teams Failed!',
-                text: 'Name size is too big',
-            })
-            return
-        }
-        if (validador.estaVazio(description)) {
-
-            Swal.fire({
-                icon: 'error',
-                title: 'Create Teams Failed!',
-                text: 'Please write a description',
-            })
-            return
-        }
 
     }
     useEffect(() => { getUser() }, [])
@@ -73,7 +49,7 @@ export default function CreateTree() {
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
             <Header category="Page" title="Tree" />
             <div>
-                <h1 className='text-lg font-bold dark:text-black'>
+                <h1 className='underline decoration-red-600 decoration-2 pb-4 text-lg font-bold dark:text-black'>
                     RISK ANALYSIS
                 </h1>
                 <div className='ml-2'>
@@ -82,7 +58,7 @@ export default function CreateTree() {
                 </div>
             </div>
             <div>
-                <h1 className='text-lg font-bold dark:text-black'>
+                <h1 className='underline decoration-cyan-600 decoration-2 py-6 pb-4 text-lg font-bold dark:text-black'>
                     IMPACT ANALYSIS
                 </h1>
                 <div className='ml-2'>
@@ -92,7 +68,7 @@ export default function CreateTree() {
 
             </div>
             <div>
-                <h1 className='text-lg font-bold dark:text-black'>
+                <h1 className='underline decoration-green-600 decoration-2 py-6 pb-4 text-lg font-bold dark:text-black'>
                     COST ANALYSIS
                 </h1>
                 <div className='ml-2'>

@@ -75,8 +75,8 @@ const CreateGroup = () => {
             <Header category="Page" title="Create Group" />
             <Campo id="Titulo" text="Group name" placeholder="Write the Name" type={"text"} value={name} setValue={setName} />
             <Campo id="Desc" text="Description" placeholder="Write the description" type={"text"} value={description} setValue={setDescription} />
-            <div className="mt-5 mb-5 flex" >
-                <button onClick={() => createGroup()} style={{ backgroundColor: currentColor, position: 'absolute' }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" >
+            <div className="mt-5 mb-5 flex items-center justify-end" >
+                <button onClick={() => createGroup()} style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" >
                     <span className='pr-1'>Create</span>
                     <MdSend />
                 </button>

@@ -161,8 +161,8 @@ export default function UpdateTeams() {
                 </select></div>
             <div className='my-6'> <Campo id='descriçãoTime' text="Description" placeholder="Description" type={"text"} value={description} setValue={setDescription} /></div>
 
-            <div className="mt-5 mb-5 flex" >
-                <button onClick={() => CriaTime()} style={{ backgroundColor: currentColor, position: 'absolute' }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" >
+            <div className="mt-5 mb-5 flex items-center justify-end" >
+                <button onClick={() => CriaTime()} style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" >
                     <span className='pr-1'>Update</span>
                     <MdSend />
                 </button>

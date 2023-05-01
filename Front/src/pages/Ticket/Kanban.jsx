@@ -159,25 +159,18 @@ export default function Kanban() {
                 <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                   {/*header*/}
                   <div className="flex p-5 pb-0 border-b border-solid border-slate-200 rounded-t">
-                    <div className='px-2'>
+                    <div className='p-2'>
                       {ticket.classification == 'Hotfix' ?
                         <span class="p-1 text-[13px] rounded-full bg-red-500 text-white">{ticket.classification}</span>
                         :
                         <span class="p-1 text-[13px] rounded-full bg-cyan-400 text-white">{ticket.classification}</span>
                       }
                     </div>
-                    <h3 className="text-1 font-semibold px2 text-left">
+
+                    <h3 className="p-2 items-center text-1 font-semibold px2 text-left">
                       {ticket.title}
                     </h3>
 
-                    <button
-                      className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                      onClick={() => setShowModal(false)}
-                    >
-                      <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
-                        ×
-                      </span>
-                    </button>
                   </div>
                   {/*body*/}
 
@@ -185,7 +178,7 @@ export default function Kanban() {
                   {/*footer*/}
                   <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                     <button
-                      className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      className="text-white rounded-full bg-red-600  hover:bg-red-800 font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                       type="button"
                       onClick={() => setShowModal(false)}
                     >

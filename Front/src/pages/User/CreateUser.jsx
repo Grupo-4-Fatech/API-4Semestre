@@ -144,8 +144,8 @@ export default function CreateUser() {
             </div>
           
             <div className='my-6'><Campo text="Password" id="password" placeholder="*****" type={"password"} /></div>
-            <div className="mt-5 mb-5 flex" >
-                <button style={{ backgroundColor: currentColor, position: 'absolute' }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" onClick={CreateUser}>
+            <div className="mt-5 mb-5 flex items-center justify-end" >
+                <button style={{ backgroundColor: currentColor}} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" onClick={CreateUser}>
                     <span className='pr-1'>Create</span>
                     <MdSend />
                 </button>

@@ -92,8 +92,8 @@ export default function Chamado() {
             </select>
             <Descrition value={hmtlString} setValue={setHtmlString} />
 
-            <div className="mt-5 mb-5 flex" >
-                <button style={{ backgroundColor: currentColor, position: 'absolute' }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" onClick={CreateTicket}>
+            <div className="mt-5 mb-5 flex items-center justify-end" >
+                <button style={{ backgroundColor: currentColor}} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" onClick={CreateTicket}>
                     <span className='pr-1'>Send</span>
                     <MdSend />
                 </button>
