@@ -25,7 +25,7 @@ const UserProfile = () => {
   return (
     <div className="nav-item absolute right-1 top-16 bg-white dark:bg-[#42464D] p-8 rounded-lg w-96">
       <div className="flex justify-between items-center">
-        <p className="font-semibold text-lg dark:text-gray-200">User Profile</p>
+        <p className="font-semibold text-lg dark:text-gray-200">Perfil do usuário</p>
         <Button
           icon={<MdOutlineCancel />}
           color="rgb(153, 171, 180)"
@@ -73,7 +73,7 @@ const UserProfile = () => {
           style={{ backgroundColor: `${currentColor}`, color: "white", borderRadius: "10px" }}
           className={`p-3 w-full hover:drop-shadow-xl `}
         >
-          LogOut
+          Deslogar
         </button>
       </div>
     </div>

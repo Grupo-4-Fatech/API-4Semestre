@@ -62,7 +62,7 @@ const Navbar = () => {
           >
             {usuario && (
               <p>
-                <span className="text-gray-400 text-14">Hi,</span>{' '}
+                <span className="text-gray-400 text-14">Olá,</span>{' '}
                 <span className="text-gray-400 font-bold ml-1 text-14">
                   {usuario.name}
                 </span>

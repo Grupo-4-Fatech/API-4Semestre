@@ -21,6 +21,7 @@ import NotFound from './pages/Not_found/NotFound';
 import CreateTree from './pages/Tree/CreateTree';
 import UpdateProfile from "./pages/User/UpdateProfile";
 import PrivateRoute from './routes/PrivateRoute';
+import Historic from './pages/Historic/historic';
 
 
 
@@ -98,6 +99,7 @@ const App = () => {
                 <Route path='/teams/view' element={<PrivateRoute><ViewTeams /></PrivateRoute>} />
                 <Route path='/teams/update/:id' element={<PrivateRoute><UpdateTeams /></PrivateRoute>} />
                 <Route path='/tree/create' element={<PrivateRoute><CreateTree /></PrivateRoute>} />
+                <Route path='/historic' element={<PrivateRoute><Historic/></PrivateRoute>} />
                 <Route path='*' element={<NotFound />} />
               </Routes>
             </div>

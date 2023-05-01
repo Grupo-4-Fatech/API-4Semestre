@@ -134,16 +134,16 @@ export const links = [
     ]
   },
   {
-    title: 'Group',
+    title: 'Equipe',
     links: [
       {
-        title: 'Create Group',
+        title: 'Criação de Equipe',
         name: 'group/create',
         icon: <FiUserPlus />,
         permission: 1,
       },
       {
-        title: 'View Group',
+        title: 'Visualizar Equipe',
         name: 'group/viewGroup',
         icon: <FiUsers />,
         permission: 1,
@@ -183,8 +183,8 @@ export const themeColors = [
 export const userProfileData = [
   {
     icon: <FiUser />,
-    title: 'My Profile',
-    desc: 'Account Settings',
+    title: 'Meu Perfil',
+    desc: 'Configuração da conta',
     iconColor: '#03C9D7',
     iconBg: '#E5FAFB',
   },
