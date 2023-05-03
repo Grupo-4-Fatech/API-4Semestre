@@ -2,6 +2,7 @@ import AppDataSource from "../data-source";
 import { Request, Response } from 'express';
 import { Solution } from "../entities/Solution";
 import { Ticket } from "../entities/Ticket";
+import { User } from "../entities/Users";
 
 
 class SolutionController{
@@ -9,12 +10,12 @@ class SolutionController{
 
   public async create(req: Request, res: Response): Promise<Response> {
 
-    const {description, problem, user, ticketId } = req.body;
+    const {description, problem, userId, ticketId } = req.body;
 
     const ticketTable = await AppDataSource.getRepository(Ticket);
-
     const ticket = await ticketTable.findOneBy({id: ticketId});
 
+    const user = await AppDataSource.getRepository(User).findOneBy({id: userId});
 
     const obj = new Solution();
     obj.description = description;
@@ -51,21 +52,12 @@ class SolutionController{
       const r = await AppDataSource.manager.remove(Solution, solution).catch((e) => e.message)
       return res.json(r)
     }
-    else if (solution && solution.error) {
-      return res.json(solution)
-    }
-    else {
-      return res.json({ error: "Solution não encontrado" })
-    }
-
+    
+    return res.json({ error: "Solution não encontrado" })
 
   }
   async list(req: Request, res: Response): Promise<Response> {
-    const response: any = await AppDataSource.getRepository(Solution).find({
-      order: {
-        id: 'asc'
-      }
-    });
+    const response = await AppDataSource.getRepository(Solution).find();
     return res.json(response);
   }
 
@@ -73,9 +65,7 @@ class SolutionController{
     public async update(req: Request, res: Response): Promise<Response> {
     const { id, description, problem, user, ticketId  } = req.body;   
 
-    
     const ticketTable = await AppDataSource.getRepository(Ticket);
-
     const ticket = await ticketTable.findOneBy({id: ticketId});
 
      const solution = AppDataSource.getRepository(Solution)
