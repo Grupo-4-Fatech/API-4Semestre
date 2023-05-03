@@ -52,6 +52,7 @@ class TicketController {
 
     return res.json(ticket);
   }
+  
 
   public async one(req: Request, res: Response): Promise<Response> {
     const id = parseInt(req.params.id);
