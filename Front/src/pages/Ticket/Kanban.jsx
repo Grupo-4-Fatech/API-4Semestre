@@ -3,6 +3,11 @@ import { KanbanComponent, ColumnsDirective, ColumnDirective } from '@syncfusion/
 import { kanbanGrid } from '../../data/dummy';
 import { Header } from '../../components';
 import { useAutenticacao } from '../../contexts/ContextUsuLogado.tsx';
+import { Tab } from '@headlessui/react'
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
 
 export default function Kanban() {
   const [showModal, setShowModal] = React.useState(false);
@@ -11,6 +16,7 @@ export default function Kanban() {
   const [searchTerm, setSearchTerm] = useState('');
 
   const { usuario } = useAutenticacao();
+  const tabs = ['Visualizar', 'Ações']
   const userPermission = usuario?.role
 
   const isDraggable = userPermission !== 3;
@@ -161,9 +167,9 @@ export default function Kanban() {
                   <div className="flex p-5 pb-0 border-b border-solid border-slate-200 rounded-t">
                     <div className='p-2'>
                       {ticket.classification == 'Hotfix' ?
-                        <span class="p-1 text-[13px] rounded-full bg-red-500 text-white">{ticket.classification}</span>
+                        <span className="p-1 text-[13px] rounded-full bg-red-500 text-white">{ticket.classification}</span>
                         :
-                        <span class="p-1 text-[13px] rounded-full bg-cyan-400 text-white">{ticket.classification}</span>
+                        <span className="p-1 text-[13px] rounded-full bg-cyan-400 text-white">{ticket.classification}</span>
                       }
                     </div>
 
@@ -173,8 +179,37 @@ export default function Kanban() {
 
                   </div>
                   {/*body*/}
-
-                  <div id='description' className="relative max-h-72 p-6 max-w-3x1 overflow-scroll m-6" dangerouslySetInnerHTML={{ __html: ticket.description }} />
+                  <div className="w-full px-2 sm:px-0">
+                    <Tab.Group defaultIndex={0}>
+                      <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1">
+                        {tabs.map((tab) => (
+                          <Tab className={({ selected }) =>
+                            classNames(
+                              'w-full rounded-lg py-2.5 text-sm font-medium leading-5',
+                              'ring-white ring-opacity-60 ring-offset-2 focus:outline-none',
+                              selected
+                                ? 'text-blue-700 bg-white shadow'
+                                : 'text-gray-500 hover:bg-white/[0.12] hover:text-gray-700'
+                            )
+                          }>{tab}</Tab>
+                        ))}
+                      </Tab.List>
+                      <Tab.Panels className="mt-2">
+                        <Tab.Panel className={classNames(
+                          'rounded-xl bg-white p-3',
+                          'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2'
+                        )}>
+                          <div id='description' className="relative max-h-72 p-6 max-w-3x1 overflow-scroll m-6" dangerouslySetInnerHTML={{ __html: ticket.description }} />
+                        </Tab.Panel>
+                        <Tab.Panel>
+                          <div id='historico' className="relative max-h-72 p-6 max-w-3x1 overflow-scroll m-6">
+                            <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Atualizar Ticket</button>
+                            <button type="button" className="text-white bg-yellow-400 hover:bg-yellow-500 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Histórico</button>
+                          </div>
+                        </Tab.Panel>
+                      </Tab.Panels>
+                    </Tab.Group>
+                  </div>
                   {/*footer*/}
                   <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                     <button
