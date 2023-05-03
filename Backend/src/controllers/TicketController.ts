@@ -119,7 +119,7 @@ class TicketController {
 
   public async getAll(req: Request, res: Response): Promise<Response> {
     var status = req.params.status
-    var query = "SELECT id, type, title FROM ticket where status = " + status;
+    var query = "SELECT id, type, title FROM ticket where status = '" + status + "'";
     let email = jwt.decode(req.cookies.jwt);
     const user = await AppDataSource.getRepository(User).findOneBy({ email: email ? email.toString() : "" });
     if (user && user.role && user.role == 3) {
