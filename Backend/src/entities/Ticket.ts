@@ -2,6 +2,7 @@ import {Entity, Column, PrimaryGeneratedColumn, ManyToMany, OneToMany, ManyToOne
 import { Teams } from './Teams';
 import { InspectionGroup } from './InspectionGroup';
 import { User } from './Users';
+import { Log } from './Log';
 
 @Entity()
 export class Ticket {
@@ -28,5 +29,9 @@ export class Ticket {
 
     @ManyToOne(() => User, (user) => user.id)
     user: User;
+
+    @ManyToMany(() => Log, (log) => log.id)
+    @JoinTable()
+    logs = Array<Log>;
 
 } 
