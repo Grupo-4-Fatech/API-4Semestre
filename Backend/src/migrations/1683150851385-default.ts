@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class default1683146615255 implements MigrationInterface {
-    name = 'default1683146615255'
+export class default1683150851385 implements MigrationInterface {
+    name = 'default1683150851385'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`ALTER TABLE "solution" RENAME COLUMN "solution" TO "description"`);
