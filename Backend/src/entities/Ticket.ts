@@ -30,8 +30,7 @@ export class Ticket {
     @ManyToOne(() => User, (user) => user.id)
     user: User;
 
-    @ManyToMany(() => Log, (log) => log.id)
-    @JoinTable()
-    logs = Array<Log>;
+    @OneToMany(() => Log, (log) => log.id)
+    logs = Array<Ticket>;
 
 } 

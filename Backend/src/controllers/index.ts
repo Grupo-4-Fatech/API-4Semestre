@@ -5,6 +5,7 @@ import InspectionGroupController from "./InspectionGroupController";
 import LoginController from "./LoginController";
 import GroupController from "./GroupController";
 import SolutionController from "./SolutionController";
+import LogController from "./LogController";
 
 
 export{
@@ -14,7 +15,7 @@ export{
     InspectionGroupController,
     LoginController,
     GroupController,
-    SolutionController
-    
+    SolutionController,
+    LogController
 
 };
