@@ -5,10 +5,10 @@ import { IsUndefined } from "../utils/global";
 import * as jwt from "jsonwebtoken";
 import UserController from "./UserController";
 import { User } from "../entities/Users";
+import { Log } from "../entities/Log";
 
 
 class TicketController {
-
   async list(req: Request, res: Response): Promise<Response> {
     let email = jwt.decode(req.cookies.jwt);
     const user = await AppDataSource.getRepository(User).findOneBy({ email: email ? email.toString() : "" })
@@ -24,17 +24,20 @@ class TicketController {
   public async update(req: Request, res: Response): Promise<Response> {
     const { id, title, type, description, status, inspectionGroup } = req.body;
     const ticketRepository = AppDataSource.getRepository(Ticket)
-    const ticketToUpdate = await ticketRepository.findOneBy({
-      id: id,
-    })
+    const ticketToUpdate = await ticketRepository.findOne({
+      where: { id: id },
+      relations: {
+        inspectionGroup: true
+      }
+    },)
     ticketToUpdate.title = title;
     ticketToUpdate.type = type;
     ticketToUpdate.description = description;
     ticketToUpdate.status = status;
     ticketToUpdate.inspectionGroup = inspectionGroup;
 
-
-    await ticketRepository.save(ticketToUpdate)
+    await ticketRepository.save(ticketToUpdate).catch((e) => { })
+    await TicketController.createLog(ticketToUpdate, "6", req);
     return res.json(ticketToUpdate)
 
 
@@ -52,7 +55,7 @@ class TicketController {
 
     return res.json(ticket);
   }
-  
+
 
   public async one(req: Request, res: Response): Promise<Response> {
     const id = parseInt(req.params.id);
@@ -66,7 +69,7 @@ class TicketController {
 
     let email = jwt.decode(req.cookies.jwt);
 
-    const user = await AppDataSource.getRepository(User).findOneBy({ email: email ? email.toString() : "" })
+    const user: any = await AppDataSource.getRepository(User).findOneBy({ email: email ? email.toString() : "" })
 
     const obj = new Ticket()
     obj.type = type;
@@ -74,11 +77,14 @@ class TicketController {
     obj.description = description;
     obj.status = status;
     obj.user = user;
-
+    obj.logs = null;
+    console.log(obj)
     const ticket: any = await AppDataSource.manager.save(Ticket, obj).catch((e) => {
+      console.log(e)
       return res.json({ error: "Error while saving the ticket" });
     })
     if (ticket.id) {
+      await TicketController.createLog(ticket, "1", req);
 
       return res.json({
         id: ticket.id,
@@ -162,6 +168,23 @@ class TicketController {
     }
     const ticket: any = await AppDataSource.manager.query(query)
     return res.json(ticket)
+  }
+  public async getLogs(req: Request, res: Response): Promise<Response> {
+    var query = "SELECT * FROM Log"
+    const logs: any = await AppDataSource.manager.query(query)
+
+    return res.json(logs)
+  }
+  public static async createLog(ticket: any, acao: string, req: any) {
+    let email = jwt.decode(req.cookies.jwt);
+    const user: any = await AppDataSource.getRepository(User).findOneBy({ email: email ? email.toString() : "" });
+    var log = new Log();
+    log.action = acao;
+    log.date = new Date();
+    log.tickets = ticket;
+    log.users = user
+    const newLog: any = await AppDataSource.manager.save(Log, log).catch((e) => { })
+    return newLog;
   }
 
 
