@@ -106,6 +106,7 @@ class UserController {
     }
     async getUsers(req: Request, res: Response): Promise<Response> {
         const response: any = await AppDataSource.getRepository(User).find({});
+        console.log("que")
         return res.json(response);
     }
     async getUser(req: Request, res: Response): Promise<Response> {

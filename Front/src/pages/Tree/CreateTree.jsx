@@ -9,7 +9,9 @@ const Swal = require('sweetalert2')
 export default function CreateTree() {
 
     const { currentColor } = useStateContext();
-    const [selectMult, setSelectMult] = useState([]);
+    const [risco, setRisco] = useState([]);
+    const [custo, setCusto] = useState([]);
+    const [impacto, setImpacto] = useState([]);
     const [data, setData] = useState([])
 
     function getUser() {
@@ -32,7 +34,7 @@ export default function CreateTree() {
 
     function CriaTime() {
 
-        if (selectMult.length === 0) {
+        if (data.length === 0) {
             Swal.fire({
                 icon: 'error',
                 title: 'Create Teams Failed!',
@@ -40,6 +42,36 @@ export default function CreateTree() {
             })
             return
         }
+        var grupoImpacto = {
+            name: "Grupo Inpacto",
+            descricao: "",
+            users: impacto
+
+        }
+        var grupoRisco = {
+            name: "Grupo Risco",
+            descricao: "",
+            users: risco
+
+        }
+        var grupoCusto = {
+            name: "Grupo Custo",
+            descricao: "",
+            users: custo
+
+        }
+        console.log({grupoRisco, grupoImpacto, grupoCusto})
+        fetch("/InspectionGroup/create", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({grupoRisco, grupoImpacto, grupoCusto})
+        }).then((resposta) => resposta.json()).then((data) => {
+            if (data.error) {
+                console.log("erro bitch")
+            }
+        })
 
 
     }
@@ -53,7 +85,7 @@ export default function CreateTree() {
                     RISK ANALYSIS
                 </h1>
                 <div className='ml-2'>
-                    <SelectMult id="integrantesDoTime" dados={data} text={'Select the users'} value={selectMult} setValue={setSelectMult} />
+                    <SelectMult id="integrantesDoTime" dados={data} text={'Select the users'} value={risco} setValue={setRisco} />
 
                 </div>
             </div>
@@ -62,7 +94,7 @@ export default function CreateTree() {
                     IMPACT ANALYSIS
                 </h1>
                 <div className='ml-2'>
-                    <SelectMult id="integrantesDoTime" dados={data} text={'Select the users'} value={selectMult} setValue={setSelectMult} />
+                    <SelectMult id="integrantesDoTime" dados={data} text={'Select the users'} value={impacto} setValue={setImpacto} />
 
                 </div>
 
@@ -72,7 +104,7 @@ export default function CreateTree() {
                     COST ANALYSIS
                 </h1>
                 <div className='ml-2'>
-                    <SelectMult id="integrantesDoTime" dados={data} text={'Select the users'} value={selectMult} setValue={setSelectMult} />
+                    <SelectMult id="integrantesDoTime" dados={data} text={'Select the users'} value={custo} setValue={setCusto} />
 
                 </div>
             </div>

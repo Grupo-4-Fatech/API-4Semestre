@@ -99,7 +99,7 @@ const App = () => {
                 <Route path='/teams/view' element={<PrivateRoute><ViewTeams /></PrivateRoute>} />
                 <Route path='/teams/update/:id' element={<PrivateRoute><UpdateTeams /></PrivateRoute>} />
                 <Route path='/tree/create' element={<PrivateRoute><CreateTree /></PrivateRoute>} />
-                <Route path='/historic' element={<PrivateRoute><Historic/></PrivateRoute>} />
+                <Route path='/historic/:id' element={<PrivateRoute><Historic/></PrivateRoute>} />
                 <Route path='*' element={<NotFound />} />
               </Routes>
             </div>

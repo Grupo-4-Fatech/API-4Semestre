@@ -160,18 +160,25 @@ class TicketController {
     }
   }
   public async getKanbanItem(req: Request, res: Response): Promise<Response> {
-    var query = "SELECT id, type, title, status, description FROM ticket WHERE status NOT IN (1,2)";
+    var query = "SELECT id, type, title, status, description FROM ticket WHERE status != '1' and status != '2' ";
     let email = jwt.decode(req.cookies.jwt);
     const user = await AppDataSource.getRepository(User).findOneBy({ email: email ? email.toString() : "" });
     if (user && user.role && user.role == 3) {
-      query = "SELECT id, type, title, status, description FROM ticket WHERE status NOT IN (1,2) and userId = " + user.id;
+      query = "SELECT id, type, title, status, description FROM ticket WHERE status != '1' and status != '2' and userId = " + user.id;
     }
     const ticket: any = await AppDataSource.manager.query(query)
     return res.json(ticket)
   }
   public async getLogs(req: Request, res: Response): Promise<Response> {
-    var query = "SELECT * FROM Log"
-    const logs: any = await AppDataSource.manager.query(query)
+     const id = req.params.id
+    // var query = "SELECT * FROM Log l Join User u on u.id = l.usersId where ticketsId = " + id;
+    
+    // let logQuery = "SELECT tickets_Id FROM public.Log ";
+    // const logs: any = await AppDataSource.manager.query(logQuery)
+    var logQuery = `SELECT "Log"."date" AS "date", "Log"."action" AS "action", "Log"."ticketsId" AS "ticketsId", "Log"."usersId" AS "usersId" , "user"."name" AS "userName" FROM "log" "Log" JOIN "public"."user" "user" on "user"."id" = "Log"."usersId" where "Log"."ticketsId"= ${id}`
+    const logs : any = await AppDataSource.manager.query(logQuery);
+    
+    console.log(logs)
 
     return res.json(logs)
   }
