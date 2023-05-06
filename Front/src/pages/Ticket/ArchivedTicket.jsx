@@ -8,7 +8,7 @@ let PageSize = 5;
 
 const ArchivedTicket = () => {
     const [currentPage, setCurrentPage] = useState(1);
-    const headers = ['Title', 'Classification', 'Restore', 'Delete']
+    const headers = ['Título', 'Classificação', 'Restaurar', 'Deletar']
     const [data, setData] = useState([])
     const [searchTerm, setSearchTerm] = useState('');
     function getData() {
@@ -43,14 +43,14 @@ const ArchivedTicket = () => {
             if (response.error) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Ticket not restored',
+                    title: 'Chamado não restaurado',
                 })
             }
             else {
 
                 Swal.fire({
                     icon: 'success',
-                    title: 'Ticket restored successfully',
+                    title: 'Chamado restaurado com sucesso',
                 })
                 var updateData = data.filter(item => item.id != id)
                 setData(updateData)
@@ -69,14 +69,14 @@ const ArchivedTicket = () => {
             if (response.error) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Ticket failed to delete!',
+                    title: 'chamado não foi excluído!',
                 })
             }
             else {
 
                 Swal.fire({
                     icon: 'success',
-                    title: 'Ticket deleted!',
+                    title: 'Chamado Excluido!',
                 })
                 var deleteData = data.filter(item => item.id != id)
                 setData(deleteData)
@@ -99,7 +99,7 @@ const ArchivedTicket = () => {
     }, [])
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-            <Header category="Page" title="View Archived Ticket" />
+            <Header category="Pagina" title="Visualizar chamados arquivados" />
             <div className="block relative">
                 <span className="h-full absolute inset-y-0 left-0 flex items-center pl-2">
                     <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current text-gray-500">
@@ -132,11 +132,11 @@ const ArchivedTicket = () => {
                                 </td>
 
                                 <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                    <button onClick={(e) => restore(dat.id, 1)} className="bg-green-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Restore</button>
+                                    <button onClick={(e) => restore(dat.id, 1)} className="bg-green-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Restaurar</button>
                                 </td>
 
                                 <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                    <button onClick={(e) => deleteTicket(dat.id)} className="bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Delete</button>
+                                    <button onClick={(e) => deleteTicket(dat.id)} className="bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Deletar</button>
                                 </td>
 
                                 <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">

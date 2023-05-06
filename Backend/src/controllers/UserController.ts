@@ -43,11 +43,11 @@ class UserController {
         })
 
         if(!renew){
-            return res.json({error:"User not found"})
+            return res.json({error:"Usuário não encontrado"})
         }
         if(changePassword){
             if(oldPassword != renew.password){
-                return res.json({error:"Wrong password"})
+                return res.json({error:"Senha incorreta"})
             }
             renew.password = password
 
@@ -71,7 +71,7 @@ class UserController {
         object.role = role;
 
         const user: any = await AppDataSource.manager.save(User, object).catch((e) => {
-            return res.json({error:"Error saving user"
+            return res.json({error:"Erro ao salvar usuário"
             });
         })
         if (user.id) {
@@ -84,14 +84,14 @@ class UserController {
                 gender: user.gender
             });
         }
-        return res.json({ error: "Error saving user" });
+        return res.json({ error: "Erro ao salvar usuário" });
 
     }
     public async deleteUser(req: Request, res: Response): Promise<Response> {
         const { id } = req.body;
 
         const user: any = await AppDataSource.getRepository(User).findOneBy({id:id}).catch((e) => {
-            return { error: "Invalid identifier" }
+            return { error: "Identificador inválido" }
         })
 
         if (user && user.id) {
@@ -99,7 +99,7 @@ class UserController {
             return res.json(r)
         }
         else {
-            return res.json({ error: "User not found" })
+            return res.json({ error: "Usuário não encontrado" })
         }
 
 
@@ -111,7 +111,7 @@ class UserController {
     async getUser(req: Request, res: Response): Promise<Response> {
         const id = parseInt(req.params.id)
         const user: any = await AppDataSource.getRepository(User).findOne({where:{id:id}}).catch((e) => {
-            return { error: "Invalid identifier" }
+            return { error: "Identificador inválido" }
         })
         return res.json(user);
     }

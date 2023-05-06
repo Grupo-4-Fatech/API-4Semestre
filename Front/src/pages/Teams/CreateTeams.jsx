@@ -62,32 +62,32 @@ export default function CreateTeams() {
         if (validador.estaVazio(name)) {
             Swal.fire({
                 icon: 'error',
-                title: 'Create Teams Failed!',
-                text: 'Please write a name',
+                title: 'Falha ao criar equipes!',
+                text: 'Por favor escreva um nome',
             })
             return
         }
         if (validador.tamanhoTexto(name)) {
             Swal.fire({
                 icon: 'error',
-                title: 'Create Teams Failed!',
-                text: 'Name size is too big',
+                title: 'Falha ao criar equipes!',
+                text: 'O tamanho do nome é muito grande',
             })
             return
         }
         if (selectMult.length === 0) {
             Swal.fire({
                 icon: 'error',
-                title: 'Create Teams Failed!',
-                text: 'Please add an user',
+                title: 'Falha ao criar equipes!',
+                text: 'Por favor Adicione um usuário',
             })
             return
         }
         if (validador.selectEstaDefault(group)) {
             Swal.fire({
                 icon: 'error',
-                title: 'Create Teams Failed!',
-                text: 'Please select a group',
+                title: 'Falha ao criar equipes!',
+                text: 'Selecione um grupo',
             })
             return
         }
@@ -95,16 +95,16 @@ export default function CreateTeams() {
 
             Swal.fire({
                 icon: 'error',
-                title: 'Create Teams Failed!',
-                text: 'Please write a description',
+                title: 'Falha ao criar equipes!',
+                text: 'Por favor escreva uma descrição',
             })
             return
         }
         if (validador.tamanhoTexto(description)) {
             Swal.fire({
                 icon: 'error',
-                title: 'Create Teams Failed!',
-                text: 'Description size is too big',
+                title: 'Falha ao criar equipes!',
+                text: 'O tamanho da descrição é muito grande',
             })
             return
         }
@@ -118,12 +118,12 @@ export default function CreateTeams() {
             if (data.error) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Failed to create new team',
+                    title: 'Falha ao criar nova equipe',
                 })
             } else {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Created successfully',
+                    title: 'Criado com sucesso',
                 }).then((result) => result.isConfirmed ? window.location.href = "/teams/view" : '')
 
             }
@@ -134,22 +134,22 @@ export default function CreateTeams() {
 
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-            <Header category="Page" title="Teams" />
-            <Campo id="tituloTime" text="Team name" placeholder="Name" type={"text"} value={name} setValue={setName} />
-            <SelectMult id="integrantesDoTime" dados={data} text={'Select the users'} value={selectMult} setValue={setSelectMult} />
-            <div className='mt-5'><label className="text-lg font-bold dark:text-black " >Select a Group</label>
+            <Header category="Pagina" title="Equipes" />
+            <Campo id="tituloTime" text="Nome do time" placeholder="Nome" type={"text"} value={name} setValue={setName} />
+            <SelectMult id="integrantesDoTime" dados={data} text={'Selecione os usuários'} value={selectMult} setValue={setSelectMult} />
+            <div className='mt-5'><label className="text-lg font-bold dark:text-black " >Selecione um grupo</label>
                 <select id="group" defaultValue='default' className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
-                    <option value="default" disabled>Select an option:</option>
+                    <option value="default" disabled>Selecione uma opção:</option>
                     {groups.map((ele) => {
                         return (<option key={ele.id} value={ele.id}>{ele.nome}</option>)
                     })}
 
                 </select></div>
-            <div className='my-6'> <Campo id='descriçãoTime' text="Description" placeholder="Description" type={"text"} value={description} setValue={setDescription} /></div>
+            <div className='my-6'> <Campo id='descriçãoTime' text="Descrição" placeholder="Descrição" type={"text"} value={description} setValue={setDescription} /></div>
 
             <div className="mt-5 mb-5 flex items-center justify-end" >
                 <button onClick={() => CriaTime()} style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" >
-                    <span className='pr-1 '>Create</span>
+                    <span className='pr-1 '>Criar</span>
                     <MdSend />
                 </button>
             </div>

@@ -42,7 +42,7 @@ const Historic = () => {
     return (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
             <div className="w-760 m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
-                <Header category="Page" title="Historic" />
+                <Header category="Pagina" title="Historico" />
                 <ol class="relative border-l border-gray-400">
                     {tiquete.map((tiq) => (
                         <li class="mb-10 ml-4">

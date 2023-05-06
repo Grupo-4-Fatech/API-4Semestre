@@ -35,8 +35,8 @@ export default function CreateTree() {
         if (selectMult.length === 0) {
             Swal.fire({
                 icon: 'error',
-                title: 'Create Teams Failed!',
-                text: 'Please add an user',
+                title: 'Falha ao criar equipes!',
+                text: 'Adicione um usuário',
             })
             return
         }
@@ -47,10 +47,10 @@ export default function CreateTree() {
 
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-            <Header category="Page" title="Tree" />
+            <Header category="Pagina" title="Árvore" />
             <div>
                 <h1 className='underline decoration-red-600 decoration-2 pb-4 text-lg font-bold dark:text-black'>
-                    RISK ANALYSIS
+                ANÁLISE DE RISCO
                 </h1>
                 <div className='ml-2'>
                     <SelectMult id="integrantesDoTime" dados={data} text={'Select the users'} value={selectMult} setValue={setSelectMult} />
@@ -59,7 +59,7 @@ export default function CreateTree() {
             </div>
             <div>
                 <h1 className='underline decoration-cyan-600 decoration-2 py-6 pb-4 text-lg font-bold dark:text-black'>
-                    IMPACT ANALYSIS
+                ANÁLISE DE IMPACTO
                 </h1>
                 <div className='ml-2'>
                     <SelectMult id="integrantesDoTime" dados={data} text={'Select the users'} value={selectMult} setValue={setSelectMult} />
@@ -69,7 +69,7 @@ export default function CreateTree() {
             </div>
             <div>
                 <h1 className='underline decoration-green-600 decoration-2 py-6 pb-4 text-lg font-bold dark:text-black'>
-                    COST ANALYSIS
+                ANÁLISE DE CUSTO
                 </h1>
                 <div className='ml-2'>
                     <SelectMult id="integrantesDoTime" dados={data} text={'Select the users'} value={selectMult} setValue={setSelectMult} />
@@ -78,7 +78,7 @@ export default function CreateTree() {
             </div>
             <div className="mt-5 mb-5 flex" >
                 <button onClick={() => CriaTime()} style={{ backgroundColor: currentColor, position: 'absolute' }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" >
-                    <span className='pr-1'>Create</span>
+                    <span className='pr-1'>Criar</span>
                     <MdSend />
                 </button>
             </div>
