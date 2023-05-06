@@ -24,16 +24,16 @@ const CreateGroup = () => {
 
             Swal.fire({
                 icon: 'error',
-                title: 'Create Crew Failed!',
-                text: 'Please write a name',
+                title: 'Falha ao criar o Grupo!',
+                text: 'Por favor escreva um nome',
             })
             return
         }
         if (validador.tamanhoTexto(nome.value)){
             Swal.fire({
                 icon: 'error',
-                title: 'Create Crew Failed!',
-                text: 'Name size is too big',
+                title: 'Falha ao criar o Grupo!',
+                text: 'O tamanho do nome é muito grande',
             })
             return
         }
@@ -41,8 +41,8 @@ const CreateGroup = () => {
 
             Swal.fire({
                 icon: 'error',
-                title: 'Create Crew Failed!',
-                text: 'Please write a description',
+                title: 'Falha ao criar o Grupo!',
+                text: 'Por favor escreva uma descrição',
             })
             return
         }
@@ -57,12 +57,12 @@ const CreateGroup = () => {
             if (data.error) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Failed to create new group',
+                    title: 'Falha ao criar novo grupo',
                 })
             } else {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Created successfully',
+                    title: 'Criado com sucesso',
                 }).then((result) => result.isConfirmed ? comeback() : '')
 
             }
@@ -72,12 +72,12 @@ const CreateGroup = () => {
 
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-            <Header category="Page" title="Create Group" />
-            <Campo id="Titulo" text="Group name" placeholder="Write the Name" type={"text"} value={name} setValue={setName} />
-            <Campo id="Desc" text="Description" placeholder="Write the description" type={"text"} value={description} setValue={setDescription} />
+            <Header category="Pagina" title="Criar grupo" />
+            <Campo id="Titulo" text="Nome do grupo" placeholder="Escreva o nome" type={"text"} value={name} setValue={setName} />
+            <Campo id="Desc" text="Descrição" placeholder="Escreva a descrição" type={"text"} value={description} setValue={setDescription} />
             <div className="mt-5 mb-5 flex items-center justify-end" >
                 <button onClick={() => createGroup()} style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" >
-                    <span className='pr-1'>Create</span>
+                    <span className='pr-1'>Criar</span>
                     <MdSend />
                 </button>
             </div>

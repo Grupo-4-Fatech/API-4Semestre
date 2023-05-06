@@ -128,7 +128,7 @@ export default function Kanban() {
                 </path>
               </svg>
             </span>
-            <input placeholder="Search" onChange={(e) => setSearchTerm(e.target.value)}
+            <input placeholder="Procurar" onChange={(e) => setSearchTerm(e.target.value)}
               className="appearance-none rounded-r-lg border border-gray-400 border-b block pl-8 pr-6 py-2 w-44 bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
           </div>
           <div className='mr-3 ' >
@@ -204,8 +204,10 @@ export default function Kanban() {
                         </Tab.Panel>
                         <Tab.Panel>
                           <div id='historico' className="relative max-h-72 p-6 max-w-3x1 overflow-scroll m-6">
+
                             <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" onClick={()=> window.location.href="/ticket/update/" + ticket.id}>Atualizar Ticket</button>
                             <button type="button" className="text-white bg-yellow-400 hover:bg-yellow-500 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" onClick={()=> window.location.href="/historic/" + ticket.id}>Histórico</button>
+
                           </div>
                         </Tab.Panel>
                       </Tab.Panels>
@@ -218,7 +220,7 @@ export default function Kanban() {
                       type="button"
                       onClick={() => setShowModal(false)}
                     >
-                      Close
+                      Fechar
                     </button>
 
                   </div>

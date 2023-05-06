@@ -14,6 +14,6 @@ app.use(cookieParser())
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => console.log(`running at the door ${PORT}`));
+app.listen(PORT, () => console.log(`Rodando na porta ${PORT}`));
 
 app.use(routes);

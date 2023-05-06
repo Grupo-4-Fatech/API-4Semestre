@@ -25,19 +25,19 @@ export const gridOrderStatus = (props) => (
 
 export const kanbanGrid = [
   {
-    headerText: 'New',
+    headerText: 'Novo',
     keyField: 'New',
     allowToggle: true
   },
 
   {
-    headerText: 'On Hold',
+    headerText: 'Em espera',
     keyField: 'OnHold',
     allowToggle: true
   },
 
   {
-    headerText: 'Done',
+    headerText: 'Feito',
     keyField: 'Done',
     allowToggle: true
   },
@@ -68,22 +68,22 @@ const ticketGridStatus = (props) => (
 // SideBar 
 export const links = [
   {
-    title: 'Ticket',
+    title: 'Chamados',
     links: [
       {
-        title: 'Open Ticket',
+        title: 'Criar Chamado',
         name: 'ticket/create',
         icon: <FiEdit />,
         permission: 3,
       },
       {
-        title: 'View Tickets',
+        title: 'Visualizar Chamados',
         name: 'ViewTicket',
         icon: <MdOutlineViewAgenda />,
         permission: 3,
       },
       {
-        title: 'Archived Tickets',
+        title: 'Chamados Arquivados',
         name: 'ArchivedTicket',
         icon: <MdOutlineViewAgenda />,
         permission: 2,
@@ -91,16 +91,16 @@ export const links = [
     ],
   },
   {
-    title: 'User',
+    title: 'Usuário',
     links: [
       {
-        title: 'Create User',
+        title: 'Criar Usuário',
         name: 'user/create',
         icon: <FiUserPlus />,
         permission: 1,
       },
       {
-        title: 'View User',
+        title: 'Visualizar Usuários',
         name: 'user/view',
         icon: <MdOutlinePermContactCalendar />,
         permission: 1,
@@ -109,17 +109,17 @@ export const links = [
 
   },
   {
-    title: 'Teams',
+    title: 'Equipes',
     links: [
       {
-        title: 'Create Team',
+        title: 'Criar Equipes',
         name: 'teams/create',
         icon: <FiUserPlus />,
         permission: 1,
       },
 
       {
-        title: 'View Team',
+        title: 'Visualizar Equipes',
         name: 'teams/view',
         icon: <FiUsers />,
         permission: 1,
@@ -134,16 +134,16 @@ export const links = [
     ]
   },
   {
-    title: 'Equipe',
+    title: 'Grupos',
     links: [
       {
-        title: 'Criação de Equipe',
+        title: 'Criação de Grupos',
         name: 'group/create',
         icon: <FiUserPlus />,
         permission: 1,
       },
       {
-        title: 'Visualizar Equipe',
+        title: 'Visualizar Grupos',
         name: 'group/viewGroup',
         icon: <FiUsers />,
         permission: 1,

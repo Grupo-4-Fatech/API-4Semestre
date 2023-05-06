@@ -30,16 +30,16 @@ export default function UpdateTicket() {
         if (validador.estaVazio(titulo.value)) {
             Swal.fire({
                 icon: 'error',
-                title: 'Ticket Failed!',
-                text: 'Please write a title',
+                title: 'Falha no Chamado!',
+                text: 'Por favor escreva um título',
             })
             return
         }
         if (validador.tamanhoTexto(titulo.value)){
             Swal.fire({
                 icon: 'error',
-                title: 'Ticket Failed!',
-                text: 'Title size is too big',
+                title: 'Falha no Chamado!',
+                text: 'O tamanho do título é muito grande',
             })
             return
         }
@@ -47,16 +47,16 @@ export default function UpdateTicket() {
         if (validador.selectEstaDefault(classification)) {
             Swal.fire({
                 icon: 'error',
-                title: 'Ticket Failed!',
-                text: 'Please select a classification',
+                title: 'Falha no Chamado!',
+                text: 'Selecione uma classificação',
             })
             return
         }
         if (validador.estaVazio(hmtlString)) {
             Swal.fire({
                 icon: 'error',
-                title: 'Ticket Failed!',
-                text: 'Please write a description',
+                title: 'Falha no Chamado!',
+                text: 'Por favor, escreva uma descrição',
             })
             return
         }
@@ -71,14 +71,14 @@ export default function UpdateTicket() {
                 if (data.error) {
                     Swal.fire({
                         icon: 'error',
-                        title: 'Updated not successful',
+                        title: 'Atualizado sem sucesso',
                     })
                 }
                 else {
 
                     Swal.fire({
                         icon: 'success',
-                        title: 'Updated successfully',
+                        title: 'Atualizado com sucesso',
                     }).then((result) => result.isConfirmed ? comeback() : '')
 
                 }
@@ -86,7 +86,7 @@ export default function UpdateTicket() {
         } else {
             Swal.fire({
                 icon: 'error',
-                title: 'User not found!',
+                title: 'Usuário não encontrado!',
             })
         }
     }

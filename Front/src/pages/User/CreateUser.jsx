@@ -29,72 +29,72 @@ export default function CreateUser() {
         if (validador.estaVazio(name.value)) {
             Swal.fire({
                 icon: 'error',
-                title: 'Create User Failed!',
-                text: 'Please write a name',
+                title: 'Criar usuário falhou!',
+                text: 'Por favor escreva um nome',
             })
             return
         }
         if(validador.tamanhoTexto(name.value)){
             Swal.fire({
                 icon: 'error',
-                title: 'Create User Failed!',
-                text: 'Name size is too big',
+                title: 'Criar usuário falhou!',
+                text: 'O tamanho do nome é muito grande',
             })
             return
         }
         if (validador.estaVazio(email.value)) {
             Swal.fire({
                 icon: 'error',
-                title: 'Create User Failed!',
-                text: 'Please write a email',
+                title: 'Criar usuário falhou!',
+                text: 'Por favor, escreva um e-mail',
             })
             return
         }
         if(!validador.validarEmail(email.value)){
             Swal.fire({
                 icon: 'error',
-                title: 'Create User Failed!',
-                text: 'Email must have @ and .com',
+                title: 'Criar usuário falhou!',
+                text: 'O e-mail deve ter @ e .com',
             })
             return
         }
         if (validador.tamanhoTexto(email.value)) {
             Swal.fire({
                 icon: 'error',
-                title: 'Create User Failed!',
-                text: 'Email size is too big',
+                title: 'Criar usuário falhou!',
+                text: 'O tamanho do e-mail é muito grande',
             })
             return
         }
         if (validador.selectEstaDefault(gender)){
             Swal.fire({
                 icon: 'error',
-                title: 'Create User Failed!',
-                text: 'Please select a gender',
+                title: 'Criar usuário falhou!',
+                text: 'Selecione um gênero',
             })
             return
         }
         if (validador.estaVazio(password.value)) {
             Swal.fire({
                 icon: 'error',
-                title: 'Create User Failed!',
-                text: 'Please write a password',
+                title: 'Criar usuário falhou!',
+                text: 'Por favor escreva uma senha',
             })
             return
         }
         if (!validador.tamanhoSenha(password.value)){
             Swal.fire({
                 icon: 'error',
-                title: 'Create User Failed!',
-                text: 'Password cannot be less than 8 and cannot be more than 15',
+                title: 'Criar usuário falhou!',
+                text: 'A senha não pode ser menor que 8 e não pode ser maior que 15',
             })
             return
         }
         if (validador.selectEstaDefault(role)){
             Swal.fire({
                 icon: 'error',
-                title: 'Create User Failed!',
-                text: 'Please select a role',
+                title: 'Criar usuário falhou!',
+                text: 'Selecione uma função',
             })
             return
         }
@@ -109,12 +109,12 @@ export default function CreateUser() {
             if (data.error) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Failed to create new user',
+                    title: 'Falha ao criar novo usuário',
                 })
             } else {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Created successfully',
+                    title: 'Criado com sucesso',
                 }).then((result) => result.isConfirmed ? comeback() : '')
 
             }
@@ -123,30 +123,30 @@ export default function CreateUser() {
 
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-            <Header category="Page" title="User" />
-            <Campo text="Name" id="name" placeholder="Name" type="text" />
+            <Header category="Pagina" title="Usuário" />
+            <Campo text="Nome" id="name" placeholder="Nome" type="text" />
             <Campo text="Email" id="email" placeholder="Email" type="text" />
-            <label className="text-lg font-bold dark:text-black " >Select a gender</label>
+            <label className="text-lg font-bold dark:text-black " >Selecione um gênero</label>
             <select id="gender" defaultValue='default' className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
-                <option value="default" disabled>Select an option:</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
+                <option value="default" disabled>Selecione uma opção:</option>
+                <option value="Male">Masculino</option>
+                <option value="Female">Feminino</option>
             </select>
             <div className='mt-5'>
-            <label className="text-lg font-bold dark:text-black " >Select a role</label>
+            <label className="text-lg font-bold dark:text-black " >Selecione uma função</label>
             <select id="role" defaultValue='default' className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
-                <option value="default" disabled>Select an option:</option>
-                <option value="1">Director</option>
-                <option value="2">Admin</option>
-                <option value="3">Requester</option>
+                <option value="default" disabled>Selecione uma opção:</option>
+                <option value="1">Diretor</option>
+                <option value="2">Administrador</option>
+                <option value="3">Solicitante</option>
             </select>
 
             </div>
           
-            <div className='my-6'><Campo text="Password" id="password" placeholder="*****" type={"password"} /></div>
+            <div className='my-6'><Campo text="Senha" id="password" placeholder="*****" type={"password"} /></div>
             <div className="mt-5 mb-5 flex items-center justify-end" >
                 <button style={{ backgroundColor: currentColor}} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" onClick={CreateUser}>
-                    <span className='pr-1'>Create</span>
+                    <span className='pr-1'>Criar</span>
                     <MdSend />
                 </button>
             </div>

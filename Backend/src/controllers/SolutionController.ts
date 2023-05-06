@@ -37,7 +37,7 @@ class SolutionController{
 
     });
   }
-  return res.json({ error: "Erro ao salvar a Solution" });
+  return res.json({ error: "Erro ao salvar a Solução" });
  
   }
 
@@ -53,7 +53,7 @@ class SolutionController{
       return res.json(r)
     }
     
-    return res.json({ error: "Solution não encontrado" })
+    return res.json({ error: "Solução não encontrada" })
 
   }
   async list(req: Request, res: Response): Promise<Response> {
