@@ -78,7 +78,7 @@ const ViewGroup = () => {
     }, [searchTerm])
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-            <Header category="Pagina" title="Visualizar Grupos" />
+            <Header category="Página" title="Visualizar Grupos" />
             <div className="block relative">
                 <span className="h-full absolute inset-y-0 left-0 flex items-center pl-2">
                     <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current text-gray-500">

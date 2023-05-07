@@ -38,7 +38,7 @@ export default function CreateTree() {
             Swal.fire({
                 icon: 'error',
                 title: 'Falha ao criar equipes!',
-                text: 'Adicione um usuário',
+                text: 'Adicione um usuário.',
             })
             return
         }
@@ -69,8 +69,16 @@ export default function CreateTree() {
             body: JSON.stringify({grupoRisco, grupoImpacto, grupoCusto})
         }).then((resposta) => resposta.json()).then((data) => {
             if (data.error) {
-                console.log("erro bitch")
-            }
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Falha ao criar.',
+                  }) 
+            }else {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Criado com sucesso.',
+                })        
+              }
         })
 
 
@@ -79,13 +87,13 @@ export default function CreateTree() {
 
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-            <Header category="Pagina" title="Árvore" />
+            <Header category="Página" title="Árvore" />
             <div>
                 <h1 className='underline decoration-red-600 decoration-2 pb-4 text-lg font-bold dark:text-black'>
                 ANÁLISE DE RISCO
                 </h1>
                 <div className='ml-2'>
-                    <SelectMult id="integrantesDoTime" dados={data} text={'Select the users'} value={risco} setValue={setRisco} />
+                    <SelectMult id="integrantesDoTime" dados={data} text={'Selecione os usuários'} value={risco} setValue={setRisco} />
 
                 </div>
             </div>
@@ -94,7 +102,7 @@ export default function CreateTree() {
                 ANÁLISE DE IMPACTO
                 </h1>
                 <div className='ml-2'>
-                    <SelectMult id="integrantesDoTime" dados={data} text={'Select the users'} value={impacto} setValue={setImpacto} />
+                    <SelectMult id="integrantesDoTime" dados={data} text={'Selecione os usuários:'} value={impacto} setValue={setImpacto} />
 
                 </div>
 
@@ -104,7 +112,7 @@ export default function CreateTree() {
                 ANÁLISE DE CUSTO
                 </h1>
                 <div className='ml-2'>
-                    <SelectMult id="integrantesDoTime" dados={data} text={'Select the users'} value={custo} setValue={setCusto} />
+                    <SelectMult id="integrantesDoTime" dados={data} text={'Selecione os usuários'} value={custo} setValue={setCusto} />
 
                 </div>
             </div>

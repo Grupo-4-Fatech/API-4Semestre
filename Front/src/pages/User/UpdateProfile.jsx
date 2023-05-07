@@ -35,7 +35,7 @@ export default function UpdateProfile() {
       Swal.fire({
         icon: 'error',
         title: 'Falha na atualização do usuário!',
-        text: 'Por favor escreva um nome',
+        text: 'Por favor escreva um nome.',
       })
       return
     }
@@ -43,7 +43,7 @@ export default function UpdateProfile() {
       Swal.fire({
         icon: 'error',
         title: 'Falha na atualização do usuário!',
-        text: 'O tamanho do nome é muito grande',
+        text: 'O tamanho do nome é muito grande.',
       })
       return
     }
@@ -51,7 +51,7 @@ export default function UpdateProfile() {
       Swal.fire({
         icon: 'error',
         title: 'Falha na atualização do usuário!',
-        text: 'Por favor escreva um e-mail',
+        text: 'Por favor escreva um e-mail.',
       })
       return
     }
@@ -59,7 +59,7 @@ export default function UpdateProfile() {
       Swal.fire({
         icon: 'error',
         title: 'Falha na atualização do usuário!',
-        text: 'O e-mail deve ter @ e .com',
+        text: 'O e-mail deve ter @ e .com.',
       })
       return
     }
@@ -67,7 +67,7 @@ export default function UpdateProfile() {
       Swal.fire({
         icon: 'error',
         title: 'Falha na atualização do usuário!',
-        text: 'O tamanho do e-mail é muito grande',
+        text: 'O tamanho do e-mail é muito grande.',
       })
       return
     }
@@ -75,7 +75,7 @@ export default function UpdateProfile() {
       Swal.fire({
         icon: 'error',
         title: 'Falha na atualização do usuário!',
-        text: 'Selecione um gênero',
+        text: 'Selecione um gênero.',
       })
       return
     }
@@ -84,7 +84,7 @@ export default function UpdateProfile() {
         Swal.fire({
           icon: 'error',
           title: 'Falha na atualização do usuário!',
-          text: 'Por favor escreva a senha antiga',
+          text: 'Por favor escreva a senha antiga.',
         })
         return
       }
@@ -92,7 +92,7 @@ export default function UpdateProfile() {
         Swal.fire({
           icon: 'error',
           title: 'Falha na atualização do usuário!',
-          text: 'A senha antiga não pode ser menor que 8 e não pode ser maior que 15',
+          text: 'A senha deve ter entre 8 e 15 caracteres.',
         })
         return
       }
@@ -100,7 +100,7 @@ export default function UpdateProfile() {
         Swal.fire({
           icon: 'error',
           title: 'Falha na atualização do usuário!',
-          text: 'Por favor escreva uma nova senha',
+          text: 'Por favor escreva uma nova senha.',
         })
         return
       }
@@ -108,7 +108,7 @@ export default function UpdateProfile() {
         Swal.fire({
           icon: 'error',
           title: 'Falha na atualização do usuário!',
-          text: 'A nova senha não pode ser menor que 8 e não pode ser maior que 15',
+          text: 'A senha deve ter entre 8 e 15 caracteres.',
         })
         return
       }
@@ -116,7 +116,7 @@ export default function UpdateProfile() {
         Swal.fire({
           icon: 'error',
           title: 'Falha na atualização do usuário!',
-          text: 'A nova senha não pode ser igual à senha antiga',
+          text: 'A nova senha não pode ser igual à senha antiga.',
         })
         return
       }
@@ -137,7 +137,7 @@ export default function UpdateProfile() {
       } else {
         Swal.fire({
           icon: 'success',
-          title: 'Atualizado com sucesso',
+          title: 'Atualizado com sucesso.'
         }).then((result) => result.isConfirmed ? comeback() : '')
 
       }
@@ -165,7 +165,7 @@ export default function UpdateProfile() {
   useEffect(() => { getData() }, [])
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-      <Header category="Pagina" title="Atualizar usuário" />
+      <Header category="Página" title="Atualizar usuário" />
       <Campo text="Nome" id="name" placeholder="Nome" type={"text"} value={name} setValue={setName} />
       <Campo text="Email" id="email" placeholder="Email" type={"text"} value={email} setValue={setEmail} />
       <label className="text-lg font-bold dark:text-black " >Selecione um gênero</label>

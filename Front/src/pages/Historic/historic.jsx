@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import { Header } from "../../components";
-import TimeLine from "../../components/timeLine";
 import { useState, useEffect } from "react";
 
 
@@ -29,15 +28,7 @@ const Historic = () => {
     }
 
     
-    const tiquete = [
-        { data: '12/12/12', tipo: "Criado", nomeUsu: "gabreu", idAcao: 1 },
-        { data: '13/12/12', tipo: "Aprovado risco", nomeUsu: "bruna", idAcao: 2 },
-        { data: '13/12/12', tipo: "Aprovado impacto", nomeUsu: "bruna", idAcao: 3 },
-        { data: '14/12/12', tipo: "Aprovado custo", nomeUsu: "marcelo", idAcao: 4 },
-        { data: '14/12/12', tipo: "Arquivado", nomeUsu: "emenerton", idAcao: 5 },
-        { data: '14/12/12', tipo: "Atualizado", nomeUsu: "emenerton", idAcao: 6 },
 
-    ];
 
     const cor = idAcao => {
         switch (idAcao) {
@@ -77,7 +68,7 @@ const Historic = () => {
                 return "Aprovado impacto"
             case 4:
                 // Aprovado custo
-                return "Aprovado custp";
+                return "Aprovado custo";
             case 5:
                 // Arquivado
                 return "Arquivado";
@@ -93,7 +84,7 @@ const Historic = () => {
     return (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
             <div className="w-760 m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
-                <Header category="Pagina" title="Historico" />
+                <Header category="Página" title="Histórico" />
                 <ol class="relative border-l border-gray-400">
                     {data.map((tiq) => (
                         <li class="mb-10 ml-4">

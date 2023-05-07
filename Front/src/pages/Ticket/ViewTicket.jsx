@@ -11,32 +11,18 @@ let PageSize = 5;
 
 
 const ViewTicket = () => {
+
     const { currentColor } = useStateContext();
     const { usuario } = useAutenticacao();
-
     const [showModal, setShowModal] = React.useState(false);
     const [ticket, setTicket] = useState({ title: '', description: ``, classification: '' });
     const [currentPage, setCurrentPage] = useState(1);
     const headers = ['Título', 'Classificação', 'Editar', 'Avaliar']
     const [data, setData] = useState([])
     const [searchTerm, setSearchTerm] = useState('');
-
     const tabs = ['Visualizar', 'Avaliar']
-
     const userPermission = usuario?.role
 
-    function getStatus(status) {
-        var newStatus = "";
-        if (status == 5) {
-            newStatus = 'Done'
-        } else if (status == 4) {
-            newStatus = 'OnHold'
-        } else {
-            newStatus = 'New'
-        }
-
-        return newStatus
-    }
 
 
     function getData() {
@@ -53,14 +39,10 @@ const ViewTicket = () => {
                     title: element.title,
                     Summary: element.description,
                     classification: element.type == 1 ? "HOTFIX" : "FEATURE",
-
                 })
-
-
             });
             setData(tickets)
         })
-
     }
     // const Aproved = (id, status) => {
     //     fetch("/ticket/updateStatus", {
@@ -91,33 +73,33 @@ const ViewTicket = () => {
 
 
     // }
-    const Archive = (id, status) => {
-        fetch("/ticket/updateStatus", {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-            },
-            body: JSON.stringify({ id: id, status: status })
-        }).then((resposta) => resposta.json()).then((response) => {
-            if (response.error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Chamado não arquivado',
-                })
-            }
-            else {
+    // const Archive = (id, status) => {
+    //     fetch("/ticket/updateStatus", {
+    //         method: 'PATCH',
+    //         headers: {
+    //             'Content-Type': 'application/json;charset=utf-8'
+    //         },
+    //         body: JSON.stringify({ id: id, status: status })
+    //     }).then((resposta) => resposta.json()).then((response) => {
+    //         if (response.error) {
+    //             Swal.fire({
+    //                 icon: 'error',
+    //                 title: 'Chamado não arquivado',
+    //             })
+    //         }
+    //         else {
 
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Chamado arquivado com sucesso',
-                })
-                var updateData = data.filter(item => item.id != id)
-                setData(updateData)
+    //             Swal.fire({
+    //                 icon: 'success',
+    //                 title: 'Chamado arquivado com sucesso',
+    //             })
+    //             var updateData = data.filter(item => item.id != id)
+    //             setData(updateData)
 
-            }
+    //         }
 
-        })
-    }
+    //     })
+    // }
 
     const currentTableData = useMemo(() => {
         const firstPageIndex = (currentPage - 1) * PageSize;
@@ -141,7 +123,7 @@ const ViewTicket = () => {
     return (
         <>
             <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-                <Header category="Pagina" title="Visualizar chamados" />
+                <Header category="Página" title="Visualizar chamados" />
                 <div className="block relative">
                     <span className="h-full absolute inset-y-0 left-0 flex items-center pl-2">
                         <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current text-gray-500">
@@ -195,7 +177,7 @@ const ViewTicket = () => {
                                         {/* Verificação para ocultar o botão 'Approved' */}
                                         {userPermission !== 3 && (
                                             <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                                <button onClick={(e) => { setTicket({ title: e.title, description: e.Summary, classification: e.classification }); setShowModal(true); }} className='bg-green-500 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20'>Avaliar</button>
+                                                <button onClick={() => { setTicket({ title: dat.title, description: dat.Summary, classification: dat.classification }); setShowModal(true); }} className='bg-green-500 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20'>Avaliar</button>
                                             </td>
                                         )}
 
@@ -306,6 +288,9 @@ const ViewTicket = () => {
                                         >
                                             Fechar
                                         </button>
+
+                                        <button className="text-white rounded-full bg-green-700  hover:bg-green-800 font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                            type="button" > Avaliar </button>
 
                                     </div>
                                 </div>

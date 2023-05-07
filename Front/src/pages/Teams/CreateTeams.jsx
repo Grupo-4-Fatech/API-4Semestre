@@ -63,7 +63,7 @@ export default function CreateTeams() {
             Swal.fire({
                 icon: 'error',
                 title: 'Falha ao criar equipes!',
-                text: 'Por favor escreva um nome',
+                text: 'Por favor escreva um nome.',
             })
             return
         }
@@ -71,7 +71,7 @@ export default function CreateTeams() {
             Swal.fire({
                 icon: 'error',
                 title: 'Falha ao criar equipes!',
-                text: 'O tamanho do nome é muito grande',
+                text: 'O tamanho do nome é muito grande.',
             })
             return
         }
@@ -79,7 +79,7 @@ export default function CreateTeams() {
             Swal.fire({
                 icon: 'error',
                 title: 'Falha ao criar equipes!',
-                text: 'Por favor Adicione um usuário',
+                text: 'Por favor Adicione um usuário.',
             })
             return
         }
@@ -87,7 +87,7 @@ export default function CreateTeams() {
             Swal.fire({
                 icon: 'error',
                 title: 'Falha ao criar equipes!',
-                text: 'Selecione um grupo',
+                text: 'Selecione um grupo.',
             })
             return
         }
@@ -96,7 +96,7 @@ export default function CreateTeams() {
             Swal.fire({
                 icon: 'error',
                 title: 'Falha ao criar equipes!',
-                text: 'Por favor escreva uma descrição',
+                text: 'Por favor escreva uma descrição.',
             })
             return
         }
@@ -104,7 +104,7 @@ export default function CreateTeams() {
             Swal.fire({
                 icon: 'error',
                 title: 'Falha ao criar equipes!',
-                text: 'O tamanho da descrição é muito grande',
+                text: 'O tamanho da descrição é muito grande.',
             })
             return
         }
@@ -118,12 +118,12 @@ export default function CreateTeams() {
             if (data.error) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Falha ao criar nova equipe',
+                    title: 'Falha ao criar nova equipe.',
                 })
             } else {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Criado com sucesso',
+                    title: 'Criado com sucesso.',
                 }).then((result) => result.isConfirmed ? window.location.href = "/teams/view" : '')
 
             }
@@ -134,7 +134,7 @@ export default function CreateTeams() {
 
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-            <Header category="Pagina" title="Equipes" />
+            <Header category="Página" title="Equipes" />
             <Campo id="tituloTime" text="Nome do time" placeholder="Nome" type={"text"} value={name} setValue={setName} />
             <SelectMult id="integrantesDoTime" dados={data} text={'Selecione os usuários'} value={selectMult} setValue={setSelectMult} />
             <div className='mt-5'><label className="text-lg font-bold dark:text-black " >Selecione um grupo</label>

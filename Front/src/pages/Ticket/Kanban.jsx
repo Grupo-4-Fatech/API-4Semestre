@@ -50,7 +50,7 @@ export default function Kanban() {
 
         }
       });
-      setData(tickets)
+      setData(tickets);
     })
   }
 

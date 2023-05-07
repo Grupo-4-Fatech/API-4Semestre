@@ -26,7 +26,7 @@ const UpdateGroup = () => {
             Swal.fire({
                 icon: 'error',
                 title: 'Falha na atualização da equipe!',
-                text: 'Por favor escreva um nome',
+                text: 'Por favor escreva um nome.',
             })
             return
         }
@@ -34,7 +34,7 @@ const UpdateGroup = () => {
             Swal.fire({
                 icon: 'error',
                 title: 'Falha na atualização da equipe!',
-                text: 'O tamanho do nome é muito grande',
+                text: 'O tamanho do nome é muito grande.',
             })
             return
         }
@@ -43,7 +43,7 @@ const UpdateGroup = () => {
             Swal.fire({
                 icon: 'error',
                 title: 'Falha na atualização da equipe!',
-                text: 'Por favor escreva uma descrição',
+                text: 'Por favor escreva uma descrição.',
             })
             return
         }
@@ -57,14 +57,14 @@ const UpdateGroup = () => {
             if (data.error) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Atualização sem êxito',
+                    title: 'Atualização sem êxito.',
                 })
             }
             else {
 
                 Swal.fire({
                     icon: 'success',
-                    title: 'Atualizado com sucesso',
+                    title: 'Atualizado com sucesso.',
                 }).then((result) => result.isConfirmed ? comeback() : '')
 
             }
@@ -90,7 +90,7 @@ const UpdateGroup = () => {
 
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-            <Header category="Pagina" title="Atualizar grupo" />
+            <Header category="Página" title="Atualizar grupo" />
             <Campo id="Titulo" text="Nome do grupo" placeholder="Escreva o nome" type={"text"} value={name} setValue={setName} />
             <Campo id="Desc" text="Descrição" placeholder="Escreva a descrição" type={"text"} value={description} setValue={setDescription} />
             <div className="mt-5 mb-5 flex items-center justify-end" >

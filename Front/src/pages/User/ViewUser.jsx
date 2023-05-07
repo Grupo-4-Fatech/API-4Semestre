@@ -10,7 +10,7 @@ let PageSize = 5;
 const ViewUser = () => {
     const { currentColor } = useStateContext();
     const [currentPage, setCurrentPage] = useState(1);
-    const headers = ['Nome', 'Email', 'Função', 'Atualizar', 'Deletar']
+    const headers = ['Nome', 'E-mail', 'Função', 'Atualizar', 'Deletar']
     const [data, setData] = useState([])
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -75,7 +75,7 @@ const ViewUser = () => {
 
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-            <Header category="Pagina" title="Visualizar Usuários" />
+            <Header category="Página" title="Visualizar Usuários" />
             <div className="block relative">
                 <span className="h-full absolute inset-y-0 left-0 flex items-center pl-2">
                     <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current text-gray-500">

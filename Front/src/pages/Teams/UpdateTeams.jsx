@@ -56,7 +56,7 @@ export default function UpdateTeams() {
             Swal.fire({
                 icon: 'error',
                 title: 'Falha na atualização das equipes!',
-                text: 'Por favor escreva um nome',
+                text: 'Por favor escreva um nome.',
             })
             return
         }
@@ -64,7 +64,7 @@ export default function UpdateTeams() {
             Swal.fire({
                 icon: 'error',
                 title: 'Falha na atualização das equipes!',
-                text: 'O tamanho do nome é muito grande',
+                text: 'O tamanho do nome é muito grande.',
             })
             return
         }
@@ -72,7 +72,7 @@ export default function UpdateTeams() {
             Swal.fire({
                 icon: 'error',
                 title: 'Falha na atualização das equipes!',
-                text: 'Por favor adicione um usuário',
+                text: 'Por favor adicione um usuário.',
             })
             return
         }
@@ -80,7 +80,7 @@ export default function UpdateTeams() {
             Swal.fire({
                 icon: 'error',
                 title: 'Falha na atualização das equipes!',
-                text: 'Por favor selecione um grupo',
+                text: 'Por favor selecione um grupo.',
             })
             return
         }
@@ -89,7 +89,7 @@ export default function UpdateTeams() {
             Swal.fire({
                 icon: 'error',
                 title: 'Falha na atualização das equipes!',
-                text: 'Por favor, escreva uma descrição',
+                text: 'Por favor, escreva uma descrição.',
             })
             return
         }
@@ -103,12 +103,12 @@ export default function UpdateTeams() {
             if (data.error) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Falha ao atualizar a equipe',
+                    title: 'Falha ao atualizar a equipe.',
                 })
             } else {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Atualizado com sucesso',
+                    title: 'Atualizado com sucesso.',
                 }).then((result) => result.isConfirmed ? window.location.href = "/teams/view" : '')
 
             }
@@ -149,7 +149,7 @@ export default function UpdateTeams() {
 
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-            <Header category="Pagina" title="Atualizar equipes" />
+            <Header category="Página" title="Atualizar equipes" />
             <Campo id="tituloTime" text="Nome do time" placeholder="Nome" type={"text"} value={name} setValue={setName} />
             <SelectMult id="integrantesDoTime" dados={data} text={'Selecione os usuários'} value={selectMult} setValue={setSelectMult} />
             <div className='mt-5'><label className="text-lg font-bold dark:text-black " >Selecione um grupo</label>

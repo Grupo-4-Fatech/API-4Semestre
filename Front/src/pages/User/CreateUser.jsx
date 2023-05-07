@@ -10,10 +10,6 @@ const Swal = require('sweetalert2')
 
 export default function CreateUser() {
     const { currentColor } = useStateContext();
-    const options = [
-        { value: 'masculino', label: 'Masculino' },
-        { value: 'feminino', label: 'Feminino' }
-    ]
 
     let location = useNavigate();
     function comeback() {
@@ -30,7 +26,7 @@ export default function CreateUser() {
             Swal.fire({
                 icon: 'error',
                 title: 'Criar usuário falhou!',
-                text: 'Por favor escreva um nome',
+                text: 'Por favor escreva um nome.',
             })
             return
         }
@@ -38,7 +34,7 @@ export default function CreateUser() {
             Swal.fire({
                 icon: 'error',
                 title: 'Criar usuário falhou!',
-                text: 'O tamanho do nome é muito grande',
+                text: 'O tamanho do nome é muito grande.',
             })
             return
         }
@@ -46,7 +42,7 @@ export default function CreateUser() {
             Swal.fire({
                 icon: 'error',
                 title: 'Criar usuário falhou!',
-                text: 'Por favor, escreva um e-mail',
+                text: 'Por favor, escreva um e-mail.',
             })
             return
         }
@@ -54,7 +50,7 @@ export default function CreateUser() {
             Swal.fire({
                 icon: 'error',
                 title: 'Criar usuário falhou!',
-                text: 'O e-mail deve ter @ e .com',
+                text: 'O e-mail deve ter @ e .com.',
             })
             return
         }
@@ -62,7 +58,7 @@ export default function CreateUser() {
             Swal.fire({
                 icon: 'error',
                 title: 'Criar usuário falhou!',
-                text: 'O tamanho do e-mail é muito grande',
+                text: 'O tamanho do e-mail é muito grande.',
             })
             return
         }
@@ -70,7 +66,7 @@ export default function CreateUser() {
             Swal.fire({
                 icon: 'error',
                 title: 'Criar usuário falhou!',
-                text: 'Selecione um gênero',
+                text: 'Selecione um gênero.',
             })
             return
         }
@@ -78,7 +74,7 @@ export default function CreateUser() {
             Swal.fire({
                 icon: 'error',
                 title: 'Criar usuário falhou!',
-                text: 'Por favor escreva uma senha',
+                text: 'Por favor escreva uma senha.',
             })
             return
         }
@@ -86,7 +82,7 @@ export default function CreateUser() {
             Swal.fire({
                 icon: 'error',
                 title: 'Criar usuário falhou!',
-                text: 'A senha não pode ser menor que 8 e não pode ser maior que 15',
+                text: 'A senha deve ter entre 8 e 15 caracteres.',
             })
             return
         }
@@ -94,7 +90,7 @@ export default function CreateUser() {
             Swal.fire({
                 icon: 'error',
                 title: 'Criar usuário falhou!',
-                text: 'Selecione uma função',
+                text: 'Selecione uma função.',
             })
             return
         }
@@ -109,12 +105,12 @@ export default function CreateUser() {
             if (data.error) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Falha ao criar novo usuário',
+                    title: 'Falha ao criar novo usuário.',
                 })
             } else {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Criado com sucesso',
+                    title: 'Criado com sucesso.',
                 }).then((result) => result.isConfirmed ? comeback() : '')
 
             }
@@ -123,9 +119,9 @@ export default function CreateUser() {
 
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-            <Header category="Pagina" title="Usuário" />
+            <Header category="Página" title="Usuário" />
             <Campo text="Nome" id="name" placeholder="Nome" type="text" />
-            <Campo text="Email" id="email" placeholder="Email" type="text" />
+            <Campo text="E-mail" id="email" placeholder="E-mail" type="text" />
             <label className="text-lg font-bold dark:text-black " >Selecione um gênero</label>
             <select id="gender" defaultValue='default' className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
                 <option value="default" disabled>Selecione uma opção:</option>

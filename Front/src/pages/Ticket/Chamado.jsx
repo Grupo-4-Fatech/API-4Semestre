@@ -45,7 +45,7 @@ export default function Chamado() {
             Swal.fire({
                 icon: 'error',
                 title: 'Falha no chamado!',
-                text: 'Selecione uma classificação',
+                text: 'Selecione uma classificação.',
             })
             return
         }
@@ -53,7 +53,7 @@ export default function Chamado() {
             Swal.fire({
                 icon: 'error',
                 title: 'Falha no chamado!',
-                text: 'Por favor escreva uma descrição',
+                text: 'Por favor escreva uma descrição.',
             })
             return
         }
@@ -68,12 +68,12 @@ export default function Chamado() {
             if (data.error) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Falha ao criar novo chamado',
+                    title: 'Falha ao criar novo chamado.',
                 })
             } else {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Criado com sucesso',
+                    title: 'Criado com sucesso.',
                 }).then((result) => result.isConfirmed ? comeback() : '')
 
             }
@@ -82,8 +82,8 @@ export default function Chamado() {
 
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-            <Header category="Page" title="Ticket" />
-            <Campo text="Titulo" id="Titulo" placeholder="Titulo" type={"text"} value={title} setValue={setTitle} />
+            <Header category="Página" title="Chamado" />
+            <Campo text="Título" id="Titulo" placeholder="Titulo" type={"text"} value={title} setValue={setTitle} />
             <label className="text-lg font-bold dark:text-black">Classificação</label>
             <select id="select" onChange={(e) => setType(e.target.value)} defaultValue='default' className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
                 <option value="default" disabled>Selecione uma opção:</option>

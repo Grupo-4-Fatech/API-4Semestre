@@ -25,7 +25,7 @@ const CreateGroup = () => {
             Swal.fire({
                 icon: 'error',
                 title: 'Falha ao criar o Grupo!',
-                text: 'Por favor escreva um nome',
+                text: 'Por favor escreva um nome.',
             })
             return
         }
@@ -33,7 +33,7 @@ const CreateGroup = () => {
             Swal.fire({
                 icon: 'error',
                 title: 'Falha ao criar o Grupo!',
-                text: 'O tamanho do nome é muito grande',
+                text: 'O tamanho do nome é muito grande.',
             })
             return
         }
@@ -42,7 +42,7 @@ const CreateGroup = () => {
             Swal.fire({
                 icon: 'error',
                 title: 'Falha ao criar o Grupo!',
-                text: 'Por favor escreva uma descrição',
+                text: 'Por favor escreva uma descrição.',
             })
             return
         }
@@ -57,12 +57,12 @@ const CreateGroup = () => {
             if (data.error) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Falha ao criar novo grupo',
+                    title: 'Falha ao criar novo grupo.',
                 })
             } else {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Criado com sucesso',
+                    title: 'Criado com sucesso.',
                 }).then((result) => result.isConfirmed ? comeback() : '')
 
             }
@@ -72,7 +72,7 @@ const CreateGroup = () => {
 
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-            <Header category="Pagina" title="Criar grupo" />
+            <Header category="Página" title="Criar grupo" />
             <Campo id="Titulo" text="Nome do grupo" placeholder="Escreva o nome" type={"text"} value={name} setValue={setName} />
             <Campo id="Desc" text="Descrição" placeholder="Escreva a descrição" type={"text"} value={description} setValue={setDescription} />
             <div className="mt-5 mb-5 flex items-center justify-end" >
