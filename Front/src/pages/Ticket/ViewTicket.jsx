@@ -4,6 +4,7 @@ import { useStateContext } from '../../contexts/ContextProvider'
 import { Header } from '../../components'
 import { useAutenticacao } from '../../contexts/ContextUsuLogado.tsx';
 import { Tab } from '@headlessui/react'
+import { validador } from '../../utils/validador';
 
 const Swal = require('sweetalert2')
 
@@ -24,7 +25,6 @@ const ViewTicket = () => {
     const userPermission = usuario?.role
 
 
-
     function getData() {
         fetch("/ticket/getAll/1", {
             method: 'GET',
@@ -43,6 +43,92 @@ const ViewTicket = () => {
             });
             setData(tickets)
         })
+    }
+  
+    function teste(e) {
+        const notai = document.getElementById("notaI")
+        const notar = document.getElementById("notaR")
+        const notac = document.getElementById("notaC")
+        if (validador.selectEstaDefault(notar)){
+            Swal.fire({
+                icon: 'error',
+                title: 'Falha na avaliação!',
+                text: 'Por favor selecione a nota de Risco',
+              })
+              return
+        }
+        if (validador.selectEstaDefault(notai)){
+            Swal.fire({
+                icon: 'error',
+                title: 'Falha na avaliação!',
+                text: 'Por favor selecione a nota Impacto',
+              })
+              return
+        }
+        console.log(notai.value);
+        if(validador.selectEstaDefault(notac)){
+            Swal.fire({
+                icon: 'error',
+                title: 'Falha na avaliação!',
+                text: 'Por favor selecione a nota Custo',
+              })
+              return
+        }
+        if (validador.selectAvaliar(notar)) {
+            Swal.fire({
+                title: `Você deseja avaliar o risco como ${notar.value}?`,
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: 'Avaliar',
+                denyButtonText: `Não avaliar`,
+                cancelButtonText: `Cancelar`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    Swal.fire('Avaliado!', '', 'success')
+                } else if (result.isDenied) {
+                    Swal.fire('Não avalidado', '', 'info')
+                }
+            })
+            return
+        }
+        if (validador.selectAvaliar(notai)) {
+            Swal.fire({
+                title: `Você deseja avaliar o impacto como ${notai.value}?`,
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: 'Avaliar',
+                denyButtonText: `Não avaliar`,
+                cancelButtonText: `Cancelar`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    Swal.fire('Avaliado!', '', 'success')
+                } else if (result.isDenied) {
+                    Swal.fire('Não avalidado', '', 'info')
+                }
+            })
+            return
+        }
+        
+        if (validador.selectAvaliar(notac)) {
+            Swal.fire({
+                title: `Você deseja avaliar o custo como ${notac.value}?`,
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: 'Avaliar',
+                denyButtonText: `Não avaliar`,
+                cancelButtonText: `Cancelar`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    Swal.fire('Avaliado!', '', 'success')
+                } else if (result.isDenied) {
+                    Swal.fire('Não avalidado', '', 'info')
+                }
+            })
+            return
+        }
     }
     // const Aproved = (id, status) => {
     //     fetch("/ticket/updateStatus", {
@@ -248,7 +334,7 @@ const ViewTicket = () => {
 
                                                     <div className=" pl-2 mt-2 text-lg font-bold dark:text-black">Análise de risco:</div>
                                                     <div className='pl-2'>
-                                                        <select id="role" defaultValue='default' className=' pl-2 mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-5/6 p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
+                                                        <select id="notaR" defaultValue='default' className=' pl-2 mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-5/6 p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
                                                             <option value="default" disabled>Selecione uma nota:</option>
                                                             <option value="1">1</option>
                                                             <option value="2">2</option>
@@ -258,7 +344,7 @@ const ViewTicket = () => {
 
                                                     <div className="pl-2 mt-2 text-lg font-bold dark:text-black">Análise de impacto:</div>
                                                     <div className='pl-2'>
-                                                        <select id="role" defaultValue='default' className='pl-2 mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-5/6 p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
+                                                        <select id="notaI" defaultValue='default' className='pl-2 mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-5/6 p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
                                                             <option value="default" disabled>Selecione uma nota:</option>
                                                             <option value="1">1</option>
                                                             <option value="2">2</option>
@@ -267,7 +353,7 @@ const ViewTicket = () => {
                                                     </div>
                                                     <div className="pl-2 mt-2 text-lg font-bold dark:text-black">Análise de custo:</div>
                                                     <div className='pl-2'>
-                                                        <select id="role" defaultValue='default' className='pl-2 mt-2 my-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-5/6 p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
+                                                        <select id="notaC" defaultValue='default' className='pl-2 mt-2 my-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-5/6 p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
                                                             <option value="default" disabled>Selecione uma nota:</option>
                                                             <option value="1">1</option>
                                                             <option value="2">2</option>
@@ -289,7 +375,7 @@ const ViewTicket = () => {
                                             Fechar
                                         </button>
 
-                                        <button className="text-white rounded-full bg-green-700  hover:bg-green-800 font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                        <button onClick={() => teste()} className="text-white rounded-full bg-green-700  hover:bg-green-800 font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                             type="button" > Avaliar </button>
 
                                     </div>
