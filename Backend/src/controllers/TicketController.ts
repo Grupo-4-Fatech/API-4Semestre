@@ -171,11 +171,7 @@ class TicketController {
   }
   public async getLogs(req: Request, res: Response): Promise<Response> {
      const id = req.params.id
-    // var query = "SELECT * FROM Log l Join User u on u.id = l.usersId where ticketsId = " + id;
-    
-    // let logQuery = "SELECT tickets_Id FROM public.Log ";
-    // const logs: any = await AppDataSource.manager.query(logQuery)
-    var logQuery = `SELECT "Log"."date" AS "date", "Log"."action" AS "action", "Log"."ticketsId" AS "ticketsId", "Log"."usersId" AS "usersId" , "user"."name" AS "userName" FROM "log" "Log" JOIN "public"."user" "user" on "user"."id" = "Log"."usersId" where "Log"."ticketsId"= ${id}`
+    var logQuery = `SELECT "Log"."date" AS "date", "Log"."action" AS "action", "Log"."ticketsId" AS "ticketsId", "Log"."usersId" AS "usersId" , "user"."name" AS "userName" FROM "log" "Log" JOIN "public"."user" "user" on "user"."id" = "Log"."usersId" where "Log"."ticketsId"= ${id} order by "date" DESC`
     const logs : any = await AppDataSource.manager.query(logQuery);
     
     console.log(logs)

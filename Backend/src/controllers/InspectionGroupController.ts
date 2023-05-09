@@ -54,7 +54,7 @@ class InspectionGroupController {
         console.log("Sucesso")
       } else {
         return res.json({ error: "Erro ao salvar grupo grupo." });
-        break;
+       
       }
 
     }
@@ -97,9 +97,12 @@ class InspectionGroupController {
     const response: any = await AppDataSource.getRepository(InspectionGroup).find({
       order: {
         id: 'asc'
+      }, relations:{
+        users:true
       }
     });
-    return res.json(response);
+    const logs : any = await AppDataSource.getRepository(InspectionGroup).delete({})
+        return res.json(response);
   }
 
 
@@ -126,6 +129,63 @@ class InspectionGroupController {
 
 
   }
+  // public name(){
+  //   const { grupoRisco, grupoImpacto, grupoCusto } = req.body;
+
+  //   const userTable = await AppDataSource.getRepository(User);
+  //   const userGrupoRisco: Array<User> = []
+  //   const userGrupoImpacto: Array<User> = []
+  //   const userGrupoCusto: Array<User> = []
+
+  //   for(const u of grupoCusto.users) {
+  //     const user = await AppDataSource.manager.findOneBy(User,{ id: u.value });
+  //     userGrupoCusto.push(user);
+  //   };
+  //   for( const u of grupoImpacto.users){
+  //     const user = await AppDataSource.manager.findOneBy(User,{ id: u.value });
+  //     userGrupoImpacto.push(user);
+  //   };
+  //   for(const u of grupoRisco.users){
+  //     const user = await AppDataSource.manager.findOneBy(User,{ id: u.value });
+  //     userGrupoRisco.push(user);
+  //   };
+
+
+  //   const obj0 = await AppDataSource.manager.findOneBy(InspectionGroup,{name:'Grupo Custo'});
+  //   obj0.name = grupoCusto.name;
+  //   obj0.descricao = grupoCusto.descricao;
+  //   obj0.ticket = null
+  //   obj0.users = userGrupoCusto;
+  //   const obj1 = new InspectionGroup();
+  //   obj1.name = grupoRisco.name;
+  //   obj1.descricao = grupoRisco.descricao;
+  //   obj1.ticket = null;
+  //   obj1.users = userGrupoRisco;
+  //   const obj2 = new InspectionGroup();
+  //   obj2.name = grupoImpacto.name;
+  //   obj2.descricao = grupoImpacto.descricao;
+  //   obj2.ticket = null
+  //   obj2.users = userGrupoImpacto;
+  //   const grupoInpercaoList: Array<InspectionGroup> = [obj0, obj1, obj2]
+
+  //   for( const el of grupoInpercaoList){
+  //     const inspectionGroup: any = await AppDataSource.getRepository(InspectionGroup).save(el).catch((e) => {
+
+  //     });
+  //     if (inspectionGroup.id) {
+  //       console.log("Sucesso")
+  //     } else {
+  //       return res.json({ error: "Erro ao salvar grupo grupo." });
+       
+  //     }
+
+  //   }
+
+  //   return res.json({ obj0, obj1, obj2 });
+
+
+
+  // }
 
 
 } export default new InspectionGroupController()

@@ -1,4 +1,4 @@
-import { Column, Entity,  ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity,  JoinColumn,  JoinTable,  ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Ticket } from "./Ticket";
 import { User } from "./Users";
 
@@ -18,6 +18,7 @@ export class Log{
     tickets = Array<Ticket>;
 
     @ManyToOne(() => User, (user) => user.id)
+    @JoinTable()
     users = User;
 
 }

@@ -39,6 +39,6 @@ export class User{
     solutions: Array<Solution>;
 
     @OneToMany(() => Log, (log) => log.id)
-    logs = Array<Log>;
+    logs : Array<Log>;
 
 }
