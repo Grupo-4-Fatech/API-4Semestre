@@ -31,6 +31,44 @@ export default function CreateTree() {
             setData(users)
         })
     }
+    function getGroups() {
+        fetch("/InspectionGroup/list", {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            }
+        }).then((resposta) => resposta.json()).then((data) => {
+           if(data){
+            let users = []
+            let grupoCusto = data.filter((e)=> e.name == "Grupo Custo")
+            let grupoRisco = data.filter((e)=> e.name == "Grupo Risco")
+            let grupoImpacto = data.filter((e)=> e.name == "Grupo Impacto")
+            grupoCusto[0].users.forEach(element => {
+                users.push({
+                    value: element.id,
+                    label: element.name,
+                })
+            });
+            setCusto(users)
+            users = []
+            grupoRisco[0].users.forEach(element => {
+                users.push({
+                    value: element.id,
+                    label: element.name,
+                })
+            });
+            setRisco(users)
+            users =[]
+            grupoImpacto[0].users.forEach(element => {
+                users.push({
+                    value: element.id,
+                    label: element.name,
+                })
+            });
+            setImpacto(users)
+           }
+        })
+    }
 
     function CriaTime() {
 
@@ -43,7 +81,7 @@ export default function CreateTree() {
             return
         }
         var grupoImpacto = {
-            name: "Grupo Inpacto",
+            name: "Grupo Impacto",
             descricao: "",
             users: impacto
 
@@ -60,9 +98,8 @@ export default function CreateTree() {
             users: custo
 
         }
-        console.log({grupoRisco, grupoImpacto, grupoCusto})
-        fetch("/InspectionGroup/create", {
-            method: 'POST',
+        fetch("/InspectionGroup/update", {
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
@@ -71,19 +108,19 @@ export default function CreateTree() {
             if (data.error) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Falha ao criar.',
+                    title: 'Falha ao realizar mudança.',
                   }) 
             }else {
                 Swal.fire({
                   icon: 'success',
-                  title: 'Criado com sucesso.',
+                  title: 'Mudança realizada com sucesso.',
                 })        
               }
         })
 
 
     }
-    useEffect(() => { getUser() }, [])
+    useEffect(() => { getUser(); getGroups();}, [])
 
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
