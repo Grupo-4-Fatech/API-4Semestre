@@ -47,7 +47,7 @@ export const kanbanGrid = [
 
 
 // SideBar 
-export const links = [
+export const linksPt = [
   {
     title: 'Chamados',
     links: [
@@ -144,6 +144,104 @@ export const links = [
   }
 
 ];
+export const linksEn = [
+  {
+    title: 'Tickets',
+    links: [
+      {
+        title: 'saokdoas',
+        name: 'ticket/create',
+        icon: <FiEdit />,
+        permission: 3,
+      },
+      {
+        title: 'Visualizar Chamados',
+        name: 'ViewTicket',
+        icon: <MdOutlineViewAgenda />,
+        permission: 3,
+      },
+      {
+        title: 'Chamados Arquivados',
+        name: 'ArchivedTicket',
+        icon: <FiArchive />,
+        permission: 2,
+      },
+    ],
+  },
+  {
+    title: 'Usuário',
+    links: [
+      {
+        title: 'Criar Usuário',
+        name: 'user/create',
+        icon: <FiUserPlus />,
+        permission: 1,
+      },
+      {
+        title: 'Visualizar Usuários',
+        name: 'user/view',
+        icon: <MdOutlinePermContactCalendar />,
+        permission: 1,
+      }
+    ]
+
+  },
+  {
+    title: 'Equipes',
+    links: [
+      {
+        title: 'Criar Equipes',
+        name: 'teams/create',
+        icon: <FiUserPlus />,
+        permission: 1,
+      },
+
+      {
+        title: 'Visualizar Equipes',
+        name: 'teams/view',
+        icon: <FiUsers />,
+        permission: 1,
+      },
+      {
+        title: 'Kanban',
+        name: 'kanban',
+        icon: <BsKanban />,
+        permission: 3,
+      },
+
+    ]
+  },
+  {
+    title: 'Grupos',
+    links: [
+      {
+        title: 'Criar Grupos',
+        name: 'group/create',
+        icon: <FiUserPlus />,
+        permission: 1,
+      },
+      {
+        title: 'Visualizar Grupos',
+        name: 'group/viewGroup',
+        icon: <FiUsers />,
+        permission: 1,
+      }
+    ]
+  },
+  {
+    title: 'Árvore de aprovação',
+    links: [
+      {
+        title:'Criar árvore',
+        name: 'tree/create',
+        icon: <FiCheckSquare/>,
+        permission: 1,
+      }
+    ]
+  }
+
+];
+
 
 export const themeColors = [
   {

@@ -4,6 +4,8 @@ import { kanbanGrid } from '../../data/dummy';
 import { Header } from '../../components';
 import { useAutenticacao } from '../../contexts/ContextUsuLogado.tsx';
 import { Tab } from '@headlessui/react'
+import { validador } from '../../utils/validador';
+import Swal from 'sweetalert2';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -12,11 +14,11 @@ function classNames(...classes) {
 export default function Kanban() {
   const [showModal, setShowModal] = React.useState(false);
   const [data, setData] = useState([])
-  const [ticket, setTicket] = useState({ id:0, title: '', description: ``, classification: '' })
+  const [ticket, setTicket] = useState({ id: 0, title: '', description: ``, classification: '' })
   const [searchTerm, setSearchTerm] = useState('');
 
   const { usuario } = useAutenticacao();
-  const tabs = ['Visualizar', 'Ações']
+  const tabs = ['Visualizar', 'Ações', 'Solução']
   const userPermission = usuario?.role
 
   const isDraggable = userPermission !== 3;
@@ -52,6 +54,18 @@ export default function Kanban() {
       });
       setData(tickets);
     })
+  }
+
+  function teste() {
+    const descricao = document.getElementById("descricao")
+    if (validador.estaVazio(descricao.value)) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Falha no envio da Solução!',
+        text: 'Por favor descreva a sua solução.',
+      })
+      return
+    }
   }
 
   function getStatus(status) {
@@ -157,7 +171,7 @@ export default function Kanban() {
       <>
         {showModal ? (
           <>
-          {console.log(ticket)}
+            {console.log(ticket)}
             <div
               className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
             >
@@ -198,17 +212,21 @@ export default function Kanban() {
                       <Tab.Panels className="mt-2">
                         <Tab.Panel className={classNames(
                           'rounded-xl bg-white p-3',
-                          'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2'
+                          'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2 '
                         )}>
                           <div id='description' className="relative max-h-72 p-6 max-w-3x1 overflow-scroll m-6" dangerouslySetInnerHTML={{ __html: ticket.description }} />
                         </Tab.Panel>
                         <Tab.Panel>
                           <div id='historico' className="relative max-h-72 p-6 max-w-3x1 overflow-scroll m-6">
 
-                            <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" onClick={()=> window.location.href="/ticket/update/" + ticket.id}>Atualizar Ticket</button>
-                            <button type="button" className="text-white bg-yellow-400 hover:bg-yellow-500 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" onClick={()=> window.location.href="/historic/" + ticket.id}>Histórico</button>
+                            <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" onClick={() => window.location.href = "/ticket/update/" + ticket.id}>Atualizar Ticket</button>
+                            <button type="button" className="text-white bg-yellow-400 hover:bg-yellow-500 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" onClick={() => window.location.href = "/historic/" + ticket.id}>Histórico</button>
 
                           </div>
+                        </Tab.Panel>
+                        <Tab.Panel>
+                          <div className="pl-2 mt-2 text-lg font-bold dark:text-black">Descrição</div>
+                          <textarea id="descricao" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500  dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Digite sua solução aqui"></textarea>
                         </Tab.Panel>
                       </Tab.Panels>
                     </Tab.Group>
@@ -221,6 +239,9 @@ export default function Kanban() {
                       onClick={() => setShowModal(false)}
                     >
                       Fechar
+                    </button>
+                    <button onClick={()=> teste()} type="button" className="text-white rounded-full bg-blue-700  hover:bg-blue-800 font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+                      Confirmar
                     </button>
 
                   </div>

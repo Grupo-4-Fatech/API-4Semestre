@@ -44,35 +44,35 @@ const ViewTicket = () => {
             setData(tickets)
         })
     }
-  
+
     function teste(e) {
         const notai = document.getElementById("notaI")
         const notar = document.getElementById("notaR")
         const notac = document.getElementById("notaC")
-        if (validador.selectEstaDefault(notar)){
+        if (validador.selectEstaDefault(notar)) {
             Swal.fire({
                 icon: 'error',
                 title: 'Falha na avaliação!',
                 text: 'Por favor selecione a nota de Risco',
-              })
-              return
+            })
+            return
         }
-        if (validador.selectEstaDefault(notai)){
+        if (validador.selectEstaDefault(notai)) {
             Swal.fire({
                 icon: 'error',
                 title: 'Falha na avaliação!',
                 text: 'Por favor selecione a nota Impacto',
-              })
-              return
+            })
+            return
         }
         console.log(notai.value);
-        if(validador.selectEstaDefault(notac)){
+        if (validador.selectEstaDefault(notac)) {
             Swal.fire({
                 icon: 'error',
                 title: 'Falha na avaliação!',
                 text: 'Por favor selecione a nota Custo',
-              })
-              return
+            })
+            return
         }
         if (validador.selectAvaliar(notar)) {
             Swal.fire({
@@ -110,7 +110,7 @@ const ViewTicket = () => {
             })
             return
         }
-        
+
         if (validador.selectAvaliar(notac)) {
             Swal.fire({
                 title: `Você deseja avaliar o custo como ${notac.value}?`,
@@ -362,6 +362,7 @@ const ViewTicket = () => {
                                                     </div>
 
                                                 </Tab.Panel>
+                                                
                                             </Tab.Panels>
                                         </Tab.Group>
                                     </div>
@@ -378,6 +379,7 @@ const ViewTicket = () => {
                                         <button onClick={() => teste()} className="text-white rounded-full bg-green-700  hover:bg-green-800 font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                             type="button" > Avaliar </button>
 
+                                        
                                     </div>
                                 </div>
                             </div>

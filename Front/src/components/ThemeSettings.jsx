@@ -4,12 +4,18 @@ import { BsCheck } from 'react-icons/bs';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import { themeColors } from '../data/dummy';
 import { useStateContext } from '../contexts/ContextProvider';
+import { useLanguage } from "../contexts/contextLanguage";
 
 const ThemeSettings = () => {
   const { setColor, setMode, currentMode, currentColor, setThemeSettings } = useStateContext();
+  const { language, changeLanguage } = useLanguage();
+  const handleLanguageChange = (event) => {
+    changeLanguage(event.target.value);
+  };
 
   return (
     <div className="bg-half-transparent w-screen fixed nav-item top-0 right-0">
+
       <div className="float-right h-screen dark:text-gray-200  bg-white dark:bg-[#484B52] w-400">
         <div className="flex justify-between items-center p-4 ml-4">
           <p className="font-semibold text-lg">Configurações</p>
@@ -22,6 +28,13 @@ const ThemeSettings = () => {
             <MdOutlineCancel />
           </button>
 
+        </div>
+        <div className="flex-col border-t-1 border-color p-4 ml-4">
+          <label for="countries" class="block mb-2 text-sm font-medium text-gray-900">Selecione a Linguagem</label>
+          <select value={language} onChange={handleLanguageChange}>
+            <option value="en">English</option>
+            <option value="pt">Português</option>
+          </select>
         </div>
         <div className="flex-col border-t-1 border-color p-4 ml-4">
           <p className="font-semibold text-xl ">Opção de tema</p>
