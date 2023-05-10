@@ -2,6 +2,7 @@ import AppDataSource from "../data-source";
 import { Request, Response } from 'express';
 import { InspectionGroup } from "../entities/InspectionGroup";
 import { User } from "../entities/Users";
+import { Like } from "typeorm";
 
 class InspectionGroupController {
 
@@ -15,16 +16,16 @@ class InspectionGroupController {
     const userGrupoImpacto: Array<User> = []
     const userGrupoCusto: Array<User> = []
 
-    for(const u of grupoCusto.users) {
-      const user = await AppDataSource.manager.findOneBy(User,{ id: u.value });
+    for (const u of grupoCusto.users) {
+      const user = await AppDataSource.manager.findOneBy(User, { id: u.value });
       userGrupoCusto.push(user);
     };
-    for( const u of grupoImpacto.users){
-      const user = await AppDataSource.manager.findOneBy(User,{ id: u.value });
+    for (const u of grupoImpacto.users) {
+      const user = await AppDataSource.manager.findOneBy(User, { id: u.value });
       userGrupoImpacto.push(user);
     };
-    for(const u of grupoRisco.users){
-      const user = await AppDataSource.manager.findOneBy(User,{ id: u.value });
+    for (const u of grupoRisco.users) {
+      const user = await AppDataSource.manager.findOneBy(User, { id: u.value });
       userGrupoRisco.push(user);
     };
 
@@ -46,7 +47,7 @@ class InspectionGroupController {
     obj2.users = userGrupoImpacto;
     const grupoInpercaoList: Array<InspectionGroup> = [obj0, obj1, obj2]
 
-    for( const el of grupoInpercaoList){
+    for (const el of grupoInpercaoList) {
       const inspectionGroup: any = await AppDataSource.getRepository(InspectionGroup).save(el).catch((e) => {
 
       });
@@ -54,7 +55,7 @@ class InspectionGroupController {
         console.log("Sucesso")
       } else {
         return res.json({ error: "Erro ao salvar grupo grupo." });
-       
+
       }
 
     }
@@ -76,7 +77,7 @@ class InspectionGroupController {
   }
   public async delete(req: Request, res: Response): Promise<Response> {
     const { id } = req.body
-    const inspectionGroup : any = await AppDataSource.manager.findOneBy(InspectionGroup, { id }).catch((e) => {
+    const inspectionGroup: any = await AppDataSource.manager.findOneBy(InspectionGroup, { id }).catch((e) => {
       return { error: "Invalid identifier" }
     })
 
@@ -95,97 +96,89 @@ class InspectionGroupController {
   }
   async list(req: Request, res: Response): Promise<Response> {
     const response: any = await AppDataSource.getRepository(InspectionGroup).find({
-      order: {
-        id: 'asc'
-      }, relations:{
-        users:true
+      relations: {
+        users: true
       }
     });
-    const logs : any = await AppDataSource.getRepository(InspectionGroup).delete({})
-        return res.json(response);
+    return res.json(response);
   }
-
 
   public async update(req: Request, res: Response): Promise<Response> {
-    const { id, name, descricao, userId } = req.body;
+    const { grupoRisco, grupoImpacto, grupoCusto } = req.body;
+
+    const inspecaoTable = await AppDataSource.getRepository(InspectionGroup)
+    const userGrupoRisco: Array<User> = []
+    const userGrupoImpacto: Array<User> = []
+    const userGrupoCusto: Array<User> = []
 
 
-    const userTable = await AppDataSource.getRepository(User);
+    for (const u of grupoCusto.users) {
+      const user = await AppDataSource.manager.findOneBy(User, { id: u.value });
+      userGrupoCusto.push(user);
+    };
+    for (const u of grupoImpacto.users) {
+      const user = await AppDataSource.manager.findOneBy(User, { id: u.value });
+      userGrupoImpacto.push(user);
+    };
+    for (const u of grupoRisco.users) {
+      const user = await AppDataSource.manager.findOneBy(User, { id: u.value });
+      userGrupoRisco.push(user);
+    };
 
-    const user = await userTable.findOneBy({ id: userId });
+    var bla: String = "aaaaaaaaa"
+    let obj0: any = await inspecaoTable.findOne({
+      where: { name: Like(`Grupo Custo`) },
+      relations: {
+        users: true
+      }
+    });
+    obj0 = obj0 === null ? new InspectionGroup() : obj0
+    obj0.name = grupoCusto.name;
+    obj0.descricao = grupoCusto.descricao;
+    obj0.ticket = null
+    obj0.users = userGrupoCusto;
+    let obj1: any = await inspecaoTable.findOne({
+      where: { name: Like(`Grupo Risco`) },
+      relations: {
+        users: true
+      }
+    });
+    obj1 = obj1 == null ? new InspectionGroup() : obj1
+    obj1.name = grupoRisco.name;
+    obj1.descricao = grupoRisco.descricao;
+    obj1.ticket = null;
+    obj1.users = userGrupoRisco;
+    let obj2: any = await inspecaoTable.findOne({
+      where: { name: Like(`Grupo Impacto`) },
+      relations: {
+        users: true
+      }
+    });
+    obj2 = obj2 == null ? new InspectionGroup() : obj2
+    obj2.name = grupoImpacto.name;
+    obj2.descricao = grupoImpacto.descricao;
+    obj2.ticket = null
+    obj2.users = userGrupoImpacto;
+    const grupoInpercaoList: Array<InspectionGroup> = [obj0, obj1, obj2]
 
-    const inspectionGroup = AppDataSource.getRepository(InspectionGroup)
+    for (const el of grupoInpercaoList) {
+      const inspectionGroup: any = await AppDataSource.getRepository(InspectionGroup).save(el).catch((e) => {
 
-    const obj = await inspectionGroup.findOneBy({
-      id: id,
-    })
+      });
+      if (inspectionGroup.id) {
+        console.log("Sucesso")
+      } else {
+        return res.json({ error: "Erro ao salvar grupo grupo." });
 
-    obj.name = name;
-    obj.descricao = descricao;
-    obj.users = [user];
+      }
 
-    await inspectionGroup.save(obj)
-    return res.json(obj)
+    }
+
+    return res.json({ obj0, obj1, obj2 });
+
 
 
   }
-  // public name(){
-  //   const { grupoRisco, grupoImpacto, grupoCusto } = req.body;
-
-  //   const userTable = await AppDataSource.getRepository(User);
-  //   const userGrupoRisco: Array<User> = []
-  //   const userGrupoImpacto: Array<User> = []
-  //   const userGrupoCusto: Array<User> = []
-
-  //   for(const u of grupoCusto.users) {
-  //     const user = await AppDataSource.manager.findOneBy(User,{ id: u.value });
-  //     userGrupoCusto.push(user);
-  //   };
-  //   for( const u of grupoImpacto.users){
-  //     const user = await AppDataSource.manager.findOneBy(User,{ id: u.value });
-  //     userGrupoImpacto.push(user);
-  //   };
-  //   for(const u of grupoRisco.users){
-  //     const user = await AppDataSource.manager.findOneBy(User,{ id: u.value });
-  //     userGrupoRisco.push(user);
-  //   };
-
-
-  //   const obj0 = await AppDataSource.manager.findOneBy(InspectionGroup,{name:'Grupo Custo'});
-  //   obj0.name = grupoCusto.name;
-  //   obj0.descricao = grupoCusto.descricao;
-  //   obj0.ticket = null
-  //   obj0.users = userGrupoCusto;
-  //   const obj1 = new InspectionGroup();
-  //   obj1.name = grupoRisco.name;
-  //   obj1.descricao = grupoRisco.descricao;
-  //   obj1.ticket = null;
-  //   obj1.users = userGrupoRisco;
-  //   const obj2 = new InspectionGroup();
-  //   obj2.name = grupoImpacto.name;
-  //   obj2.descricao = grupoImpacto.descricao;
-  //   obj2.ticket = null
-  //   obj2.users = userGrupoImpacto;
-  //   const grupoInpercaoList: Array<InspectionGroup> = [obj0, obj1, obj2]
-
-  //   for( const el of grupoInpercaoList){
-  //     const inspectionGroup: any = await AppDataSource.getRepository(InspectionGroup).save(el).catch((e) => {
-
-  //     });
-  //     if (inspectionGroup.id) {
-  //       console.log("Sucesso")
-  //     } else {
-  //       return res.json({ error: "Erro ao salvar grupo grupo." });
-       
-  //     }
-
-  //   }
-
-  //   return res.json({ obj0, obj1, obj2 });
-
-
-
-  // }
 
 
 } export default new InspectionGroupController()
