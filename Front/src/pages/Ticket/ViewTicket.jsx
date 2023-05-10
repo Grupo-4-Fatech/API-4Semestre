@@ -289,7 +289,7 @@ const ViewTicket = () => {
                         <div
                             className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
                         >
-                            <div className="relative w-4/6 my-6">
+                            <div className="relative w-3/5 my-6">
                                 {/*content*/}
                                 <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                                     {/*header*/}
@@ -310,7 +310,7 @@ const ViewTicket = () => {
                                     {/*body*/}
                                     <div className="w-full px-2 sm:px-0">
                                         <Tab.Group defaultIndex={0}>
-                                            <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1">
+                                            <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1  pl-2 pr-2">
                                                 {tabs.map((tab) => (
                                                     <Tab className={({ selected }) =>
                                                         classNames(
@@ -332,9 +332,9 @@ const ViewTicket = () => {
                                                 </Tab.Panel>
                                                 <Tab.Panel>
 
-                                                    <div className=" pl-2 mt-2 text-lg font-bold dark:text-black">Análise de risco:</div>
-                                                    <div className='pl-2'>
-                                                        <select id="notaR" defaultValue='default' className=' pl-2 mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-5/6 p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
+                                                    <div className=" pl-2  mt-2 text-lg font-bold dark:text-black">Análise de risco:</div>
+                                                    <div className='pl-2 pr-2'>
+                                                        <select id="notaR" defaultValue='default' className=' pl-2 mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
                                                             <option value="default" disabled>Selecione uma nota:</option>
                                                             <option value="1">1</option>
                                                             <option value="2">2</option>
@@ -343,8 +343,8 @@ const ViewTicket = () => {
                                                     </div>
 
                                                     <div className="pl-2 mt-2 text-lg font-bold dark:text-black">Análise de impacto:</div>
-                                                    <div className='pl-2'>
-                                                        <select id="notaI" defaultValue='default' className='pl-2 mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-5/6 p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
+                                                    <div className='pl-2 pr-2'>
+                                                        <select id="notaI" defaultValue='default' className='pl-2 mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
                                                             <option value="default" disabled>Selecione uma nota:</option>
                                                             <option value="1">1</option>
                                                             <option value="2">2</option>
@@ -352,8 +352,8 @@ const ViewTicket = () => {
                                                         </select>
                                                     </div>
                                                     <div className="pl-2 mt-2 text-lg font-bold dark:text-black">Análise de custo:</div>
-                                                    <div className='pl-2'>
-                                                        <select id="notaC" defaultValue='default' className='pl-2 mt-2 my-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-5/6 p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
+                                                    <div className='pl-2 pr-2'>
+                                                        <select id="notaC" defaultValue='default' className='pl-2 mt-2 my-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
                                                             <option value="default" disabled>Selecione uma nota:</option>
                                                             <option value="1">1</option>
                                                             <option value="2">2</option>

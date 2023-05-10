@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 
 const Historic = () => {
-    const {id} = useParams();
+    const { id } = useParams();
     const [data, setData] = useState([])
     function getData() {
         if (id) {
@@ -17,8 +17,8 @@ const Historic = () => {
                 if (res != null) {
                     console.log(res)
                     var logs = []
-                    res.forEach(ele=>{
-                        logs.push({ data: ele.date, nomeUsu: ele.userName, idAcao: parseInt(ele.action )})
+                    res.forEach(ele => {
+                        logs.push({ data: ele.date, nomeUsu: ele.userName, idAcao: parseInt(ele.action) })
                     })
                     setData(logs)
                 }
@@ -26,9 +26,6 @@ const Historic = () => {
             })
         }
     }
-
-    
-
 
     const cor = idAcao => {
         switch (idAcao) {
@@ -83,7 +80,7 @@ const Historic = () => {
     useEffect(() => { getData() }, [])
     return (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <div className="w-760 m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+            <div className="w-760 m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                 <Header category="Página" title="Histórico" />
                 <ol class="relative border-l border-gray-400">
                     {data.map((tiq) => (
@@ -100,7 +97,7 @@ const Historic = () => {
             </div>
         </div>
 
-        
+
     );
 };
 

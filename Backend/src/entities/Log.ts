@@ -14,11 +14,20 @@ export class Log{
     @Column()
     action: string;
 
+    @Column({nullable: true, default: ""})
+    risk: string;
+
+    @Column({nullable: true, default: ""})
+    value: string;
+     
+    @Column({nullable: true, default: ""})
+    cost: string;
+
     @ManyToOne(() => Ticket, (ticket) => ticket.id)
-    tickets = Array<Ticket>;
+    tickets: Array<Ticket>;
 
     @ManyToOne(() => User, (user) => user.id)
     @JoinTable()
-    users = User;
+    users: User;
 
 }
