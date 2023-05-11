@@ -24,6 +24,53 @@ const ViewTicket = () => {
     const tabs = ['Visualizar', 'Avaliar']
     const userPermission = usuario?.role
 
+    function getUsersByGroup(groups, groupName) {
+        const group = groups.find(group => group.name.toLowerCase() === groupName.toLowerCase());
+
+        if (group) {
+            return group.users;
+        } else {
+            return [];
+        }
+    }
+
+    function hasPermission(users, loggedInUser) {
+        return users.some(user => user.id === loggedInUser);
+    }
+
+    function disableSelects(groups, loggedInUser) {
+        const riscoSelect = document.getElementById('notaR');
+        const custoSelect = document.getElementById('notaC');
+        const impactoSelect = document.getElementById('notaI');
+
+        const riscoUsers = getUsersByGroup(groups, 'Grupo Risco');
+        const custoUsers = getUsersByGroup(groups, 'Grupo Custo');
+        const impactoUsers = getUsersByGroup(groups, 'Grupo Impacto');
+
+        if (!hasPermission(riscoUsers, loggedInUser)) {
+            riscoSelect.disabled = true;
+        }
+
+        if (!hasPermission(custoUsers, loggedInUser)) {
+            custoSelect.disabled = true;
+        }
+
+        if (!hasPermission(impactoUsers, loggedInUser)) {
+            impactoSelect.disabled = true;
+        }
+    }
+
+
+    function getDataAndSetSelectPermission() {
+        fetch("/InspectionGroup/list", {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            }
+        }).then((resposta) => resposta.json()).then((data) => {
+            disableSelects(data, usuario.id);
+        })
+    };
 
     function getData() {
         fetch("/ticket/getAll/1", {
@@ -263,7 +310,7 @@ const ViewTicket = () => {
                                         {/* Verificação para ocultar o botão 'Approved' */}
                                         {userPermission !== 3 && (
                                             <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                                <button onClick={() => { setTicket({ title: dat.title, description: dat.Summary, classification: dat.classification }); setShowModal(true); }} className='bg-green-500 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20'>Avaliar</button>
+                                                <button onClick={() => { setTicket({ title: dat.title, description: dat.Summary, classification: dat.classification }); setShowModal(true); getDataAndSetSelectPermission() }} className='bg-green-500 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20'>Avaliar</button>
                                             </td>
                                         )}
 
@@ -309,7 +356,7 @@ const ViewTicket = () => {
                                     </div>
                                     {/*body*/}
                                     <div className="w-full px-2 sm:px-0">
-                                        <Tab.Group defaultIndex={0}>
+                                        <Tab.Group defaultIndex={1}>
                                             <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1  pl-2 pr-2">
                                                 {tabs.map((tab) => (
                                                     <Tab className={({ selected }) =>
@@ -331,7 +378,6 @@ const ViewTicket = () => {
                                                     <div id='description' className="relative max-h-72 p-6 max-w-3x1 overflow-scroll m-6" dangerouslySetInnerHTML={{ __html: ticket.description }} />
                                                 </Tab.Panel>
                                                 <Tab.Panel>
-
                                                     <div className=" pl-2  mt-2 text-lg font-bold dark:text-black">Análise de risco:</div>
                                                     <div className='pl-2 pr-2'>
                                                         <select id="notaR" defaultValue='default' className=' pl-2 mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
@@ -362,7 +408,7 @@ const ViewTicket = () => {
                                                     </div>
 
                                                 </Tab.Panel>
-                                                
+
                                             </Tab.Panels>
                                         </Tab.Group>
                                     </div>
@@ -378,8 +424,6 @@ const ViewTicket = () => {
 
                                         <button onClick={() => teste()} className="text-white rounded-full bg-green-700  hover:bg-green-800 font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                             type="button" > Avaliar </button>
-
-                                        
                                     </div>
                                 </div>
                             </div>
