@@ -5,7 +5,7 @@ import { Header } from '../../components'
 import { useStateContext } from '../../contexts/ContextProvider'
 import { useNavigate, useParams } from 'react-router-dom';
 import { validador } from '../../utils/validador';
-import tradutorUpdateUser from '../../utils/tradutor/tradutorUpdateUser';
+import tradutorUpdateUser from '../../utils/tradutor/user/tradutorUpdateUser';
 import { useLanguage } from "../../contexts/contextLanguage";
 const Swal = require('sweetalert2')
 

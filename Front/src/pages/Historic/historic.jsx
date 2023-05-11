@@ -82,14 +82,14 @@ const Historic = () => {
                 // Atualizado
                 return "Atualizado"
             case 7:
-                    // Aprovado risco
-                    return "Avaliado risco";
+                // Aprovado risco
+                return "Avaliado risco";
             case 8:
-                    // Aprovado impacto
-                    return "Avaliado impacto"
+                // Aprovado impacto
+                return "Avaliado impacto"
             case 9:
-                    // Aprovado custo
-                    return "Avaliado custo";
+                // Aprovado custo
+                return "Avaliado custo";
             default:
                 // Caso tenha algum id que nao bate
                 return "bg-gray-500";
@@ -101,7 +101,7 @@ const Historic = () => {
             <div className="w-760 m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                 <Header category="Página" title={title} />
                 <ol className="relative border-l border-gray-400">
-                    {data.map((tiq,index) => (
+                    {data.map((tiq, index) => (
                         <li key={index} className="mb-10 ml-4">
                             <div
                                 className={`${cor(tiq.idAcao)} absolute w-3 h-3 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-600`}

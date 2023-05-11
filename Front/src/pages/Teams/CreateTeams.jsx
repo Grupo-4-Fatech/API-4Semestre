@@ -5,6 +5,8 @@ import { useStateContext } from '../../contexts/ContextProvider'
 import SelectMult from '../../components/Select';
 import { useEffect, useState } from 'react';
 import { validador } from "../../utils/validador";
+import { useLanguage } from "../../contexts/contextLanguage";
+
 const Swal = require('sweetalert2')
 
 
@@ -12,7 +14,7 @@ const Swal = require('sweetalert2')
 
 
 export default function CreateTeams() {
-
+    const { language } = useLanguage();
     const { currentColor } = useStateContext();
     const [selectMult, setSelectMult] = useState([])
     const [name, setName] = useState("")

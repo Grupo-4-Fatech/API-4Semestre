@@ -6,7 +6,7 @@ import { useStateContext } from '../../contexts/ContextProvider'
 import { useNavigate } from 'react-router-dom';
 import { validador } from '../../utils/validador';
 import { useLanguage } from "../../contexts/contextLanguage";
-import tradutorCriarUsu from '../../utils/tradutor/tradutorCriarUsu';
+import tradutorCriarUsu from '../../utils/tradutor/user/tradutorCriarUsu';
 
 const Swal = require('sweetalert2')
 

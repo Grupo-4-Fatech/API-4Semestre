@@ -1,10 +1,10 @@
 import React, { createContext, useContext, useState } from "react";
 import  translations from "../utils/tradutor/tradutorCriarGrupo";
-import translationsChamado from "../utils/tradutor/tradutorCriarChamado";
-import translationsUpdateChamado from "../utils/tradutor/tradutorUpdateChamado";
+import translationsChamado from "../utils/tradutor/ticket/tradutorCriarChamado";
+import translationsUpdateChamado from "../utils/tradutor/ticket/tradutorUpdateChamado";
 import tradutorKanban from "../utils/tradutor/tradutorKanban";
-import archivedTicktes from "../utils/tradutor/tradutorArchivedTickets";
-import visualizarChamado from "../utils/tradutor/visualizarChamado";
+import archivedTicktes from "../utils/tradutor/ticket/tradutorArchivedTickets";
+import visualizarChamado from "../utils/tradutor/ticket/tradutorVisualizarChamado";
 
 const LanguageContext = createContext();
 

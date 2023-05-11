@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import Pagination from '../../components/Paginacao/Pagination';
 import { Header } from '../../components'
 import { useLanguage } from "../../contexts/contextLanguage";
-import archivedTicktes from '../../utils/tradutor/tradutorArchivedTickets';
+import archivedTicktes from '../../utils/tradutor/ticket/tradutorArchivedTickets';
 
 
 const Swal = require('sweetalert2')
