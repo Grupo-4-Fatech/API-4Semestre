@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { KanbanComponent, ColumnsDirective, ColumnDirective } from '@syncfusion/ej2-react-kanban';
-import { kanbanGrid } from '../../data/dummy';
+import { kanbanGridPt,kanbanGridEn } from '../../data/dummy';
 import { Header } from '../../components';
 import { useAutenticacao } from '../../contexts/ContextUsuLogado.tsx';
 import { Tab } from '@headlessui/react'
 import { validador } from '../../utils/validador';
+import { useLanguage } from "../../contexts/contextLanguage";
+
 import Swal from 'sweetalert2';
+import tradutorKanban from '../../utils/tradutor/tradutorKanban';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -16,11 +19,11 @@ export default function Kanban() {
   const [data, setData] = useState([])
   const [ticket, setTicket] = useState({ id: 0, title: '', description: ``, classification: '' })
   const [searchTerm, setSearchTerm] = useState('');
-
+  const { language } = useLanguage();
   const { usuario } = useAutenticacao();
-  const tabs = ['Visualizar', 'Ações', 'Solução']
+  const tabs = [tradutorKanban[language].tabsVisualizar,tradutorKanban[language].tabsAcao, tradutorKanban[language].tabsSolucao]
   const userPermission = usuario?.role
-
+  const itensKanban = language === 'pt'? kanbanGridPt : kanbanGridEn
   const isDraggable = userPermission !== 3;
   function getData() {
     fetch("/ticket/getKanbanItem", {
@@ -61,8 +64,8 @@ export default function Kanban() {
     if (validador.estaVazio(descricao.value)) {
       Swal.fire({
         icon: 'error',
-        title: 'Falha no envio da Solução!',
-        text: 'Por favor descreva a sua solução.',
+        title: tradutorKanban[language].errorSolucaoTitle,
+        text: tradutorKanban[language].errorSolucaoText,
       })
       return
     }
@@ -104,6 +107,8 @@ export default function Kanban() {
 
   }
 
+
+
   function cardTemplate(props) {
     var color = props.Type == "Hotfix" ? "rgba(225, 30, 30, 0.813)" : "rgb(31, 207, 198)"
     return (<div style={{ borderLeft: "solid 2.5px", color: color }} className="card-template ">
@@ -132,7 +137,7 @@ export default function Kanban() {
   return (
     <>
       <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-        <Header category="App" title="Kanban" />
+        <Header category={tradutorKanban[language].page} title={tradutorKanban[language].pageTitle}/>
         <div className='flex '>
           <div className="flex-1 block relative pl-2.5 ">
             <span className="h-full absolute inset-y-0 flex items-center pl-2">
@@ -142,7 +147,7 @@ export default function Kanban() {
                 </path>
               </svg>
             </span>
-            <input placeholder="Procurar" onChange={(e) => setSearchTerm(e.target.value)}
+            <input placeholder={tradutorKanban[language].placheSearch} onChange={(e) => setSearchTerm(e.target.value)}
               className="appearance-none rounded-r-lg border border-gray-400 border-b block pl-8 pr-6 py-2 w-44 bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
           </div>
           <div className='mr-3 ' >
@@ -164,7 +169,7 @@ export default function Kanban() {
         >
           <ColumnsDirective>
             {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-            {kanbanGrid.map((item, index) => <ColumnDirective key={index} {...item} />)}
+            {itensKanban.map((item, index) => <ColumnDirective key={index} {...item} />)}
           </ColumnsDirective>
         </KanbanComponent>
       </div>
@@ -219,14 +224,14 @@ export default function Kanban() {
                         <Tab.Panel>
                           <div id='historico' className="relative max-h-72 p-6 max-w-3x1 overflow-scroll m-6">
 
-                            <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" onClick={() => window.location.href = "/ticket/update/" + ticket.id}>Atualizar Ticket</button>
-                            <button type="button" className="text-white bg-yellow-400 hover:bg-yellow-500 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" onClick={() => window.location.href = "/historic/" + ticket.id}>Histórico</button>
+                            <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" onClick={() => window.location.href = "/ticket/update/" + ticket.id}>{tradutorKanban[language].atualizarButon}</button>
+                            <button type="button" className="text-white bg-yellow-400 hover:bg-yellow-500 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" onClick={() => window.location.href = "/historic/" + ticket.id}>{tradutorKanban[language].historico}</button>
 
                           </div>
                         </Tab.Panel>
                         <Tab.Panel>
-                          <div className="pl-2 mt-2 text-lg font-bold dark:text-black">Descrição</div>
-                          <textarea id="descricao" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500  dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Digite sua solução aqui"></textarea>
+                          <div className="pl-2 mt-2 text-lg font-bold dark:text-black">{tradutorKanban[language].descricaoTitle}</div>
+                          <textarea id="descricao" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500  dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder={tradutorKanban[language].placeholderDescricao}></textarea>
                         </Tab.Panel>
                       </Tab.Panels>
                     </Tab.Group>
@@ -238,10 +243,10 @@ export default function Kanban() {
                       type="button"
                       onClick={() => setShowModal(false)}
                     >
-                      Fechar
+                      {tradutorKanban[language].buttonClose}
                     </button>
                     <button onClick={()=> teste()} type="button" className="text-white rounded-full bg-blue-700  hover:bg-blue-800 font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
-                      Confirmar
+                      {tradutorKanban[language].buttonConfirm}
                     </button>
 
                   </div>

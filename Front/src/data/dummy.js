@@ -24,7 +24,7 @@ export const gridOrderStatus = (props) => (
   </button>
 );
 
-export const kanbanGrid = [
+export const kanbanGridPt = [
   {
     headerText: 'Novo',
     keyField: 'New',
@@ -43,6 +43,26 @@ export const kanbanGrid = [
     allowToggle: true
   },
 ];
+export const kanbanGridEn = [
+  {
+    headerText: 'New',
+    keyField: 'New',
+    allowToggle: true
+  },
+
+  {
+    headerText: 'On hold',
+    keyField: 'OnHold',
+    allowToggle: true
+  },
+
+  {
+    headerText: 'Done',
+    keyField: 'Done',
+    allowToggle: true
+  },
+];
+
 
 
 
@@ -90,17 +110,17 @@ export const linksPt = [
 
   },
   {
-    title: 'Equipes',
+    title: 'Grupos',
     links: [
       {
-        title: 'Criar Equipes',
+        title: 'Criar Grupos',
         name: 'teams/create',
         icon: <FiUserPlus />,
         permission: 1,
       },
 
       {
-        title: 'Visualizar Equipes',
+        title: 'Visualizar Grupos',
         name: 'teams/view',
         icon: <FiUsers />,
         permission: 1,
@@ -115,16 +135,16 @@ export const linksPt = [
     ]
   },
   {
-    title: 'Grupos',
+    title: 'Equipes',
     links: [
       {
-        title: 'Criar Grupos',
+        title: 'Criar Equipes',
         name: 'group/create',
         icon: <FiUserPlus />,
         permission: 1,
       },
       {
-        title: 'Visualizar Grupos',
+        title: 'Visualizar Equipes',
         name: 'group/viewGroup',
         icon: <FiUsers />,
         permission: 1,
@@ -135,7 +155,7 @@ export const linksPt = [
     title: 'Árvore de aprovação',
     links: [
       {
-        title:'Criar árvore',
+        title:'Gerenciar árvore',
         name: 'tree/create',
         icon: <FiCheckSquare/>,
         permission: 1,
@@ -149,19 +169,19 @@ export const linksEn = [
     title: 'Tickets',
     links: [
       {
-        title: 'saokdoas',
+        title: 'Create tickets',
         name: 'ticket/create',
         icon: <FiEdit />,
         permission: 3,
       },
       {
-        title: 'Visualizar Chamados',
+        title: 'View Tickets',
         name: 'ViewTicket',
         icon: <MdOutlineViewAgenda />,
         permission: 3,
       },
       {
-        title: 'Chamados Arquivados',
+        title: 'Archived Tickets',
         name: 'ArchivedTicket',
         icon: <FiArchive />,
         permission: 2,
@@ -169,16 +189,16 @@ export const linksEn = [
     ],
   },
   {
-    title: 'Usuário',
+    title: 'User',
     links: [
       {
-        title: 'Criar Usuário',
+        title: 'Create User',
         name: 'user/create',
         icon: <FiUserPlus />,
         permission: 1,
       },
       {
-        title: 'Visualizar Usuários',
+        title: 'View User',
         name: 'user/view',
         icon: <MdOutlinePermContactCalendar />,
         permission: 1,
@@ -187,17 +207,17 @@ export const linksEn = [
 
   },
   {
-    title: 'Equipes',
+    title: 'Teams',
     links: [
       {
-        title: 'Criar Equipes',
+        title: 'Create Team',
         name: 'teams/create',
         icon: <FiUserPlus />,
         permission: 1,
       },
 
       {
-        title: 'Visualizar Equipes',
+        title: 'View Team',
         name: 'teams/view',
         icon: <FiUsers />,
         permission: 1,
@@ -212,16 +232,16 @@ export const linksEn = [
     ]
   },
   {
-    title: 'Grupos',
+    title: 'Group',
     links: [
       {
-        title: 'Criar Grupos',
+        title: 'Create Group',
         name: 'group/create',
         icon: <FiUserPlus />,
         permission: 1,
       },
       {
-        title: 'Visualizar Grupos',
+        title: 'View Group',
         name: 'group/viewGroup',
         icon: <FiUsers />,
         permission: 1,
@@ -229,10 +249,10 @@ export const linksEn = [
     ]
   },
   {
-    title: 'Árvore de aprovação',
+    title: 'Approval tree',
     links: [
       {
-        title:'Criar árvore',
+        title:'Manage tree',
         name: 'tree/create',
         icon: <FiCheckSquare/>,
         permission: 1,

@@ -5,11 +5,15 @@ import { Header } from '../../components'
 import { useStateContext } from '../../contexts/ContextProvider'
 import { useNavigate } from 'react-router-dom';
 import { validador } from '../../utils/validador';
+import { useLanguage } from "../../contexts/contextLanguage";
+
 const Swal = require('sweetalert2')
 
 
 export default function CreateUser() {
     const { currentColor } = useStateContext();
+    const { language } = useLanguage();
+
 
     let location = useNavigate();
     function comeback() {

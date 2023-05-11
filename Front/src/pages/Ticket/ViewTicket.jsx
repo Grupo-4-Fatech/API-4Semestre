@@ -5,6 +5,9 @@ import { Header } from '../../components'
 import { useAutenticacao } from '../../contexts/ContextUsuLogado.tsx';
 import { Tab } from '@headlessui/react'
 import { validador } from '../../utils/validador';
+import { useLanguage } from "../../contexts/contextLanguage";
+import visualizarChamado from '../../utils/tradutor/visualizarChamado';
+
 
 const Swal = require('sweetalert2')
 
@@ -12,16 +15,18 @@ let PageSize = 5;
 
 
 const ViewTicket = () => {
-
+    const { language } = useLanguage();
     const { currentColor } = useStateContext();
     const { usuario } = useAutenticacao();
     const [showModal, setShowModal] = React.useState(false);
     const [ticket, setTicket] = useState({ title: '', description: ``, classification: '' });
     const [currentPage, setCurrentPage] = useState(1);
-    const headers = ['Título', 'Classificação', 'Editar', 'Avaliar']
+    const headers = [visualizarChamado[language].headerTitulo, visualizarChamado[language].headerClassificacao, visualizarChamado[language].headerEditar, visualizarChamado[language].headerAvaliar]
     const [data, setData] = useState([])
     const [searchTerm, setSearchTerm] = useState('');
-    const tabs = ['Visualizar', 'Avaliar']
+    const tabs = [visualizarChamado[language].tabsVisualizar, visualizarChamado[language].tabsAvaliar]
+
+
     const userPermission = usuario?.role
     const [grupos, setGrupos] = useState([])
 
@@ -123,16 +128,16 @@ const ViewTicket = () => {
         if (validador.selectEstaDefault(notar)) {
             Swal.fire({
                 icon: 'error',
-                title: 'Falha na avaliação!',
-                text: 'Por favor selecione a nota de Risco',
+                title: visualizarChamado[language].errotTitle,
+                text: visualizarChamado[language].selectDefautlNotarText,
             })
             return
         }
         if (validador.selectEstaDefault(notai)) {
             Swal.fire({
                 icon: 'error',
-                title: 'Falha na avaliação!',
-                text: 'Por favor selecione a nota Impacto',
+                title: visualizarChamado[language].errotTitle,
+                text: visualizarChamado[language].selectDefautlNotaiText,
             })
             return
         }
@@ -140,8 +145,8 @@ const ViewTicket = () => {
         if (validador.selectEstaDefault(notac)) {
             Swal.fire({
                 icon: 'error',
-                title: 'Falha na avaliação!',
-                text: 'Por favor selecione a nota Custo',
+                title: visualizarChamado[language].errotTitle,
+                text: visualizarChamado[language].selectDefautlNotacText,
             })
             return
         }
@@ -150,15 +155,15 @@ const ViewTicket = () => {
                 title: `Você deseja avaliar o risco como ${notar.value}?`,
                 showDenyButton: true,
                 showCancelButton: true,
-                confirmButtonText: 'Avaliar',
-                denyButtonText: `Não avaliar`,
-                cancelButtonText: `Cancelar`,
+                confirmButtonText: visualizarChamado[language].AvaliarButton,
+                denyButtonText: visualizarChamado[language].DennyButton,
+                cancelButtonText: visualizarChamado[language].cancelButton,
             }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
-                    Swal.fire('Avaliado!', '', 'success')
+                    Swal.fire(visualizarChamado[language].messageAvaliado, '', 'success')
                 } else if (result.isDenied) {
-                    Swal.fire('Não avalidado', '', 'info')
+                    Swal.fire(visualizarChamado[language].messageNaoAvaliado, '', 'info')
                 }
             })
             return
@@ -168,15 +173,15 @@ const ViewTicket = () => {
                 title: `Você deseja avaliar o impacto como ${notai.value}?`,
                 showDenyButton: true,
                 showCancelButton: true,
-                confirmButtonText: 'Avaliar',
-                denyButtonText: `Não avaliar`,
-                cancelButtonText: `Cancelar`,
+                confirmButtonText: visualizarChamado[language].AvaliarButton,
+                denyButtonText: visualizarChamado[language].DennyButton,
+                cancelButtonText: visualizarChamado[language].cancelButton,
             }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
-                    Swal.fire('Avaliado!', '', 'success')
+                    Swal.fire(visualizarChamado[language].messageAvaliado, '', 'success')
                 } else if (result.isDenied) {
-                    Swal.fire('Não avalidado', '', 'info')
+                    Swal.fire(visualizarChamado[language].messageNaoAvaliado, '', 'info')
                 }
             })
             return
@@ -187,15 +192,15 @@ const ViewTicket = () => {
                 title: `Você deseja avaliar o custo como ${notac.value}?`,
                 showDenyButton: true,
                 showCancelButton: true,
-                confirmButtonText: 'Avaliar',
-                denyButtonText: `Não avaliar`,
-                cancelButtonText: `Cancelar`,
+                confirmButtonText: visualizarChamado[language].AvaliarButton,
+                denyButtonText: visualizarChamado[language].DennyButton,
+                cancelButtonText: visualizarChamado[language].cancelButton,
             }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
-                    Swal.fire('Avaliado!', '', 'success')
+                    Swal.fire(visualizarChamado[language].messageAvaliado, '', 'success')
                 } else if (result.isDenied) {
-                    Swal.fire('Não avalidado', '', 'info')
+                    Swal.fire(visualizarChamado[language].messageNaoAvaliado, '', 'info')
                 }
             })
             return
@@ -280,7 +285,7 @@ const ViewTicket = () => {
     return (
         <>
             <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-                <Header category="Página" title="Visualizar chamados" />
+                <Header category={visualizarChamado[language].page} title={visualizarChamado[language].pageTitle} />
                 <div className="block relative">
                     <span className="h-full absolute inset-y-0 left-0 flex items-center pl-2">
                         <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current text-gray-500">
@@ -289,7 +294,7 @@ const ViewTicket = () => {
                             </path>
                         </svg>
                     </span>
-                    <input placeholder="Procurar" onChange={(e) => setSearchTerm(e.target.value)}
+                    <input placeholder={visualizarChamado[language].placheSearch} onChange={(e) => setSearchTerm(e.target.value)}
                         className="appearance-none rounded-r-lg border border-gray-400 border-b block pl-8 pr-6 py-2 w-44 bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
                 </div>
                 <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -321,7 +326,7 @@ const ViewTicket = () => {
                                         </td>
 
                                         <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                            <button onClick={() => { window.location.href = "/ticket/update/" + dat.id }} style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Editar</button>
+                                            <button onClick={() => { window.location.href = "/ticket/update/" + dat.id }} style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">{visualizarChamado[language].editarButton}</button>
                                         </td>
 
                                         {/* Verificação para ocultar o botão 'Archive' */}
@@ -334,12 +339,13 @@ const ViewTicket = () => {
                                         {/* Verificação para ocultar o botão 'Approved' */}
                                         {userPermission !== 3 && (
                                             <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
+
                                                 <button
                                                     onClick={() => { setTicket({ title: dat.title, description: dat.Summary, classification: dat.classification }); setShowModal(true); getDataAndSetSelectPermission() }}
                                                     className={`bg-green-500 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20 ${!allUserIds.includes(usuario.id) ? 'bg-gray-400 cursor-not-allowed' : ''}`}
                                                     disabled={!allUserIds.includes(usuario.id)}
                                                 >
-                                                    Avaliar
+                                                    {visualizarChamado[language].avaliarButton}
                                                 </button>
                                             </td>
                                         )}
@@ -408,29 +414,30 @@ const ViewTicket = () => {
                                                     <div id='description' className="relative max-h-72 p-6 max-w-3x1 overflow-scroll m-6" dangerouslySetInnerHTML={{ __html: ticket.description }} />
                                                 </Tab.Panel>
                                                 <Tab.Panel>
-                                                    <div className=" pl-2  mt-2 text-lg font-bold dark:text-black">Análise de risco:</div>
+
+                                                    <div className=" pl-2  mt-2 text-lg font-bold dark:text-black">{visualizarChamado[language].titleRisco}</div>
                                                     <div className='pl-2 pr-2'>
                                                         <select id="notaR" defaultValue='default' className=' pl-2 mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
-                                                            <option value="default" disabled>Selecione uma nota:</option>
+                                                            <option value="default" disabled>{visualizarChamado[language].selectNota}</option>
                                                             <option value="1">1</option>
                                                             <option value="2">2</option>
                                                             <option value="3">3</option>
                                                         </select>
                                                     </div>
 
-                                                    <div className="pl-2 mt-2 text-lg font-bold dark:text-black">Análise de impacto:</div>
+                                                    <div className="pl-2 mt-2 text-lg font-bold dark:text-black">{visualizarChamado[language].titleImpacto}</div>
                                                     <div className='pl-2 pr-2'>
                                                         <select id="notaI" defaultValue='default' className='pl-2 mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
-                                                            <option value="default" disabled>Selecione uma nota:</option>
+                                                            <option value="default" disabled>{visualizarChamado[language].selectNota}</option>
                                                             <option value="1">1</option>
                                                             <option value="2">2</option>
                                                             <option value="3">3</option>
                                                         </select>
                                                     </div>
-                                                    <div className="pl-2 mt-2 text-lg font-bold dark:text-black">Análise de custo:</div>
+                                                    <div className="pl-2 mt-2 text-lg font-bold dark:text-black">{visualizarChamado[language].titleCusto}</div>
                                                     <div className='pl-2 pr-2'>
                                                         <select id="notaC" defaultValue='default' className='pl-2 mt-2 my-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
-                                                            <option value="default" disabled>Selecione uma nota:</option>
+                                                            <option value="default" disabled>{visualizarChamado[language].selectNota}</option>
                                                             <option value="1">1</option>
                                                             <option value="2">2</option>
                                                             <option value="3">3</option>
@@ -449,11 +456,13 @@ const ViewTicket = () => {
                                             type="button"
                                             onClick={() => setShowModal(false)}
                                         >
-                                            Fechar
+                                            {visualizarChamado[language].closeButton}
                                         </button>
 
                                         <button onClick={() => teste()} className="text-white rounded-full bg-green-700  hover:bg-green-800 font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                            type="button" > Avaliar </button>
+
+
+                                            type="button" >{visualizarChamado[language].avaliarButton} </button>
                                     </div>
                                 </div>
                             </div>

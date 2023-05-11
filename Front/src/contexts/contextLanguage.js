@@ -1,7 +1,10 @@
 import React, { createContext, useContext, useState } from "react";
-import  translations from "../utils/tradutorCriarGrupo";
-import translationsChamado from "../utils/tradutorCriarChamado";
-import translationsUpdateChamado from "../utils/tradutorUpdateChamado";
+import  translations from "../utils/tradutor/tradutorCriarGrupo";
+import translationsChamado from "../utils/tradutor/tradutorCriarChamado";
+import translationsUpdateChamado from "../utils/tradutor/tradutorUpdateChamado";
+import tradutorKanban from "../utils/tradutor/tradutorKanban";
+import archivedTicktes from "../utils/tradutor/tradutorArchivedTickets";
+import visualizarChamado from "../utils/tradutor/visualizarChamado";
 
 const LanguageContext = createContext();
 
@@ -25,6 +28,9 @@ const LanguageProvider = ({ children }) => {
     translations: translations[language],
     translationsChamado : translationsChamado[language],
     translationsUpdateChamado: translationsUpdateChamado[language],
+    tradutorKanban: tradutorKanban[language],
+    archivedTicktes:archivedTicktes[language],
+    visualizarChamado: visualizarChamado[language],
     changeLanguage,
   };
 
