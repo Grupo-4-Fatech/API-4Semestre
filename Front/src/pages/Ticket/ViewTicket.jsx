@@ -25,11 +25,11 @@ const ViewTicket = () => {
     const [data, setData] = useState([])
     const [searchTerm, setSearchTerm] = useState('');
     const tabs = [visualizarChamado[language].tabsVisualizar, visualizarChamado[language].tabsAvaliar]
-    const [avaliacao, setAvalicao] = useState([]);
-
-
     const userPermission = usuario?.role
     const [grupos, setGrupos] = useState([])
+    const riscoUsers = getUsersByGroup(grupos, 'Grupo Risco');
+    const custoUsers = getUsersByGroup(grupos, 'Grupo Custo');
+    const impactoUsers = getUsersByGroup(grupos, 'Grupo Impacto');
 
     function getUsersByGroup(groups, groupName) {
         const group = groups.find(group => group.name.toLowerCase() === groupName.toLowerCase());
@@ -49,10 +49,6 @@ const ViewTicket = () => {
         const riscoSelect = document.getElementById('notaR');
         const custoSelect = document.getElementById('notaC');
         const impactoSelect = document.getElementById('notaI');
-
-        const riscoUsers = getUsersByGroup(groups, 'Grupo Risco');
-        const custoUsers = getUsersByGroup(groups, 'Grupo Custo');
-        const impactoUsers = getUsersByGroup(groups, 'Grupo Impacto');
 
         if (!hasPermission(riscoUsers, loggedInUser)) {
             riscoSelect.disabled = true;
@@ -121,12 +117,11 @@ const ViewTicket = () => {
 
     const allUserIds = getAllUserIds(grupos);
 
-
     function teste(e) {
         const notai = document.getElementById("notaI")
         const notar = document.getElementById("notaR")
         const notac = document.getElementById("notaC")
-        if (validador.selectEstaDefault(notar)) {
+        if (hasPermission(riscoUsers, usuario.id) && validador.selectEstaDefault(notar)) {
             Swal.fire({
                 icon: 'error',
                 title: visualizarChamado[language].errotTitle,
@@ -134,7 +129,7 @@ const ViewTicket = () => {
             })
             return
         }
-        if (validador.selectEstaDefault(notai)) {
+        if (hasPermission(impactoUsers, usuario.id) && validador.selectEstaDefault(notai)) {
             Swal.fire({
                 icon: 'error',
                 title: visualizarChamado[language].errotTitle,
@@ -142,8 +137,7 @@ const ViewTicket = () => {
             })
             return
         }
-        console.log(notai.value);
-        if (validador.selectEstaDefault(notac)) {
+        if (hasPermission(custoUsers, usuario.id) && validador.selectEstaDefault(notac)) {
             Swal.fire({
                 icon: 'error',
                 title: visualizarChamado[language].errotTitle,
@@ -167,7 +161,6 @@ const ViewTicket = () => {
                     Swal.fire(visualizarChamado[language].messageNaoAvaliado, '', 'info')
                 }
             })
-            return
         }
         if (validador.selectAvaliar(notai)) {
             Swal.fire({
@@ -185,7 +178,6 @@ const ViewTicket = () => {
                     Swal.fire(visualizarChamado[language].messageNaoAvaliado, '', 'info')
                 }
             })
-            return
         }
 
         if (validador.selectAvaliar(notac)) {
@@ -204,65 +196,8 @@ const ViewTicket = () => {
                     Swal.fire(visualizarChamado[language].messageNaoAvaliado, '', 'info')
                 }
             })
-            return
         }
     }
-    // const Aproved = (id, status) => {
-    //     fetch("/ticket/updateStatus", {
-    //         method: 'PATCH',
-    //         headers: {
-    //             'Content-Type': 'application/json;charset=utf-8'
-    //         },
-    //         body: JSON.stringify({ id: id, status: status })
-    //     }).then((resposta) => resposta.json()).then((response) => {
-    //         if (response.error) {
-    //             Swal.fire({
-    //                 icon: 'error',
-    //                 title: 'Ticket not archived',
-    //             })
-    //         }
-    //         else {
-
-    //             Swal.fire({
-    //                 icon: 'success',
-    //                 title: 'Ticket approved successfully',
-    //             })
-    //             var updateData = data.filter(item => item.id != id)
-    //             setData(updateData)
-
-    //         }
-
-    //     })
-
-
-    // }
-    // const Archive = (id, status) => {
-    //     fetch("/ticket/updateStatus", {
-    //         method: 'PATCH',
-    //         headers: {
-    //             'Content-Type': 'application/json;charset=utf-8'
-    //         },
-    //         body: JSON.stringify({ id: id, status: status })
-    //     }).then((resposta) => resposta.json()).then((response) => {
-    //         if (response.error) {
-    //             Swal.fire({
-    //                 icon: 'error',
-    //                 title: 'Chamado não arquivado',
-    //             })
-    //         }
-    //         else {
-
-    //             Swal.fire({
-    //                 icon: 'success',
-    //                 title: 'Chamado arquivado com sucesso',
-    //             })
-    //             var updateData = data.filter(item => item.id != id)
-    //             setData(updateData)
-
-    //         }
-
-    //     })
-    // }
 
     const currentTableData = useMemo(() => {
         const firstPageIndex = (currentPage - 1) * PageSize;
@@ -330,14 +265,7 @@ const ViewTicket = () => {
                                             <button onClick={() => { window.location.href = "/ticket/update/" + dat.id }} style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">{visualizarChamado[language].editarButton}</button>
                                         </td>
 
-                                        {/* Verificação para ocultar o botão 'Archive' */}
-                                        {/* {userPermission !== 3 && (
-                                            <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                                <button onClick={(e) => Archive(dat.id, 2)} className='bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20'>Archive</button>
-                                            </td>
-                                        )} */}
-
-                                        {/* Verificação para ocultar o botão 'Approved' */}
+                                        {/* Verificação para disable o botão 'Avaliar' */}
                                         {userPermission !== 3 && (
                                             <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
 
@@ -461,8 +389,6 @@ const ViewTicket = () => {
                                         </button>
 
                                         <button onClick={() => teste()} className="text-white rounded-full bg-green-700  hover:bg-green-800 font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-
-
                                             type="button" >{visualizarChamado[language].avaliarButton} </button>
                                     </div>
                                 </div>
