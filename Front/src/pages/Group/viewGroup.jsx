@@ -1,14 +1,17 @@
 import { useStateContext } from '../../contexts/ContextProvider'
 import { Header } from "../../components";
 import { useState, useEffect, useMemo } from 'react';
+import { useLanguage } from "../../contexts/contextLanguage";
 import Pagination from '../../components/Paginacao/Pagination';
+import tradutorViewGroup from '../../utils/tradutor/group/tradutorViewGroup';
 
 const Swal = require('sweetalert2')
 
 const ViewGroup = () => {
+    const { language } = useLanguage();
     const { currentColor } = useStateContext();
     const [currentPage, setCurrentPage] = useState(1);
-    const headers = ['Nome da Equipe', 'Editar', 'Deletar']
+    const headers = [tradutorViewGroup[language].headersNomeEquipe, tradutorViewGroup[language].headersEditar, tradutorViewGroup[language].headersDeletar]
     const [data, setData] = useState([])
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -45,17 +48,17 @@ const ViewGroup = () => {
             if (response.error) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'A equipe não pode ser excluída',
-                    text: 'Antes de excluir a equipe, verifique se a equipe possui um time.'
+                    title: tradutorViewGroup[language].errorDeleteTitle,
+                    text: tradutorViewGroup[language].errorDeleteText
                 })
             }
             else {
 
                 Swal.fire({
                     icon: 'success',
-                    title: 'Equipe excluída com sucesso',
+                    title: tradutorViewGroup[language].succssesfulyDelete,
                 })
-                var updateData = data.filter(item => item.id != id)
+                var updateData = data.filter(item => item.id !== id)
                 setData(updateData)
             }
         })
@@ -78,7 +81,7 @@ const ViewGroup = () => {
     }, [searchTerm])
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-            <Header category="Página" title="Visualizar Equipes" />
+            <Header category={tradutorViewGroup[language].page} title={tradutorViewGroup[language].pageTitle} />
             <div className="block relative">
                 <span className="h-full absolute inset-y-0 left-0 flex items-center pl-2">
                     <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current text-gray-500">
@@ -87,7 +90,7 @@ const ViewGroup = () => {
                         </path>
                     </svg>
                 </span>
-                <input placeholder="Procurar" onChange={(e) => setSearchTerm(e.target.value)}
+                <input placeholder={tradutorViewGroup[language].searchPlaceholder} onChange={(e) => setSearchTerm(e.target.value)}
                     className="appearance-none rounded-r-lg border border-gray-400 border-b block pl-8 pr-6 py-2 w-44 bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
             </div>
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -108,10 +111,10 @@ const ViewGroup = () => {
                                         {dat.nome}
                                     </td>
                                     <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                        <button style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" onClick={() => window.location.href = "/group/update/" + dat.id}>Editar</button>
+                                        <button style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" onClick={() => window.location.href = "/group/update/" + dat.id}>{tradutorViewGroup[language].editarButton}</button>
                                     </td>
                                     <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                        <button className="bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" onClick={() => deleteGroup(dat.id)}>Deletar</button>
+                                        <button className="bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" onClick={() => deleteGroup(dat.id)}>{tradutorViewGroup[language].deletarButton}</button>
                                     </td>
                                     <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
                                     </td>

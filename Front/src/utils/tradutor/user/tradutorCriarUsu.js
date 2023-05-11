@@ -59,7 +59,7 @@ const tradutorCriarUsu = {
         errorSenhaVazia: "Please write a password",
         errorTamanoSenha: "Password must be between 8 and 15 characters long",
         errorSelectDefaultRole: "Select a role",
-        messageSucssefuly: "User created sucssefuly",
+        messageSucssefuly: "User created succssefully",
 
     }
 };

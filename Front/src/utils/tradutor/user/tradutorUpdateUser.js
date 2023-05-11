@@ -51,7 +51,7 @@ const tradutorUpdateUser = {
         errorTamanhoEmail: "E-mail size is too big",
         errorSelectDefaultRole: "Select a role",
         errorSelectDefaultGender: "Select a gender",
-        messageSucssefuly: "User updated sucssefuly",
+        messageSucssefuly: "User updated succssesfully",
 
     }
 };

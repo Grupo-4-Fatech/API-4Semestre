@@ -1,7 +1,7 @@
-const tradutorCriarTime = {
+const tradutorAlterarTime = {
     pt: {
         page: "Página",
-        pageTitle: "Criar times",
+        pageTitle: "Alterar times",
         timeTitle: "Nome do time",
         timePlaceholder: "Escreva o nome do time",
         selectMultTitle: "Selecione os usuários",
@@ -9,22 +9,22 @@ const tradutorCriarTime = {
         selectOption: "Selecione uma opção:",
         descriptonTitle: "Descrição",
         discriptionPlaceholder: "Digite a descrição",
-        criarButton: "Criar",
-        errorTitle: "Falha ao criar equipes",
+        updateButton: "Alterar",
+        errorTitle: "Falha na atualizações das equipes",
         errorNomeVazio: "Por favor escreva um nome para a equipe",
         errorTamanhoTexto: "O tamanho do nome é muito grande",
         selectMultAddUsers: "Por favor adicione um usuário",
         selectDefaultGroup: "Selecione uma equipe",
         errorDescriptionVazio: "Por favor escreva uma descrição",
-        errorDescriptionTamanhoTexto: "O tamanho do descrição da equipe é muito grande",
-        messageSucssefuly: "Criado com sucesso",
+        errorDescriptionTamanhoTexto: "O tamanho da equipe é muito grande",
+        messageSucssefuly: "Atualizado com sucesso",
 
         
         
     },
     en: {
         page: "Page",
-        pageTitle: "Create teams",
+        pageTitle: "Update teams",
         timeTitle: "Name team",
         timePlaceholder: "Write the name team",
         selectMultTitle: "Select the user's",
@@ -32,8 +32,8 @@ const tradutorCriarTime = {
         selectOption: "Select a option",
         descriptonTitle: "Description",
         discriptionPlaceholder: "Write a description",
-        criarButton: "Create",
-        errorTitle: "Failed to create teams",
+        updateButton: "Update",
+        errorTitle: "Failed to update teams",
         errorNomeVazio: "Please write a name for the team",
         errorTamanhoTexto: "Name size is too big",
         selectMultAddUsers: "Please add a user",
@@ -46,4 +46,4 @@ const tradutorCriarTime = {
 };
 
 
-export default tradutorCriarTime;
+export default tradutorAlterarTime;
