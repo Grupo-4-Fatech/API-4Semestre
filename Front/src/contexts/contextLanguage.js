@@ -17,7 +17,7 @@ export const useLanguage = () => {
 };
 
 const LanguageProvider = ({ children }) => {
-  const [language, setLanguage] = useState( window.localStorage.getItem("language") === ""? "pt": window.localStorage.getItem("language"));
+  const [language, setLanguage] = useState( window.localStorage.getItem("language") === null? "pt": window.localStorage.getItem("language"));
  
   const changeLanguage = (selectedLanguage) => {
     setLanguage(selectedLanguage);

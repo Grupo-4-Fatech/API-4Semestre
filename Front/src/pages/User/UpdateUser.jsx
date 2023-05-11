@@ -5,6 +5,8 @@ import { Header } from '../../components'
 import { useStateContext } from '../../contexts/ContextProvider'
 import { useNavigate, useParams } from 'react-router-dom';
 import { validador } from '../../utils/validador';
+import tradutorUpdateUser from '../../utils/tradutor/tradutorUpdateUser';
+import { useLanguage } from "../../contexts/contextLanguage";
 const Swal = require('sweetalert2')
 
 
@@ -15,6 +17,8 @@ export default function UpdateUser() {
   const [email, setEmail] = useState("")
   const [gender, setGender] = useState("default")
   const [role, setRole] = useState("default")
+  const { language } = useLanguage();
+
 
 
   let location = useNavigate();
@@ -31,64 +35,56 @@ export default function UpdateUser() {
     if (validador.estaVazio(name.value)) {
       Swal.fire({
         icon: 'error',
-        title: 'Falha na atualização do usuário!',
-        text: 'Por favor, escreva um nome.',
+        title: tradutorUpdateUser[language].errorTitle,
+        text: tradutorUpdateUser[language].errorNameVazio,
       })
       return
     }
     if (validador.tamanhoTexto(name.value)) {
       Swal.fire({
         icon: 'error',
-        title: 'Falha na atualização do usuário!',
-        text: 'O tamanho do nome é muito grande.',
+        title: tradutorUpdateUser[language].errorTitle,
+        text: tradutorUpdateUser[language].errorNameTamanho,
       })
       return
     }
     if (validador.estaVazio(email.value)) {
       Swal.fire({
         icon: 'error',
-        title: 'Falha na atualização do usuário!',
-        text: 'Por favor, escreva um e-mail.',
+        title: tradutorUpdateUser[language].errorTitle,
+        text: tradutorUpdateUser[language].errorEmailVazio,
       })
       return
     }
     if (!validador.validarEmail(email.value)) {
       Swal.fire({
         icon: 'error',
-        title: 'Falha na atualização do usuário!',
-        text: 'O e-mail deve ter @ e .com.',
+        title: tradutorUpdateUser[language].errorTitle,
+        text: tradutorUpdateUser[language].errorValidarEmail,
       })
       return
     }
     if (validador.tamanhoTexto(email.value)) {
       Swal.fire({
         icon: 'error',
-        title: 'Falha na atualização do usuário!',
-        text: 'O tamanho do e-mail é muito grande.',
+        title: tradutorUpdateUser[language].errorTitle,
+        text: tradutorUpdateUser[language].errorTamanhoEmail,
       })
       return
     }
     if (validador.selectEstaDefault(role.value)) {
       Swal.fire({
         icon: 'error',
-        title: 'Falha na atualização do usuário!',
-        text: 'Selecione uma função.',
-      })
-      return
-    }
-    if (validador.tamanhoTexto(role.value)) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Falha na atualização do usuário!',
-        text: 'O tamanho da função é muito grande',
+        title: tradutorUpdateUser[language].errorTitle,
+        text: tradutorUpdateUser[language].errorSelectDefaultRole,
       })
       return
     }
     if (validador.selectEstaDefault(gender)) {
       Swal.fire({
         icon: 'error',
-        title: 'Falha na atualização do usuário!',
-        text: 'Selecione um gênero.',
+        title: tradutorUpdateUser[language].errorTitle,
+        text: tradutorUpdateUser[language].errorSelectDefaultGender,
       })
       return
     }
@@ -104,12 +100,12 @@ export default function UpdateUser() {
       if (data.error) {
         Swal.fire({
           icon: 'error',
-          title: 'Falha ao atualizar o usuário.',
+          title: tradutorUpdateUser[language].errorTitle,
         })
       } else {
         Swal.fire({
           icon: 'success',
-          title: 'Atualizado com sucesso.',
+          title: tradutorUpdateUser[language].messageSucssefuly,
         }).then((result) => result.isConfirmed ? comeback() : '')
 
       }
@@ -137,27 +133,27 @@ export default function UpdateUser() {
   useEffect(() => { getData() }, [])
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-      <Header category="Página" title="Atualizar usuário" />
-      <Campo text="Nome" id="name" placeholder="Nome" type={"text"} value={name} setValue={setName} />
-      <Campo text="Email" id="email" placeholder="Email" type={"text"} value={email} setValue={setEmail} />
-      <label className="text-lg font-bold dark:text-black " >Selecione um gênero</label>
+      <Header category={tradutorUpdateUser[language].page} title={tradutorUpdateUser[language].pageTitle}/>
+      <Campo text={tradutorUpdateUser[language].nomeTitle} id="name" placeholder={tradutorUpdateUser[language].nomePlaceholder} type={"text"} value={name} setValue={setName} />
+      <Campo text={tradutorUpdateUser[language].emailTitle} id="email" placeholder={tradutorUpdateUser[language].emailPlaceholder} type={"text"} value={email} setValue={setEmail} />
+      <label className="text-lg font-bold dark:text-black " >{tradutorUpdateUser[language].selectTitleGender}</label>
       <select id="gender" onChange={(e) => setGender(e.target.value)} value={gender} className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
-        <option value="default" disabled>Selecione uma opção:</option>
-        <option value="Male">Masculino</option>
-        <option value="Female">Feminino</option>
+        <option value="default" disabled>{tradutorUpdateUser[language].selectTitleOp}</option>
+        <option value="Male">{tradutorUpdateUser[language].selectTitleGenderOp2}</option>
+        <option value="Female">{tradutorUpdateUser[language].selectTitleGenderOp3}</option>
       </select>
       <div className='mt-5'>
-        <label className="text-lg font-bold dark:text-black " >Selecione uma função</label>
+        <label className="text-lg font-bold dark:text-black " >{tradutorUpdateUser[language].selectTitleRole}</label>
         <select disabled id="role" onChange={(e) => setRole(e.target.value)} value={role} className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
-          <option value="default" disabled >Select an option:</option>
-          <option value="1">Diretor</option>
-          <option value="2">Administrador</option>
-          <option value="3">Solicitante</option>
+          <option value="default" disabled >{tradutorUpdateUser[language].selectTitleOp}</option>
+          <option value="1">{tradutorUpdateUser[language].selectTitleRoleOp2}</option>
+          <option value="2">{tradutorUpdateUser[language].selectTitleRoleOp3}</option>
+          <option value="3">{tradutorUpdateUser[language].selectTitleRoleOp4}</option>
         </select>
       </div>
       <div className="mt-5 mb-5 flex items-center justify-end" >
         <button style={{ backgroundColor: currentColor}} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" onClick={UpdateUser}>
-          <span className='pr-1'>Atualizar</span>
+          <span className='pr-1'>{tradutorUpdateUser[language].buttonAtualizar}</span>
           <MdSend />
         </button>
       </div>
