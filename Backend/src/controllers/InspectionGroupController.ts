@@ -179,6 +179,7 @@ class InspectionGroupController {
 
 
   }
+  
 
 
 } export default new InspectionGroupController()

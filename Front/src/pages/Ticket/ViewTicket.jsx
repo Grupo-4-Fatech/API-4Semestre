@@ -25,6 +25,7 @@ const ViewTicket = () => {
     const [data, setData] = useState([])
     const [searchTerm, setSearchTerm] = useState('');
     const tabs = [visualizarChamado[language].tabsVisualizar, visualizarChamado[language].tabsAvaliar]
+    const [avaliacao, setAvalicao] = useState([]);
 
 
     const userPermission = usuario?.role
@@ -418,7 +419,7 @@ const ViewTicket = () => {
                                                     <div className=" pl-2  mt-2 text-lg font-bold dark:text-black">{visualizarChamado[language].titleRisco}</div>
                                                     <div className='pl-2 pr-2'>
                                                         <select id="notaR" defaultValue='default' className=' pl-2 mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
-                                                            <option value="default" disabled>{visualizarChamado[language].selectNota}</option>
+                                                            <option onChange={(e)=> console.log(e)} value="default" disabled>{visualizarChamado[language].selectNota}</option>
                                                             <option value="1">1</option>
                                                             <option value="2">2</option>
                                                             <option value="3">3</option>
