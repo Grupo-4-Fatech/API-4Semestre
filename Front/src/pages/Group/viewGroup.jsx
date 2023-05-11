@@ -8,7 +8,7 @@ const Swal = require('sweetalert2')
 const ViewGroup = () => {
     const { currentColor } = useStateContext();
     const [currentPage, setCurrentPage] = useState(1);
-    const headers = ['Nome do grupo', 'Editar', 'Deletar']
+    const headers = ['Nome da Equipe', 'Editar', 'Deletar']
     const [data, setData] = useState([])
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -45,15 +45,15 @@ const ViewGroup = () => {
             if (response.error) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'O grupo não pode ser excluído',
-                    text: 'Antes de excluir o grupo, verifique se o grupo possui uma equipe.'
+                    title: 'A equipe não pode ser excluída',
+                    text: 'Antes de excluir a equipe, verifique se a equipe possui um time.'
                 })
             }
             else {
 
                 Swal.fire({
                     icon: 'success',
-                    title: 'Grupo excluído com sucesso',
+                    title: 'Equipe excluída com sucesso',
                 })
                 var updateData = data.filter(item => item.id != id)
                 setData(updateData)
@@ -78,7 +78,7 @@ const ViewGroup = () => {
     }, [searchTerm])
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-            <Header category="Página" title="Visualizar Grupos" />
+            <Header category="Página" title="Visualizar Equipes" />
             <div className="block relative">
                 <span className="h-full absolute inset-y-0 left-0 flex items-center pl-2">
                     <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current text-gray-500">

@@ -1,13 +1,13 @@
 const translations = {
     pt: {
-        pageTitle: "Criar Grupo",
-        groupName: "Nome do grupo",
+        pageTitle: "Criar Equipe",
+        groupName: "Nome da Equipe",
         groupNamePlaceholder: "Escreva o nome",
         groupDescription: "Descrição",
         groupDescriptionPlaceholder: "Escreva a descrição",
         createButton: "Criar",
         successMessage: "Criado com sucesso.",
-        errorMessage: "Não foi possível criar o novo grupo.",
+        errorMessage: "Não foi possível criar uma nova equipe.",
         emptyNameMessage: "Por favor, escreva um nome.",
         largeNameMessage: "O nome é muito grande.",
         emptyDescriptionMessage: "Por favor, escreva uma descrição."

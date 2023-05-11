@@ -110,17 +110,17 @@ export const linksPt = [
 
   },
   {
-    title: 'Grupos',
+    title: 'Times',
     links: [
       {
-        title: 'Criar Grupos',
+        title: 'Criar Times',
         name: 'teams/create',
         icon: <FiUserPlus />,
         permission: 1,
       },
 
       {
-        title: 'Visualizar Grupos',
+        title: 'Visualizar Times',
         name: 'teams/view',
         icon: <FiUsers />,
         permission: 1,
