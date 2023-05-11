@@ -126,30 +126,22 @@ export default function CreateTree() {
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
             <Header category="Página" title="Árvore" />
             <div>
-                <h1 className='underline decoration-red-600 decoration-2 pb-4 text-lg font-bold dark:text-black'>
-                ANÁLISE DE RISCO
-                </h1>
+                
                 <div className='ml-2'>
-                    <SelectMult id="integrantesDoTime" dados={data} text={'Selecione os usuários'} value={risco} setValue={setRisco} />
+                    <SelectMult id="integrantesDoTime" dados={data} text={'Análise de Risco'} value={risco} setValue={setRisco} />
 
                 </div>
             </div>
             <div>
-                <h1 className='underline decoration-cyan-600 decoration-2 py-6 pb-4 text-lg font-bold dark:text-black'>
-                ANÁLISE DE IMPACTO
-                </h1>
-                <div className='ml-2'>
-                    <SelectMult id="integrantesDoTime" dados={data} text={'Selecione os usuários:'} value={impacto} setValue={setImpacto} />
+                <div className='ml-2 mt-7'>
+                    <SelectMult id="integrantesDoTime" dados={data} text={'Análise de Impacto'} value={impacto} setValue={setImpacto} />
 
                 </div>
 
             </div>
             <div>
-                <h1 className='underline decoration-green-600 decoration-2 py-6 pb-4 text-lg font-bold dark:text-black'>
-                ANÁLISE DE CUSTO
-                </h1>
-                <div className='ml-2'>
-                    <SelectMult id="integrantesDoTime" dados={data} text={'Selecione os usuários'} value={custo} setValue={setCusto} />
+                <div className='ml-2 mt-7'>
+                    <SelectMult id="integrantesDoTime" dados={data} text={'Análise de Custo'} value={custo} setValue={setCusto} />
 
                 </div>
             </div>
