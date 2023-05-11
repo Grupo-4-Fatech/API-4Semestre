@@ -1,16 +1,21 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import Pagination from '../../components/Paginacao/Pagination';
 import { Header } from '../../components'
+import { useLanguage } from "../../contexts/contextLanguage";
+import archivedTicktes from '../../utils/tradutor/tradutorArchivedTickets';
+
 
 const Swal = require('sweetalert2')
 
 let PageSize = 5;
 
 const ArchivedTicket = () => {
+    const { language } = useLanguage();
     const [currentPage, setCurrentPage] = useState(1);
-    const headers = ['Título', 'Classificação', 'Restaurar', 'Deletar']
+    const headers = [archivedTicktes[language].headerTitulo, archivedTicktes[language].headerClassificacao,archivedTicktes[language].headerRestaurar , archivedTicktes[language].headerDeletar]
     const [data, setData] = useState([])
     const [searchTerm, setSearchTerm] = useState('');
+
     function getData() {
         fetch("/ticket/getAll/2", {
             method: 'GET',
@@ -43,14 +48,14 @@ const ArchivedTicket = () => {
             if (response.error) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Chamado não restaurado',
+                    title: archivedTicktes[language].swalError,
                 })
             }
             else {
 
                 Swal.fire({
                     icon: 'success',
-                    title: 'Chamado restaurado com sucesso',
+                    title: archivedTicktes[language].swalSucsses,
                 })
                 var updateData = data.filter(item => item.id != id)
                 setData(updateData)
@@ -69,14 +74,14 @@ const ArchivedTicket = () => {
             if (response.error) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'chamado não foi excluído!',
+                    title: archivedTicktes[language].swalErrorDelete,
                 })
             }
             else {
 
                 Swal.fire({
                     icon: 'success',
-                    title: 'Chamado Excluido!',
+                    title: archivedTicktes[language].swalSucssesDeleted,
                 })
                 var deleteData = data.filter(item => item.id != id)
                 setData(deleteData)
@@ -99,7 +104,7 @@ const ArchivedTicket = () => {
     }, [])
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-            <Header category="Página" title="Chamados arquivados" />
+            <Header category={archivedTicktes[language].page} title={archivedTicktes[language].pageTitle} />
             <div className="block relative">
                 <span className="h-full absolute inset-y-0 left-0 flex items-center pl-2">
                     <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current text-gray-500">
@@ -108,7 +113,7 @@ const ArchivedTicket = () => {
                         </path>
                     </svg>
                 </span>
-                <input placeholder="Search" onChange={(e) => setSearchTerm(e.target.value)}
+                <input placeholder={archivedTicktes[language].placheSearch} onChange={(e) => setSearchTerm(e.target.value)}
                     className="appearance-none rounded-r rounded-l sm:rounded-l-none border border-gray-400 border-b block pl-8 pr-6 py-2 w-44 bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
             </div>
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -132,11 +137,11 @@ const ArchivedTicket = () => {
                                 </td>
 
                                 <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                    <button onClick={(e) => restore(dat.id, 1)} className="bg-green-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Restaurar</button>
+                                    <button onClick={(e) => restore(dat.id, 1)} className="bg-green-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">{archivedTicktes[language].restaurarButton}</button>
                                 </td>
 
                                 <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                    <button onClick={(e) => deleteTicket(dat.id)} className="bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Deletar</button>
+                                    <button onClick={(e) => deleteTicket(dat.id)} className="bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">{archivedTicktes[language].deletarButton}</button>
                                 </td>
 
                                 <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">

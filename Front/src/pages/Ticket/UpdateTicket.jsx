@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { validador } from '../../utils/validador';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useLanguage } from "../../contexts/contextLanguage";
-import translationsUpdateChamado from '../../utils/tradutorUpdateChamado';
+import translationsUpdateChamado from '../../utils/tradutor/tradutorUpdateChamado';
 
 
 const Swal = require('sweetalert2')

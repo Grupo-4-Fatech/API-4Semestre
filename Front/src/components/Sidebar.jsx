@@ -23,8 +23,8 @@ const Sidebar = () => {
 
   const userPermission = usuario?.role
   function getFilteredLinks() {
-    const linguagem = language === "pt" ? linksPt : linksEn
-    const newLinks = linguagem
+    // const linguagem = language === "pt" ? linksPt : linksEn
+    const newLinks = language === "pt" ? linksPt : linksEn
       .map((item) => {
         const filteredLinks = item.links.filter((link) => link.permission >= userPermission);
         if (filteredLinks.length > 0) {
