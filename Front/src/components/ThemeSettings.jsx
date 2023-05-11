@@ -11,6 +11,7 @@ const ThemeSettings = () => {
   const { language, changeLanguage } = useLanguage();
   const handleLanguageChange = (event) => {
     changeLanguage(event.target.value);
+    window.localStorage.setItem("language", event.target.value)
   };
 
   return (
