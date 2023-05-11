@@ -20,7 +20,7 @@ const visualizarChamado = {
         DennyButton: "Não avaliar",
         cancelButton: "Cancelar",
         messageAvaliado: "Avaliado",
-        messageNaoAvaliado: "Não avalidado",
+        messageNaoAvaliado: "Não avaliado",
         titleRisco:"Análise de risco:",
         titleImpacto:"Análise de impacto:",
         titleCusto: "Análise de custo:",
