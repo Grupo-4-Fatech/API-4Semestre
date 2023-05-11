@@ -23,6 +23,7 @@ const ViewTicket = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const tabs = ['Visualizar', 'Avaliar']
     const userPermission = usuario?.role
+    const [grupos, setGrupos] = useState([])
 
     function getUsersByGroup(groups, groupName) {
         const group = groups.find(group => group.name.toLowerCase() === groupName.toLowerCase());
@@ -90,7 +91,30 @@ const ViewTicket = () => {
             });
             setData(tickets)
         })
+        fetch("/InspectionGroup/list", {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            }
+        }).then((resposta) => resposta.json()).then((data) => {
+            setGrupos(data);
+        })
     }
+
+    function getAllUserIds(groups) {
+        const allUserIds = [];
+
+        groups.forEach(group => {
+            group.users.forEach(user => {
+                allUserIds.push(user.id);
+            });
+        });
+
+        return allUserIds;
+    }
+
+    const allUserIds = getAllUserIds(grupos);
+
 
     function teste(e) {
         const notai = document.getElementById("notaI")
@@ -310,7 +334,13 @@ const ViewTicket = () => {
                                         {/* Verificação para ocultar o botão 'Approved' */}
                                         {userPermission !== 3 && (
                                             <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                                <button onClick={() => { setTicket({ title: dat.title, description: dat.Summary, classification: dat.classification }); setShowModal(true); getDataAndSetSelectPermission() }} className='bg-green-500 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20'>Avaliar</button>
+                                                <button
+                                                    onClick={() => { setTicket({ title: dat.title, description: dat.Summary, classification: dat.classification }); setShowModal(true); getDataAndSetSelectPermission() }}
+                                                    className={`bg-green-500 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20 ${!allUserIds.includes(usuario.id) ? 'bg-gray-400 cursor-not-allowed' : ''}`}
+                                                    disabled={!allUserIds.includes(usuario.id)}
+                                                >
+                                                    Avaliar
+                                                </button>
                                             </td>
                                         )}
 
