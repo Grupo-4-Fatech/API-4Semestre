@@ -81,6 +81,15 @@ const Historic = () => {
             case 6:
                 // Atualizado
                 return "Atualizado"
+            case 7:
+                    // Aprovado risco
+                    return "Avaliado risco";
+            case 8:
+                    // Aprovado impacto
+                    return "Avaliado impacto"
+            case 9:
+                    // Aprovado custo
+                    return "Avaliado custo";
             default:
                 // Caso tenha algum id que nao bate
                 return "bg-gray-500";

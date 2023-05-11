@@ -21,6 +21,15 @@ export class Ticket {
     @Column( {})
     status: string;
 
+    @Column({nullable: true, default: ""})
+    risk: string;
+
+    @Column({nullable: true, default: ""})
+    impact: string;
+     
+    @Column({nullable: true, default: ""})
+    cost: string;
+
     @ManyToOne(() => Teams, (teams) => teams.id)
     teams: Teams[]
 

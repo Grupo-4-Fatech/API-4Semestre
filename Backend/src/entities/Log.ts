@@ -15,13 +15,7 @@ export class Log{
     action: string;
 
     @Column({nullable: true, default: ""})
-    risk: string;
-
-    @Column({nullable: true, default: ""})
     value: string;
-     
-    @Column({nullable: true, default: ""})
-    cost: string;
 
     @ManyToOne(() => Ticket, (ticket) => ticket.id)
     tickets: Array<Ticket>;

@@ -161,7 +161,6 @@ const ViewTicket = () => {
                     Swal.fire(visualizarChamado[language].messageNaoAvaliado, '', 'info')
                 }
             })
-            return
         }
         if (validador.selectAvaliar(notai)) {
             Swal.fire({
@@ -179,7 +178,6 @@ const ViewTicket = () => {
                     Swal.fire(visualizarChamado[language].messageNaoAvaliado, '', 'info')
                 }
             })
-            return
         }
 
         if (validador.selectAvaliar(notac)) {
@@ -198,65 +196,8 @@ const ViewTicket = () => {
                     Swal.fire(visualizarChamado[language].messageNaoAvaliado, '', 'info')
                 }
             })
-            return
         }
     }
-    // const Aproved = (id, status) => {
-    //     fetch("/ticket/updateStatus", {
-    //         method: 'PATCH',
-    //         headers: {
-    //             'Content-Type': 'application/json;charset=utf-8'
-    //         },
-    //         body: JSON.stringify({ id: id, status: status })
-    //     }).then((resposta) => resposta.json()).then((response) => {
-    //         if (response.error) {
-    //             Swal.fire({
-    //                 icon: 'error',
-    //                 title: 'Ticket not archived',
-    //             })
-    //         }
-    //         else {
-
-    //             Swal.fire({
-    //                 icon: 'success',
-    //                 title: 'Ticket approved successfully',
-    //             })
-    //             var updateData = data.filter(item => item.id != id)
-    //             setData(updateData)
-
-    //         }
-
-    //     })
-
-
-    // }
-    // const Archive = (id, status) => {
-    //     fetch("/ticket/updateStatus", {
-    //         method: 'PATCH',
-    //         headers: {
-    //             'Content-Type': 'application/json;charset=utf-8'
-    //         },
-    //         body: JSON.stringify({ id: id, status: status })
-    //     }).then((resposta) => resposta.json()).then((response) => {
-    //         if (response.error) {
-    //             Swal.fire({
-    //                 icon: 'error',
-    //                 title: 'Chamado não arquivado',
-    //             })
-    //         }
-    //         else {
-
-    //             Swal.fire({
-    //                 icon: 'success',
-    //                 title: 'Chamado arquivado com sucesso',
-    //             })
-    //             var updateData = data.filter(item => item.id != id)
-    //             setData(updateData)
-
-    //         }
-
-    //     })
-    // }
 
     const currentTableData = useMemo(() => {
         const firstPageIndex = (currentPage - 1) * PageSize;
@@ -324,14 +265,7 @@ const ViewTicket = () => {
                                             <button onClick={() => { window.location.href = "/ticket/update/" + dat.id }} style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">{visualizarChamado[language].editarButton}</button>
                                         </td>
 
-                                        {/* Verificação para ocultar o botão 'Archive' */}
-                                        {/* {userPermission !== 3 && (
-                                            <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                                <button onClick={(e) => Archive(dat.id, 2)} className='bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20'>Archive</button>
-                                            </td>
-                                        )} */}
-
-                                        {/* Verificação para ocultar o botão 'Approved' */}
+                                        {/* Verificação para disable o botão 'Avaliar' */}
                                         {userPermission !== 3 && (
                                             <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
 
@@ -413,7 +347,7 @@ const ViewTicket = () => {
                                                     <div className=" pl-2  mt-2 text-lg font-bold dark:text-black">{visualizarChamado[language].titleRisco}</div>
                                                     <div className='pl-2 pr-2'>
                                                         <select id="notaR" defaultValue='default' className=' pl-2 mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
-                                                            <option value="default" disabled>{visualizarChamado[language].selectNota}</option>
+                                                            <option onChange={(e)=> console.log(e)} value="default" disabled>{visualizarChamado[language].selectNota}</option>
                                                             <option value="1">1</option>
                                                             <option value="2">2</option>
                                                             <option value="3">3</option>
@@ -455,8 +389,6 @@ const ViewTicket = () => {
                                         </button>
 
                                         <button onClick={() => teste()} className="text-white rounded-full bg-green-700  hover:bg-green-800 font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-
-
                                             type="button" >{visualizarChamado[language].avaliarButton} </button>
                                     </div>
                                 </div>

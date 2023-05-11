@@ -6,6 +6,7 @@ import * as jwt from "jsonwebtoken";
 import UserController from "./UserController";
 import { User } from "../entities/Users";
 import { Log } from "../entities/Log";
+import LogController from "./LogController";
 
 
 class TicketController {
@@ -170,15 +171,60 @@ class TicketController {
     return res.json(ticket)
   }
   public async getLogs(req: Request, res: Response): Promise<Response> {
-     const id = req.params.id
+    const id = req.params.id
     var logQuery = `SELECT "Log"."date" AS "date", "Log"."action" AS "action", "Log"."ticketsId" AS "ticketsId", "Log"."usersId" AS "usersId" , "user"."name" AS "userName" FROM "log" "Log" JOIN "public"."user" "user" on "user"."id" = "Log"."usersId" where "Log"."ticketsId"= ${id} order by "date" DESC`
-    const logs : any = await AppDataSource.manager.query(logQuery);
-    
+    const logs: any = await AppDataSource.manager.query(logQuery);
+
     console.log(logs)
 
     return res.json(logs)
   }
-  public static async createLog(ticket: any, acao: string, req: any) {
+  public async avaliar(req: Request, res: Response): Promise<Response> {
+    //id, tipo, nota
+    const { data, id} = req.body;
+    const ticketRepository = AppDataSource.getRepository(Ticket)
+
+    const ticket = await ticketRepository.findOneBy({ id: id })
+    for( var item of data){
+    if (item.tipo == 1) {
+      if (item.nota == "0") {
+        ticket.status = '2'
+        ticket.risk = item.nota
+        await ticketRepository.save(ticket)
+        await TicketController.createLog(ticket, '7', req, item.nota)
+        await TicketController.createLog(ticket, '5', req)
+      } else {
+        ticket.risk = item.nota
+        await ticketRepository.save(ticket)
+        await TicketController.createLog(ticket, '2', req, item.nota)
+
+      }
+
+    } else if (item.tipo == 2) {
+      if (item.nota == "3") {
+        ticket.status = '3'
+        ticket.impact = item.nota
+        await ticketRepository.save(ticket)
+        await TicketController.createLog(ticket, '8', req, item.nota)
+        await TicketController.createLog(ticket, '5', req)
+      } else {
+        ticket.impact = item.nota
+        await ticketRepository.save(ticket)
+        await TicketController.createLog(ticket, '3', req, item.nota)
+      }
+
+    } else if (item.tipo == 3) {
+      ticket.cost = item.nota
+      await ticketRepository.save(ticket)
+      await TicketController.createLog(ticket, '4', req, item.
+      
+      nota)
+    }
+  }
+
+    return res.json({ true: true });
+  }
+  public static async createLog(ticket: any, acao: string, req: any, value = "") {
     let email = jwt.decode(req.cookies.jwt);
     const user: any = await AppDataSource.getRepository(User).findOneBy({ email: email ? email.toString() : "" });
     var log = new Log();
@@ -186,6 +232,7 @@ class TicketController {
     log.date = new Date();
     log.tickets = ticket;
     log.users = user
+    log.value = value
     const newLog: any = await AppDataSource.manager.save(Log, log).catch((e) => { })
     return newLog;
   }
