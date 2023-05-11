@@ -30,72 +30,72 @@ export default function CreateUser() {
         if (validador.estaVazio(name.value)) {
             Swal.fire({
                 icon: 'error',
-                title: 'Criar usuário falhou!',
-                text: 'Por favor escreva um nome.',
+                title: tradutorCriarUsu[language].errorTitle,
+                text: tradutorCriarUsu[language].errorNameVazio,
             })
             return
         }
         if(validador.tamanhoTexto(name.value)){
             Swal.fire({
                 icon: 'error',
-                title: 'Criar usuário falhou!',
-                text: 'O tamanho do nome é muito grande.',
+                title: tradutorCriarUsu[language].errorTitle,
+                text: tradutorCriarUsu[language].errorNameTamanho,
             })
             return
         }
         if (validador.estaVazio(email.value)) {
             Swal.fire({
                 icon: 'error',
-                title: 'Criar usuário falhou!',
-                text: 'Por favor, escreva um e-mail.',
+                title: tradutorCriarUsu[language].errorTitle,
+                text: tradutorCriarUsu[language].errorEmailVazio,
             })
             return
         }
         if(!validador.validarEmail(email.value)){
             Swal.fire({
                 icon: 'error',
-                title: 'Criar usuário falhou!',
-                text: 'O e-mail deve ter @ e .com.',
+                title: tradutorCriarUsu[language].errorTitle,
+                text: tradutorCriarUsu[language].errorValidarEmail,
             })
             return
         }
         if (validador.tamanhoTexto(email.value)) {
             Swal.fire({
                 icon: 'error',
-                title: 'Criar usuário falhou!',
-                text: 'O tamanho do e-mail é muito grande.',
+                title: tradutorCriarUsu[language].errorTitle,
+                text: tradutorCriarUsu[language].errorTamanhoEmail,
             })
             return
         }
         if (validador.selectEstaDefault(gender)){
             Swal.fire({
                 icon: 'error',
-                title: 'Criar usuário falhou!',
-                text: 'Selecione um gênero.',
+                title: tradutorCriarUsu[language].errorTitle,
+                text: tradutorCriarUsu[language].errorSelectDefaultGender,
             })
             return
         }
         if (validador.estaVazio(password.value)) {
             Swal.fire({
                 icon: 'error',
-                title: 'Criar usuário falhou!',
-                text: 'Por favor escreva uma senha.',
+                title: tradutorCriarUsu[language].errorTitle,
+                text: tradutorCriarUsu[language].errorSenhaVazia,
             })
             return
         }
         if (!validador.tamanhoSenha(password.value)){
             Swal.fire({
                 icon: 'error',
-                title: 'Criar usuário falhou!',
-                text: 'A senha deve ter entre 8 e 15 caracteres.',
+                title: tradutorCriarUsu[language].errorTitle,
+                text: tradutorCriarUsu[language].errorTamanoSenha,
             })
             return
         }
         if (validador.selectEstaDefault(role)){
             Swal.fire({
                 icon: 'error',
-                title: 'Criar usuário falhou!',
-                text: 'Selecione uma função.',
+                title: tradutorCriarUsu[language].errorTitle,
+                text: tradutorCriarUsu[language].errorSelectDefaultRole,
             })
             return
         }
@@ -110,12 +110,12 @@ export default function CreateUser() {
             if (data.error) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Falha ao criar novo usuário.',
+                    title: tradutorCriarUsu[language].errorTitle,
                 })
             } else {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Criado com sucesso.',
+                    title: tradutorCriarUsu[language].messageSucssefuly,
                 }).then((result) => result.isConfirmed ? comeback() : '')
 
             }
@@ -125,29 +125,29 @@ export default function CreateUser() {
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
             <Header category={tradutorCriarUsu[language].page} title={tradutorCriarUsu[language].pageTitle} />
-            <Campo text="Nome" id="name" placeholder="Nome" type="text" />
-            <Campo text="E-mail" id="email" placeholder="E-mail" type="text" />
-            <label className="text-lg font-bold dark:text-black " >Selecione um gênero</label>
+            <Campo text={tradutorCriarUsu[language].nomeTitle} id="name" placeholder={tradutorCriarUsu[language].nomePlaceholder} type="text" />
+            <Campo text={tradutorCriarUsu[language].emailTitle} id="email" placeholder={tradutorCriarUsu[language].emailPlaceholder} type="text" />
+            <label className="text-lg font-bold dark:text-black " >{tradutorCriarUsu[language].selectTitleGender}</label>
             <select id="gender" defaultValue='default' className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
-                <option value="default" disabled>Selecione uma opção:</option>
-                <option value="Male">Masculino</option>
-                <option value="Female">Feminino</option>
+                <option value="default" disabled>{tradutorCriarUsu[language].selectTitleOp}</option>
+                <option value="Male">{tradutorCriarUsu[language].selectTitleGenderOp2}</option>
+                <option value="Female">{tradutorCriarUsu[language].selectTitleGenderOp3}</option>
             </select>
             <div className='mt-5'>
-            <label className="text-lg font-bold dark:text-black " >Selecione uma função</label>
+            <label className="text-lg font-bold dark:text-black " >{tradutorCriarUsu[language].selectTitleRole}</label>
             <select id="role" defaultValue='default' className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
-                <option value="default" disabled>Selecione uma opção:</option>
-                <option value="1">Diretor</option>
-                <option value="2">Administrador</option>
-                <option value="3">Solicitante</option>
+                <option value="default" disabled>{tradutorCriarUsu[language].selectTitleOp}</option>
+                <option value="1">{tradutorCriarUsu[language].selectTitleRoleOp2}</option>
+                <option value="2">{tradutorCriarUsu[language].selectTitleRoleOp3}</option>
+                <option value="3">{tradutorCriarUsu[language].selectTitleRoleOp4}</option>
             </select>
 
             </div>
           
-            <div className='my-6'><Campo text="Senha" id="password" placeholder="*****" type={"password"} /></div>
+            <div className='my-6'><Campo text={tradutorCriarUsu[language].senhaTitulo} id="password" placeholder={tradutorCriarUsu[language].senhaPlaceholder} type={"password"} /></div>
             <div className="mt-5 mb-5 flex items-center justify-end" >
                 <button style={{ backgroundColor: currentColor}} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" onClick={CreateUser}>
-                    <span className='pr-1'>Criar</span>
+                    <span className='pr-1'>{tradutorCriarUsu[language].buttonCriar}</span>
                     <MdSend />
                 </button>
             </div>
