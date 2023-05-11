@@ -6,6 +6,7 @@ import { useStateContext } from '../../contexts/ContextProvider'
 import { useNavigate } from 'react-router-dom';
 import { validador } from '../../utils/validador';
 import { useLanguage } from "../../contexts/contextLanguage";
+import tradutorCriarUsu from '../../utils/tradutor/tradutorCriarUsu';
 
 const Swal = require('sweetalert2')
 
@@ -123,7 +124,7 @@ export default function CreateUser() {
 
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-            <Header category="Página" title="Usuário" />
+            <Header category={tradutorCriarUsu[language].page} title={tradutorCriarUsu[language].pageTitle} />
             <Campo text="Nome" id="name" placeholder="Nome" type="text" />
             <Campo text="E-mail" id="email" placeholder="E-mail" type="text" />
             <label className="text-lg font-bold dark:text-black " >Selecione um gênero</label>
