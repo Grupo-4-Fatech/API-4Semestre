@@ -25,10 +25,11 @@ const ViewTicket = () => {
     const [data, setData] = useState([])
     const [searchTerm, setSearchTerm] = useState('');
     const tabs = [visualizarChamado[language].tabsVisualizar, visualizarChamado[language].tabsAvaliar]
-
-
     const userPermission = usuario?.role
     const [grupos, setGrupos] = useState([])
+    const riscoUsers = getUsersByGroup(grupos, 'Grupo Risco');
+    const custoUsers = getUsersByGroup(grupos, 'Grupo Custo');
+    const impactoUsers = getUsersByGroup(grupos, 'Grupo Impacto');
 
     function getUsersByGroup(groups, groupName) {
         const group = groups.find(group => group.name.toLowerCase() === groupName.toLowerCase());
@@ -48,10 +49,6 @@ const ViewTicket = () => {
         const riscoSelect = document.getElementById('notaR');
         const custoSelect = document.getElementById('notaC');
         const impactoSelect = document.getElementById('notaI');
-
-        const riscoUsers = getUsersByGroup(groups, 'Grupo Risco');
-        const custoUsers = getUsersByGroup(groups, 'Grupo Custo');
-        const impactoUsers = getUsersByGroup(groups, 'Grupo Impacto');
 
         if (!hasPermission(riscoUsers, loggedInUser)) {
             riscoSelect.disabled = true;
@@ -120,12 +117,11 @@ const ViewTicket = () => {
 
     const allUserIds = getAllUserIds(grupos);
 
-
     function teste(e) {
         const notai = document.getElementById("notaI")
         const notar = document.getElementById("notaR")
         const notac = document.getElementById("notaC")
-        if (validador.selectEstaDefault(notar)) {
+        if (hasPermission(riscoUsers, usuario.id) && validador.selectEstaDefault(notar)) {
             Swal.fire({
                 icon: 'error',
                 title: visualizarChamado[language].errotTitle,
@@ -133,7 +129,7 @@ const ViewTicket = () => {
             })
             return
         }
-        if (validador.selectEstaDefault(notai)) {
+        if (hasPermission(impactoUsers, usuario.id) && validador.selectEstaDefault(notai)) {
             Swal.fire({
                 icon: 'error',
                 title: visualizarChamado[language].errotTitle,
@@ -141,8 +137,7 @@ const ViewTicket = () => {
             })
             return
         }
-        console.log(notai.value);
-        if (validador.selectEstaDefault(notac)) {
+        if (hasPermission(custoUsers, usuario.id) && validador.selectEstaDefault(notac)) {
             Swal.fire({
                 icon: 'error',
                 title: visualizarChamado[language].errotTitle,
