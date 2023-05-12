@@ -19,9 +19,15 @@ const ViewTicket = () => {
     const { currentColor } = useStateContext();
     const { usuario } = useAutenticacao();
     const [showModal, setShowModal] = React.useState(false);
-    const [ticket, setTicket] = useState({ title: '', description: ``, classification: '' });
+    const [ticket, setTicket] = useState({ id: '', title: '', description: ``, classification: '' });
     const [currentPage, setCurrentPage] = useState(1);
-    const headers = [visualizarChamado[language].headerTitulo, visualizarChamado[language].headerClassificacao, visualizarChamado[language].headerEditar, visualizarChamado[language].headerAvaliar]
+    const headers = [
+        visualizarChamado[language].headerTitulo,
+        visualizarChamado[language].headerClassificacao,
+        visualizarChamado[language].headerEditar,
+        visualizarChamado[language].headerAvaliar,
+        visualizarChamado[language].headerHistorico
+    ]
     const [data, setData] = useState([])
     const [searchTerm, setSearchTerm] = useState('');
     const tabs = [visualizarChamado[language].tabsVisualizar, visualizarChamado[language].tabsAvaliar]
@@ -30,6 +36,7 @@ const ViewTicket = () => {
     const riscoUsers = getUsersByGroup(grupos, 'Grupo Risco');
     const custoUsers = getUsersByGroup(grupos, 'Grupo Custo');
     const impactoUsers = getUsersByGroup(grupos, 'Grupo Impacto');
+    const arrayNotas = new Array()
 
     function getUsersByGroup(groups, groupName) {
         const group = groups.find(group => group.name.toLowerCase() === groupName.toLowerCase());
@@ -62,7 +69,6 @@ const ViewTicket = () => {
             impactoSelect.disabled = true;
         }
     }
-
 
     function getDataAndSetSelectPermission() {
         fetch("/InspectionGroup/list", {
@@ -117,7 +123,17 @@ const ViewTicket = () => {
 
     const allUserIds = getAllUserIds(grupos);
 
-    function teste(e) {
+    function adicionarAvaliacao(tipo, nota) {
+        if (nota !== 'default') {
+            const avaliacao = {
+                tipo: tipo,
+                nota: nota
+            };
+            arrayNotas.push(avaliacao);
+        }
+    }
+
+    function teste(id) {
         const notai = document.getElementById("notaI")
         const notar = document.getElementById("notaR")
         const notac = document.getElementById("notaC")
@@ -150,52 +166,76 @@ const ViewTicket = () => {
                 title: `Você deseja avaliar o risco como ${notar.value}?`,
                 showDenyButton: true,
                 showCancelButton: true,
-                confirmButtonText: visualizarChamado[language].AvaliarButton,
+                confirmButtonText: visualizarChamado[language].avaliarButton,
                 denyButtonText: visualizarChamado[language].DennyButton,
                 cancelButtonText: visualizarChamado[language].cancelButton,
             }).then((result) => {
-                /* Read more about isConfirmed, isDenied below */
-                if (result.isConfirmed) {
-                    Swal.fire(visualizarChamado[language].messageAvaliado, '', 'success')
-                } else if (result.isDenied) {
-                    Swal.fire(visualizarChamado[language].messageNaoAvaliado, '', 'info')
+                if (result.isDenied) {
+                    Swal.fire(visualizarChamado[language].messageNaoAvaliado, '', 'info');
+                    return
                 }
-            })
-        }
-        if (validador.selectAvaliar(notai)) {
-            Swal.fire({
-                title: `Você deseja avaliar o impacto como ${notai.value}?`,
-                showDenyButton: true,
-                showCancelButton: true,
-                confirmButtonText: visualizarChamado[language].AvaliarButton,
-                denyButtonText: visualizarChamado[language].DennyButton,
-                cancelButtonText: visualizarChamado[language].cancelButton,
-            }).then((result) => {
-                /* Read more about isConfirmed, isDenied below */
-                if (result.isConfirmed) {
-                    Swal.fire(visualizarChamado[language].messageAvaliado, '', 'success')
-                } else if (result.isDenied) {
-                    Swal.fire(visualizarChamado[language].messageNaoAvaliado, '', 'info')
-                }
-            })
-        }
 
-        if (validador.selectAvaliar(notac)) {
-            Swal.fire({
-                title: `Você deseja avaliar o custo como ${notac.value}?`,
-                showDenyButton: true,
-                showCancelButton: true,
-                confirmButtonText: visualizarChamado[language].AvaliarButton,
-                denyButtonText: visualizarChamado[language].DennyButton,
-                cancelButtonText: visualizarChamado[language].cancelButton,
-            }).then((result) => {
-                /* Read more about isConfirmed, isDenied below */
-                if (result.isConfirmed) {
-                    Swal.fire(visualizarChamado[language].messageAvaliado, '', 'success')
-                } else if (result.isDenied) {
-                    Swal.fire(visualizarChamado[language].messageNaoAvaliado, '', 'info')
+                if (validador.selectAvaliar(notai)) {
+                    Swal.fire({
+                        title: `Você deseja avaliar o impacto como ${notai.value}?`,
+                        showDenyButton: true,
+                        showCancelButton: true,
+                        confirmButtonText: visualizarChamado[language].avaliarButton,
+                        denyButtonText: visualizarChamado[language].DennyButton,
+                        cancelButtonText: visualizarChamado[language].cancelButton,
+                    }).then((result) => {
+                        if (result.isDenied) {
+                            Swal.fire(visualizarChamado[language].messageNaoAvaliado, '', 'info');
+                            return
+                        }
+
+                        if (validador.selectAvaliar(notac)) {
+                            Swal.fire({
+                                title: `Você deseja avaliar o custo como ${notac.value}?`,
+                                showDenyButton: true,
+                                showCancelButton: true,
+                                confirmButtonText: visualizarChamado[language].avaliarButton,
+                                denyButtonText: visualizarChamado[language].DennyButton,
+                                cancelButtonText: visualizarChamado[language].cancelButton,
+                            }).then((result) => {
+                                if (result.isDenied) {
+                                    Swal.fire(visualizarChamado[language].messageNaoAvaliado, '', 'info');
+                                    return
+                                } else {
+                                    adicionarAvaliacao(1, notar.value)
+                                    adicionarAvaliacao(2, notai.value)
+                                    adicionarAvaliacao(3, notac.value)
+                                    if (id) {
+                                        console.log(id)
+                                        fetch("/ticket/avaliar", {
+                                            method: 'PATCH',
+                                            headers: {
+                                                'Content-Type': 'application/json;charset=utf-8'
+                                            },
+                                            body: JSON.stringify({ id: id, data: arrayNotas })
+                                        }).then((resposta) => resposta.json()).then((res) => {
+                                            if (res.error) {
+                                                Swal.fire({
+                                                    icon: 'error',
+                                                    title: visualizarChamado[language].errotTitle
+                                                })
+                                            }
+                                            else {
+                                                Swal.fire(visualizarChamado[language].messageAvaliado, '', 'success')
+                                                var updateData = data.filter(item => item.id != id)
+                                                setData(updateData); setShowModal(false)
+                                            }
+                                        })
+                                    }
+                                } if (result.isDenied) {
+                                    Swal.fire(visualizarChamado[language].messageNaoAvaliado, '', 'info');
+                                    return
+                                }
+                            });
+                        }
+                    });
                 }
-            })
+            });
         }
     }
 
@@ -270,7 +310,7 @@ const ViewTicket = () => {
                                             <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
 
                                                 <button
-                                                    onClick={() => { setTicket({ title: dat.title, description: dat.Summary, classification: dat.classification }); setShowModal(true); getDataAndSetSelectPermission() }}
+                                                    onClick={() => { setTicket({ id: dat.id, title: dat.title, description: dat.Summary, classification: dat.classification }); setShowModal(true); getDataAndSetSelectPermission() }}
                                                     className={`bg-green-500 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20 ${!allUserIds.includes(usuario.id) ? 'bg-gray-400 cursor-not-allowed' : ''}`}
                                                     disabled={!allUserIds.includes(usuario.id)}
                                                 >
@@ -280,6 +320,8 @@ const ViewTicket = () => {
                                         )}
 
                                         <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
+                                            <button onClick={() => { window.location.href = "/historic/" + dat.id }} className="bg-botaohistorico text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">
+                                                {visualizarChamado[language].historicoButton}</button>
                                         </td>
                                     </tr>
                                 );
@@ -347,7 +389,8 @@ const ViewTicket = () => {
                                                     <div className=" pl-2  mt-2 text-lg font-bold dark:text-black">{visualizarChamado[language].titleRisco}</div>
                                                     <div className='pl-2 pr-2'>
                                                         <select id="notaR" defaultValue='default' className=' pl-2 mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
-                                                            <option onChange={(e)=> console.log(e)} value="default" disabled>{visualizarChamado[language].selectNota}</option>
+                                                            <option onChange={(e) => console.log(e)} value="default" disabled>{visualizarChamado[language].selectNota}</option>
+                                                            <option value="0">0</option>
                                                             <option value="1">1</option>
                                                             <option value="2">2</option>
                                                             <option value="3">3</option>
@@ -358,6 +401,7 @@ const ViewTicket = () => {
                                                     <div className='pl-2 pr-2'>
                                                         <select id="notaI" defaultValue='default' className='pl-2 mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
                                                             <option value="default" disabled>{visualizarChamado[language].selectNota}</option>
+                                                            <option value="0">0</option>
                                                             <option value="1">1</option>
                                                             <option value="2">2</option>
                                                             <option value="3">3</option>
@@ -367,6 +411,7 @@ const ViewTicket = () => {
                                                     <div className='pl-2 pr-2'>
                                                         <select id="notaC" defaultValue='default' className='pl-2 mt-2 my-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
                                                             <option value="default" disabled>{visualizarChamado[language].selectNota}</option>
+                                                            <option value="0">0</option>
                                                             <option value="1">1</option>
                                                             <option value="2">2</option>
                                                             <option value="3">3</option>
@@ -387,8 +432,7 @@ const ViewTicket = () => {
                                         >
                                             {visualizarChamado[language].closeButton}
                                         </button>
-
-                                        <button onClick={() => teste()} className="text-white rounded-full bg-green-700  hover:bg-green-800 font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                        <button onClick={() => teste(ticket.id)} className="text-white rounded-full bg-green-700  hover:bg-green-800 font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                             type="button" >{visualizarChamado[language].avaliarButton} </button>
                                     </div>
                                 </div>
