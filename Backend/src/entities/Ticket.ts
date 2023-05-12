@@ -40,6 +40,6 @@ export class Ticket {
     user: User;
 
     @OneToMany(() => Log, (log) => log.id)
-    logs = Array<Log>;
+    logs: Array<Log>;
 
 } 

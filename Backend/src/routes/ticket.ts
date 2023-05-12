@@ -17,6 +17,7 @@ routes.patch("/updateStatus", TicketController.updateStatus)
 routes.get("/getKanbanItem", TicketController.getKanbanItem)
 routes.post("/deleteAll", TicketController.deleteAll)
 routes.get("/getLog/:id", TicketController.getLogs)
+routes.patch("/avaliar", TicketController.avaliar)
 
 
 export default routes;
