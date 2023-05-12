@@ -19,6 +19,7 @@ const ViewTicket = () => {
     const { currentColor } = useStateContext();
     const { usuario } = useAutenticacao();
     const [showModal, setShowModal] = React.useState(false);
+    const [showModalHistorico, setShowModalHistorico] = React.useState(false);
     const [ticket, setTicket] = useState({ id: '', title: '', description: ``, classification: '' });
     const [currentPage, setCurrentPage] = useState(1);
     const headers = [
@@ -36,7 +37,7 @@ const ViewTicket = () => {
     const riscoUsers = getUsersByGroup(grupos, 'Grupo Risco');
     const custoUsers = getUsersByGroup(grupos, 'Grupo Custo');
     const impactoUsers = getUsersByGroup(grupos, 'Grupo Impacto');
-    const arrayNotas = new Array()
+    const arrayNotas = new Array();
 
     function getUsersByGroup(groups, groupName) {
         const group = groups.find(group => group.name.toLowerCase() === groupName.toLowerCase());
@@ -320,7 +321,7 @@ const ViewTicket = () => {
                                         )}
 
                                         <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                            <button onClick={() => { window.location.href = "/historic/" + dat.id }} className="bg-botaohistorico text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">
+                                            <button onClick={() => { setTicket({ id: dat.id, title: dat.title, description: dat.Summary, classification: dat.classification }); setShowModalHistorico(true);}} className="bg-botaohistorico text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">
                                                 {visualizarChamado[language].historicoButton}</button>
                                         </td>
                                     </tr>
@@ -441,6 +442,56 @@ const ViewTicket = () => {
                         <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
                     </>
                 ) : null}
+            </>
+            <>
+                {showModalHistorico ?
+                    <>
+                        <div
+                            className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+                        >
+                            <div className="relative w-4/6 my-6">
+                                {/*content*/}
+                                <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                                    {/*header*/}
+                                    <div className="flex p-5 pb-0 border-b border-solid border-slate-200 rounded-t">
+                                        <div className='p-2'>
+                                            {ticket.classification == 'Hotfix' ?
+                                                <span class="p-1 text-[13px] rounded-full bg-red-500 text-white">{ticket.classification}</span>
+                                                :
+                                                <span class="p-1 text-[13px] rounded-full bg-cyan-400 text-white">{ticket.classification}</span>
+                                            }
+                                        </div>
+                                        <h3 className="text-1 font-semibold p-2 text-left">
+                                            {ticket.title}
+                                        </h3>
+                                    </div>
+                                    {/*body*/}
+
+                                    <div id='description' className="relative max-h-72 p-6 max-w-3x1 overflow-scroll m-6" dangerouslySetInnerHTML={{ __html: ticket.description }} />
+                                    {/*footer*/}
+                                    <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                                        <button
+                                            className="text-white rounded-full bg-red-600  hover:bg-red-800 font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                            type="button"
+                                            onClick={() => setShowModalHistorico(false)}
+                                        >
+                                            {visualizarChamado[language].closeButton}
+                                        </button>
+                                        <button
+                                            className="text-white rounded-full bg-botaohistorico  hover:bg-green-900 font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                            type="button"
+                                            onClick={() => { window.location.href = "/historic/" + ticket.id }}
+                                        >
+                                            {visualizarChamado[language].historicoButton}
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+                    </>
+                    : null}
             </>
         </>
     );
