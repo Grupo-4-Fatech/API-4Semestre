@@ -6,7 +6,7 @@ import { useAutenticacao } from '../../contexts/ContextUsuLogado.tsx';
 import { Tab } from '@headlessui/react'
 import { validador } from '../../utils/validador';
 import { useLanguage } from "../../contexts/contextLanguage";
-import visualizarChamado from '../../utils/tradutor/visualizarChamado';
+import visualizarChamado from '../../utils/tradutor/ticket/tradutorVisualizarChamado';
 
 
 const Swal = require('sweetalert2')

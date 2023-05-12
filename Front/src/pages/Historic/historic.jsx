@@ -112,6 +112,7 @@ const Historic = () => {
                 <Header category="Página" title={title} />
                 <ol className="relative border-l border-gray-400">
                     {data.map((tiq, index) => (
+                    {data.map((tiq, index) => (
                         <li key={index} className="mb-10 ml-4">
                             <div
                                 className={`${cor(tiq.idAcao)} absolute w-3 h-3 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-600`}

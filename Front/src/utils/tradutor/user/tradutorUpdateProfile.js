@@ -57,7 +57,7 @@ const tradutorUpdateProfile = {
         errorSenhaNova: "Please write the new password",
         errorTamanoSenha: "Password must be between 8 and 15 characters long",
         errorSenhasIguais: "The new password cannot be the same as the old password.",
-        messageSucssefuly: "User updated sucssefuly",
+        messageSucssefuly: "User updated succssesfully",
 
     }
 };

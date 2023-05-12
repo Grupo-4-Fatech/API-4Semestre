@@ -7,7 +7,7 @@ import { useStateContext } from '../../contexts/ContextProvider'
 import Campo from "../../components/Campo";
 import { validador } from "../../utils/validador";
 import { useNavigate } from 'react-router-dom';
-import translations from "../../utils/tradutor/tradutorCriarGrupo";
+import tradutorCriarGroup from "../../utils/tradutor/group/tradutorCriarGroup";
 const Swal = require('sweetalert2')
 
 
@@ -33,16 +33,16 @@ const CreateGroup = () => {
 
             Swal.fire({
                 icon: 'error',
-                title: translations[language].errorMessage,
-                text: translations[language].emptyNameMessage,
+                title: tradutorCriarGroup[language].errorMessage,
+                text: tradutorCriarGroup[language].emptyNameMessage,
             })
             return
         }
         if (validador.tamanhoTexto(nome.value)) {
             Swal.fire({
                 icon: 'error',
-                title: translations[language].errorMessage,
-                text: translations[language].largeNameMessage,
+                title: tradutorCriarGroup[language].errorMessage,
+                text: tradutorCriarGroup[language].largeNameMessage,
             })
             return
         }
@@ -50,8 +50,8 @@ const CreateGroup = () => {
 
             Swal.fire({
                 icon: 'error',
-                title: translations[language].errorMessage,
-                text: translations[language].emptyDescriptionMessage,
+                title: tradutorCriarGroup[language].errorMessage,
+                text: tradutorCriarGroup[language].emptyDescriptionMessage,
             })
             return
         }
@@ -66,12 +66,12 @@ const CreateGroup = () => {
             if (data.error) {
                 Swal.fire({
                     icon: 'error',
-                    title: translations[language].errorMessage,
+                    title: tradutorCriarGroup[language].errorMessage,
                 })
             } else {
                 Swal.fire({
                     icon: 'success',
-                    title: translations[language].successMessage,
+                    title: tradutorCriarGroup[language].successMessage,
                 }).then((result) => result.isConfirmed ? comeback() : '')
 
             }
@@ -94,24 +94,24 @@ const CreateGroup = () => {
         // <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
         //     <button onClick={() => setLanguage("en")}>English</button>
         //     <button onClick={() => setLanguage("pt")}>Português</button>
-        //     <Header category="Página" title={translations[language].pageTitle} />
-        //     <Campo id="Titulo" text={translations[language].groupName} placeholder={translations[language].emptyNameMessage} type={"text"} value={name} setValue={setName} />
-        //     <Campo id="Desc" text={translations[language].groupDescription} placeholder={translations[language].emptyDescriptionMessage} type={"text"} value={description} setValue={setDescription} />
+        //     <Header category="Página" title={tradutorCriarGroup[language].pageTitle} />
+        //     <Campo id="Titulo" text={tradutorCriarGroup[language].groupName} placeholder={tradutorCriarGroup[language].emptyNameMessage} type={"text"} value={name} setValue={setName} />
+        //     <Campo id="Desc" text={tradutorCriarGroup[language].groupDescription} placeholder={tradutorCriarGroup[language].emptyDescriptionMessage} type={"text"} value={description} setValue={setDescription} />
         //     <div className="mt-5 mb-5 flex items-center justify-end" >
         //         <button onClick={() => createGroup()} style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" >
-        //             <span className='pr-1'>{translations[language].createButton}</span>
+        //             <span className='pr-1'>{tradutorCriarGroup[language].createButton}</span>
         //             <MdSend />
         //         </button>
         //     </div>
         // </div>
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
 
-            <Header category="Página" title={translations[language].pageTitle} />
-            <Campo id="Titulo" text={translations[language].groupName} placeholder={translations[language].groupNamePlaceholder} type={"text"} value={name} setValue={setName} />
-            <Campo id="Desc" text={translations[language].groupDescription} placeholder={translations[language].groupDescriptionPlaceholder} type={"text"} value={description} setValue={setDescription} />
+            <Header category={tradutorCriarGroup[language].page} title={tradutorCriarGroup[language].pageTitle} />
+            <Campo id="Titulo" text={tradutorCriarGroup[language].groupName} placeholder={tradutorCriarGroup[language].groupNamePlaceholder} type={"text"} value={name} setValue={setName} />
+            <Campo id="Desc" text={tradutorCriarGroup[language].groupDescription} placeholder={tradutorCriarGroup[language].groupDescriptionPlaceholder} type={"text"} value={description} setValue={setDescription} />
             <div className="mt-5 mb-5 flex items-center justify-end" >
                 <button onClick={() => createGroup()} style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" >
-                    <span className='pr-1'>{translations[language].createButton}</span>
+                    <span className='pr-1'>{tradutorCriarGroup[language].createButton}</span>
                     <MdSend />
                 </button>
             </div>
