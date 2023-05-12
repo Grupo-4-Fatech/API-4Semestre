@@ -176,7 +176,6 @@ export default function Kanban() {
       <>
         {showModal ? (
           <>
-            {console.log(ticket)}
             <div
               className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
             >
@@ -225,7 +224,7 @@ export default function Kanban() {
                           <div id='historico' className="relative max-h-72 p-6 max-w-3x1 overflow-scroll m-6">
 
                             <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" onClick={() => window.location.href = "/ticket/update/" + ticket.id}>{tradutorKanban[language].atualizarButon}</button>
-                            <button type="button" className="text-white bg-yellow-400 hover:bg-yellow-500 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" onClick={() => window.location.href = "/historic/" + ticket.id}>{tradutorKanban[language].historico}</button>
+                            <button type="button" className="text-white bg-botaohistorico hover:bg-historico-clicado font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" onClick={() => window.location.href = "/historic/" + ticket.id}>{tradutorKanban[language].historico}</button>
 
                           </div>
                         </Tab.Panel>
@@ -245,7 +244,7 @@ export default function Kanban() {
                     >
                       {tradutorKanban[language].buttonClose}
                     </button>
-                    <button onClick={()=> teste()} type="button" className="text-white rounded-full bg-blue-700  hover:bg-blue-800 font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+                    <button onClick={()=> teste()} type="button" className="text-white rounded-full bg-green-500  hover:bg-green-700 font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
                       {tradutorKanban[language].buttonConfirm}
                     </button>
 
