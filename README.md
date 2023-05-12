@@ -70,12 +70,20 @@ Com esses recursos, a single-page application de criação de tickets e usuário
 <img src="docs/imagens/BACKLOG.png">
 
 </br>
+## Modelo conceitual
+
+![modelo conceitual](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/e39a6b95-345f-4a98-876d-b36abc2ec59a)
+
+## Modelo Logico 
+
+![modelo logico](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/22e19108-1abd-45c9-9047-9f848132575c)
+
 
 ## 📉 Gráfico Burndown
 
 - <a href="docs/sprint1/Burndown Geral - sprint 1.pdf">**Sprint 1**</a>
 - <a href="docs/sprint2/Burndown Geral - sprint 2.pdf">**Sprint 2**</a>
-- <a href="docs/">**Sprint 3**</a>
+- <a href="docs/sprint3/Burndown Geral - sprint 3.pdf">**Sprint 3**</a>
 - <a href="docs/">**Sprint 4**</a>
  
 ## 👥 Equipe
