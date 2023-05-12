@@ -70,6 +70,7 @@ Com esses recursos, a single-page application de criação de tickets e usuário
 <img src="docs/imagens/BACKLOG.png">
 
 </br>
+
 ## Modelo conceitual
 
 ![modelo conceitual](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/e39a6b95-345f-4a98-876d-b36abc2ec59a)
