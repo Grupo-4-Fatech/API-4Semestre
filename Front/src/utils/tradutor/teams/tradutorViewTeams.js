@@ -16,7 +16,7 @@ const tradutorViewTime = {
     },
     en: {
         page: "Page",
-        pageTitle: "Create teams",
+        pageTitle: "View teams",
         searchPlaceholder: "Search",
         editarButton: "Edit",
         deletarButton: "Delete",

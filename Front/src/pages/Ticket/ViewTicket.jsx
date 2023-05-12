@@ -163,7 +163,7 @@ const ViewTicket = () => {
         }
         if (validador.selectAvaliar(notar)) {
             Swal.fire({
-                title: `Você deseja avaliar o risco como ${notar.value}?`,
+                title: `${visualizarChamado[language].avaliarRisco} ${notar.value}?`,
                 showDenyButton: true,
                 showCancelButton: true,
                 confirmButtonText: visualizarChamado[language].avaliarButton,
@@ -177,7 +177,7 @@ const ViewTicket = () => {
 
                 if (validador.selectAvaliar(notai)) {
                     Swal.fire({
-                        title: `Você deseja avaliar o impacto como ${notai.value}?`,
+                        title: `${visualizarChamado[language].avaliarImpacto} ${notai.value}?`,
                         showDenyButton: true,
                         showCancelButton: true,
                         confirmButtonText: visualizarChamado[language].avaliarButton,
@@ -191,7 +191,7 @@ const ViewTicket = () => {
 
                         if (validador.selectAvaliar(notac)) {
                             Swal.fire({
-                                title: `Você deseja avaliar o custo como ${notac.value}?`,
+                                title: `${visualizarChamado[language].avaliarCusto} ${notac.value}?`,
                                 showDenyButton: true,
                                 showCancelButton: true,
                                 confirmButtonText: visualizarChamado[language].avaliarButton,
