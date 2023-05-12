@@ -290,7 +290,7 @@ export const themeColors = [
   },
 ];
 
-export const userProfileData = [
+export const userProfileDataPt = [
   {
     icon: <FiUser />,
     title: 'Meu Perfil',
@@ -300,3 +300,12 @@ export const userProfileData = [
   },
 ];
 
+export const userProfileDataEn = [
+  {
+    icon: <FiUser />,
+    title: 'My profile',
+    desc: 'Account setup',
+    iconColor: '#03C9D7',
+    iconBg: '#E5FAFB',
+  },
+];

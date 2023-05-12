@@ -40,7 +40,7 @@ const tradutorAlterarTime = {
         selectDefaultGroup: "Select a group",
         errorDescriptionVazio: "Please write a desciption",
         errorDescriptionTamanhoTexto: "Group description size it too big",
-        messageSucssefuly: "Create succssesfully",
+        messageSucssefuly: "Create successfully",
         
     }
 };

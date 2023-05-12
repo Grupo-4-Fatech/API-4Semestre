@@ -5,6 +5,7 @@ import { useStateContext } from '../../contexts/ContextProvider'
 import SelectMult from '../../components/Select';
 import { useEffect, useState } from 'react';
 import { validador } from "../../utils/validador";
+import tradutorTree from "../../utils/tradutor/tree/tradutorTree";
 const Swal = require('sweetalert2')
 
 export default function CreateTree() {
@@ -76,8 +77,8 @@ export default function CreateTree() {
         if (data.length === 0) {
             Swal.fire({
                 icon: 'error',
-                title: 'Falha ao criar equipes!',
-                text: 'Adicione um usuário.',
+                title: tradutorTree[language].errorDataTamanhoTitle,
+                text: tradutorTree[language].errorDataTamanhoText,
             })
             return
         }
@@ -109,12 +110,12 @@ export default function CreateTree() {
             if (data.error) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Falha ao realizar mudança.',
+                    title: tradutorTree[language].errorDataUpdate,
                 })
             } else {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Mudança realizada com sucesso.',
+                    title: tradutorTree[language].successfulyData,
                 })
             }
         })
@@ -125,30 +126,30 @@ export default function CreateTree() {
 
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-            <Header category="Página" title="Árvore" />
+            <Header category={tradutorTree[language].page} title={tradutorTree[language].pageTitle} />
             <div>
 
                 <div className='ml-2'>
-                    <SelectMult id="integrantesDoTime" dados={data} text={'Análise de Risco'} value={risco} setValue={setRisco} />
+                    <SelectMult id="integrantesDoTime" dados={data} text={tradutorTree[language].selectTextRisco} value={risco} setValue={setRisco} />
 
                 </div>
             </div>
             <div>
                 <div className='ml-2 mt-7'>
-                    <SelectMult id="integrantesDoTime" dados={data} text={'Análise de Impacto'} value={impacto} setValue={setImpacto} />
+                    <SelectMult id="integrantesDoTime" dados={data} text={tradutorTree[language].selectTextImpacto} value={impacto} setValue={setImpacto} />
 
                 </div>
 
             </div>
             <div>
                 <div className='ml-2 mt-7'>
-                    <SelectMult id="integrantesDoTime" dados={data} text={'Análise de Custo'} value={custo} setValue={setCusto} />
+                    <SelectMult id="integrantesDoTime" dados={data} text={tradutorTree[language].selectTextCusto} value={custo} setValue={setCusto} />
 
                 </div>
             </div>
             <div className="mt-5 mb-5 flex" >
                 <button onClick={() => CriaTime()} style={{ backgroundColor: currentColor, position: 'absolute' }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" >
-                    <span className='pr-1'>Criar</span>
+                    <span className='pr-1'>{tradutorTree[language].criarButton}</span>
                     <MdSend />
                 </button>
             </div>

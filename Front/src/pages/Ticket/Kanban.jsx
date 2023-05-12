@@ -8,7 +8,7 @@ import { validador } from '../../utils/validador';
 import { useLanguage } from "../../contexts/contextLanguage";
 
 import Swal from 'sweetalert2';
-import tradutorKanban from '../../utils/tradutor/tradutorKanban';
+import tradutorKanban from '../../utils/tradutor/kanban/tradutorKanban';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')

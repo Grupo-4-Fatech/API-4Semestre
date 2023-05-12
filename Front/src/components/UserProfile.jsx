@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { MdOutlineCancel } from 'react-icons/md';
 import { Button } from '.';
-import { userProfileData } from '../data/dummy';
+import { userProfileDataPt,userProfileDataEn} from '../data/dummy';
 import { useStateContext } from '../contexts/ContextProvider';
 import { useAutenticacao } from '../contexts/ContextUsuLogado.tsx';
+import { useLanguage } from "../contexts/contextLanguage";
+import tradutorProfile from '../utils/tradutor/profile/tradutorProfile';
+
 
 const UserProfile = () => {
   const { currentColor } = useStateContext();
   const {usuario} = useAutenticacao()
-  
+  const { language } = useLanguage();
+
+  const usersProfile = language === "pt" ? userProfileDataPt : userProfileDataEn
   function logOut() {
     fetch("/Login/LogOut", {
       method: 'get',
@@ -25,7 +30,7 @@ const UserProfile = () => {
   return (
     <div className="nav-item absolute right-1 top-16 bg-white dark:bg-[#42464D] p-8 rounded-lg w-96">
       <div className="flex justify-between items-center">
-        <p className="font-semibold text-lg dark:text-gray-200">Perfil do usuário</p>
+        <p className="font-semibold text-lg dark:text-gray-200">{tradutorProfile[language].perfil}</p>
         <Button
           icon={<MdOutlineCancel />}
           color="rgb(153, 171, 180)"
@@ -48,7 +53,7 @@ const UserProfile = () => {
       </div>
 
       <div>
-        {userProfileData.map((item, index) => (
+        {usersProfile.map((item, index) => (
           <div onClick={() => window.location.href = "/user/updateProfile"} key={index} className="flex gap-5 border-b-1 border-color p-4 hover:bg-light-gray cursor-pointer  dark:hover:bg-[#42464D]">
             <button
               onClick={()=> window.location.href = "/user/updateProfile"}
@@ -73,7 +78,7 @@ const UserProfile = () => {
           style={{ backgroundColor: `${currentColor}`, color: "white", borderRadius: "10px" }}
           className={`p-3 w-full hover:drop-shadow-xl `}
         >
-          Deslogar
+          {tradutorProfile[language].deslogar}
         </button>
       </div>
     </div>

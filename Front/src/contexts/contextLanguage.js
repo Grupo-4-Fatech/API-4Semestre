@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 import translationsChamado from "../utils/tradutor/ticket/tradutorCriarChamado";
 import translationsUpdateChamado from "../utils/tradutor/ticket/tradutorUpdateChamado";
-import tradutorKanban from "../utils/tradutor/tradutorKanban";
+import tradutorKanban from "../utils/tradutor/kanban/tradutorKanban";
 import archivedTicktes from "../utils/tradutor/ticket/tradutorArchivedTickets";
 import visualizarChamado from "../utils/tradutor/ticket/tradutorVisualizarChamado";
 import tradutorCriarGruop from "../utils/tradutor/group/tradutorCriarGroup";

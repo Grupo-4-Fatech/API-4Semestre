@@ -1,12 +1,17 @@
 import { useParams } from "react-router-dom";
 import { Header } from "../../components";
 import { useState, useEffect } from "react";
+import { useLanguage } from "../../contexts/contextLanguage";
+import tradutorHistorico from "../../utils/tradutor/historic/tradutorHitorico";
+
 
 
 const Historic = () => {
     const { id } = useParams();
     const [data, setData] = useState([])
     const [title, setTitle] = useState("")
+    const { language } = useLanguage();
+
     function getData() {
         if (id) {
             fetch("/ticket/getLog/" + id, {
@@ -55,7 +60,7 @@ const Historic = () => {
                 return "bg-red-500";
             case 6:
                 // Atualizado
-                return "bg-blue-500"
+                return "bg-purple-500"
             case 7:
                 // Avaliado risco
                 return "bg-green-500"
@@ -75,31 +80,31 @@ const Historic = () => {
         switch (idAcao) {
             case 1:
                 // Criado
-                return "Criado";
+                return tradutorHistorico[language].idAcaoCriado;
             case 2:
                 // Aprovado risco
-                return "Aprovado risco";
+                return tradutorHistorico[language].idAcaoAprovadoRisco;
             case 3:
                 // Aprovado impacto
-                return "Aprovado impacto"
+                return tradutorHistorico[language].idAcaoAprovadoImpacto
             case 4:
                 // Aprovado custo
-                return "Aprovado custo";
+                return tradutorHistorico[language].idAcaoAprovadoCusto;
             case 5:
                 // Arquivado
-                return "Arquivado";
+                return tradutorHistorico[language].idAcaoArquivado;
             case 6:
                 // Atualizado
-                return "Atualizado"
+                return tradutorHistorico[language].idAcaoAtualizado
             case 7:
                 // Avaliado risco
-                return "Avaliado risco";
+                return tradutorHistorico[language].idAcaoAtualizadoRisco;
             case 8:
                 // Avaliado impacto
-                return "Avaliado impacto"
+                return tradutorHistorico[language].idAcaoAtualizadoImpacto
             case 9:
                 // Avaliado custo
-                return "Avaliado custo";
+                return tradutorHistorico[language].idAcaoAtualizadoCusto;
             default:
                 // Caso tenha algum id que nao bate
                 return "bg-gray-500";
@@ -118,8 +123,8 @@ const Historic = () => {
                             ></div>
                             <time className="mb-1 text-sm font-semibold leading-none text-gray-500">{new Date(tiq.data).toLocaleDateString("en-US")} </time>
                             <h3 className="text-lg font-bold text-gray-900 dark:text-gray-900">{acao(tiq.idAcao)}</h3>
-                            {tiq.idAcao>6 && <p className="text-base font-semibold text-gray-600">Nota: {tiq.nota}</p>}
-                            <p className="mb-4 text-base font-semibold text-gray-600">Realizado por {tiq.nomeUsu}</p>
+                            {tiq.idAcao>6 && <p className="text-base font-semibold text-gray-600">{tradutorHistorico[language].nota} {tiq.nota}</p>}
+                            <p className="mb-4 text-base font-semibold text-gray-600">{tradutorHistorico[language].realizado} {tiq.nomeUsu}</p>
                         </li>
                     ))}
                 </ol>

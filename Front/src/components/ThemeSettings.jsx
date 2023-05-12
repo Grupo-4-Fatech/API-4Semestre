@@ -5,6 +5,7 @@ import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import { themeColors } from '../data/dummy';
 import { useStateContext } from '../contexts/ContextProvider';
 import { useLanguage } from "../contexts/contextLanguage";
+import tradutorSettings from '../utils/tradutor/themeSettings/tradutorSettings';
 
 const ThemeSettings = () => {
   const { setColor, setMode, currentMode, currentColor, setThemeSettings } = useStateContext();
@@ -19,7 +20,7 @@ const ThemeSettings = () => {
 
       <div className="float-right h-screen dark:text-gray-200  bg-white dark:bg-[#484B52] w-400">
         <div className="flex justify-between items-center p-4 ml-4">
-          <p className="font-semibold text-lg">Configurações</p>
+          <p className="font-semibold text-lg">{tradutorSettings[language].config}</p>
           <button
             type="button"
             onClick={() => setThemeSettings(false)}
@@ -31,14 +32,18 @@ const ThemeSettings = () => {
 
         </div>
         <div className="flex-col border-t-1 border-color p-4 ml-4">
-          <label for="countries" class="block mb-2 text-sm font-medium text-gray-900">Selecione a Linguagem</label>
-          <select value={language} onChange={handleLanguageChange}>
-            <option value="en">English</option>
-            <option value="pt">Português</option>
-          </select>
+          <p className="font-semibold text-xl ">{tradutorSettings[language].linguagem}</p>
+          <div className='mt-4'>
+            <input type="radio" className='cursor-pointer' id="english" name="language" value="en" checked={language === "en"} onChange={handleLanguageChange} />
+            <label className="ml-2 text-md cursor-pointer" htmlFor="english">{tradutorSettings[language].ingles}</label>
+          </div>
+          <div className='mt-2'>
+            <input type="radio" className='cursor-pointer' id="portuguese" name="language" value="pt" checked={language === "pt"} onChange={handleLanguageChange} />
+            <label className="ml-2 text-md cursor-pointer" htmlFor="portuguese">{tradutorSettings[language].portugues}</label>
+          </div>
         </div>
         <div className="flex-col border-t-1 border-color p-4 ml-4">
-          <p className="font-semibold text-xl ">Opção de tema</p>
+          <p className="font-semibold text-xl ">{tradutorSettings[language].tema}</p>
 
           <div className="mt-4">
             <input
@@ -52,7 +57,7 @@ const ThemeSettings = () => {
             />
             {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
             <label htmlFor="light" className="ml-2 text-md cursor-pointer">
-              Claro
+              {tradutorSettings[language].claro}
             </label>
           </div>
           <div className="mt-2">
@@ -67,12 +72,12 @@ const ThemeSettings = () => {
             />
             {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
             <label htmlFor="dark" className="ml-2 text-md cursor-pointer">
-              Escuro
+              {tradutorSettings[language].escuro}
             </label>
           </div>
         </div>
         <div className="p-4 border-t-1 border-color ml-4">
-          <p className="font-semibold text-xl ">Cores do Tema</p>
+          <p className="font-semibold text-xl ">{tradutorSettings[language].cores}</p>
           <div className="flex gap-3">
             {themeColors.map((item, index) => (
               <TooltipComponent key={index} content={item.name} position="TopCenter">

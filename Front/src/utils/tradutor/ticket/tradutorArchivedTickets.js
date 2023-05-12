@@ -23,7 +23,7 @@ const archivedTicktes = {
         headerRestaurar: "Restore",
         headerDeletar: "Delete",
         swalError: "Ticket not restored",
-        swalSucsses: "Ticket restored succssesfully",
+        swalSucsses: "Ticket restored successfully",
         swalErrorDelete: "Ticket was not deleted",
         swalSucssesDeleted: "Ticket deleted",
         restaurarButton: "Restore",
