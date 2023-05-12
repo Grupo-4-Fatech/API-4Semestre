@@ -27,7 +27,7 @@ const tradutorKanban = {
         errorSolocaoTitle: "Failed to send the solution",
         errorSolocaoText: "Please describe your solution",
         atualizarButon: "Update",
-        historico: "Historic",
+        historico: "History",
         descricaoTitle: "Description",
         placeholderDescricao: "Write your solution here",
         buttonClose: "Close",
