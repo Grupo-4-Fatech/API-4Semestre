@@ -31,7 +31,9 @@ Com esses recursos, a single-page application de criação de tickets e usuário
 - [X] Usuários devem ter distinção por times;
 - [X] Fila de chamados por time;
 - [X] Configuração e personalização de formulários de chamados;
-- [ ] Árvore de decisão para escalonamento de chamados;
+- [X] Árvore de decisão para escalonamento de chamados;
+- [X] Historio do Chamado;
+- [X] Tela de Analise (chamados);
 - [ ] Cadastro de soluções para problemas conhecidos;
 - [ ] Formulário de abertura de chamado com indicação de interessados;
 
