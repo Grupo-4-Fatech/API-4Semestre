@@ -9,7 +9,7 @@ const tradutorTree = {
         selectTextRisco: "Análise de Risco",
         selectTextImpacto: "Análise de Impacto",
         selectTextCusto: "Análise de Custo",
-        criarButton: "Criar",
+        criarButton: "Atualizar",
         
     },
     en: {
@@ -22,7 +22,7 @@ const tradutorTree = {
         selectTextRisco: "Risk analysis",
         selectTextImpacto: "Impact Analysis",
         selectTextCusto: "Cost Analysis",
-        criarButton: "Create",
+        criarButton: "Update",
         
     }
 };

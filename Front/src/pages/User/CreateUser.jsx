@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState } from 'react'
 import { MdSend } from 'react-icons/md';
 import Campo from '../../components/Campo'
 import { Header } from '../../components'
@@ -14,6 +14,9 @@ const Swal = require('sweetalert2')
 export default function CreateUser() {
     const { currentColor } = useStateContext();
     const { language } = useLanguage();
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [senha, setSenha] = useState("")
 
 
     let location = useNavigate();
@@ -125,8 +128,8 @@ export default function CreateUser() {
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
             <Header category={tradutorCriarUsu[language].page} title={tradutorCriarUsu[language].pageTitle} />
-            <Campo text={tradutorCriarUsu[language].nomeTitle} id="name" placeholder={tradutorCriarUsu[language].nomePlaceholder} type="text" />
-            <Campo text={tradutorCriarUsu[language].emailTitle} id="email" placeholder={tradutorCriarUsu[language].emailPlaceholder} type="text" />
+            <Campo text={tradutorCriarUsu[language].nomeTitle} id="name" placeholder={tradutorCriarUsu[language].nomePlaceholder} type="text" value={name} setValue={setName}/>
+            <Campo text={tradutorCriarUsu[language].emailTitle} id="email" placeholder={tradutorCriarUsu[language].emailPlaceholder} type="text" value={email} setValue={setEmail}/>
             <label className="text-lg font-bold dark:text-black " >{tradutorCriarUsu[language].selectTitleGender}</label>
             <select id="gender" defaultValue='default' className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
                 <option value="default" disabled>{tradutorCriarUsu[language].selectTitleOp}</option>
@@ -144,7 +147,7 @@ export default function CreateUser() {
 
             </div>
           
-            <div className='my-6'><Campo text={tradutorCriarUsu[language].senhaTitulo} id="password" placeholder={tradutorCriarUsu[language].senhaPlaceholder} type={"password"} /></div>
+            <div className='my-6'><Campo text={tradutorCriarUsu[language].senhaTitulo} id="password" placeholder={tradutorCriarUsu[language].senhaPlaceholder} type={"password"} value={senha} setValue={setSenha} /></div>
             <div className="mt-5 mb-5 flex items-center justify-end" >
                 <button style={{ backgroundColor: currentColor}} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" onClick={CreateUser}>
                     <span className='pr-1'>{tradutorCriarUsu[language].buttonCriar}</span>

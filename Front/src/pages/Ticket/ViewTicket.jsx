@@ -412,9 +412,9 @@ const ViewTicket = () => {
                                     <div className="flex p-5 pb-0 border-b border-solid border-slate-200 rounded-t">
                                         <div className='p-2'>
                                             {ticket.classification == 'Hotfix' ?
-                                                <span class="p-1 text-[13px] rounded-full bg-red-500 text-white">{ticket.classification}</span>
+                                                <span className="p-1 text-[13px] rounded-full bg-red-500 text-white">{ticket.classification}</span>
                                                 :
-                                                <span class="p-1 text-[13px] rounded-full bg-cyan-400 text-white">{ticket.classification}</span>
+                                                <span className="p-1 text-[13px] rounded-full bg-cyan-400 text-white">{ticket.classification}</span>
                                             }
                                         </div>
                                         <h3 className="text-1 font-semibold p-2 text-left">
