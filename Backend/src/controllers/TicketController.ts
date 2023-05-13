@@ -119,7 +119,7 @@ class TicketController {
 
   public async getAll(req: Request, res: Response): Promise<Response> {
     var status = req.params.status
-    var query = "SELECT id, type, title FROM ticket where status = " + status;
+    var query = `SELECT id, type, title FROM ticket where status = '${status}'`;
     let email = jwt.decode(req.cookies.jwt);
     const user = await AppDataSource.getRepository(User).findOneBy({ email: email ? email.toString() : "" });
     if (user && user.role && user.role == 3) {
@@ -137,7 +137,7 @@ class TicketController {
       if (status !== "") {
         ticket.status = status;
       }
-      const r = await AppDataSource.manager.save(ticket, ticket).catch((e) => {
+      const r = await AppDataSource.manager.save(ticket).catch((e) => {
         return e;
       })
       if (!r.error) {
@@ -153,11 +153,11 @@ class TicketController {
     }
   }
   public async getKanbanItem(req: Request, res: Response): Promise<Response> {
-    var query = "SELECT id, type, title, status, description FROM ticket WHERE status NOT IN (1,2)";
+    var query = "SELECT id, type, title, status, description FROM ticket WHERE status NOT IN ('1','2')";
     let email = jwt.decode(req.cookies.jwt);
     const user = await AppDataSource.getRepository(User).findOneBy({ email: email ? email.toString() : "" });
     if (user && user.role && user.role == 3) {
-      query = "SELECT id, type, title, status, description FROM ticket WHERE status NOT IN (1,2) and userId = " + user.id;
+      query = "SELECT id, type, title, status, description FROM ticket WHERE status NOT IN ('1','2') and userId = " + user.id;
     }
     const ticket: any = await AppDataSource.manager.query(query)
     return res.json(ticket)
