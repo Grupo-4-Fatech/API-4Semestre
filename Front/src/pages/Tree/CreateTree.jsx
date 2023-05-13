@@ -4,8 +4,8 @@ import { MdSend } from 'react-icons/md';
 import { useStateContext } from '../../contexts/ContextProvider'
 import SelectMult from '../../components/Select';
 import { useEffect, useState } from 'react';
-import { validador } from "../../utils/validador";
 import tradutorTree from "../../utils/tradutor/tree/tradutorTree";
+
 const Swal = require('sweetalert2')
 
 export default function CreateTree() {
@@ -15,6 +15,8 @@ export default function CreateTree() {
     const [custo, setCusto] = useState([]);
     const [impacto, setImpacto] = useState([]);
     const [data, setData] = useState([])
+    const [loading, setLoading] = useState(false)
+    
 
 
 
@@ -106,7 +108,7 @@ export default function CreateTree() {
             users: custo
 
         }
-        
+        setLoading(true);
         fetch("/InspectionGroup/update", {
             method: 'PATCH',
             headers: {
@@ -118,22 +120,26 @@ export default function CreateTree() {
                 Swal.fire({
                     icon: 'error',
                     title: tradutorTree[language].errorDataUpdate,
+
                 })
+
             } else {
-                
                 Swal.fire({
                     icon: 'success',
                     title: tradutorTree[language].successfulyData,
                 })
+                setLoading(false);
             }
-           
+
         })
-        
+
 
 
     }
 
-  
+
+
+ 
 
     useEffect(() => { getUser(); getGroups(); }, [])
 
@@ -161,7 +167,10 @@ export default function CreateTree() {
                 </div>
             </div>
             <div className="mt-5 mb-5 my-1 flex items-center justify-end " >
-                <button onClick={() => CriaTime()} style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" >
+                <button onClick={() => CriaTime()}
+                    disabled={loading === true}
+                    style={{ backgroundColor: currentColor }}
+                    className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" >
                     <span className='pr-1'>{tradutorTree[language].criarButton}</span>
                     <MdSend />
                 </button>

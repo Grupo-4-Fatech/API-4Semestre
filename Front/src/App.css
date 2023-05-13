@@ -77,10 +77,3 @@
 
 }
 
-#loading{
-  display: none;
-}
-
-#loading.show{
-  display: block;
-}

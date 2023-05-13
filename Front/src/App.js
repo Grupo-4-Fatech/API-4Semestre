@@ -101,6 +101,8 @@ const App = () => {
                 <Route path='/tree/create' element={<PrivateRoute><CreateTree /></PrivateRoute>} />
                 <Route path='/historic/:id' element={<PrivateRoute><Historic/></PrivateRoute>} />
                 <Route path='*' element={<NotFound />} />
+                
+                
               </Routes>
             </div>
             <Footer />
