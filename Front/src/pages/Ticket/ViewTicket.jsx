@@ -44,9 +44,6 @@ const ViewTicket = () => {
     const [riscoDesabilitado, setRiscoDesabilitado] = useState(false)
     const [custoDesabilitado, setCustoDesabilitado] = useState(false)
     const [impactoDesabilitado, setImpactoDesabilitado] = useState(false)
-    const notai = document.getElementById("notaI")
-    const notar = document.getElementById("notaR")
-    const notac = document.getElementById("notaC")
 
     function getUsersByGroup(groups, groupName) {
         const group = groups.find(group => group.name.toLowerCase() === groupName.toLowerCase());
@@ -139,6 +136,11 @@ const ViewTicket = () => {
             confirmButtonText: visualizarChamado[language].avaliarButton,
             cancelButtonText: visualizarChamado[language].cancelButton,
         })
+        .then((result) => {
+            if (result.isDismissed) {
+                return 'cancelado'
+            }
+        })
     }
 
     async function verificaDefault(nota, analise) {
@@ -156,18 +158,20 @@ const ViewTicket = () => {
             const resultado = await verificaDefault(selectRisco, 'selectDefautlNotarText')
             if (resultado !== undefined) { return }
             const risco = await confirmarAvaliacao(selectRisco, 'avaliarRisco')
+            if (risco === 'cancelado') {return}
         }
         if (hasPermission(impactoUsers, usuario.id)) {
             const resultado = await verificaDefault(selectImpacto, 'selectDefautlNotaiText')
             if (resultado !== undefined) { return }
             const impacto = await confirmarAvaliacao(selectImpacto, 'avaliarImpacto')
+            if (impacto === 'cancelado') {return}
         }
         if (hasPermission(custoUsers, usuario.id)) {
             const resultado = await verificaDefault(selectCusto, 'selectDefautlNotacText')
             if (resultado !== undefined) { return }
             const custo = await confirmarAvaliacao(selectCusto, 'avaliarCusto')
+            if (custo === 'cancelado') {return}
         }
-
         adicionarAvaliacao(1, selectRisco)
         adicionarAvaliacao(2, selectImpacto)
         adicionarAvaliacao(3, selectCusto)
