@@ -199,6 +199,7 @@ class TicketController {
         } else {
           ticket.risk = item.nota
           await ticketRepository.save(ticket)
+          await TicketController.createLog(ticket, '7', req, item.nota)
           await TicketController.createLog(ticket, '2', req, item.nota)
 
         }
@@ -214,6 +215,7 @@ class TicketController {
         } else {
           ticket.impact = item.nota
           await ticketRepository.save(ticket)
+          await TicketController.createLog(ticket, '8', req, item.nota)
           await TicketController.createLog(ticket, '3', req, item.nota)
         }
 
@@ -222,16 +224,17 @@ class TicketController {
           ticket.status = '2'
           ticket.cost = item.nota
           await ticketRepository.save(ticket)
-          await TicketController.createLog(ticket, '8', req, item.nota)
+          await TicketController.createLog(ticket, '9', req, item.nota)
           await TicketController.createLog(ticket, '5', req)
           return res.json({ true: true })
         } else {
           ticket.cost = item.nota
           await ticketRepository.save(ticket)
+          await TicketController.createLog(ticket, '9', req, item.nota)
           await TicketController.createLog(ticket, '4', req, item.nota)
         }
       }
-    } if (ticket.risk != '' && ticket.cost != '' && ticket.impact != '') {
+    } if (ticket.risk != null && ticket.cost != null && ticket.impact != null) {
       if (ticket.risk != '3' && ticket.impact != '0') {
         ticket.status = '3'
         await ticketRepository.save(ticket)
