@@ -20,11 +20,11 @@ const Sidebar = () => {
     }
   }
   const { usuario } = useAutenticacao();
+  const linguagem = language === "pt" ? linksPt : linksEn
 
   const userPermission = usuario?.role
   function getFilteredLinks() {
-    // const linguagem = language === "pt" ? linksPt : linksEn
-    const newLinks = language === "pt" ? linksPt : linksEn
+    const newLinks = linguagem
       .map((item) => {
         const filteredLinks = item.links.filter((link) => link.permission >= userPermission);
         if (filteredLinks.length > 0) {
