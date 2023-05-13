@@ -63,13 +63,13 @@ const Historic = () => {
                 return "bg-purple-500"
             case 7:
                 // Avaliado risco
-                return "bg-green-500"
+                return "bg-cyan-500"
             case 8:
                 // Avaliado impacto
-                return "bg-green-600"
+                return "bg-cyan-600"
             case 9:
                 // Avaliado custo
-                return "bg-green-700"
+                return "bg-cyan-700"
 
             default:
                 // Caso tenha algum id que nao bate
