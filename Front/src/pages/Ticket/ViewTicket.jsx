@@ -41,6 +41,8 @@ const ViewTicket = () => {
     const [selectRisco, setSelectRisco] = useState();
     const [selectImpacto, setSelectImpacto] = useState();
     const [selectCusto, setSelectCusto] = useState();
+    const [riscoDesabilitado, setRiscoDesabilitado] = useState(false)
+    const [custoDesabilitado, setCustoDesabilitado] = useState(false)
     const [impactoDesabilitado, setImpactoDesabilitado] = useState(false)
     const notai = document.getElementById("notaI")
     const notar = document.getElementById("notaR")
@@ -62,11 +64,11 @@ const ViewTicket = () => {
 
     function disableSelects(loggedInUser) {
         if (!hasPermission(riscoUsers, loggedInUser)) {
-            notar.disabled = true;
+            setRiscoDesabilitado(true)
         }
 
         if (!hasPermission(custoUsers, loggedInUser)) {
-            notac.disabled = true;
+            setCustoDesabilitado(true)
         }
 
         if (!hasPermission(impactoUsers, loggedInUser)) {
@@ -152,42 +154,42 @@ const ViewTicket = () => {
     async function avaliar(id) {
         if (hasPermission(riscoUsers, usuario.id)) {
             const resultado = await verificaDefault(selectRisco, 'selectDefautlNotarText')
-            if (resultado !== undefined) {return}
+            if (resultado !== undefined) { return }
             const risco = await confirmarAvaliacao(selectRisco, 'avaliarRisco')
         }
         if (hasPermission(impactoUsers, usuario.id)) {
             const resultado = await verificaDefault(selectImpacto, 'selectDefautlNotaiText')
-            if (resultado !== undefined) {return}
+            if (resultado !== undefined) { return }
             const impacto = await confirmarAvaliacao(selectImpacto, 'avaliarImpacto')
         }
         if (hasPermission(custoUsers, usuario.id)) {
             const resultado = await verificaDefault(selectCusto, 'selectDefautlNotacText')
-            if (resultado !== undefined) {return}
+            if (resultado !== undefined) { return }
             const custo = await confirmarAvaliacao(selectCusto, 'avaliarCusto')
         }
-    
+
         adicionarAvaliacao(1, selectRisco)
         adicionarAvaliacao(2, selectImpacto)
         adicionarAvaliacao(3, selectCusto)
-            await fetch("/ticket/avaliar", {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json;charset=utf-8'
-                },
-                body: JSON.stringify({ id: id, data: arrayNotas })
-            }).then((resposta) => resposta.json()).then((res) => {
-                if (res.error) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: visualizarChamado[language].errotTitle
-                    })
-                }
-                else {
-                    Swal.fire(visualizarChamado[language].messageAvaliado, '', 'success')
-                    var updateData = data.filter(item => item.id != id)
-                    setData(updateData); setShowModal(false)
-                }
-            })
+        await fetch("/ticket/avaliar", {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({ id: id, data: arrayNotas })
+        }).then((resposta) => resposta.json()).then((res) => {
+            if (res.error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: visualizarChamado[language].errotTitle
+                })
+            }
+            else {
+                Swal.fire(visualizarChamado[language].messageAvaliado, '', 'success')
+                var updateData = data.filter(item => item.id != id)
+                setData(updateData); setShowModal(false)
+            }
+        })
     }
 
     const currentTableData = useMemo(() => {
@@ -339,7 +341,7 @@ const ViewTicket = () => {
 
                                                     <div className=" pl-2  mt-2 text-lg font-bold dark:text-black">{visualizarChamado[language].titleRisco}</div>
                                                     <div className='pl-2 pr-2'>
-                                                        <select id="notaR" defaultValue='default' value={selectRisco} onChange={(e) => { setSelectRisco(e.target.value) }} className=' pl-2 mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
+                                                        <select id="notaR" defaultValue='default' disabled={riscoDesabilitado} value={selectRisco} onChange={(e) => { setSelectRisco(e.target.value) }} className=' pl-2 mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
                                                             <option value="default" disabled>{visualizarChamado[language].selectNota}</option>
                                                             <option value="0">0</option>
                                                             <option value="1">1</option>
@@ -360,7 +362,7 @@ const ViewTicket = () => {
                                                     </div>
                                                     <div className="pl-2 mt-2 text-lg font-bold dark:text-black">{visualizarChamado[language].titleCusto}</div>
                                                     <div className='pl-2 pr-2'>
-                                                        <select id="notaC" defaultValue='default' value={selectCusto} onChange={(e) => { setSelectCusto(e.target.value) }} className='pl-2 mt-2 my-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
+                                                        <select id="notaC" defaultValue='default' disabled={custoDesabilitado} value={selectCusto} onChange={(e) => { setSelectCusto(e.target.value) }} className='pl-2 mt-2 my-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
                                                             <option value="default" disabled>{visualizarChamado[language].selectNota}</option>
                                                             <option value="0">0</option>
                                                             <option value="1">1</option>
