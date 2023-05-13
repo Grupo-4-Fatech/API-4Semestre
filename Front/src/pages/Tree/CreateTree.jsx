@@ -16,7 +16,12 @@ export default function CreateTree() {
     const [impacto, setImpacto] = useState([]);
     const [data, setData] = useState([])
 
+
+
+
+
     function getUser() {
+
         fetch("/user/getUsers", {
             method: 'GET',
             headers: {
@@ -74,6 +79,7 @@ export default function CreateTree() {
 
     function CriaTime() {
 
+
         if (data.length === 0) {
             Swal.fire({
                 icon: 'error',
@@ -100,6 +106,7 @@ export default function CreateTree() {
             users: custo
 
         }
+        
         fetch("/InspectionGroup/update", {
             method: 'PATCH',
             headers: {
@@ -113,15 +120,21 @@ export default function CreateTree() {
                     title: tradutorTree[language].errorDataUpdate,
                 })
             } else {
+                
                 Swal.fire({
                     icon: 'success',
                     title: tradutorTree[language].successfulyData,
                 })
             }
+           
         })
+        
 
 
     }
+
+  
+
     useEffect(() => { getUser(); getGroups(); }, [])
 
     return (
@@ -147,8 +160,8 @@ export default function CreateTree() {
 
                 </div>
             </div>
-            <div className="mt-5 mb-5 flex" >
-                <button onClick={() => CriaTime()} style={{ backgroundColor: currentColor, position: 'absolute' }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" >
+            <div className="mt-5 mb-5 my-1 flex items-center justify-end " >
+                <button onClick={() => CriaTime()} style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" >
                     <span className='pr-1'>{tradutorTree[language].criarButton}</span>
                     <MdSend />
                 </button>
