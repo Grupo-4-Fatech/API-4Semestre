@@ -38,6 +38,13 @@ const ViewTicket = () => {
     const custoUsers = getUsersByGroup(grupos, 'Grupo Custo');
     const impactoUsers = getUsersByGroup(grupos, 'Grupo Impacto');
     const arrayNotas = new Array();
+    const [selectRisco, setSelectRisco] = useState();
+    const [selectImpacto, setSelectImpacto] = useState();
+    const [selectCusto, setSelectCusto] = useState();
+    const [impactoDesabilitado, setImpactoDesabilitado] = useState(false)
+    const notai = document.getElementById("notaI")
+    const notar = document.getElementById("notaR")
+    const notac = document.getElementById("notaC")
 
     function getUsersByGroup(groups, groupName) {
         const group = groups.find(group => group.name.toLowerCase() === groupName.toLowerCase());
@@ -53,33 +60,22 @@ const ViewTicket = () => {
         return users.some(user => user.id === loggedInUser);
     }
 
-    function disableSelects(groups, loggedInUser) {
-        const riscoSelect = document.getElementById('notaR');
-        const custoSelect = document.getElementById('notaC');
-        const impactoSelect = document.getElementById('notaI');
-
+    function disableSelects(loggedInUser) {
         if (!hasPermission(riscoUsers, loggedInUser)) {
-            riscoSelect.disabled = true;
+            notar.disabled = true;
         }
 
         if (!hasPermission(custoUsers, loggedInUser)) {
-            custoSelect.disabled = true;
+            notac.disabled = true;
         }
 
         if (!hasPermission(impactoUsers, loggedInUser)) {
-            impactoSelect.disabled = true;
+            setImpactoDesabilitado(true)
         }
     }
 
     function getDataAndSetSelectPermission() {
-        fetch("/InspectionGroup/list", {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-            }
-        }).then((resposta) => resposta.json()).then((data) => {
-            disableSelects(data, usuario.id);
-        })
+        disableSelects(usuario.id);
     };
 
     function getData() {
@@ -125,7 +121,7 @@ const ViewTicket = () => {
     const allUserIds = getAllUserIds(grupos);
 
     function adicionarAvaliacao(tipo, nota) {
-        if (nota !== 'default') {
+        if (nota !== 'default' && nota !== null) {
             const avaliacao = {
                 tipo: tipo,
                 nota: nota
@@ -134,110 +130,64 @@ const ViewTicket = () => {
         }
     }
 
-    function teste(id) {
-        const notai = document.getElementById("notaI")
-        const notar = document.getElementById("notaR")
-        const notac = document.getElementById("notaC")
-        if (hasPermission(riscoUsers, usuario.id) && validador.selectEstaDefault(notar)) {
-            Swal.fire({
-                icon: 'error',
-                title: visualizarChamado[language].errotTitle,
-                text: visualizarChamado[language].selectDefautlNotarText,
-            })
-            return
-        }
-        if (hasPermission(impactoUsers, usuario.id) && validador.selectEstaDefault(notai)) {
-            Swal.fire({
-                icon: 'error',
-                title: visualizarChamado[language].errotTitle,
-                text: visualizarChamado[language].selectDefautlNotaiText,
-            })
-            return
-        }
-        if (hasPermission(custoUsers, usuario.id) && validador.selectEstaDefault(notac)) {
-            Swal.fire({
-                icon: 'error',
-                title: visualizarChamado[language].errotTitle,
-                text: visualizarChamado[language].selectDefautlNotacText,
-            })
-            return
-        }
-        if (validador.selectAvaliar(notar)) {
-            Swal.fire({
-                title: `${visualizarChamado[language].avaliarRisco} ${notar.value}?`,
-                showDenyButton: true,
-                showCancelButton: true,
-                confirmButtonText: visualizarChamado[language].avaliarButton,
-                denyButtonText: visualizarChamado[language].DennyButton,
-                cancelButtonText: visualizarChamado[language].cancelButton,
-            }).then((result) => {
-                if (result.isDenied) {
-                    Swal.fire(visualizarChamado[language].messageNaoAvaliado, '', 'info');
-                    return
-                }
+    async function confirmarAvaliacao(nota, avaliacao) {
+        return Swal.fire({
+            title: `${visualizarChamado[language][avaliacao]} ${nota}?`,
+            showCancelButton: true,
+            confirmButtonText: visualizarChamado[language].avaliarButton,
+            cancelButtonText: visualizarChamado[language].cancelButton,
+        })
+    }
 
-                if (validador.selectAvaliar(notai)) {
+    async function verificaDefault(nota, analise) {
+        if (nota === undefined) {
+            return Swal.fire({
+                icon: 'error',
+                title: visualizarChamado[language].errotTitle,
+                text: visualizarChamado[language][analise],
+            })
+        }
+    }
+
+    async function avaliar(id) {
+        if (hasPermission(riscoUsers, usuario.id)) {
+            const resultado = await verificaDefault(selectRisco, 'selectDefautlNotarText')
+            if (resultado !== undefined) {return}
+            const risco = await confirmarAvaliacao(selectRisco, 'avaliarRisco')
+        }
+        if (hasPermission(impactoUsers, usuario.id)) {
+            const resultado = await verificaDefault(selectImpacto, 'selectDefautlNotaiText')
+            if (resultado !== undefined) {return}
+            const impacto = await confirmarAvaliacao(selectImpacto, 'avaliarImpacto')
+        }
+        if (hasPermission(custoUsers, usuario.id)) {
+            const resultado = await verificaDefault(selectCusto, 'selectDefautlNotacText')
+            if (resultado !== undefined) {return}
+            const custo = await confirmarAvaliacao(selectCusto, 'avaliarCusto')
+        }
+    
+        adicionarAvaliacao(1, selectRisco)
+        adicionarAvaliacao(2, selectImpacto)
+        adicionarAvaliacao(3, selectCusto)
+            await fetch("/ticket/avaliar", {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify({ id: id, data: arrayNotas })
+            }).then((resposta) => resposta.json()).then((res) => {
+                if (res.error) {
                     Swal.fire({
-                        title: `${visualizarChamado[language].avaliarImpacto} ${notai.value}?`,
-                        showDenyButton: true,
-                        showCancelButton: true,
-                        confirmButtonText: visualizarChamado[language].avaliarButton,
-                        denyButtonText: visualizarChamado[language].DennyButton,
-                        cancelButtonText: visualizarChamado[language].cancelButton,
-                    }).then((result) => {
-                        if (result.isDenied) {
-                            Swal.fire(visualizarChamado[language].messageNaoAvaliado, '', 'info');
-                            return
-                        }
-
-                        if (validador.selectAvaliar(notac)) {
-                            Swal.fire({
-                                title: `${visualizarChamado[language].avaliarCusto} ${notac.value}?`,
-                                showDenyButton: true,
-                                showCancelButton: true,
-                                confirmButtonText: visualizarChamado[language].avaliarButton,
-                                denyButtonText: visualizarChamado[language].DennyButton,
-                                cancelButtonText: visualizarChamado[language].cancelButton,
-                            }).then((result) => {
-                                if (result.isDenied) {
-                                    Swal.fire(visualizarChamado[language].messageNaoAvaliado, '', 'info');
-                                    return
-                                } else {
-                                    adicionarAvaliacao(1, notar.value)
-                                    adicionarAvaliacao(2, notai.value)
-                                    adicionarAvaliacao(3, notac.value)
-                                    if (id) {
-                                        console.log(id)
-                                        fetch("/ticket/avaliar", {
-                                            method: 'PATCH',
-                                            headers: {
-                                                'Content-Type': 'application/json;charset=utf-8'
-                                            },
-                                            body: JSON.stringify({ id: id, data: arrayNotas })
-                                        }).then((resposta) => resposta.json()).then((res) => {
-                                            if (res.error) {
-                                                Swal.fire({
-                                                    icon: 'error',
-                                                    title: visualizarChamado[language].errotTitle
-                                                })
-                                            }
-                                            else {
-                                                Swal.fire(visualizarChamado[language].messageAvaliado, '', 'success')
-                                                var updateData = data.filter(item => item.id != id)
-                                                setData(updateData); setShowModal(false)
-                                            }
-                                        })
-                                    }
-                                } if (result.isDenied) {
-                                    Swal.fire(visualizarChamado[language].messageNaoAvaliado, '', 'info');
-                                    return
-                                }
-                            });
-                        }
-                    });
+                        icon: 'error',
+                        title: visualizarChamado[language].errotTitle
+                    })
                 }
-            });
-        }
+                else {
+                    Swal.fire(visualizarChamado[language].messageAvaliado, '', 'success')
+                    var updateData = data.filter(item => item.id != id)
+                    setData(updateData); setShowModal(false)
+                }
+            })
     }
 
     const currentTableData = useMemo(() => {
@@ -321,7 +271,7 @@ const ViewTicket = () => {
                                         )}
 
                                         <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                            <button onClick={() => { setTicket({ id: dat.id, title: dat.title, description: dat.Summary, classification: dat.classification }); setShowModalHistorico(true);}} className="bg-botaohistorico text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">
+                                            <button onClick={() => { setTicket({ id: dat.id, title: dat.title, description: dat.Summary, classification: dat.classification }); setShowModalHistorico(true); }} className="bg-botaohistorico text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">
                                                 {visualizarChamado[language].historicoButton}</button>
                                         </td>
                                     </tr>
@@ -366,8 +316,8 @@ const ViewTicket = () => {
                                     <div className="w-full px-2 sm:px-0">
                                         <Tab.Group defaultIndex={1}>
                                             <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1  pl-2 pr-2">
-                                                {tabs.map((tab) => (
-                                                    <Tab className={({ selected }) =>
+                                                {tabs.map((tab, index) => (
+                                                    <Tab key={index} className={({ selected }) =>
                                                         classNames(
                                                             'w-full rounded-lg py-2.5 text-sm font-medium leading-5',
                                                             'ring-white ring-opacity-60 ring-offset-2 focus:outline-none',
@@ -389,8 +339,8 @@ const ViewTicket = () => {
 
                                                     <div className=" pl-2  mt-2 text-lg font-bold dark:text-black">{visualizarChamado[language].titleRisco}</div>
                                                     <div className='pl-2 pr-2'>
-                                                        <select id="notaR" defaultValue='default' className=' pl-2 mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
-                                                            <option onChange={(e) => console.log(e)} value="default" disabled>{visualizarChamado[language].selectNota}</option>
+                                                        <select id="notaR" defaultValue='default' value={selectRisco} onChange={(e) => { setSelectRisco(e.target.value) }} className=' pl-2 mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
+                                                            <option value="default" disabled>{visualizarChamado[language].selectNota}</option>
                                                             <option value="0">0</option>
                                                             <option value="1">1</option>
                                                             <option value="2">2</option>
@@ -400,7 +350,7 @@ const ViewTicket = () => {
 
                                                     <div className="pl-2 mt-2 text-lg font-bold dark:text-black">{visualizarChamado[language].titleImpacto}</div>
                                                     <div className='pl-2 pr-2'>
-                                                        <select id="notaI" defaultValue='default' className='pl-2 mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
+                                                        <select id="notaI" defaultValue='default' disabled={impactoDesabilitado} value={selectImpacto} onChange={(e) => { setSelectImpacto(e.target.value) }} className='pl-2 mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
                                                             <option value="default" disabled>{visualizarChamado[language].selectNota}</option>
                                                             <option value="0">0</option>
                                                             <option value="1">1</option>
@@ -410,7 +360,7 @@ const ViewTicket = () => {
                                                     </div>
                                                     <div className="pl-2 mt-2 text-lg font-bold dark:text-black">{visualizarChamado[language].titleCusto}</div>
                                                     <div className='pl-2 pr-2'>
-                                                        <select id="notaC" defaultValue='default' className='pl-2 mt-2 my-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
+                                                        <select id="notaC" defaultValue='default' value={selectCusto} onChange={(e) => { setSelectCusto(e.target.value) }} className='pl-2 mt-2 my-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500'>
                                                             <option value="default" disabled>{visualizarChamado[language].selectNota}</option>
                                                             <option value="0">0</option>
                                                             <option value="1">1</option>
@@ -433,7 +383,7 @@ const ViewTicket = () => {
                                         >
                                             {visualizarChamado[language].closeButton}
                                         </button>
-                                        <button onClick={() => teste(ticket.id)} className="text-white rounded-full bg-green-700  hover:bg-green-800 font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                        <button onClick={() => avaliar(ticket.id)} className="text-white rounded-full bg-green-700  hover:bg-green-800 font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                             type="button" >{visualizarChamado[language].avaliarButton} </button>
                                     </div>
                                 </div>
