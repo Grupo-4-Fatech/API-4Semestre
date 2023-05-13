@@ -71,6 +71,21 @@ Com esses recursos, a single-page application de criação de tickets e usuário
 
 </br>
 
+## Demonstração em Gif 3ª Sprint
+
+<ul> <li> <strong> Tela de análise(chamados) </strong> </li> </ul>
+
+![Design sem nome(2)](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/e25e8a9b-2d7b-4444-a7ad-e8ce56cd83bb)
+
+<ul> <li> <strong> Árvore dinâmica </strong> </li> </ul>
+
+![Design sem nome(1)](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/02540e03-0eee-46bd-aa9e-5e304612b367)
+
+<ul> <li> <strong> Histórico do chamado </strong> </li> </ul>
+
+![Design sem nome](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/2b85a928-98d9-4468-af4e-8cf63cd5751d)
+
+
 ## Modelo conceitual
 
 ![modelo conceitual](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/e39a6b95-345f-4a98-876d-b36abc2ec59a)
