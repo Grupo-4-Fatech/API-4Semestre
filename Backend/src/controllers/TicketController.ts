@@ -101,20 +101,22 @@ class TicketController {
 
   public async delete(req: Request, res: Response): Promise<Response> {
     const { id } = req.body
-    const ticket: any = await AppDataSource.manager.findOneBy(Ticket, { id }).catch((e) => {
-      return { error: "identificador inválido" }
-    })
+    const ticket: any = await AppDataSource.getRepository(Ticket).findOneBy({ id: id }).catch((e) => {
+      return { error: "Identificador inválido" }
+  })
 
-    if (ticket && ticket.id) {
-      const r = await AppDataSource.manager.remove(Ticket, ticket).catch((e) => e.message)
+  if (ticket && ticket.id) {
+      const r = await AppDataSource
+      .createQueryBuilder()
+      .delete()
+      .from(Ticket)
+      .where("id = :id", { id: id })
+      .execute()
       return res.json(r)
-    }
-    else if (ticket && ticket.error) {
-      return res.json(ticket)
-    }
-    else {
-      return res.json({ error: "chamado não encontrado" })
-    }
+  }
+  else {
+      return res.json({ error: "Ticket não encontrado" })
+  }
 
 
   }

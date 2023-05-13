@@ -30,13 +30,13 @@ export class Ticket {
     @Column({ nullable: true, default: "" })
     cost: string;
 
-    @ManyToOne(() => Teams, (teams) => teams.id)
+    @ManyToOne(() => Teams, (teams) => teams.id, {onDelete: 'CASCADE'})
     teams: Teams[]
 
-    @ManyToOne(() => InspectionGroup, (inspectionGroup) => inspectionGroup.id)
+    @ManyToOne(() => InspectionGroup, (inspectionGroup) => inspectionGroup.id, {onDelete: 'CASCADE'})
     inspectionGroup: InspectionGroup;
 
-    @ManyToOne(() => User, (user) => user.id)
+    @ManyToOne(() => User, (user) => user.id, {onDelete: 'CASCADE'})
     user: User;
 
     @OneToMany(() => Log, (log) => log.id)
