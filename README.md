@@ -26,12 +26,10 @@ Com esses recursos, a single-page application de criação de tickets e usuário
 
 > Requisitos Funcionais
 
-- [X] Cadastros de grupos de usuários;
-- [X] Permissão por grupo e por usuário;
-- [X] Usuários devem ter distinção por times;
-- [X] Fila de chamados por time;
-- [X] Configuração e personalização de formulários de chamados;
-- [ ] Árvore de decisão para escalonamento de chamados;
+- [X] Árvore de decisão para escalonamento de chamados;
+- [X] Tela de análise(chamados);
+- [X] Histórico do chamado;
+- [X] Opção de idioma;
 - [ ] Cadastro de soluções para problemas conhecidos;
 - [ ] Formulário de abertura de chamado com indicação de interessados;
 
@@ -75,15 +73,23 @@ Com esses recursos, a single-page application de criação de tickets e usuário
 
 <ul> <li> <strong> Tela de análise(chamados) </strong> </li> </ul>
 
-![Design sem nome(2)](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/e25e8a9b-2d7b-4444-a7ad-e8ce56cd83bb)
+![avaliar chamado](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/a71b2b87-938a-458e-9da9-5bacb63df6be)
+
 
 <ul> <li> <strong> Árvore dinâmica </strong> </li> </ul>
 
-![Design sem nome(1)](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/02540e03-0eee-46bd-aa9e-5e304612b367)
+![Arvore](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/cd73e933-a0bb-4c82-8d4e-cd2605bf0450)
+
 
 <ul> <li> <strong> Histórico do chamado </strong> </li> </ul>
 
-![Design sem nome](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/2b85a928-98d9-4468-af4e-8cf63cd5751d)
+![Historico](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/748fe1b6-22ee-4876-89b9-c7ab3b3fac60)
+
+
+<ul> <li> <strong> Opção de idioma </strong> </li> </ul>
+
+![idioma](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/15896a2d-bf10-4a55-af8a-8fc592336ea5)
+
 
 
 ## Modelo conceitual
