@@ -100,24 +100,16 @@ class TicketController {
   }
 
 
-  public async delete(req: Request, res: Response): Promise<Response> {
+  public async delete(req: Request, res: Response){
     const { id } = req.body
-    const ticket: any = await AppDataSource.manager.findOneBy(Ticket, { id }).catch((e) => {
-      return { error: "Identificador inválido" }
-    })
+  
+    const ticketTable = await AppDataSource.getRepository(Ticket);
+    const ticket: Ticket = await ticketTable.findOneBy({id: id})
+    const log: Log[] = await AppDataSource.getRepository(Log).findBy({tickets: id})
+    await log.forEach(log => AppDataSource.getRepository(Log).remove(log))
 
-    if (ticket && ticket.id) {
-      const r = await AppDataSource.manager.remove(Ticket, ticket).catch((e) => e.message)
-      return res.json(r)
-    }
-    else if (ticket && ticket.error) {
-      return res.json(ticket)
-    }
-    else {
-      return res.json({ error: "Ticket não localizado" })
-    }
-
-
+    ticketTable.remove(ticket);
+    console.log(ticket)
   }
 
 
@@ -129,12 +121,15 @@ class TicketController {
 
   public async getAll(req: Request, res: Response): Promise<Response> {
     var status = req.params.status
-    var query = "SELECT id, type, title, description FROM ticket where status = '" + status + "'";
+    var query;
     let email = jwt.decode(req.cookies.jwt);
     const user = await AppDataSource.getRepository(User).findOneBy({ email: email ? email.toString() : "" });
-    if (user && user.role && user.role == 3) {
-      query = "SELECT id, type, title, description FROM ticket where status = " + status + " and userId = " + user.id;
+    if (user.role == 3) {
+      query = `SELECT id, type, title, description FROM ticket where status = '${status}' and "userId" = ${user.id}`;
+      const ticket: any = await AppDataSource.manager.query(query)
+      return res.json(ticket);
     }
+    query = "SELECT id, type, title, description FROM ticket where status = '" + status + "'";
     const ticket: any = await AppDataSource.manager.query(query)
     return res.json(ticket)
   }
@@ -167,7 +162,7 @@ class TicketController {
     let email = jwt.decode(req.cookies.jwt);
     const user = await AppDataSource.getRepository(User).findOneBy({ email: email ? email.toString() : "" });
     if (user && user.role && user.role == 3) {
-      query = "SELECT id, type, title, status, description FROM ticket WHERE status NOT IN ('1','2') and userId = " + user.id;
+      query = `SELECT id, type, title, status, description FROM ticket WHERE status NOT IN ('1','2') and "userId" = ` + user.id;
     }
     const ticket: any = await AppDataSource.manager.query(query)
     return res.json(ticket)
