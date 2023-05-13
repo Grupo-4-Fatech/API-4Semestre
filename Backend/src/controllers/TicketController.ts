@@ -161,11 +161,11 @@ class TicketController {
     }
   }
   public async getKanbanItem(req: Request, res: Response): Promise<Response> {
-    var query = "SELECT id, type, title, status, description FROM ticket WHERE status != '1' and status != '2' ";
+    var query = "SELECT id, type, title, status, description FROM ticket WHERE status = '3' ";
     let email = jwt.decode(req.cookies.jwt);
     const user = await AppDataSource.getRepository(User).findOneBy({ email: email ? email.toString() : "" });
     if (user && user.role && user.role == 3) {
-      query = "SELECT id, type, title, status, description FROM ticket WHERE status != '1' and status != '2' and userId = " + user.id;
+      query = "SELECT id, type, title, status, description FROM ticket WHERE status NOT IN ('1','2') and userId = " + user.id;
     }
     const ticket: any = await AppDataSource.manager.query(query)
     return res.json(ticket)
@@ -179,57 +179,64 @@ class TicketController {
 
     return res.json(logs)
   }
-public async avaliar(req: Request, res: Response): Promise<Response> {
+  public async avaliar(req: Request, res: Response): Promise<Response> {
     //id, tipo, nota
     //1-risco; 2-impacto; 3-custo
-    const { data, id} = req.body;
+    const { data, id } = req.body;
     const ticketRepository = AppDataSource.getRepository(Ticket)
 
     const ticket = await AppDataSource.getRepository(Ticket).findOneBy({ id: id })
-  
-    for( var item of data){
-    if (item.tipo == 1) {
-      if (item.nota == "3") {
-        ticket.status = '2'
-        ticket.risk = item.nota
-        await ticketRepository.save(ticket)
-        await TicketController.createLog(ticket, '7', req, item.nota)
-        await TicketController.createLog(ticket, '5', req)
-        return res.json({true:true})
-      } else {
-        ticket.risk = item.nota
-        await ticketRepository.save(ticket)
-        await TicketController.createLog(ticket, '2', req, item.nota)
 
-      }
+    for (var item of data) {
+      if (item.tipo == 1) {
+        if (item.nota == "3") {
+          ticket.status = '2'
+          ticket.risk = item.nota
+          await ticketRepository.save(ticket)
+          await TicketController.createLog(ticket, '7', req, item.nota)
+          await TicketController.createLog(ticket, '5', req)
+          return res.json({ true: true })
+        } else {
+          ticket.risk = item.nota
+          await ticketRepository.save(ticket)
+          await TicketController.createLog(ticket, '2', req, item.nota)
 
-    } else if (item.tipo == 2) {
-      if (item.nota == "0") {
-        ticket.status = '2'
-        ticket.impact = item.nota
-        await ticketRepository.save(ticket)
-        await TicketController.createLog(ticket, '8', req, item.nota)
-        await TicketController.createLog(ticket, '5', req)
-        return res.json({true:true})
-      } else {
-        ticket.impact = item.nota
-        await ticketRepository.save(ticket)
-        await TicketController.createLog(ticket, '3', req, item.nota)
-      }
+        }
 
-    } else if (item.tipo == 3) {
-      if (item.nota == "3") {
-        ticket.status = '2'
-        ticket.cost = item.nota
-        await ticketRepository.save(ticket)
-        await TicketController.createLog(ticket, '8', req, item.nota)
-        await TicketController.createLog(ticket, '5', req)
-        return res.json({true:true})
+      } if (item.tipo == 2) {
+        if (item.nota == "0") {
+          ticket.status = '2'
+          ticket.impact = item.nota
+          await ticketRepository.save(ticket)
+          await TicketController.createLog(ticket, '8', req, item.nota)
+          await TicketController.createLog(ticket, '5', req)
+          return res.json({ true: true })
+        } else {
+          ticket.impact = item.nota
+          await ticketRepository.save(ticket)
+          await TicketController.createLog(ticket, '3', req, item.nota)
+        }
+
+      } if (item.tipo == 3) {
+        if (item.nota == "3") {
+          ticket.status = '2'
+          ticket.cost = item.nota
+          await ticketRepository.save(ticket)
+          await TicketController.createLog(ticket, '8', req, item.nota)
+          await TicketController.createLog(ticket, '5', req)
+          return res.json({ true: true })
+        } else {
+          ticket.cost = item.nota
+          await ticketRepository.save(ticket)
+          await TicketController.createLog(ticket, '4', req, item.nota)
+        }
       }
-      await ticketRepository.save(ticket)
-      await TicketController.createLog(ticket, '4', req, item.nota)
+    } if (ticket.risk != '' && ticket.cost != '' && ticket.impact != '') {
+      if (ticket.risk != '3' && ticket.impact != '0') {
+        ticket.status = '3'
+        await ticketRepository.save(ticket)
+      }
     }
-  }
 
     return res.json({ true: true });
   }
@@ -237,7 +244,7 @@ public async avaliar(req: Request, res: Response): Promise<Response> {
     let email = jwt.decode(req.cookies.jwt);
     const user: any = await AppDataSource.getRepository(User).findOneBy({ email: email ? email.toString() : "" });
     var log = new Log();
-    
+
     log.action = acao;
     log.date = new Date();
     log.tickets = ticket;

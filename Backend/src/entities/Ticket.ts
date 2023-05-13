@@ -1,4 +1,4 @@
-import {Entity, Column, PrimaryGeneratedColumn, ManyToMany, OneToMany, ManyToOne, JoinTable} from  'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, OneToMany, ManyToOne, JoinTable, AfterInsert } from 'typeorm'
 import { Teams } from './Teams';
 import { InspectionGroup } from './InspectionGroup';
 import { User } from './Users';
@@ -18,16 +18,16 @@ export class Ticket {
     @Column({})
     description: string;
 
-    @Column( {})
+    @Column({})
     status: string;
 
-    @Column({nullable: true, default: ""})
+    @Column({ nullable: true, default: "" })
     risk: string;
 
-    @Column({nullable: true, default: ""})
+    @Column({ nullable: true, default: "" })
     impact: string;
-     
-    @Column({nullable: true, default: ""})
+
+    @Column({ nullable: true, default: "" })
     cost: string;
 
     @ManyToOne(() => Teams, (teams) => teams.id)
