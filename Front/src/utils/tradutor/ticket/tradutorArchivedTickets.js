@@ -14,7 +14,8 @@ const archivedTicktes = {
         swalSucssesDeleted: "Chamado excluido",
         restaurarButton: "Restaurar",
         deletarButton: "Deletar",
-        historicoButton: "Histórico"
+        historicoButton: "Histórico",
+        closeButton: "Fechar"
     },
     en: {
         page: "Page",
@@ -31,7 +32,8 @@ const archivedTicktes = {
         swalSucssesDeleted: "Ticket deleted",
         restaurarButton: "Restore",
         deletarButton: "Delete",
-        historicoButton: "History"
+        historicoButton: "History",
+        closeButton: "Close"
 
 
     }
