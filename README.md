@@ -31,7 +31,7 @@ Com esses recursos, a single-page application de criação de tickets e usuário
 - [X] Usuários devem ter distinção por times;
 - [X] Fila de chamados por time;
 - [X] Configuração e personalização de formulários de chamados;
-- [ ] Árvore de decisão para escalonamento de chamados;
+- [X] Árvore de decisão para escalonamento de chamados;
 - [ ] Cadastro de soluções para problemas conhecidos;
 - [ ] Formulário de abertura de chamado com indicação de interessados;
 
@@ -44,7 +44,7 @@ Com esses recursos, a single-page application de criação de tickets e usuário
 
  - - [X] **1° Sprint:**</a> 13/03/2023 a 02/04/2023<br>
  - - [X] **2° Sprint:**</a> 03/04/2023 a 23/04/2023
- - - [ ] **3° Sprint:**</a> 24/04/2023 a 14/05/2023
+ - - [X] **3° Sprint:**</a> 24/04/2023 a 14/05/2023
  - - [ ] **4°Sprint:** 15/05/2023 a 04/06/2023
  - - [ ] **Feira de Soluções:** 13/06 e 14/06/2023
  
@@ -52,7 +52,7 @@ Com esses recursos, a single-page application de criação de tickets e usuário
     
  ## 💻 Tecnologias Utilizadas
 
- - **Back-end:** TypeScript, SQLite, NodeJS com o framework TypeORM.
+ - **Back-end:** TypeScript, SQLite, PostGreSQL NodeJS com o framework TypeORM.
 - **Front-end:** Javascript utilizando React e o framework Tailwind CSS.
 - **Ferramentas:** Visual Studio Code, Canva, Git, Github, PowerPoint, MySQL, Microsoft Teams e Discord.
 
@@ -74,7 +74,7 @@ Com esses recursos, a single-page application de criação de tickets e usuário
 
 - <a href="docs/sprint1/Burndown Geral - sprint 1.pdf">**Sprint 1**</a>
 - <a href="docs/sprint2/Burndown Geral - sprint 2.pdf">**Sprint 2**</a>
-- <a href="docs/">**Sprint 3**</a>
+- <a href="docs/sprint3/Burndown Geral - sprint 3.pdf">**Sprint 3**</a>
 - <a href="docs/">**Sprint 4**</a>
  
 ## 👥 Equipe
