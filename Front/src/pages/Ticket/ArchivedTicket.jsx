@@ -12,7 +12,7 @@ let PageSize = 5;
 const ArchivedTicket = () => {
     const { language } = useLanguage();
     const [currentPage, setCurrentPage] = useState(1);
-    const headers = [archivedTicktes[language].headerTitulo, archivedTicktes[language].headerClassificacao,archivedTicktes[language].headerRestaurar , archivedTicktes[language].headerDeletar]
+    const headers = [archivedTicktes[language].headerTitulo, archivedTicktes[language].headerClassificacao, archivedTicktes[language].headerRestaurar, archivedTicktes[language].headerHistorico]
     const [data, setData] = useState([])
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -140,10 +140,12 @@ const ArchivedTicket = () => {
                                     <button onClick={(e) => restore(dat.id, 1)} className="bg-green-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">{archivedTicktes[language].restaurarButton}</button>
                                 </td>
 
-                                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
+                                {/* <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
                                     <button onClick={(e) => deleteTicket(dat.id)} className="bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">{archivedTicktes[language].deletarButton}</button>
+                                </td> */}
+                                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
+                                    <button className="bg-botaohistorico text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">{archivedTicktes[language].historicoButton}</button>
                                 </td>
-
                                 <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
                                 </td>
 

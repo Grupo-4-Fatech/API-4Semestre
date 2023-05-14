@@ -14,6 +14,7 @@ const tradutorAlterarTime = {
         errorNomeVazio: "Por favor escreva um nome para a equipe",
         errorTamanhoTexto: "O tamanho do nome é muito grande",
         selectMultAddUsers: "Por favor adicione um usuário",
+        selectMultAddUsersTamanho: "O limite de usuários é 4 por time" ,
         selectDefaultGroup: "Selecione uma equipe",
         errorDescriptionVazio: "Por favor escreva uma descrição",
         errorDescriptionTamanhoTexto: "O tamanho da equipe é muito grande",
@@ -37,10 +38,11 @@ const tradutorAlterarTime = {
         errorNomeVazio: "Please write a name for the team",
         errorTamanhoTexto: "Name size is too big",
         selectMultAddUsers: "Please add a user",
+        selectMultAddUsersTamanho: "User limit is 4 per time" ,
         selectDefaultGroup: "Select a group",
         errorDescriptionVazio: "Please write a desciption",
         errorDescriptionTamanhoTexto: "Group description size it too big",
-        messageSucssefuly: "Create successfully",
+        messageSucssefuly: "Updated successfully",
         
     }
 };

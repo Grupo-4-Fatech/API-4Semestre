@@ -80,6 +80,14 @@ export default function UpdateTeams() {
             })
             return
         }
+        if (selectMult.length >= 5) {
+            Swal.fire({
+                icon: 'error',
+                title: tradutorAlterarTime[language].errorTitle,
+                text: tradutorAlterarTime[language].selectMultAddUsersTamanho,
+            })
+            return
+        }
         if (validador.selectEstaDefault(group)) {
             Swal.fire({
                 icon: 'error',
