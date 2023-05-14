@@ -29,7 +29,6 @@ Com esses recursos, a single-page application de criação de tickets e usuário
 - [X] Árvore de decisão para escalonamento de chamados;
 - [X] Tela de análise(chamados);
 - [X] Histórico do chamado;
-- [X] Opção de idioma;
 - [ ] Cadastro de soluções para problemas conhecidos;
 - [ ] Formulário de abertura de chamado com indicação de interessados;
 
@@ -43,7 +42,7 @@ Com esses recursos, a single-page application de criação de tickets e usuário
  - - [X] <a href="https://github.com/Grupo-4-Fatech/API-4Semestre/tree/sprint_1">**1° Sprint:**</a> 13/03/2023 a 02/04/2023<br>
  - - [X] <a href="https://github.com/Grupo-4-Fatech/API-4Semestre/tree/sprint_2">**2° Sprint:**</a>
  03/04/2023 a 23/04/2023
- - - [ ] <a href="https://github.com/Grupo-4-Fatech/API-4Semestre/tree/sprint_3">**3° Sprint:**</a> 24/04/2023 a 14/05/2023
+ - - [X] <a href="https://github.com/Grupo-4-Fatech/API-4Semestre/tree/sprint_3">**3° Sprint:**</a> 24/04/2023 a 14/05/2023
  - - [ ] **4°Sprint:** 15/05/2023 a 04/06/2023
  - - [ ] **Feira de Soluções:** 13/06 e 14/06/2023
  
@@ -51,7 +50,7 @@ Com esses recursos, a single-page application de criação de tickets e usuário
     
  ## 💻 Tecnologias Utilizadas
 
- - **Back-end:** TypeScript, SQLite, NodeJS com o framework TypeORM.
+ - **Back-end:** TypeScript, SQLite, PostGreSQL NodeJS com o framework TypeORM.
 - **Front-end:** Javascript utilizando React e o framework Tailwind CSS.
 - **Ferramentas:** Visual Studio Code, Canva, Git, Github, PowerPoint, MySQL, Microsoft Teams e Discord.
 
