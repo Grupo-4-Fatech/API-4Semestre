@@ -42,9 +42,10 @@ Com esses recursos, a single-page application de criação de tickets e usuário
     
  ## 📅 Cronograma das Sprints 
 
- - - [X] **1° Sprint:**</a> 13/03/2023 a 02/04/2023<br>
- - - [X] **2° Sprint:**</a> 03/04/2023 a 23/04/2023
- - - [X] **3° Sprint:**</a> 24/04/2023 a 14/05/2023
+ - - [X] <a href="https://github.com/Grupo-4-Fatech/API-4Semestre/tree/sprint_1">**1° Sprint:**</a> 13/03/2023 a 02/04/2023<br>
+ - - [X] <a href="https://github.com/Grupo-4-Fatech/API-4Semestre/tree/sprint_2">**2° Sprint:**</a>
+ 03/04/2023 a 23/04/2023
+ - - [ ] <a href="https://github.com/Grupo-4-Fatech/API-4Semestre/tree/sprint_3">**3° Sprint:**</a> 24/04/2023 a 14/05/2023
  - - [ ] **4°Sprint:** 15/05/2023 a 04/06/2023
  - - [ ] **Feira de Soluções:** 13/06 e 14/06/2023
  
@@ -69,6 +70,17 @@ Com esses recursos, a single-page application de criação de tickets e usuário
 <img src="docs/imagens/BACKLOG.png">
 
 </br>
+
+## Modelo Conceitual
+
+![modelo conceitual](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/debe23d3-6bfe-4813-acd6-3dee10f7a4db)
+
+
+## Modelo Logico
+
+![modelo logico](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/b7df1b8d-2578-4d89-9564-b57ebd91a3b1)
+
+
 
 ## 📉 Gráfico Burndown
 
