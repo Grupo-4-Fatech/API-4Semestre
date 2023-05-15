@@ -125,11 +125,11 @@ class TicketController {
     let email = jwt.decode(req.cookies.jwt);
     const user = await AppDataSource.getRepository(User).findOneBy({ email: email ? email.toString() : "" });
     if (user.role == 3) {
-      query = `SELECT id, type, title, description FROM ticket where status = '${status}' and "userId" = ${user.id}`;
+      query = `SELECT id, type, title, risk, impact, cost ,description FROM ticket where status = '${status}' and "userId" = ${user.id}`;
       const ticket: any = await AppDataSource.manager.query(query)
       return res.json(ticket);
     }
-    query = "SELECT id, type, title, description FROM ticket where status = '" + status + "'";
+    query = "SELECT id, type, title, risk, impact, cost , description FROM ticket where status = '" + status + "'";
     const ticket: any = await AppDataSource.manager.query(query)
     return res.json(ticket)
   }
