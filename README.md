@@ -31,7 +31,7 @@ Com esses recursos, a single-page application de criação de tickets e usuário
 - [X] Usuários devem ter distinção por times;
 - [X] Fila de chamados por time;
 - [X] Configuração e personalização de formulários de chamados;
-- [ ] Árvore de decisão para escalonamento de chamados;
+- [X] Árvore de decisão para escalonamento de chamados;
 - [ ] Cadastro de soluções para problemas conhecidos;
 - [ ] Formulário de abertura de chamado com indicação de interessados;
 
@@ -42,10 +42,10 @@ Com esses recursos, a single-page application de criação de tickets e usuário
     
  ## 📅 Cronograma das Sprints 
 
- - - [X] <a href="https://github.com/Grupo-4-Fatech/API-4Semestre/tree/sprint_1/README.md">**1° Sprint:**</a> 13/03/2023 a 02/04/2023<br>
- - - [X] <a href="https://github.com/Grupo-4-Fatech/API-4Semestre/tree/sprint_2/README.md">**2° Sprint:**</a>
+ - - [X] <a href="https://github.com/Grupo-4-Fatech/API-4Semestre/tree/sprint_1">**1° Sprint:**</a> 13/03/2023 a 02/04/2023<br>
+ - - [X] <a href="https://github.com/Grupo-4-Fatech/API-4Semestre/tree/sprint_2">**2° Sprint:**</a>
  03/04/2023 a 23/04/2023
- - - [ ] <a href="https://github.com/Grupo-4-Fatech/API-4Semestre/tree/sprint_3/README.md">**3° Sprint:**</a> 24/04/2023 a 14/05/2023
+ - - [X] <a href="https://github.com/Grupo-4-Fatech/API-4Semestre/tree/sprint_3">**3° Sprint:**</a> 24/04/2023 a 14/05/2023
  - - [ ] **4°Sprint:** 15/05/2023 a 04/06/2023
  - - [ ] **Feira de Soluções:** 13/06 e 14/06/2023
  
@@ -53,7 +53,7 @@ Com esses recursos, a single-page application de criação de tickets e usuário
     
  ## 💻 Tecnologias Utilizadas
 
- - **Back-end:** TypeScript, SQLite, NodeJS com o framework TypeORM.
+ - **Back-end:** TypeScript, SQLite, PostGreSQL NodeJS com o framework TypeORM.
 - **Front-end:** Javascript utilizando React e o framework Tailwind CSS.
 - **Ferramentas:** Visual Studio Code, Canva, Git, Github, PowerPoint, MySQL, Microsoft Teams e Discord.
 
@@ -71,12 +71,44 @@ Com esses recursos, a single-page application de criação de tickets e usuário
 
 </br>
 
+## Demonstração em Gif 3ª Sprint
+
+<ul> <li> <strong> Tela de análise(chamados) </strong> </li> </ul>
+
+![avaliar chamado](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/a71b2b87-938a-458e-9da9-5bacb63df6be)
+
+
+<ul> <li> <strong> Árvore dinâmica </strong> </li> </ul>
+
+![Arvore](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/cd73e933-a0bb-4c82-8d4e-cd2605bf0450)
+
+
+<ul> <li> <strong> Histórico do chamado </strong> </li> </ul>
+
+![Historico](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/748fe1b6-22ee-4876-89b9-c7ab3b3fac60)
+
+
+<ul> <li> <strong> Opção de idioma </strong> </li> </ul>
+
+![idioma](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/15896a2d-bf10-4a55-af8a-8fc592336ea5)
+
+
+
+## Modelo conceitual
+
+![modelo conceitual](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/e39a6b95-345f-4a98-876d-b36abc2ec59a)
+
+## Modelo Logico 
+
+![modelo logico](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/22e19108-1abd-45c9-9047-9f848132575c)
+
+
 ## 📉 Gráfico Burndown
 
 - <a href="docs/sprint1/Burndown Geral - sprint 1.pdf">**Sprint 1**</a>
 - <a href="docs/sprint2/Burndown Geral - sprint 2.pdf">**Sprint 2**</a>
-- <a href="docs/">**Sprint 3**</a>
-- <a href="docs/">**Sprint 4**</a>
+- <a href="docs/sprint3/Burndown Geral - sprint 3.pdf">**Sprint 3**</a>
+- <a href="docs/sprint4/Burndown Geral - sprint 4.pdf">**Sprint 4**</a>
  
 ## 👥 Equipe
 

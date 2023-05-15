@@ -7,47 +7,53 @@ import { Not } from "typeorm";
 
 class UserController {
     async listUser(req: Request, res: Response): Promise<Response> {
-        var email =  jwt.decode(req.cookies.jwt)
-        const response: any = await AppDataSource.getRepository(User).find({where:{email:Not(email?email.toString():"")}
+        var email = jwt.decode(req.cookies.jwt)
+        const response: any = await AppDataSource.getRepository(User).find({
+            where: { email: Not(email ? email.toString() : "") }
         });
-      
+
         return res.json(response);
     }
     async profileUser(req: Request, res: Response): Promise<Response> {
-        var email =  jwt.decode(req.cookies.jwt)
-        const response: any = await AppDataSource.getRepository(User).findOne({where:{email:email?email.toString():""}
-       
+        var email = jwt.decode(req.cookies.jwt)
+        const response: any = await AppDataSource.getRepository(User).findOne({
+            where: { email: email ? email.toString() : "" }
+
         });
         return res.json(response);
     }
     public async updateUser(req: Request, res: Response): Promise<Response> {
-        const { id, name, email, password, gender,role } = req.body;
+        const { id, name, email, password, gender, role } = req.body;
         const collection = AppDataSource.getRepository(User)
-        const renew = await collection.findOneBy({
-            id: id,
-        })
+        const renew: any = await collection.findOne({
+            where: { id: id },
+        }).catch((e) => console.log(e))
+        console.log(renew)
         renew.name = name;
         renew.email = email;
         renew.password = renew.password;
         renew.gender = gender;
         renew.role = role;
 
-        await collection.save(renew)
+        await collection.save(renew).catch((e) => {
+            console.log(e)
+        })
+
         return res.json(renew)
     }
     public async updateProfile(req: Request, res: Response): Promise<Response> {
-        const { id, name, email, password, oldPassword, gender,role, changePassword } = req.body;
+        const { id, name, email, password, oldPassword, gender, role, changePassword } = req.body;
         const collection = AppDataSource.getRepository(User)
-        const renew = await collection.findOneBy({
-            id: id,
+        const renew = await collection.findOne({
+            where: { id: id },
         })
 
-        if(!renew){
-            return res.json({error:"User not found"})
+        if (!renew) {
+            return res.json({ error: "Usuário não encontrado" })
         }
-        if(changePassword){
-            if(oldPassword != renew.password){
-                return res.json({error:"Wrong password"})
+        if (changePassword) {
+            if (oldPassword != renew.password) {
+                return res.json({ error: "Senha incorreta" })
             }
             renew.password = password
 
@@ -69,9 +75,14 @@ class UserController {
         object.password = password;
         object.gender = gender;
         object.role = role;
+        object.inspectionGroup = null;
+        object.solutions = null;
+        object.team = null;
+        object.ticket = null;
 
         const user: any = await AppDataSource.manager.save(User, object).catch((e) => {
-            return res.json({error:"Error saving user"
+            return res.json({
+                error: "Erro ao salvar usuário"
             });
         })
         if (user.id) {
@@ -84,14 +95,14 @@ class UserController {
                 gender: user.gender
             });
         }
-        return res.json({ error: "Error saving user" });
+        return res.json({ error: "Erro ao salvar usuário" });
 
     }
     public async deleteUser(req: Request, res: Response): Promise<Response> {
         const { id } = req.body;
 
-        const user: any = await AppDataSource.getRepository(User).findOneBy({id:id}).catch((e) => {
-            return { error: "Invalid identifier" }
+        const user: any = await AppDataSource.getRepository(User).findOneBy({ id: id }).catch((e) => {
+            return { error: "Identificador inválido" }
         })
 
         if (user && user.id) {
@@ -99,7 +110,7 @@ class UserController {
             return res.json(r)
         }
         else {
-            return res.json({ error: "User not found" })
+            return res.json({ error: "Usuário não encontrado" })
         }
 
 
@@ -110,8 +121,8 @@ class UserController {
     }
     async getUser(req: Request, res: Response): Promise<Response> {
         const id = parseInt(req.params.id)
-        const user: any = await AppDataSource.getRepository(User).findOne({where:{id:id}}).catch((e) => {
-            return { error: "Invalid identifier" }
+        const user: any = await AppDataSource.getRepository(User).findOne({ where: { id: id } }).catch((e) => {
+            return { error: "Identificador inválido" }
         })
         return res.json(user);
     }

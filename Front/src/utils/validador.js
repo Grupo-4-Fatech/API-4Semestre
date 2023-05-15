@@ -6,6 +6,10 @@ export const validador = {
     selectEstaDefault(elementoSelect) {
         return elementoSelect.value === "default"
     },
+    selectAvaliar(elementoSelect) {
+        return elementoSelect.value !== "default"
+    },
+
     selectEstaVazio(elementoSelect) {
         return elementoSelect === null
     },

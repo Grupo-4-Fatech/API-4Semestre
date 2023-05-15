@@ -4,6 +4,9 @@ import UserController from "./UserController";
 import InspectionGroupController from "./InspectionGroupController";
 import LoginController from "./LoginController";
 import GroupController from "./GroupController";
+import SolutionController from "./SolutionController";
+import LogController from "./LogController";
+
 
 export{
     TicketController,
@@ -11,7 +14,8 @@ export{
     TeamsController,
     InspectionGroupController,
     LoginController,
-    GroupController
-    
+    GroupController,
+    SolutionController,
+    LogController
 
 };

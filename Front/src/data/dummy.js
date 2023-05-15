@@ -1,7 +1,8 @@
 import React from 'react';
-import { FiEdit, FiUserPlus, FiUsers, FiUser } from 'react-icons/fi';
+import { FiEdit, FiUserPlus, FiUsers, FiUser,FiArchive,FiCheckSquare} from 'react-icons/fi';
 import { MdOutlineViewAgenda, MdOutlinePermContactCalendar } from 'react-icons/md';
 import { BsKanban, } from 'react-icons/bs';
+
 
 export const gridOrderImage = (props) => (
   <div>
@@ -23,7 +24,26 @@ export const gridOrderStatus = (props) => (
   </button>
 );
 
-export const kanbanGrid = [
+export const kanbanGridPt = [
+  {
+    headerText: 'Novo',
+    keyField: 'New',
+    allowToggle: true
+  },
+
+  {
+    headerText: 'Em espera',
+    keyField: 'OnHold',
+    allowToggle: true
+  },
+
+  {
+    headerText: 'Feito',
+    keyField: 'Done',
+    allowToggle: true
+  },
+];
+export const kanbanGridEn = [
   {
     headerText: 'New',
     keyField: 'New',
@@ -31,7 +51,7 @@ export const kanbanGrid = [
   },
 
   {
-    headerText: 'On Hold',
+    headerText: 'On hold',
     keyField: 'OnHold',
     allowToggle: true
   },
@@ -43,35 +63,113 @@ export const kanbanGrid = [
   },
 ];
 
-const customerGridImage = (props) => (
-  <div className="image flex gap-4">
-    <img
-      className="rounded-full w-10 h-10"
-      src={props.CustomerImage}
-      alt="employee"
-    />
-    <div>
-      <p>{props.CustomerName}</p>
-      <p>{props.CustomerEmail}</p>
-    </div>
-  </div>
-);
 
-const ticketGridStatus = (props) => (
-  <div className="flex gap-2 justify-center items-center text-gray-700 capitalize">
-    <p style={{ background: props.StatusBg }} className="rounded-full h-3 w-3" />
-    <p>{props.Status}</p>
-  </div>
-);
 
 
 // SideBar 
-export const links = [
+export const linksPt = [
   {
-    title: 'Ticket',
+    title: 'Chamados',
     links: [
       {
-        title: 'Open Ticket',
+        title: 'Criar Chamado',
+        name: 'ticket/create',
+        icon: <FiEdit />,
+        permission: 3,
+      },
+      {
+        title: 'Visualizar Chamados',
+        name: 'ViewTicket',
+        icon: <MdOutlineViewAgenda />,
+        permission: 3,
+      },
+      {
+        title: 'Chamados Arquivados',
+        name: 'ArchivedTicket',
+        icon: <FiArchive />,
+        permission: 2,
+      },
+    ],
+  },
+  {
+    title: 'Usuário',
+    links: [
+      {
+        title: 'Criar Usuário',
+        name: 'user/create',
+        icon: <FiUserPlus />,
+        permission: 1,
+      },
+      {
+        title: 'Visualizar Usuários',
+        name: 'user/view',
+        icon: <MdOutlinePermContactCalendar />,
+        permission: 1,
+      }
+    ]
+
+  },
+  {
+    title: 'Times',
+    links: [
+      {
+        title: 'Criar Times',
+        name: 'teams/create',
+        icon: <FiUserPlus />,
+        permission: 1,
+      },
+
+      {
+        title: 'Visualizar Times',
+        name: 'teams/view',
+        icon: <FiUsers />,
+        permission: 1,
+      },
+      {
+        title: 'Kanban',
+        name: 'kanban',
+        icon: <BsKanban />,
+        permission: 3,
+      },
+
+    ]
+  },
+  {
+    title: 'Equipes',
+    links: [
+      {
+        title: 'Criar Equipes',
+        name: 'group/create',
+        icon: <FiUserPlus />,
+        permission: 1,
+      },
+      {
+        title: 'Visualizar Equipes',
+        name: 'group/viewGroup',
+        icon: <FiUsers />,
+        permission: 1,
+      }
+    ]
+  },
+  {
+    title: 'Árvore de aprovação',
+    links: [
+      {
+        title:'Gerenciar árvore',
+        name: 'tree/create',
+        icon: <FiCheckSquare/>,
+        permission: 1,
+      }
+    ]
+  }
+
+];
+export const linksEn = [
+  {
+    title: 'Tickets',
+    links: [
+      {
+        title: 'Create tickets',
         name: 'ticket/create',
         icon: <FiEdit />,
         permission: 3,
@@ -85,7 +183,7 @@ export const links = [
       {
         title: 'Archived Tickets',
         name: 'ArchivedTicket',
-        icon: <MdOutlineViewAgenda />,
+        icon: <FiArchive />,
         permission: 2,
       },
     ],
@@ -149,9 +247,21 @@ export const links = [
         permission: 1,
       }
     ]
+  },
+  {
+    title: 'Approval tree',
+    links: [
+      {
+        title:'Manage tree',
+        name: 'tree/create',
+        icon: <FiCheckSquare/>,
+        permission: 1,
+      }
+    ]
   }
 
 ];
+
 
 export const themeColors = [
   {
@@ -180,145 +290,22 @@ export const themeColors = [
   },
 ];
 
-export const userProfileData = [
+export const userProfileDataPt = [
   {
     icon: <FiUser />,
-    title: 'My Profile',
-    desc: 'Account Settings',
+    title: 'Meu Perfil',
+    desc: 'Configuração da conta',
     iconColor: '#03C9D7',
     iconBg: '#E5FAFB',
   },
 ];
 
-export const contextMenuItems = [
-  'AutoFit',
-  'AutoFitAll',
-  'SortAscending',
-  'SortDescending',
-  'Copy',
-  'Edit',
-  'Delete',
-  'Save',
-  'Cancel',
-  'PdfExport',
-  'ExcelExport',
-  'CsvExport',
-  'FirstPage',
-  'PrevPage',
-  'LastPage',
-  'NextPage',
-];
-export const kanbanData = [
+export const userProfileDataEn = [
   {
-    Id: 'Task 3',
-    Title: 'Task - 29003',
-    Status: 'Open',
-    Summary: 'Arrange a web meeting with the customer to get new requirements.',
-    Type: 'Others',
-    Priority: 'Critical',
-    Tags: 'Meeting',
-    Estimate: 5.5,
-    Assignee: 'Janet Leverling',
-    RankId: 2,
-    Color: '#1F88E5',
-    ClassName: 'e-others, e-critical, e-janet-leverling',
+    icon: <FiUser />,
+    title: 'My profile',
+    desc: 'Account setup',
+    iconColor: '#03C9D7',
+    iconBg: '#E5FAFB',
   },
-  {
-    Id: 'Task 4',
-    Title: 'Task - 29004',
-    Status: 'InProgress',
-    Summary: 'Fix the issues reported in the IE browser.',
-    Type: 'Bug',
-    Priority: 'Critical',
-    Tags: 'IE',
-    Estimate: 2.5,
-    Assignee: 'Janet Leverling',
-    RankId: 2,
-    Color: '#E64A19',
-    ClassName: 'e-bug, e-release, e-janet-leverling',
-  },
-  {
-    Id: 'Task 5',
-    Title: 'Task - 29005',
-    Status: 'Review',
-    Summary: 'Fix the issues reported by the customer.',
-    Type: 'Bug',
-    Priority: 'Low',
-    Tags: 'Customer',
-    Estimate: '3.5',
-    Assignee: 'Steven walker',
-    RankId: 1,
-    Color: '#E64A19',
-    ClassName: 'e-bug, e-low, e-steven-walker',
-  },
-  {
-    Id: 'Task 6',
-    Title: 'Task - 29007',
-    Status: 'Validate',
-    Summary: 'Validate new requirements',
-    Type: 'Improvement',
-    Priority: 'Low',
-    Tags: 'Validation',
-    Estimate: 1.5,
-    Assignee: 'Robert King',
-    RankId: 1,
-    Color: '#673AB8',
-    ClassName: 'e-improvement, e-low, e-robert-king',
-  },
-  {
-    Id: 'Task 7',
-    Title: 'Task - 29009',
-    Status: 'Review',
-    Summary: 'Fix the issues reported in Safari browser.',
-    Type: 'Bug',
-    Priority: 'Critical',
-    Tags: 'Fix,Safari',
-    Estimate: 1.5,
-    Assignee: 'Nancy Davloio',
-    RankId: 2,
-    Color: '#E64A19',
-    ClassName: 'e-bug, e-release, e-nancy-davloio',
-  },
-  {
-    Id: 'Task 8',
-    Title: 'Task - 29010',
-    Status: 'Close',
-    Summary: 'Test the application in the IE browser.',
-    Type: 'Story',
-    Priority: 'Low',
-    Tags: 'Review,IE',
-    Estimate: 5.5,
-    Assignee: 'Margaret hamilt',
-    RankId: 3,
-    Color: '#02897B',
-    ClassName: 'e-story, e-low, e-margaret-hamilt',
-  },
-  {
-    Id: 'Task 9',
-    Title: 'Task - 29011',
-    Status: 'Validate',
-    Summary: 'Validate the issues reported by the customer.',
-    Type: 'Story',
-    Priority: 'High',
-    Tags: 'Validation,Fix',
-    Estimate: 1,
-    Assignee: 'Steven walker',
-    RankId: 1,
-    Color: '#02897B',
-    ClassName: 'e-story, e-high, e-steven-walker',
-  },
-  {
-    Id: 'Task 10',
-    Title: 'Task - 29015',
-    Status: 'Open',
-    Summary: 'Show the retrieved data from the server in grid control.',
-    Type: 'Story',
-    Priority: 'High',
-    Tags: 'Database,SQL',
-    Estimate: 5.5,
-    Assignee: 'Margaret hamilt',
-    RankId: 4,
-    Color: '#02897B',
-    ClassName: 'e-story, e-high, e-margaret-hamilt',
-  }
 ];

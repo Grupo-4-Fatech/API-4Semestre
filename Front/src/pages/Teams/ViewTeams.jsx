@@ -2,13 +2,16 @@ import { useStateContext } from '../../contexts/ContextProvider'
 import { Header } from '../../components'
 import { useState, useEffect, useMemo } from 'react';
 import Pagination from '../../components/Paginacao/Pagination';
+import { useLanguage } from "../../contexts/contextLanguage";
+import tradutorViewTime from '../../utils/tradutor/teams/tradutorViewTeams';
 
 const Swal = require('sweetalert2')
 
 export default function ViewTeams() {
+    const { language } = useLanguage();
     const { currentColor } = useStateContext();
     const [currentPage, setCurrentPage] = useState(1);
-    const headers = ['Teams Name', 'Edit', 'Delete']
+    const headers = [tradutorViewTime[language].headersNomeTime, tradutorViewTime[language].headersEditar, tradutorViewTime[language].headersDeletar]
     const [data, setData] = useState([])
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -44,14 +47,14 @@ export default function ViewTeams() {
             if (response.error) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Team not deleted',
+                    title: tradutorViewTime[language].errorDelete,
                 })
             }
             else {
 
                 Swal.fire({
                     icon: 'success',
-                    title: 'Team deleted successfully',
+                    title: tradutorViewTime[language].succssesfullyDelete,
                 })
                 var updateData = data.filter(item => item.id != id)
                 setData(updateData)
@@ -76,7 +79,7 @@ export default function ViewTeams() {
     }, [searchTerm])
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-            <Header category="Page" title="View Teams" />
+            <Header category={tradutorViewTime[language].page} title={tradutorViewTime[language].pageTitle} />
             <div className="block relative">
                 <span className="h-full absolute inset-y-0 left-0 flex items-center pl-2">
                     <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current text-gray-500">
@@ -85,7 +88,7 @@ export default function ViewTeams() {
                         </path>
                     </svg>
                 </span>
-                <input placeholder="Search"  onChange={(e) => setSearchTerm(e.target.value)}
+                <input placeholder={tradutorViewTime[language].searchPlaceholder} onChange={(e) => setSearchTerm(e.target.value)}
                     className="appearance-none rounded-r-lg border border-gray-400 border-b block pl-8 pr-6 py-2 w-44 bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
             </div>
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -107,10 +110,10 @@ export default function ViewTeams() {
                                     </td>
 
                                     <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                        <button style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" onClick={() => window.location.href = "/teams/update/" + dat.id}>Edit</button>
+                                        <button style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" onClick={() => window.location.href = "/teams/update/" + dat.id}>{tradutorViewTime[language].editarButton}</button>
                                     </td>
                                     <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                        <button className="bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" onClick={() => deleteTeams(dat.id)}>Delete</button>
+                                        <button className="bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" onClick={() => deleteTeams(dat.id)}>{tradutorViewTime[language].deletarButton}</button>
                                     </td>
                                     <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
                                     </td>

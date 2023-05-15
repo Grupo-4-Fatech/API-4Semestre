@@ -2,6 +2,8 @@ import React, { useEffect, useState, useMemo } from 'react';
 import Pagination from '../../components/Paginacao/Pagination';
 import { useStateContext } from '../../contexts/ContextProvider'
 import { Header } from '../../components'
+import { useLanguage } from "../../contexts/contextLanguage";
+import tradutorViewUsu from '../../utils/tradutor/user/tradutorViewUsu';
 
 const Swal = require('sweetalert2')
 
@@ -9,8 +11,9 @@ let PageSize = 5;
 
 const ViewUser = () => {
     const { currentColor } = useStateContext();
+    const { language } = useLanguage();
     const [currentPage, setCurrentPage] = useState(1);
-    const headers = ['Name', 'Email', 'Role', 'Update', 'Delete']
+    const headers = [tradutorViewUsu[language].headersNome,tradutorViewUsu[language].headersEmail, tradutorViewUsu[language].headersFuncao, tradutorViewUsu[language].headersAtualizar, tradutorViewUsu[language].headersDeletar]
     const [data, setData] = useState([])
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -53,14 +56,14 @@ const ViewUser = () => {
             if (response.error) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'User not deleted',
+                    title: tradutorViewUsu[language].errorUsuNaoDeletado,
                 })
             }
             else {
 
                 Swal.fire({
                     icon: 'success',
-                    title: 'User deleted successfully',
+                    title: tradutorViewUsu[language].sucssesUsuDeletado,
                 })
                 var updateData = data.filter(item => item.id != id)
                 setData(updateData)
@@ -75,7 +78,7 @@ const ViewUser = () => {
 
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-            <Header category="Page" title="View User" />
+            <Header category={tradutorViewUsu[language].page} title={tradutorViewUsu[language].pageTitle} />
             <div className="block relative">
                 <span className="h-full absolute inset-y-0 left-0 flex items-center pl-2">
                     <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current text-gray-500">
@@ -84,7 +87,7 @@ const ViewUser = () => {
                         </path>
                     </svg>
                 </span>
-                <input placeholder="Search" onChange={(e) => setSearchTerm(e.target.value)}
+                <input placeholder={tradutorViewUsu[language].searchPlaceholder} onChange={(e) => setSearchTerm(e.target.value)}
                     className="appearance-none rounded-r-lg border border-gray-400 border-b block pl-8 pr-6 py-2 w-44 bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
             </div>
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -111,10 +114,10 @@ const ViewUser = () => {
                                         {dat.role}
                                     </td>
                                     <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                        <button onClick={() => { window.location.href = "/user/update/" + dat.id }} style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">Update</button>
+                                        <button onClick={() => { window.location.href = "/user/update/" + dat.id }} style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">{tradutorViewUsu[language].atualizarButton}</button>
                                     </td>
                                     <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                        <button className="bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" onClick={() => deleteUser(dat.id)}>Delete</button>
+                                        <button className="bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" onClick={() => deleteUser(dat.id)}>{tradutorViewUsu[language].deletarButton}</button>
                                     </td>
                                     <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
                                     </td>
