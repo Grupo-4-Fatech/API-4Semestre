@@ -159,22 +159,26 @@ const ViewTicket = () => {
             if (resultado !== undefined) { return }
             const risco = await confirmarAvaliacao(selectRisco, 'avaliarRisco')
             if (risco === 'cancelado') {return}
+            adicionarAvaliacao(1, selectRisco)
         }
         if (hasPermission(impactoUsers, usuario.id)) {
             const resultado = await verificaDefault(selectImpacto, 'selectDefautlNotaiText')
             if (resultado !== undefined) { return }
             const impacto = await confirmarAvaliacao(selectImpacto, 'avaliarImpacto')
             if (impacto === 'cancelado') {return}
+            adicionarAvaliacao(2, selectImpacto)
         }
         if (hasPermission(custoUsers, usuario.id)) {
             const resultado = await verificaDefault(selectCusto, 'selectDefautlNotacText')
             if (resultado !== undefined) { return }
             const custo = await confirmarAvaliacao(selectCusto, 'avaliarCusto')
             if (custo === 'cancelado') {return}
-        }
-        adicionarAvaliacao(1, selectRisco)
-        adicionarAvaliacao(2, selectImpacto)
+            
         adicionarAvaliacao(3, selectCusto)
+        }
+        // adicionarAvaliacao(1, selectRisco)
+        // adicionarAvaliacao(2, selectImpacto)
+        // adicionarAvaliacao(3, selectCusto)
         await fetch("/ticket/avaliar", {
             method: 'PATCH',
             headers: {
@@ -190,8 +194,10 @@ const ViewTicket = () => {
             }
             else {
                 Swal.fire(visualizarChamado[language].messageAvaliado, '', 'success')
+                if(res.aprovado){
                 var updateData = data.filter(item => item.id != id)
                 setData(updateData); setShowModal(false)
+                }
             }
         })
     }

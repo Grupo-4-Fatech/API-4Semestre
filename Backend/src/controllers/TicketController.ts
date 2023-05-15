@@ -183,6 +183,7 @@ class TicketController {
     const ticketRepository = AppDataSource.getRepository(Ticket)
 
     const ticket = await AppDataSource.getRepository(Ticket).findOneBy({ id: id })
+    console.log(data)
 
     for (var item of data) {
       if (item.tipo == 1) {
@@ -231,10 +232,12 @@ class TicketController {
           await TicketController.createLog(ticket, '4', req, item.nota)
         }
       }
-    } if (ticket.risk != null && ticket.cost != null && ticket.impact != null) {
+    } if (ticket.risk  && ticket.cost  && ticket.impact ) {
+      console.log(ticket)
       if (ticket.risk != '3' && ticket.impact != '0') {
         ticket.status = '3'
         await ticketRepository.save(ticket)
+        return res.json({ aprovado: true });
       }
     }
 
