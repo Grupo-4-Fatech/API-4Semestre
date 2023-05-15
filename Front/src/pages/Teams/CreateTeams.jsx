@@ -86,6 +86,14 @@ export default function CreateTeams() {
             })
             return
         }
+        if (selectMult.length >= 5) {
+            Swal.fire({
+                icon: 'error',
+                title: tradutorCriarTime[language].errorTitle,
+                text: tradutorCriarTime[language].selectMultAddUsersTamanho,
+            })
+            return
+        }
         if (validador.selectEstaDefault(group)) {
             Swal.fire({
                 icon: 'error',
