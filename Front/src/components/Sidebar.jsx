@@ -3,13 +3,16 @@ import { Link, NavLink } from 'react-router-dom';
 import { MdOutlineCancel } from 'react-icons/md';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import { useAutenticacao } from '../contexts/ContextUsuLogado.tsx';
+import { useLanguage } from "../contexts/contextLanguage.js";
 
-import { links } from '../data/dummy';
+import { linksPt, linksEn } from '../data/dummy';
 import { useStateContext } from '../contexts/ContextProvider';
 
 const Sidebar = () => {
 
   const { currentColor, activeMenu, setActiveMenu, screenSize, currentMode } = useStateContext();
+  const { language } = useLanguage();
+
 
   const handleCloseSideBar = () => {
     if (activeMenu !== undefined && screenSize <= 900) {
@@ -17,10 +20,11 @@ const Sidebar = () => {
     }
   }
   const { usuario } = useAutenticacao();
-  
-  const userPermission = usuario?.role 
+  const linguagem = language === "pt" ? linksPt : linksEn
+
+  const userPermission = usuario?.role
   function getFilteredLinks() {
-    const newLinks = links
+    const newLinks = linguagem
       .map((item) => {
         const filteredLinks = item.links.filter((link) => link.permission >= userPermission);
         if (filteredLinks.length > 0) {
@@ -79,7 +83,7 @@ const Sidebar = () => {
             </TooltipComponent>
           </div>
           {/* Itens da SideBar obs: vindos da Data */}
-          {usuario ===null ? '' : 
+          {usuario === null ? '' :
             <div className="mt-10 ">
               {getFilteredLinks().map((item) => (
                 item.links.length && (

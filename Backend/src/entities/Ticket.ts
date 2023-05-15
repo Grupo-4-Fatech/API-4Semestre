@@ -1,4 +1,4 @@
-import {Entity, Column, PrimaryGeneratedColumn, ManyToMany, OneToMany, ManyToOne, JoinTable} from  'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, OneToMany, ManyToOne, JoinTable, AfterInsert } from 'typeorm'
 import { Teams } from './Teams';
 import { InspectionGroup } from './InspectionGroup';
 import { User } from './Users';
@@ -18,20 +18,28 @@ export class Ticket {
     @Column({})
     description: string;
 
-    @Column( {})
+    @Column({})
     status: string;
 
-    @ManyToOne(() => Teams, (teams) => teams.id)
+    @Column({ nullable: true, default: "" })
+    risk: string;
+
+    @Column({ nullable: true, default: "" })
+    impact: string;
+
+    @Column({ nullable: true, default: "" })
+    cost: string;
+
+    @ManyToOne(() => Teams, (teams) => teams.id, {onDelete: 'CASCADE'})
     teams: Teams[]
 
-    @ManyToOne(() => InspectionGroup, (inspectionGroup) => inspectionGroup.id)
+    @ManyToOne(() => InspectionGroup, (inspectionGroup) => inspectionGroup.id, {onDelete: 'CASCADE'})
     inspectionGroup: InspectionGroup;
 
-    @ManyToOne(() => User, (user) => user.id)
+    @ManyToOne(() => User, (user) => user.id, {onDelete: 'CASCADE'})
     user: User;
 
-    @ManyToMany(() => Log, (log) => log.id)
-    @JoinTable()
-    logs = Array<Log>;
+    @OneToMany(() => Log, (log) => log.id)
+    logs: Array<Log>;
 
 } 

@@ -7,6 +7,8 @@ import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import { UserProfile } from '.';
 import { useStateContext } from '../contexts/ContextProvider';
 import { useAutenticacao } from '../contexts/ContextUsuLogado.tsx';
+import { useLanguage } from "../contexts/contextLanguage";
+import tradutorProfile from '../utils/tradutor/profile/tradutorProfile';
 
 
 const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
@@ -29,6 +31,8 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
 const Navbar = () => {
   const { currentColor, activeMenu, setActiveMenu, handleClick, isClicked, setScreenSize, screenSize } = useStateContext();
   const { usuario } = useAutenticacao()
+  const { language } = useLanguage();
+
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);
 
@@ -62,7 +66,7 @@ const Navbar = () => {
           >
             {usuario && (
               <p>
-                <span className="text-gray-400 text-14">Hi,</span>{' '}
+                <span className="text-gray-400 text-14">{tradutorProfile[language].ola},</span>{' '}
                 <span className="text-gray-400 font-bold ml-1 text-14">
                   {usuario.name}
                 </span>

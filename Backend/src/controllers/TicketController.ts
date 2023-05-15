@@ -5,10 +5,11 @@ import { IsUndefined } from "../utils/global";
 import * as jwt from "jsonwebtoken";
 import UserController from "./UserController";
 import { User } from "../entities/Users";
+import { Log } from "../entities/Log";
+import LogController from "./LogController";
 
 
 class TicketController {
-
   async list(req: Request, res: Response): Promise<Response> {
     let email = jwt.decode(req.cookies.jwt);
     const user = await AppDataSource.getRepository(User).findOneBy({ email: email ? email.toString() : "" })
@@ -24,17 +25,20 @@ class TicketController {
   public async update(req: Request, res: Response): Promise<Response> {
     const { id, title, type, description, status, inspectionGroup } = req.body;
     const ticketRepository = AppDataSource.getRepository(Ticket)
-    const ticketToUpdate = await ticketRepository.findOneBy({
-      id: id,
-    })
+    const ticketToUpdate = await ticketRepository.findOne({
+      where: { id: id },
+      relations: {
+        inspectionGroup: true
+      }
+    },)
     ticketToUpdate.title = title;
     ticketToUpdate.type = type;
     ticketToUpdate.description = description;
     ticketToUpdate.status = status;
     ticketToUpdate.inspectionGroup = inspectionGroup;
 
-
-    await ticketRepository.save(ticketToUpdate)
+    await ticketRepository.save(ticketToUpdate).catch((e) => { })
+    await TicketController.createLog(ticketToUpdate, "6", req);
     return res.json(ticketToUpdate)
 
 
@@ -53,6 +57,7 @@ class TicketController {
     return res.json(ticket);
   }
 
+
   public async one(req: Request, res: Response): Promise<Response> {
     const id = parseInt(req.params.id);
     const usuario: any = await AppDataSource.manager.findOneBy(Ticket, { id }).catch((e) => {
@@ -65,7 +70,7 @@ class TicketController {
 
     let email = jwt.decode(req.cookies.jwt);
 
-    const user = await AppDataSource.getRepository(User).findOneBy({ email: email ? email.toString() : "" })
+    const user: any = await AppDataSource.getRepository(User).findOneBy({ email: email ? email.toString() : "" })
 
     const obj = new Ticket()
     obj.type = type;
@@ -73,11 +78,14 @@ class TicketController {
     obj.description = description;
     obj.status = status;
     obj.user = user;
-
+    obj.logs = null;
+    console.log(obj)
     const ticket: any = await AppDataSource.manager.save(Ticket, obj).catch((e) => {
-      return res.json({ error: "Error while saving the ticket" });
+      console.log(e)
+      return res.json({ error: "Erro ao salvar o Chamado" });
     })
     if (ticket.id) {
+      await TicketController.createLog(ticket, "1", req);
 
       return res.json({
         id: ticket.id,
@@ -91,25 +99,19 @@ class TicketController {
 
   }
 
-  public async delete(req: Request, res: Response): Promise<Response> {
+
+  public async delete(req: Request, res: Response){
     const { id } = req.body
-    const ticket: any = await AppDataSource.manager.findOneBy(Ticket, { id }).catch((e) => {
-      return { error: "invalid identifier" }
-    })
+  
+    const ticketTable = await AppDataSource.getRepository(Ticket);
+    const ticket: Ticket = await ticketTable.findOneBy({id: id})
+    const log: Log[] = await AppDataSource.getRepository(Log).findBy({tickets: id})
+    await log.forEach(log => AppDataSource.getRepository(Log).remove(log))
 
-    if (ticket && ticket.id) {
-      const r = await AppDataSource.manager.remove(Ticket, ticket).catch((e) => e.message)
-      return res.json(r)
-    }
-    else if (ticket && ticket.error) {
-      return res.json(ticket)
-    }
-    else {
-      return res.json({ error: "Ticket not found" })
-    }
-
-
+    ticketTable.remove(ticket);
+    console.log(ticket)
   }
+
 
   public async deleteAll(req: Request, res: Response): Promise<Response> {
     const r = await AppDataSource.getRepository(Ticket);
@@ -119,19 +121,22 @@ class TicketController {
 
   public async getAll(req: Request, res: Response): Promise<Response> {
     var status = req.params.status
-    var query = `SELECT id, type, title FROM ticket where status = '${status}'`;
+    var query;
     let email = jwt.decode(req.cookies.jwt);
     const user = await AppDataSource.getRepository(User).findOneBy({ email: email ? email.toString() : "" });
-    if (user && user.role && user.role == 3) {
-      query = "SELECT id, type, title FROM ticket where status = " + status + " and userId = " + user.id;
+    if (user.role == 3) {
+      query = `SELECT id, type, title, description FROM ticket where status = '${status}' and "userId" = ${user.id}`;
+      const ticket: any = await AppDataSource.manager.query(query)
+      return res.json(ticket);
     }
+    query = "SELECT id, type, title, description FROM ticket where status = '" + status + "'";
     const ticket: any = await AppDataSource.manager.query(query)
     return res.json(ticket)
   }
   public async updateStatus(req: Request, res: Response): Promise<Response> {
     const { id, status } = req.body;
     const ticket: any = await AppDataSource.manager.findOneBy(Ticket, { id }).catch((e) => {
-      return { error: "invalid identifier" };
+      return { error: "identificador inválido" };
     })
     if (ticket && ticket.id) {
       if (status !== "") {
@@ -146,21 +151,106 @@ class TicketController {
       return res.json(r);
     }
     else if (ticket && ticket.error) {
-      return res.json({ error: "Updating the status" })
+      return res.json({ error: "Atualizando o status" })
     }
     else {
-      return res.json({ error: "Ticket not found" });
+      return res.json({ error: "Chamado não encontrado" });
     }
   }
   public async getKanbanItem(req: Request, res: Response): Promise<Response> {
-    var query = "SELECT id, type, title, status, description FROM ticket WHERE status NOT IN ('1','2')";
+    var query = "SELECT id, type, title, status, description FROM ticket WHERE status = '3' ";
     let email = jwt.decode(req.cookies.jwt);
     const user = await AppDataSource.getRepository(User).findOneBy({ email: email ? email.toString() : "" });
     if (user && user.role && user.role == 3) {
-      query = "SELECT id, type, title, status, description FROM ticket WHERE status NOT IN ('1','2') and userId = " + user.id;
+      query = `SELECT id, type, title, status, description FROM ticket WHERE status NOT IN ('1','2') and "userId" = ` + user.id;
     }
     const ticket: any = await AppDataSource.manager.query(query)
     return res.json(ticket)
+  }
+  public async getLogs(req: Request, res: Response): Promise<Response> {
+    const id = req.params.id
+    var logQuery = `SELECT "Log"."date" AS "date", "Log"."value" AS "nota", "Log"."action" AS "action", "Log"."ticketsId" AS "ticketsId", "Log"."usersId" AS "usersId" , "user"."name" AS "userName" FROM "log" "Log" JOIN "public"."user" "user" on "user"."id" = "Log"."usersId" where "Log"."ticketsId"= ${id} order by "date" DESC`
+    const logs: any = await AppDataSource.manager.query(logQuery);
+
+    console.log(logs)
+
+    return res.json(logs)
+  }
+  public async avaliar(req: Request, res: Response): Promise<Response> {
+    //id, tipo, nota
+    //1-risco; 2-impacto; 3-custo
+    const { data, id } = req.body;
+    const ticketRepository = AppDataSource.getRepository(Ticket)
+
+    const ticket = await AppDataSource.getRepository(Ticket).findOneBy({ id: id })
+
+    for (var item of data) {
+      if (item.tipo == 1) {
+        if (item.nota == "3") {
+          ticket.status = '2'
+          ticket.risk = item.nota
+          await ticketRepository.save(ticket)
+          await TicketController.createLog(ticket, '7', req, item.nota)
+          await TicketController.createLog(ticket, '5', req)
+          return res.json({ true: true })
+        } else {
+          ticket.risk = item.nota
+          await ticketRepository.save(ticket)
+          await TicketController.createLog(ticket, '7', req, item.nota)
+          await TicketController.createLog(ticket, '2', req, item.nota)
+
+        }
+
+      } if (item.tipo == 2) {
+        if (item.nota == "0") {
+          ticket.status = '2'
+          ticket.impact = item.nota
+          await ticketRepository.save(ticket)
+          await TicketController.createLog(ticket, '8', req, item.nota)
+          await TicketController.createLog(ticket, '5', req)
+          return res.json({ true: true })
+        } else {
+          ticket.impact = item.nota
+          await ticketRepository.save(ticket)
+          await TicketController.createLog(ticket, '8', req, item.nota)
+          await TicketController.createLog(ticket, '3', req, item.nota)
+        }
+
+      } if (item.tipo == 3) {
+        if (item.nota == "3") {
+          ticket.status = '2'
+          ticket.cost = item.nota
+          await ticketRepository.save(ticket)
+          await TicketController.createLog(ticket, '9', req, item.nota)
+          await TicketController.createLog(ticket, '5', req)
+          return res.json({ true: true })
+        } else {
+          ticket.cost = item.nota
+          await ticketRepository.save(ticket)
+          await TicketController.createLog(ticket, '9', req, item.nota)
+          await TicketController.createLog(ticket, '4', req, item.nota)
+        }
+      }
+    } if (ticket.risk != null && ticket.cost != null && ticket.impact != null) {
+      if (ticket.risk != '3' && ticket.impact != '0') {
+        ticket.status = '3'
+        await ticketRepository.save(ticket)
+      }
+    }
+
+    return res.json({ true: true });
+  }
+  public static async createLog(ticket: any, acao: string, req: any, value = "") {
+    let email = jwt.decode(req.cookies.jwt);
+    const user: any = await AppDataSource.getRepository(User).findOneBy({ email: email ? email.toString() : "" });
+    var log = new Log();
+
+    log.action = acao;
+    log.date = new Date();
+    log.tickets = ticket;
+    log.users = user
+    log.value = value
+    const newLog: any = await AppDataSource.manager.save(Log, log).catch((e) => { })
   }
 
 

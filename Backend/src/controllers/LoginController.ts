@@ -8,7 +8,7 @@ class LoginController {
     async login(req: Request, res: Response): Promise<Response> {
         const { email, password } = req.body;
         const user: any = await AppDataSource.manager.findOneBy(User, { email }).catch((e) => {
-            return res.json({ error: "Email not found" })
+            return res.json({ error: "emailNotFound" })
         })
         if (user) {
             if (user.password == password) {
@@ -16,10 +16,10 @@ class LoginController {
                 res.cookie("jwt", userJwt);
                 return res.json(true);
             } else {
-                return res.json({ error: "Incorrect password" })
+                return res.json({ error: "senhaIncorreta" })
             }
         }else{
-            return res.json({ error: "Email not found" })
+            return res.json({ error: "emailNotFound" })
         }
     }
 
