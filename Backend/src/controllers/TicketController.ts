@@ -193,7 +193,7 @@ class TicketController {
           await ticketRepository.save(ticket)
           await TicketController.createLog(ticket, '7', req, item.nota)
           await TicketController.createLog(ticket, '5', req)
-          return res.json({ true: true })
+          return res.json({ arquivado: true })
         } else {
           ticket.risk = item.nota
           await ticketRepository.save(ticket)
@@ -209,7 +209,7 @@ class TicketController {
           await ticketRepository.save(ticket)
           await TicketController.createLog(ticket, '8', req, item.nota)
           await TicketController.createLog(ticket, '5', req)
-          return res.json({ true: true })
+          return res.json({ arquivado: true })
         } else {
           ticket.impact = item.nota
           await ticketRepository.save(ticket)

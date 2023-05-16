@@ -92,9 +92,9 @@ const ViewTicket = () => {
                     title: element.title,
                     Summary: element.description,
                     classification: element.type == 1 ? "HOTFIX" : "FEATURE",
-                    risk : element.risk != ""? element.risk:"default",
-                    cost: element.cost != ""? element.cost:"default",
-                    impact: element.impact != ""? element.impact:"default",
+                    risk : element.risk != ""? element.risk:'default',
+                    cost: element.cost != ""? element.cost:'default',
+                    impact: element.impact != ""? element.impact:'default',
                 })
             });
             setData(tickets)
@@ -148,7 +148,7 @@ const ViewTicket = () => {
     }
 
     async function verificaDefault(nota, analise) {
-        if (nota === undefined) {
+        if (nota === undefined || nota === "default") {
             return Swal.fire({
                 icon: 'error',
                 title: visualizarChamado[language].errotTitle,
@@ -198,10 +198,11 @@ const ViewTicket = () => {
             }
             else {
                 Swal.fire(visualizarChamado[language].messageAvaliado, '', 'success')
-                if(res.aprovado){
+                if(res.aprovado || res.arquivado){
                 var updateData = data.filter(item => item.id != id)
                 setData(updateData); setShowModal(false)
                 }
+                setShowModal(false);
             }
         })
     }
