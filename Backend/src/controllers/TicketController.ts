@@ -158,7 +158,7 @@ class TicketController {
     }
   }
   public async getKanbanItem(req: Request, res: Response): Promise<Response> {
-    var query = "SELECT id, type, title, status, description FROM ticket WHERE status = '3' ";
+    var query = "SELECT id, type, title, status, description FROM ticket WHERE status NOT IN ('1','2')";
     let email = jwt.decode(req.cookies.jwt);
     const user = await AppDataSource.getRepository(User).findOneBy({ email: email ? email.toString() : "" });
     if (user && user.role && user.role == 3) {
