@@ -57,6 +57,7 @@ const ViewUser = () => {
                 Swal.fire({
                     icon: 'error',
                     title: tradutorViewUsu[language].errorUsuNaoDeletado,
+                    text: tradutorViewUsu[language].errorUsuNaoDeletadoText
                 })
             }
             else {

@@ -21,7 +21,7 @@ export default function Kanban() {
   const [searchTerm, setSearchTerm] = useState('');
   const { language } = useLanguage();
   const { usuario } = useAutenticacao();
-  const tabs = [tradutorKanban[language].tabsVisualizar,tradutorKanban[language].tabsAcao, tradutorKanban[language].tabsSolucao]
+  const tabs = [tradutorKanban[language].tabsVisualizar,tradutorKanban[language].tabsAcao]
   const userPermission = usuario?.role
   const itensKanban = language === 'pt'? kanbanGridPt : kanbanGridEn
   const isDraggable = userPermission !== 3;
@@ -228,10 +228,10 @@ export default function Kanban() {
 
                           </div>
                         </Tab.Panel>
-                        <Tab.Panel>
+                        {/* <Tab.Panel>
                           <div className="pl-2 mt-2 text-lg font-bold dark:text-black">{tradutorKanban[language].descricaoTitle}</div>
                           <textarea id="descricao" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500  dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder={tradutorKanban[language].placeholderDescricao}></textarea>
-                        </Tab.Panel>
+                        </Tab.Panel> */}
                       </Tab.Panels>
                     </Tab.Group>
                   </div>
