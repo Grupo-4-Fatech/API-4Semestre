@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import { User } from "../entities/Users";
 import * as jwt from "jsonwebtoken";
 import { Not } from "typeorm";
+import { Teams } from "../entities/Teams";
 
 
 class UserController {
@@ -106,8 +107,13 @@ class UserController {
         })
 
         if (user && user.id) {
-            const r = await AppDataSource.manager.remove(User, user).catch((e) => e)
-            return res.json(r)
+            const verTime = await AppDataSource.manager.find(Teams, {where:{users:user}})
+            if (verTime.length == 0){
+                const r = await AppDataSource.manager.remove(User, user).catch((e) => e)
+                return res.json(r)
+            }
+            return res.json({error: "Usuário pode ser deletado"})
+           
         }
         else {
             return res.json({ error: "Usuário não encontrado" })
