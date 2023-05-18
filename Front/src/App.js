@@ -59,7 +59,7 @@ const App = () => {
           </div>
 
           {activeMenu ? (
-            <div style={{ display: isLogged && notFound ? "" : "none" }} className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white ">
+            <div style={{ display: isLogged && notFound ? "" : "none" }} className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white z-40">
               <Sidebar />
             </div>
           ) : (
