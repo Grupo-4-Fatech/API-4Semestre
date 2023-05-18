@@ -13,9 +13,10 @@ const ViewUser = () => {
     const { currentColor } = useStateContext();
     const { language } = useLanguage();
     const [currentPage, setCurrentPage] = useState(1);
-    const headers = [tradutorViewUsu[language].headersNome,tradutorViewUsu[language].headersEmail, tradutorViewUsu[language].headersFuncao, tradutorViewUsu[language].headersAtualizar, tradutorViewUsu[language].headersDeletar]
+    const headers = [tradutorViewUsu[language].headersNome, tradutorViewUsu[language].headersEmail, tradutorViewUsu[language].headersFuncao, tradutorViewUsu[language].headersAtualizar, tradutorViewUsu[language].headersDeletar]
     const [data, setData] = useState([])
     const [searchTerm, setSearchTerm] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const currentTableData = useMemo(() => {
         const firstPageIndex = (currentPage - 1) * PageSize;
@@ -46,12 +47,13 @@ const ViewUser = () => {
         })
     }
     function deleteUser(id) {
+        setLoading(true);
         fetch("/user/delete", {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
-            body: JSON.stringify({id:id})
+            body: JSON.stringify({ id: id })
         }).then((res) => res.json()).then((response) => {
             if (response.error) {
                 Swal.fire({
@@ -59,6 +61,7 @@ const ViewUser = () => {
                     title: tradutorViewUsu[language].errorUsuNaoDeletado,
                     text: tradutorViewUsu[language].errorUsuNaoDeletadoText
                 })
+                setLoading(false);
             }
             else {
 
@@ -66,6 +69,7 @@ const ViewUser = () => {
                     icon: 'success',
                     title: tradutorViewUsu[language].sucssesUsuDeletado,
                 })
+                setLoading(false);
                 var updateData = data.filter(item => item.id != id)
                 setData(updateData)
             }
@@ -118,7 +122,11 @@ const ViewUser = () => {
                                         <button onClick={() => { window.location.href = "/user/update/" + dat.id }} style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">{tradutorViewUsu[language].atualizarButton}</button>
                                     </td>
                                     <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                        <button className="bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" onClick={() => deleteUser(dat.id)}>{tradutorViewUsu[language].deletarButton}</button>
+                                        <button
+                                            disabled={loading === true}
+                                            className="bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20"
+                                            onClick={() => deleteUser(dat.id)}>{tradutorViewUsu[language].deletarButton}
+                                        </button>
                                     </td>
                                     <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
                                     </td>

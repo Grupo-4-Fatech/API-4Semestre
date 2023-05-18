@@ -20,7 +20,7 @@ const ViewTicket = () => {
     const { usuario } = useAutenticacao();
     const [showModal, setShowModal] = React.useState(false);
     const [showModalHistorico, setShowModalHistorico] = React.useState(false);
-    const [ticket, setTicket] = useState({ id: '', title: '', description: ``, classification: '', risk:'', cost:'', impact:'' });
+    const [ticket, setTicket] = useState({ id: '', title: '', description: ``, classification: '', risk: '', cost: '', impact: '' });
     const [currentPage, setCurrentPage] = useState(1);
     const headers = [
         visualizarChamado[language].headerTitulo,
@@ -41,9 +41,10 @@ const ViewTicket = () => {
     const [selectRisco, setSelectRisco] = useState();
     const [selectImpacto, setSelectImpacto] = useState();
     const [selectCusto, setSelectCusto] = useState();
-    const [riscoDesabilitado, setRiscoDesabilitado] = useState(false)
-    const [custoDesabilitado, setCustoDesabilitado] = useState(false)
-    const [impactoDesabilitado, setImpactoDesabilitado] = useState(false)
+    const [riscoDesabilitado, setRiscoDesabilitado] = useState(false);
+    const [custoDesabilitado, setCustoDesabilitado] = useState(false);
+    const [impactoDesabilitado, setImpactoDesabilitado] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     function getUsersByGroup(groups, groupName) {
         const group = groups.find(group => group.name.toLowerCase() === groupName.toLowerCase());
@@ -92,9 +93,9 @@ const ViewTicket = () => {
                     title: element.title,
                     Summary: element.description,
                     classification: element.type == 1 ? "HOTFIX" : "FEATURE",
-                    risk : element.risk != ""? element.risk:'default',
-                    cost: element.cost != ""? element.cost:'default',
-                    impact: element.impact != ""? element.impact:'default',
+                    risk: element.risk != "" ? element.risk : 'default',
+                    cost: element.cost != "" ? element.cost : 'default',
+                    impact: element.impact != "" ? element.impact : 'default',
                 })
             });
             setData(tickets)
@@ -140,11 +141,11 @@ const ViewTicket = () => {
             confirmButtonText: visualizarChamado[language].avaliarButton,
             cancelButtonText: visualizarChamado[language].cancelButton,
         })
-        .then((result) => {
-            if (result.isDismissed) {
-                return 'cancelado'
-            }
-        })
+            .then((result) => {
+                if (result.isDismissed) {
+                    return 'cancelado'
+                }
+            })
     }
 
     async function verificaDefault(nota, analise) {
@@ -162,27 +163,28 @@ const ViewTicket = () => {
             const resultado = await verificaDefault(selectRisco, 'selectDefautlNotarText')
             if (resultado !== undefined) { return }
             const risco = await confirmarAvaliacao(selectRisco, 'avaliarRisco')
-            if (risco === 'cancelado') {return}
+            if (risco === 'cancelado') { return }
             adicionarAvaliacao(1, selectRisco)
         }
         if (hasPermission(impactoUsers, usuario.id)) {
             const resultado = await verificaDefault(selectImpacto, 'selectDefautlNotaiText')
             if (resultado !== undefined) { return }
             const impacto = await confirmarAvaliacao(selectImpacto, 'avaliarImpacto')
-            if (impacto === 'cancelado') {return}
+            if (impacto === 'cancelado') { return }
             adicionarAvaliacao(2, selectImpacto)
         }
         if (hasPermission(custoUsers, usuario.id)) {
             const resultado = await verificaDefault(selectCusto, 'selectDefautlNotacText')
             if (resultado !== undefined) { return }
             const custo = await confirmarAvaliacao(selectCusto, 'avaliarCusto')
-            if (custo === 'cancelado') {return}
-            
-        adicionarAvaliacao(3, selectCusto)
+            if (custo === 'cancelado') { return }
+
+            adicionarAvaliacao(3, selectCusto)
         }
         // adicionarAvaliacao(1, selectRisco)
         // adicionarAvaliacao(2, selectImpacto)
         // adicionarAvaliacao(3, selectCusto)
+        setLoading(true);
         await fetch("/ticket/avaliar", {
             method: 'PATCH',
             headers: {
@@ -195,12 +197,14 @@ const ViewTicket = () => {
                     icon: 'error',
                     title: visualizarChamado[language].errotTitle
                 })
+                setLoading(false);
             }
             else {
                 Swal.fire(visualizarChamado[language].messageAvaliado, '', 'success')
-                if(res.aprovado || res.arquivado){
-                var updateData = data.filter(item => item.id != id)
-                setData(updateData); setShowModal(false)
+                if (res.aprovado || res.arquivado) {
+                    var updateData = data.filter(item => item.id != id)
+                    setLoading(false);
+                    setData(updateData); setShowModal(false)
                 }
                 setShowModal(false);
             }
@@ -278,7 +282,7 @@ const ViewTicket = () => {
                                             <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
 
                                                 <button
-                                                    onClick={() => { setTicket({ id: dat.id, title: dat.title, description: dat.Summary, classification: dat.classification, risk:dat.risk, cost:dat.cost, impact:dat.impact }); setSelectCusto(dat.cost); setSelectImpacto(dat.impact); setSelectRisco(dat.risk);setShowModal(true); getDataAndSetSelectPermission() }}
+                                                    onClick={() => { setTicket({ id: dat.id, title: dat.title, description: dat.Summary, classification: dat.classification, risk: dat.risk, cost: dat.cost, impact: dat.impact }); setSelectCusto(dat.cost); setSelectImpacto(dat.impact); setSelectRisco(dat.risk); setShowModal(true); getDataAndSetSelectPermission() }}
                                                     className={`bg-green-500 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20 ${!allUserIds.includes(usuario.id) ? 'bg-gray-400 cursor-not-allowed' : ''}`}
                                                     disabled={!allUserIds.includes(usuario.id)}
                                                 >
@@ -288,7 +292,7 @@ const ViewTicket = () => {
                                         )}
 
                                         <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                            <button onClick={() => { setTicket({ id: dat.id, title: dat.title, description: dat.Summary, classification: dat.classification });  setSelectCusto(dat.cost); setSelectImpacto(dat.impact); setSelectRisco(dat.risk);setShowModalHistorico(true); }} className="bg-botaohistorico text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">
+                                            <button onClick={() => { setTicket({ id: dat.id, title: dat.title, description: dat.Summary, classification: dat.classification }); setSelectCusto(dat.cost); setSelectImpacto(dat.impact); setSelectRisco(dat.risk); setShowModalHistorico(true); }} className="bg-botaohistorico text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">
                                                 {visualizarChamado[language].historicoButton}</button>
                                         </td>
                                     </tr>
@@ -400,8 +404,20 @@ const ViewTicket = () => {
                                         >
                                             {visualizarChamado[language].closeButton}
                                         </button>
-                                        <button onClick={() => avaliar(ticket.id)} className="text-white rounded-full bg-green-700  hover:bg-green-800 font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                            type="button" >{visualizarChamado[language].avaliarButton} </button>
+                                        <button
+                                            onClick={() => avaliar(ticket.id)}
+                                            disabled={loading === true}
+                                            className="text-white rounded-full bg-green-700  hover:bg-green-800 font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                            type="button" >{loading ?
+                                                <div role="status">
+                                                    <svg aria-hidden="true" class="w-6 h-6 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-white" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
+                                                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill" />
+                                                    </svg>
+                                                </div>
+                                                :
+                                                visualizarChamado[language].avaliarButton}
+                                        </button>
                                     </div>
                                 </div>
                             </div>

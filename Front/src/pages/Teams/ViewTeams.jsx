@@ -14,6 +14,7 @@ export default function ViewTeams() {
     const headers = [tradutorViewTime[language].headersNomeTime, tradutorViewTime[language].headersEditar, tradutorViewTime[language].headersDeletar]
     const [data, setData] = useState([])
     const [searchTerm, setSearchTerm] = useState('');
+    const [loading, setLoading] = useState(false);
 
 
     function getData() {
@@ -38,6 +39,7 @@ export default function ViewTeams() {
         })
     }
     function deleteTeams(id) {
+        setLoading(true);
         fetch("/teams/delete/" + id, {
             method: 'DELETE',
             headers: {
@@ -49,6 +51,7 @@ export default function ViewTeams() {
                     icon: 'error',
                     title: tradutorViewTime[language].errorDelete,
                 })
+                setLoading(false);
             }
             else {
 
@@ -56,6 +59,7 @@ export default function ViewTeams() {
                     icon: 'success',
                     title: tradutorViewTime[language].succssesfullyDelete,
                 })
+                setLoading(false);
                 var updateData = data.filter(item => item.id != id)
                 setData(updateData)
             }
@@ -113,7 +117,11 @@ export default function ViewTeams() {
                                         <button style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" onClick={() => window.location.href = "/teams/update/" + dat.id}>{tradutorViewTime[language].editarButton}</button>
                                     </td>
                                     <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                        <button className="bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" onClick={() => deleteTeams(dat.id)}>{tradutorViewTime[language].deletarButton}</button>
+                                        <button className="bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20"
+                                            onClick={() => deleteTeams(dat.id)}
+                                            disabled={loading === true}>
+                                            {tradutorViewTime[language].deletarButton}
+                                        </button>
                                     </td>
                                     <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
                                     </td>

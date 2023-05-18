@@ -14,6 +14,8 @@ const ViewGroup = () => {
     const headers = [tradutorViewGroup[language].headersNomeEquipe, tradutorViewGroup[language].headersEditar, tradutorViewGroup[language].headersDeletar]
     const [data, setData] = useState([])
     const [searchTerm, setSearchTerm] = useState('');
+    const [loading, setLoading] = useState(false)
+
 
 
     function getData() {
@@ -38,6 +40,7 @@ const ViewGroup = () => {
         })
     }
     function deleteGroup(id) {
+        setLoading(true);
         fetch("/group/delete", {
             method: 'DELETE',
             headers: {
@@ -51,6 +54,7 @@ const ViewGroup = () => {
                     title: tradutorViewGroup[language].errorDeleteTitle,
                     text: tradutorViewGroup[language].errorDeleteText
                 })
+                setLoading(false);
             }
             else {
 
@@ -58,6 +62,7 @@ const ViewGroup = () => {
                     icon: 'success',
                     title: tradutorViewGroup[language].succssesfulyDelete,
                 })
+                setLoading(false)
                 var updateData = data.filter(item => item.id !== id)
                 setData(updateData)
             }
@@ -114,7 +119,10 @@ const ViewGroup = () => {
                                         <button style={{ backgroundColor: currentColor }} className="text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" onClick={() => window.location.href = "/group/update/" + dat.id}>{tradutorViewGroup[language].editarButton}</button>
                                     </td>
                                     <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                        <button className="bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20" onClick={() => deleteGroup(dat.id)}>{tradutorViewGroup[language].deletarButton}</button>
+                                        <button className="bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20"
+                                            onClick={() => deleteGroup(dat.id)}
+                                            disabled={loading === true}>{tradutorViewGroup[language].deletarButton}
+                                        </button>
                                     </td>
                                     <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
                                     </td>
