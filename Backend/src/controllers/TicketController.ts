@@ -255,6 +255,23 @@ class TicketController {
     log.value = value
     const newLog: any = await AppDataSource.manager.save(Log, log).catch((e) => { })
   }
+  async ticketrole(req: Request, res: Response): Promise<Response> {
+    const repository = await AppDataSource.getRepository(Ticket)
+  
+    const result = {};
+    for (let n = 1; n <= 3; n++) {
+      const response = await repository
+        .createQueryBuilder("ticket")
+        .select("COUNT(*)", "count")
+        .where("ticket.status = :status", { status: n})
+        .groupBy("ticket.status")
+        .getRawOne();
+  
+      result[n] = response.count;
+    }
+    return res.json(result);
+  }
+
 
 
 } export default new TicketController();
