@@ -2,7 +2,7 @@ import React from 'react';
 import { FiEdit, FiUserPlus, FiUsers, FiUser,FiArchive,FiCheckSquare} from 'react-icons/fi';
 import { MdOutlineViewAgenda, MdOutlinePermContactCalendar } from 'react-icons/md';
 import { BsKanban, } from 'react-icons/bs';
-
+import { AiOutlinePieChart } from 'react-icons/ai'
 
 export const gridOrderImage = (props) => (
   <div>
@@ -62,9 +62,6 @@ export const kanbanGridEn = [
     allowToggle: true
   },
 ];
-
-
-
 
 // SideBar 
 export const linksPt = [
@@ -159,6 +156,17 @@ export const linksPt = [
         name: 'tree/create',
         icon: <FiCheckSquare/>,
         permission: 1,
+      }
+    ]
+  },
+  {
+    title: 'Gráficos',
+    links: [
+      {
+        title:'Pizza',
+        name: 'pie',
+        icon: <AiOutlinePieChart/>,
+        permission: 3,
       }
     ]
   }
@@ -258,10 +266,20 @@ export const linksEn = [
         permission: 1,
       }
     ]
+  },
+  {
+    title: 'Charts',
+    links: [
+      {
+        title:'Pie',
+        name: 'pie',
+        icon: <AiOutlinePieChart/>,
+        permission: 3,
+      }
+    ]
   }
 
 ];
-
 
 export const themeColors = [
   {
@@ -308,4 +326,14 @@ export const userProfileDataEn = [
     iconColor: '#03C9D7',
     iconBg: '#E5FAFB',
   },
+];export const pieChartData = [
+  { x: 'Labour', y: 18, text: '18%' },
+  { x: 'Legal', y: 8, text: '8%' },
+  { x: 'Production', y: 15, text: '15%' },
+  { x: 'License', y: 11, text: '11%' },
+  { x: 'Facilities', y: 18, text: '18%' },
+  { x: 'Taxes', y: 14, text: '14%' },
+  { x: 'Insurance', y: 16, text: '16%' },
 ];
+
+// Chart
