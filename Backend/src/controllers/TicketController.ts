@@ -388,7 +388,31 @@ class TicketController {
 //   const countArray = tickets.map((ticket) => parseInt(ticket.count));
 
 //   return res.json(countArray);
+//}
+
+// async ticketcount(req: Request, res: Response): Promise<Response> {
+//   const ticketRepository = AppDataSource.getRepository(Ticket);
+
+//   const tickets = await ticketRepository
+//     .createQueryBuilder('ticket')
+//     .leftJoin('ticket.user', 'user')
+//     .select('user.name', 'name')
+//     .addSelect('COUNT(*)', 'count')
+//     .groupBy('user.name')
+//     .getRawMany();
+
+//   const result = tickets.map((ticket) => ({
+//     user: ticket.name,
+//     count: parseInt(ticket.count),
+//   }));
+
+//   const values = result.map((item) => Object.values(item));
+
+//   return res.json(values);
 // }
+
+
+
 
 async ticketcount(req: Request, res: Response): Promise<Response> {
   const ticketRepository = AppDataSource.getRepository(Ticket);
