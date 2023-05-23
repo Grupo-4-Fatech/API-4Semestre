@@ -291,26 +291,48 @@ class TicketController {
   //   return res.json(result);
   // }
 
+  // async ticketcount(req: Request, res: Response): Promise<Response> {
+  //   const ticketRepository = AppDataSource.getRepository(Ticket);
+  
+  //   const result = {};
+  //   const tickets = await ticketRepository
+  //     .createQueryBuilder('ticket')
+  //     .leftJoin('ticket.user', 'user') 
+  //     .select('user.name', 'userName') 
+  //     .addSelect('COUNT(*)', 'count')
+  //     .groupBy('user.name') 
+  //     .getRawMany();
+  
+  //   tickets.forEach((ticket) => {
+  //     const user = ticket.userName; 
+  //     const count = ticket.count;
+  //     result[user] = count;
+  //   });
+  
+  //   return res.json(result);
+  // }
+
   async ticketcount(req: Request, res: Response): Promise<Response> {
-    const ticketRepository = AppDataSource.getRepository(Ticket);
-  
-    const result = {};
-    const tickets = await ticketRepository
-      .createQueryBuilder('ticket')
-      .leftJoin('ticket.user', 'user') 
-      .select('user.name', 'userName') 
-      .addSelect('COUNT(*)', 'count')
-      .groupBy('user.name') 
-      .getRawMany();
-  
-    tickets.forEach((ticket) => {
-      const user = ticket.userName; 
-      const count = ticket.count;
-      result[user] = count;
-    });
-  
-    return res.json(result);
-  }
+  const ticketRepository = AppDataSource.getRepository(Ticket);
+
+  const result = [];
+  const tickets = await ticketRepository
+    .createQueryBuilder('ticket')
+    .leftJoin('ticket.user', 'user') // Realizando uma junção entre as tabelas Ticket e User
+    .select('user.name', 'userName') // Selecionando o nome do usuário
+    .addSelect('COUNT(*)', 'count')
+    .groupBy('user.name') // Alterando para agrupar pelo nome do usuário
+    .getRawMany();
+
+  tickets.forEach((ticket) => {
+    const user = ticket.userName; // Obtendo o nome do usuário
+    const count = ticket.count;
+    result.push({ x: user, y: count });
+  });
+
+  return res.json(result);
+}
+
   
   
 
