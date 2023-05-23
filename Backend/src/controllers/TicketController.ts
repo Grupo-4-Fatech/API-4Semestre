@@ -100,12 +100,12 @@ class TicketController {
   }
 
 
-  public async delete(req: Request, res: Response){
+  public async delete(req: Request, res: Response) {
     const { id } = req.body
-  
+
     const ticketTable = await AppDataSource.getRepository(Ticket);
-    const ticket: Ticket = await ticketTable.findOneBy({id: id})
-    const log: Log[] = await AppDataSource.getRepository(Log).findBy({tickets: id})
+    const ticket: Ticket = await ticketTable.findOneBy({ id: id })
+    const log: Log[] = await AppDataSource.getRepository(Log).findBy({ tickets: id })
     await log.forEach(log => AppDataSource.getRepository(Log).remove(log))
 
     ticketTable.remove(ticket);
@@ -232,7 +232,7 @@ class TicketController {
           await TicketController.createLog(ticket, '4', req, item.nota)
         }
       }
-    } if (ticket.risk  && ticket.cost  && ticket.impact ) {
+    } if (ticket.risk && ticket.cost && ticket.impact) {
       console.log(ticket)
       if (ticket.risk != '3' && ticket.impact != '0') {
         ticket.status = '3'
@@ -257,165 +257,23 @@ class TicketController {
   }
   async ticketrole(req: Request, res: Response): Promise<Response> {
     const repository = await AppDataSource.getRepository(Ticket)
-  
+
     const result = {};
     for (let n = 1; n <= 3; n++) {
       const response = await repository
         .createQueryBuilder("ticket")
         .select("COUNT(*)", "count")
-        .where("ticket.status = :status", { status: n})
+        .where("ticket.status = :status", { status: n })
         .groupBy("ticket.status")
         .getRawOne();
-  
+
       result[n] = response.count;
     }
     return res.json(result);
   }
-  // async ticketcount(req: Request, res: Response): Promise<Response> {
-  //   const ticketRepository = AppDataSource.getRepository(Ticket);
   
-  //   const result = {};
-  //   const tickets = await ticketRepository
-  //     .createQueryBuilder('ticket')
-  //     .select('ticket.user', 'user')
-  //     .addSelect('SUM(1)', 'count')
-  //     .groupBy('ticket.user') 
-  //     .getRawMany();
-  
-  //   tickets.forEach((ticket) => {
-  //     const user = ticket.user; 
-  //     const count = ticket.count;
-  //     result[user] = count;
-  //   });
-  
-  //   return res.json(result);
-  // }
-
-  // async ticketcount(req: Request, res: Response): Promise<Response> {
-  //   const ticketRepository = AppDataSource.getRepository(Ticket);
-  
-  //   const result = {};
-  //   const tickets = await ticketRepository
-  //     .createQueryBuilder('ticket')
-  //     .leftJoin('ticket.user', 'user') 
-  //     .select('user.name', 'userName') 
-  //     .addSelect('COUNT(*)', 'count')
-  //     .groupBy('user.name') 
-  //     .getRawMany();
-  
-  //   tickets.forEach((ticket) => {
-  //     const user = ticket.userName; 
-  //     const count = ticket.count;
-  //     result[user] = count;
-  //   });
-  
-  //   return res.json(result);
-  // }
-
-//   async ticketcount(req: Request, res: Response): Promise<Response> {
-//   const ticketRepository = AppDataSource.getRepository(Ticket);
-
-//   const result = [];
-//   const tickets = await ticketRepository
-//     .createQueryBuilder('ticket')
-//     .leftJoin('ticket.user', 'user') // Realizando uma junção entre as tabelas Ticket e User
-//     .select('user.name', 'userName') // Selecionando o nome do usuário
-//     .addSelect('COUNT(*)', 'count')
-//     .groupBy('user.name') // Alterando para agrupar pelo nome do usuário
-//     .getRawMany();
-
-//   tickets.forEach((ticket) => {
-//     const user = ticket.userName; // Obtendo o nome do usuário
-//     const count = ticket.count;
-//     result.push({ x: user, y: count });
-//   });
-
-//   return res.json(result);
-// }
-// async ticketcount(req: Request, res: Response): Promise<Response> {
-//   const ticketRepository = AppDataSource.getRepository(Ticket);
-
-//   const result = [];
-//   const tickets = await ticketRepository
-//     .createQueryBuilder('ticket')
-//     .leftJoin('ticket.user', 'user') // Realizando uma junção entre as tabelas Ticket e User
-//     .select('user.name', 'userName') // Selecionando o nome do usuário
-//     .addSelect('COUNT(*)', 'count')
-//     .groupBy('user.name') // Alterando para agrupar pelo nome do usuário
-//     .getRawMany();
-
-//   tickets.forEach((ticket) => {
-//     const user = ticket.userName; // Obtendo o nome do usuário
-//     const count = ticket.count;
-//     result.push({ user, count });
-//   });
-
-//   return res.json(result);
-// }
-
-// async ticketcount(req: Request, res: Response): Promise<Response> {
-//   const ticketRepository = AppDataSource.getRepository(Ticket);
-
-//   const result = [];
-//   const tickets = await ticketRepository
-//     .createQueryBuilder('ticket')
-//     .leftJoin('ticket.user', 'user')
-//     .select('user.name', 'user') 
-//     .addSelect('COUNT(*)', 'count')
-//     .groupBy('user.name') 
-//     .getRawMany();
-
-//   tickets.forEach((ticket) => {
-//     const user = ticket.user; 
-//     const count = parseInt(ticket.count); 
-//     result.push({ user, count });
-//   });
-
-//   return res.json(result);
-// }
-
-// async ticketcount(req: Request, res: Response): Promise<Response> {
-//   const ticketRepository = AppDataSource.getRepository(Ticket);
-
-//   const tickets = await ticketRepository
-//     .createQueryBuilder('ticket')
-//     .leftJoin('ticket.user', 'user') // Realizando uma junção entre as tabelas Ticket e User
-//     .select('user.name', 'user') // Selecionando o nome do usuário
-//     .addSelect('COUNT(*)', 'count')
-//     .groupBy('user.name') // Alterando para agrupar pelo nome do usuário
-//     .getRawMany();
-
-//   const countArray = tickets.map((ticket) => parseInt(ticket.count));
-
-//   return res.json(countArray);
-//}
-
-// async ticketcount(req: Request, res: Response): Promise<Response> {
-//   const ticketRepository = AppDataSource.getRepository(Ticket);
-
-//   const tickets = await ticketRepository
-//     .createQueryBuilder('ticket')
-//     .leftJoin('ticket.user', 'user')
-//     .select('user.name', 'name')
-//     .addSelect('COUNT(*)', 'count')
-//     .groupBy('user.name')
-//     .getRawMany();
-
-//   const result = tickets.map((ticket) => ({
-//     user: ticket.name,
-//     count: parseInt(ticket.count),
-//   }));
-
-//   const values = result.map((item) => Object.values(item));
-
-//   return res.json(values);
-// }
-
-
-
-
-async ticketcount(req: Request, res: Response): Promise<Response> {
-  const ticketRepository = AppDataSource.getRepository(Ticket);
+  async ticketcountold(req: Request, res: Response): Promise<Response> {
+    const ticketRepository = AppDataSource.getRepository(Ticket);
 
   const result = [];
   const tickets = await ticketRepository
@@ -426,21 +284,29 @@ async ticketcount(req: Request, res: Response): Promise<Response> {
     .groupBy('user.name') // Alterando para agrupar pelo nome do usuário
     .getRawMany();
 
-  tickets.forEach((ticket) => {
-    const userName = ticket.userName; // Obtendo o nome do usuário
-    const count = parseInt(ticket.count); // Convertendo para um número inteiro
-    result.push({ user: userName, count });
-  });
+    tickets.forEach((ticket) => {
+      const userName = ticket.userName; // Obtendo o nome do usuário
+      const count = parseInt(ticket.count); // Convertendo para um número inteiro
+      result.push({ user: userName, count });
+    });
 
-  return res.json(result);
-}
+    return res.json(result);
+  }
+
+  public async ticketcount(req: Request, res: Response): Promise<Response> {
+
+    let query = `SELECT "user"."name" AS "x", CAST(COUNT("ticket"."id") AS INTEGER) AS "y" FROM "ticket" INNER JOIN "user" ON "user"."id"="ticket"."userId" GROUP BY "user"."name" ;`;
+    const contagem: any = await AppDataSource.manager.query(query)
+    return res.json(contagem)
+
+  }
 
 
 
 
 
 
-  
-  
+
+
 
 } export default new TicketController();
