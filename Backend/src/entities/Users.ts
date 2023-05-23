@@ -40,5 +40,6 @@ export class User{
 
     @OneToMany(() => Log, (log) => log.id)
     logs : Array<Log>;
+  static id: number;
 
 }
