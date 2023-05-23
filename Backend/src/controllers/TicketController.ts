@@ -271,24 +271,47 @@ class TicketController {
     }
     return res.json(result);
   }
+  // async ticketcount(req: Request, res: Response): Promise<Response> {
+  //   const ticketRepository = AppDataSource.getRepository(Ticket);
+  
+  //   const result = {};
+  //   const tickets = await ticketRepository
+  //     .createQueryBuilder('ticket')
+  //     .select('ticket.user', 'user')
+  //     .addSelect('SUM(1)', 'count')
+  //     .groupBy('ticket.user') 
+  //     .getRawMany();
+  
+  //   tickets.forEach((ticket) => {
+  //     const user = ticket.user; 
+  //     const count = ticket.count;
+  //     result[user] = count;
+  //   });
+  
+  //   return res.json(result);
+  // }
+
   async ticketcount(req: Request, res: Response): Promise<Response> {
     const ticketRepository = AppDataSource.getRepository(Ticket);
   
     const result = {};
     const tickets = await ticketRepository
       .createQueryBuilder('ticket')
-      .select('ticket.user', 'user')
-      .addSelect('SUM(1)', 'count')
-      .groupBy('ticket.user') 
+      .leftJoin('ticket.user', 'user') 
+      .select('user.name', 'userName') 
+      .addSelect('COUNT(*)', 'count')
+      .groupBy('user.name') 
       .getRawMany();
   
     tickets.forEach((ticket) => {
-      const user = ticket.user; 
+      const user = ticket.userName; 
       const count = ticket.count;
       result[user] = count;
     });
   
     return res.json(result);
   }
+  
+  
 
 } export default new TicketController();
