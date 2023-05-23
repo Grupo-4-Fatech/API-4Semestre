@@ -271,44 +271,6 @@ class TicketController {
     }
     return res.json(result);
   }
-  // async ticketcount(req: Request, res: Response): Promise<Response> {
-  //   const ticketRepository = AppDataSource.getRepository(Ticket);
-  
-  //   const result = {};
-  //   const tickets = await ticketRepository
-  //     .createQueryBuilder('ticket')
-  //     .select('ticket.useId', 'usId')
-  //     .addSelect('COUNT(*)', 'count')
-  //     .groupBy('ticket.use_id')
-  //     .getRawMany();
-  
-  //   tickets.forEach((ticket) => {
-  //     const user = ticket.use_id;
-  //     const count = ticket.count;
-  //     result[user] = count;
-  //   });
-  
-  //    return res.json(result);
-  
-  // async ticketcount(req: Request, res: Response): Promise<Response> {
-  //   const ticketRepository = AppDataSource.getRepository(Ticket);
-  
-  //   const result = {};
-  //   const tickets = await ticketRepository
-  //     .createQueryBuilder('ticket')
-  //     .select('ticket.use_Id', 'use_Id')
-  //     .addSelect('COUNT(*)', 'count')
-  //     .groupBy('ticket.userId') 
-  //     .getRawMany();
-  
-  //   tickets.forEach((ticket) => {
-  //     const user = ticket.use_Id; 
-  //     const count = ticket.count;
-  //     result[user] = count;
-  //   });
-  
-  //   return res.json(result);
-  // }
   async ticketcount(req: Request, res: Response): Promise<Response> {
     const ticketRepository = AppDataSource.getRepository(Ticket);
   
@@ -316,7 +278,7 @@ class TicketController {
     const tickets = await ticketRepository
       .createQueryBuilder('ticket')
       .select('ticket.user', 'user')
-      .addSelect('SUM(1)', 'count') // Usando a função SUM(1) para contar os tickets
+      .addSelect('SUM(1)', 'count')
       .groupBy('ticket.user') 
       .getRawMany();
   
@@ -328,37 +290,5 @@ class TicketController {
   
     return res.json(result);
   }
-  
-  
-
-     
-  // }
-  // async ticketcount(req: Request, res: Response): Promise<Response> {
-  //   let email = jwt.decode(req.cookies.jwt);
-  //   const user = await AppDataSource.getRepository(User).findOneBy({ email: email ? email.toString() : "" });
-  
-  //   const ticketTable = await AppDataSource.getRepository(Ticket);
-  
-  //   const tickets = await ticketTable.findBy({ user: user });
-  
-  //   return res.json(tickets);
-  // }
-
-  // async ticketcount(req: Request, res: Response): Promise<Response> {
-  //   let email = jwt.decode(req.cookies.jwt);
-  //   const user = await AppDataSource.getRepository(User).findOneBy({ email: email ? email.toString() : "" });
-  
-  //   const ticketTable = await AppDataSource.getRepository(Ticket);
-  
-  //   const tickets = await ticketTable.findBy({ user: user?.id || 0 }); // Supondo que o ID do usuário é usado como referência no modelo de ticket
-  
-  //   return res.json(tickets);
-  // }
-  
-  
-  
-  
-
-  
 
 } export default new TicketController();
