@@ -18,7 +18,7 @@ class TicketController {
 
     const ticket = await ticketTable.findBy({ user: false })
 
-    return res.json("");
+    return res.json(ticket);
   }
 
 
