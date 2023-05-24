@@ -271,18 +271,18 @@ class TicketController {
     }
     return res.json(result);
   }
-  
+
   async ticketcountold(req: Request, res: Response): Promise<Response> {
     const ticketRepository = AppDataSource.getRepository(Ticket);
 
-  const result = [];
-  const tickets = await ticketRepository
-    .createQueryBuilder('ticket')
-    .leftJoin('ticket.user', 'user') // Realizando uma junção entre as tabelas Ticket e User
-    .select('user.name', 'userName') // Selecionando o nome do usuário
-    .addSelect('COUNT(*)', 'count')
-    .groupBy('user.name') // Alterando para agrupar pelo nome do usuário
-    .getRawMany();
+    const result = [];
+    const tickets = await ticketRepository
+      .createQueryBuilder('ticket')
+      .leftJoin('ticket.user', 'user') // Realizando uma junção entre as tabelas Ticket e User
+      .select('user.name', 'userName') // Selecionando o nome do usuário
+      .addSelect('COUNT(*)', 'count')
+      .groupBy('user.name') // Alterando para agrupar pelo nome do usuário
+      .getRawMany();
 
     tickets.forEach((ticket) => {
       const userName = ticket.userName; // Obtendo o nome do usuário
@@ -296,6 +296,35 @@ class TicketController {
   public async ticketcount(req: Request, res: Response): Promise<Response> {
 
     let query = `SELECT "user"."name" AS "x", CAST(COUNT("ticket"."id") AS INTEGER) AS "y" FROM "ticket" INNER JOIN "user" ON "user"."id"="ticket"."userId" GROUP BY "user"."name" ;`;
+    const contagem: any = await AppDataSource.manager.query(query)
+    return res.json(contagem)
+
+  }
+
+  public async ticketperStatus(req: Request, res: Response): Promise<Response> {
+
+    let query = `
+    SELECT
+      CASE "ticket"."status"
+        WHEN '1' THEN 'Esperando aprovação'
+        WHEN '2' THEN 'Arquivado'
+        WHEN '3' THEN 'Aprovado'
+        WHEN '4' THEN 'Em desenvolvimento'
+        WHEN '5' THEN 'Concluído'
+        ELSE 'Outro'
+      END AS "x",
+      COUNT("ticket"."id") AS "y",
+      CONCAT(CAST(ROUND(100.0 * COUNT("ticket"."id") / SUM(COUNT("ticket"."id")) OVER (), 2) AS TEXT), '%') AS "text"
+    FROM
+      "ticket"
+    INNER JOIN
+    "user" ON "user"."id" = "ticket"."userId"
+    WHERE
+      "ticket"."status" IN ('1', '2', '3', '4', '5')
+    GROUP BY
+      "ticket"."status";
+
+    `;
     const contagem: any = await AppDataSource.manager.query(query)
     return res.json(contagem)
 
