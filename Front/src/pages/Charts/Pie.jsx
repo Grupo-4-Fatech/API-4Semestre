@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PieChart from '../../components/PieChart';
 import ChartsHeader from '../../components/ChartsHeader';
 import { useLanguage } from '../../contexts/contextLanguage';
-
+import pieTranslate from '../../utils/tradutor/chart/tradutorPie';
 
 function Pie() {
   const [dataSource, setDataSource] = useState([]);
@@ -17,7 +17,7 @@ function Pie() {
     })
       .then((response) => response.json())
       .then((data) => {
-        const newData = alterarTextoEmIngles(data);
+        const newData = translateLabels(data);
         setDataSource(newData);
       })
       .catch((error) => {
@@ -25,39 +25,26 @@ function Pie() {
       });
   }
 
-  function alterarTextoEmIngles(data) {
-    if (language === 'en') {
-      const newData = data.map(item => {
-        switch (item.x) {
-          case "Em desenvolvimento":
-            return { ...item, x: "In progress" };
-          case "Concluído":
-            return { ...item, x: "Completed" };
-          case "Aprovado":
-            return { ...item, x: "Approved" };
-          case "Arquivado":
-            return { ...item, x: "Archived" };
-          case "Esperando aprovação":
-            return { ...item, x: "Waiting for approval" };
-          default:
-            return item;
-        }
-      });
-      return newData;
-    } else {
-      return data;
-    }
+  function translateLabels(data) {
+    const translation = pieTranslate[language];
+
+    const newData = data.map(item => {
+      const translatedLabel = translation.labels[item.x] || item.x;
+      return { ...item, x: translatedLabel };
+    });
+
+    return newData;
   }
 
   useEffect(() => {
     fetchData();
-  }, [language]); // Observa a variável "language"
+  }, [language]);
 
   return (
     <div className="m-4 md:m-10 mt-24 p-10 bg-white dark:bg-secondary-dark-bg rounded-3xl">
-      <ChartsHeader tipo='Gráfico' category="Pie" title="Quantidade de tickets por status" />
+      <ChartsHeader tipo={pieTranslate[language].tipopag} category={pieTranslate[language].titulopag} title={pieTranslate[language].nomeGrafico} />
       <div className="w-full">
-        <PieChart id="chart-pie" data={dataSource} legendVisiblity height="full" />
+        <PieChart id="chart-pie" legenda={pieTranslate[language].legenda} data={dataSource} legendVisiblity height="full" />
       </div>
     </div>
   )
