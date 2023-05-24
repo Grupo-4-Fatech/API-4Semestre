@@ -4,10 +4,13 @@ import { ChartComponent, SeriesCollectionDirective, SeriesDirective, Inject, Leg
 import { barCustomSeries, barPrimaryXAxis, barPrimaryYAxis } from '../../data/dummy';
 import { useStateContext } from '../../contexts/ContextProvider';
 import ChartsHeader from '../../components/ChartsHeader';
+import { useLanguage } from '../../contexts/contextLanguage';
+import barTranslate from '../../utils/tradutor/chart/tradutorBar';
 
 const Bar = () => {
   const { currentMode, currentColor } = useStateContext();
   const [dataSource, setDataSource] = useState([]);
+  const { language } = useLanguage();
 
   function fetchData() {
     fetch("/chart/bar", {
@@ -33,13 +36,14 @@ const Bar = () => {
     return {
       ...series,
       dataSource: dataSource,
+      name: barTranslate[language].legendaGrafico,
       fill: currentColor,
     };
   });
 
   return (
     <div className="m-4 md:m-10 mt-24 p-10 bg-white dark:bg-secondary-dark-bg rounded-3xl">
-      <ChartsHeader category="Bar" title="Quantidade de tickets por usuário" />
+      <ChartsHeader tipo={barTranslate[language].tipopag} category={barTranslate[language].titulopag} title={barTranslate[language].nomeGrafico} />
       <div className="w-full">
         <ChartComponent
           id="charts"

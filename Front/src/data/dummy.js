@@ -368,7 +368,7 @@ export const barCustomSeries = [
     dataSource: [],
     xName: 'x',
     yName: 'y',
-    name: 'Quantidade de tickets',
+    name: '',
     type: 'Column',
     marker: {
       dataLabel: {
