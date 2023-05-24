@@ -1,8 +1,8 @@
 import React from 'react';
-import { FiEdit, FiUserPlus, FiUsers, FiUser,FiArchive,FiCheckSquare} from 'react-icons/fi';
+import { FiEdit, FiUserPlus, FiUsers, FiUser, FiArchive, FiCheckSquare } from 'react-icons/fi';
 import { MdOutlineViewAgenda, MdOutlinePermContactCalendar } from 'react-icons/md';
 import { BsKanban, } from 'react-icons/bs';
-import { AiOutlinePieChart } from 'react-icons/ai'
+import { AiOutlinePieChart, AiOutlineBarChart } from 'react-icons/ai'
 
 export const gridOrderImage = (props) => (
   <div>
@@ -152,9 +152,9 @@ export const linksPt = [
     title: 'Árvore de aprovação',
     links: [
       {
-        title:'Gerenciar árvore',
+        title: 'Gerenciar árvore',
         name: 'tree/create',
-        icon: <FiCheckSquare/>,
+        icon: <FiCheckSquare />,
         permission: 1,
       }
     ]
@@ -163,10 +163,16 @@ export const linksPt = [
     title: 'Gráficos',
     links: [
       {
-        title:'Pizza',
+        title: 'Pizza',
         name: 'pie',
-        icon: <AiOutlinePieChart/>,
+        icon: <AiOutlinePieChart />,
         permission: 3,
+      },
+      {
+        title: 'Barra',
+        name: 'bar',
+        icon: <AiOutlineBarChart />,
+        permission: 3
       }
     ]
   }
@@ -260,9 +266,9 @@ export const linksEn = [
     title: 'Approval tree',
     links: [
       {
-        title:'Manage tree',
+        title: 'Manage tree',
         name: 'tree/create',
-        icon: <FiCheckSquare/>,
+        icon: <FiCheckSquare />,
         permission: 1,
       }
     ]
@@ -271,10 +277,16 @@ export const linksEn = [
     title: 'Charts',
     links: [
       {
-        title:'Pie',
+        title: 'Pie',
         name: 'pie',
-        icon: <AiOutlinePieChart/>,
+        icon: <AiOutlinePieChart />,
         permission: 3,
+      },
+      {
+        title: 'Bar',
+        name: 'bar',
+        icon: <AiOutlineBarChart />,
+        permission: 3
       }
     ]
   }
@@ -326,7 +338,10 @@ export const userProfileDataEn = [
     iconColor: '#03C9D7',
     iconBg: '#E5FAFB',
   },
-];export const pieChartData = [
+];
+
+// Chart
+export const pieChartData = [
   { x: 'Labour', y: 18, text: '18%' },
   { x: 'Legal', y: 8, text: '8%' },
   { x: 'Production', y: 15, text: '15%' },
@@ -336,4 +351,32 @@ export const userProfileDataEn = [
   { x: 'Insurance', y: 16, text: '16%' },
 ];
 
-// Chart
+export const barPrimaryXAxis = {
+  valueType: 'Category',
+  interval: 1,
+  majorGridLines: { width: 0 },
+  labelStyle: { color: 'rgba(255, 255, 255, 0.75)' }
+};
+export const barPrimaryYAxis = {
+  majorGridLines: { width: 0.5 },
+  majorTickLines: { width: 0 },
+  //lineStyle: { width: 0 },
+};
+
+export const barCustomSeries = [
+  {
+    dataSource: [],
+    xName: 'x',
+    yName: 'y',
+    name: 'Quantidade de tickets',
+    type: 'Column',
+    marker: {
+      dataLabel: {
+        visible: true,
+        position: 'Top',
+        font: { fontWeight: '600', color: '#ffffff' },
+      },
+    },
+    fill: '',
+  },
+];

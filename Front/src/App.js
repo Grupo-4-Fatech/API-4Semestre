@@ -23,6 +23,7 @@ import UpdateProfile from "./pages/User/UpdateProfile";
 import PrivateRoute from './routes/PrivateRoute';
 import Historic from './pages/Historic/historic';
 import Pie from './pages/Charts/Pie';
+import Bar from './pages/Charts/Bar';
 
 
 
@@ -102,6 +103,7 @@ const App = () => {
                 <Route path='/tree/create' element={<PrivateRoute><CreateTree /></PrivateRoute>} />
                 <Route path='/historic/:id' element={<PrivateRoute><Historic/></PrivateRoute>} />
                 <Route path='/pie' element={<PrivateRoute><Pie /></PrivateRoute>} />
+                <Route path='/bar' element={<PrivateRoute><Bar /></PrivateRoute>} />
                 <Route path='*' element={<NotFound />} />
                 
                 
