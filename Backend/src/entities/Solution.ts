@@ -8,10 +8,10 @@ export class Solution {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({nullable: true, default: ''})
     solution: string;
 
-    @Column()
+    @Column({nullable: true, default: ''})
     problem: string;
 
     @OneToOne(() => Ticket, (ticket) => ticket.id)

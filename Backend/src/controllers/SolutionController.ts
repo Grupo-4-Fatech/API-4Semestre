@@ -10,12 +10,10 @@ class SolutionController{
 
   public async create(req: Request, res: Response): Promise<Response> {
 
-    const {ticketSolution, problem, userId, ticketId } = req.body;
+    const {ticketSolution, problem, ticketId } = req.body;
 
     const ticketTable = await AppDataSource.getRepository(Ticket);
     const ticket = await ticketTable.findOneBy({id: ticketId});
-
-    const user = await AppDataSource.getRepository(User).findOneBy({id: userId});
 
     const obj = new Solution();
     obj.solution = ticketSolution;
