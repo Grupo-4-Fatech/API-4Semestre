@@ -75,23 +75,28 @@ Com esses recursos, a single-page application de criação de tickets e usuário
 
 <ul> <li> <strong> Crud de Ticket </strong> </li> </ul>
 
-![Crud ticket](https://user-images.githubusercontent.com/88494278/234429611-526b58f7-a275-415d-afa0-3939cdc65101.gif)
+![crud ticket](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/8ca5d49a-2d2c-4286-9c47-b3d564701738)
+
 
 <ul> <li> <strong> Cadastro de Ticket </strong> </li> </ul>
 
-![open ticket](https://user-images.githubusercontent.com/88494278/234429671-e8609d2b-8063-4849-9f40-66e09e629c50.gif)
+![Cadastro Ticket](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/9bfb293e-d42d-4fe4-9ee7-e9e5d9583bc1)
+
 
 <ul> <li> <strong> Aprovado ou Arquivado </strong> </li> </ul>
 
-![Archive or Approved](https://user-images.githubusercontent.com/88494278/234429786-f4fa151e-bd7a-4041-9a4c-553cb63b8362.gif)
+![aprovado e arquivado](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/3b4c51fc-e140-4be3-afe7-5e0d2bb1766c)
+
 
 <ul> <li> <strong> Kanban </strong> </li> </ul>
 
-![Kanban](https://user-images.githubusercontent.com/88494278/234429816-b5c4fb7d-3192-457c-ba9a-d116c29efcae.gif)
+![kanban](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/d1c9c3c0-f838-41ff-8289-b3d265bdad75)
+
 
 <ul> <li> <strong> Arquivado </strong> </li> </ul>
 
-![Archive ticket](https://user-images.githubusercontent.com/88494278/234429871-0de3acab-df6d-4d2e-91f3-e8cfc252a3bb.gif)
+![arquivado](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/101ca38d-c704-4137-a165-39e241b3b7fe)
+
 
 
 
