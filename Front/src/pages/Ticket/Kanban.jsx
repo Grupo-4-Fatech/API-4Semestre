@@ -5,10 +5,11 @@ import { Header } from '../../components';
 import { useAutenticacao } from '../../contexts/ContextUsuLogado.tsx';
 import { Tab } from '@headlessui/react'
 import { validador } from '../../utils/validador';
+import Campo from '../../components/Campo'
 import { useLanguage } from "../../contexts/contextLanguage";
-
 import Swal from 'sweetalert2';
 import tradutorKanban from '../../utils/tradutor/kanban/tradutorKanban';
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -17,12 +18,18 @@ function classNames(...classes) {
 export default function Kanban() {
   const [showModal, setShowModal] = React.useState(false);
   const [data, setData] = useState([])
-  const [ticket, setTicket] = useState({ id: 0, title: '', description: ``, classification: ''})
+  const [ticket, setTicket] = useState({ id: 0, title: '', description: ``, classification: '' })
   const [searchTerm, setSearchTerm] = useState('');
+  const [problema, setProblema] = useState('')
+  const [solucao, setSolucao] = useState('')
   const { language } = useLanguage();
   const { usuario } = useAutenticacao();
+
+
+
   // let tabs = validarSolucao(ticket.status)
   const userPermission = usuario?.role
+  const userId = usuario?.id
   const itensKanban = language === 'pt' ? kanbanGridPt : kanbanGridEn
   const isDraggable = userPermission !== 3;
   function getData() {
@@ -58,16 +65,55 @@ export default function Kanban() {
     })
   }
 
+
+
+
+
   function teste() {
-    const descricao = document.getElementById("descricao")
-    if (validador.estaVazio(descricao.value)) {
+    const descricao = document.getElementById("solucao")
+    console.log("a" + descricao);
+    const problem = document.getElementById("problema")
+    console.log("b"+ problem);
+    if (validador.estaVazio(problem.value)) {
       Swal.fire({
         icon: 'error',
-        title: tradutorKanban[language].errorSolucaoTitle,
-        text: tradutorKanban[language].errorSolucaoText,
+        title: tradutorKanban[language].errorTitle,
+        text: tradutorKanban[language].errorProblemText,
       })
       return
     }
+    if (validador.estaVazio(descricao.value)) {
+      Swal.fire({
+        icon: 'error',
+        title: tradutorKanban[language].errorTitle,
+        text: tradutorKanban[language].errorSolocaoText,
+      })
+      return
+    }
+    fetch("/solution/create", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify({ ticketSolution: solucao, problem: problema, ticketId: ticket.id, solver: userId })
+    }).then((resposta) => resposta.json()).then((data) => {
+      if (data.error) {
+        Swal.fire({
+          icon: 'error',
+          title: tradutorKanban[language].errorTitleSolution,
+        })
+
+      } else {
+        Swal.fire({
+          icon: 'success',
+          title: tradutorKanban[language].sucessoTitleSolution,
+        }).then((result) => result.isConfirmed ? setProblema("") + setSolucao("") : "")
+
+      }
+    })
+
+
+ 
   }
 
   function getStatus(status) {
@@ -113,7 +159,7 @@ export default function Kanban() {
       return [tradutorKanban[language].tabsVisualizar, tradutorKanban[language].tabsAcao, tradutorKanban[language].tabsSolucao]
 
     }
-    return [tradutorKanban[language].tabsVisualizar, tradutorKanban[language].tabsAcao] 
+    return [tradutorKanban[language].tabsVisualizar, tradutorKanban[language].tabsAcao]
   }
 
   function cardTemplate(props) {
@@ -236,8 +282,9 @@ export default function Kanban() {
                           </div>
                         </Tab.Panel>
                         <Tab.Panel>
-                          <div className="pl-2 mt-2 text-lg font-bold dark:text-black">{tradutorKanban[language].descricaoTitle}</div>
-                          <textarea id="descricao" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500  dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder={tradutorKanban[language].placeholderDescricao}></textarea>
+                          <Campo id="problema" text={tradutorKanban[language].problemTitle} placeholder={tradutorKanban[language].placeholderProblem} type={"text"} value={problema} setValue={setProblema} />
+                          <Campo id="solucao" text={tradutorKanban[language].descricaoTitle} placeholder={tradutorKanban[language].placeholderDescricao} type={"text"} value={solucao} setValue={setSolucao} />
+
                         </Tab.Panel>
                       </Tab.Panels>
                     </Tab.Group>
