@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { KanbanComponent, ColumnsDirective, ColumnDirective } from '@syncfusion/ej2-react-kanban';
-import { kanbanGridPt,kanbanGridEn } from '../../data/dummy';
+import { kanbanGridPt, kanbanGridEn } from '../../data/dummy';
 import { Header } from '../../components';
 import { useAutenticacao } from '../../contexts/ContextUsuLogado.tsx';
 import { Tab } from '@headlessui/react'
@@ -17,13 +17,13 @@ function classNames(...classes) {
 export default function Kanban() {
   const [showModal, setShowModal] = React.useState(false);
   const [data, setData] = useState([])
-  const [ticket, setTicket] = useState({ id: 0, title: '', description: ``, classification: '' })
+  const [ticket, setTicket] = useState({ id: 0, title: '', description: ``, classification: ''})
   const [searchTerm, setSearchTerm] = useState('');
   const { language } = useLanguage();
   const { usuario } = useAutenticacao();
-  const tabs = [tradutorKanban[language].tabsVisualizar,tradutorKanban[language].tabsAcao]
+  // let tabs = validarSolucao(ticket.status)
   const userPermission = usuario?.role
-  const itensKanban = language === 'pt'? kanbanGridPt : kanbanGridEn
+  const itensKanban = language === 'pt' ? kanbanGridPt : kanbanGridEn
   const isDraggable = userPermission !== 3;
   function getData() {
     fetch("/ticket/getKanbanItem", {
@@ -50,7 +50,6 @@ export default function Kanban() {
             RankId: 2,
             Color: '#1F88E5',
             ClassName: 'e-others, e-critical, e-janet-leverling',
-
           })
 
         }
@@ -107,7 +106,15 @@ export default function Kanban() {
 
   }
 
+  function validarSolucao(Status) {
+    console.log("a", Status);
+    if (Status === 'Done') {
+      console.log("oaskd");
+      return [tradutorKanban[language].tabsVisualizar, tradutorKanban[language].tabsAcao, tradutorKanban[language].tabsSolucao]
 
+    }
+    return [tradutorKanban[language].tabsVisualizar, tradutorKanban[language].tabsAcao] 
+  }
 
   function cardTemplate(props) {
     var color = props.Type == "Hotfix" ? "rgba(225, 30, 30, 0.813)" : "rgb(31, 207, 198)"
@@ -137,7 +144,7 @@ export default function Kanban() {
   return (
     <>
       <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-        <Header category={tradutorKanban[language].page} title={tradutorKanban[language].pageTitle}/>
+        <Header category={tradutorKanban[language].page} title={tradutorKanban[language].pageTitle} />
         <div className='flex '>
           <div className="flex-1 block relative pl-2.5 ">
             <span className="h-full absolute inset-y-0 flex items-center pl-2">
@@ -164,7 +171,7 @@ export default function Kanban() {
           allowDragAndDrop={isDraggable}
           dialogOpen={DialogOpen.bind(this)}
           dragStop={(e) => { changeStatus(e.data[0].Id, e.data[0].Status); }}
-          cardDoubleClick={(e) => { setTicket({ id: e.data.Id, title: e.data.Title, description: e.data.Summary, classification: e.data.Type }); setShowModal(true); }}
+          cardDoubleClick={(e) => { setTicket({ id: e.data.Id, title: e.data.Title, description: e.data.Summary, classification: e.data.Type, status: e.data.Status }); setShowModal(true); }}
 
         >
           <ColumnsDirective>
@@ -201,7 +208,7 @@ export default function Kanban() {
                   <div className="w-full px-2 sm:px-0">
                     <Tab.Group defaultIndex={0}>
                       <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1">
-                        {tabs.map((tab) => (
+                        {validarSolucao(ticket.status).map((tab) => (
                           <Tab className={({ selected }) =>
                             classNames(
                               'w-full rounded-lg py-2.5 text-sm font-medium leading-5',
@@ -228,10 +235,10 @@ export default function Kanban() {
 
                           </div>
                         </Tab.Panel>
-                        {/* <Tab.Panel>
+                        <Tab.Panel>
                           <div className="pl-2 mt-2 text-lg font-bold dark:text-black">{tradutorKanban[language].descricaoTitle}</div>
                           <textarea id="descricao" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500  dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder={tradutorKanban[language].placeholderDescricao}></textarea>
-                        </Tab.Panel> */}
+                        </Tab.Panel>
                       </Tab.Panels>
                     </Tab.Group>
                   </div>
@@ -244,7 +251,7 @@ export default function Kanban() {
                     >
                       {tradutorKanban[language].buttonClose}
                     </button>
-                    <button onClick={()=> teste()} type="button" className="text-white rounded-full bg-green-500  hover:bg-green-700 font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+                    <button onClick={() => teste()} type="button" className="text-white rounded-full bg-green-500  hover:bg-green-700 font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
                       {tradutorKanban[language].buttonConfirm}
                     </button>
 

@@ -9,6 +9,7 @@ import { useState } from 'react';
 import { validador } from '../../utils/validador';
 import { useLanguage } from "../../contexts/contextLanguage";
 import translationsChamado from '../../utils/tradutor/ticket/tradutorCriarChamado';
+import Interessados from '../../components/interessados.tsx';
 
 const Swal = require('sweetalert2')
 
@@ -97,6 +98,8 @@ export default function Chamado() {
                 <option value="1">Hotfix</option>
                 <option value="2">Feature</option>
             </select>
+            <br></br>
+            <Interessados texto={translationsChamado[language].interessadosTitle}/>
             <Descrition nome={translationsChamado[language].descriptionName} descricao={translationsChamado[language].descriptionPlaceholder} value={hmtlString} setValue={setHtmlString} />
 
             <div className="mt-5 mb-5 flex items-center justify-end" >
