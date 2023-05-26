@@ -9,19 +9,29 @@ class SolutionController{
 
 
   public async create(req: Request, res: Response): Promise<Response> {
-
-    const {ticketSolution, problem, ticketId } = req.body;
+    const {ticketSolution, problem, ticketId, solver } = req.body;
 
     const ticketTable = await AppDataSource.getRepository(Ticket);
     const ticket = await ticketTable.findOneBy({id: ticketId});
+
+    const solution = await AppDataSource.getRepository(Solution).findOneBy({ticket: ticketId})
+
+    if(solution != null){
+      solution.problem = problem;
+      solution.solution = ticketSolution;
+
+      await AppDataSource.getRepository(Solution).save(solution)
+      return res.json(solution);
+    }
 
     const obj = new Solution();
     obj.solution = ticketSolution;
     obj.problem = problem;
     obj.ticket = ticket;
+    obj.ticket.solver = solver;
 
 
-    const solution: any = await AppDataSource.getRepository(Solution).save(obj).catch((e) => {
+    await AppDataSource.getRepository(Solution).save(obj).catch((e) => {
       return res.json({ error: "Erro ao salvar a Solução" });
   });
 
@@ -49,28 +59,6 @@ class SolutionController{
   async list(req: Request, res: Response): Promise<Response> {
     const response = await AppDataSource.getRepository(Solution).find();
     return res.json(response);
-  }
-
-
-    public async update(req: Request, res: Response): Promise<Response> {
-    const { id, ticketSolution, problem, user, ticketId  } = req.body;   
-
-    const ticketTable = await AppDataSource.getRepository(Ticket);
-    const ticket = await ticketTable.findOneBy({id: ticketId});
-
-     const solution = AppDataSource.getRepository(Solution)
-
-     const obj = await solution.findOneBy({
-         id: id,
-     })
-   
-     obj.solution = ticketSolution;
-     obj.problem = problem;
-     obj.ticket = ticket;
-
-     await solution.save(obj)
-     return res.json(obj)
-
   }
 
 
