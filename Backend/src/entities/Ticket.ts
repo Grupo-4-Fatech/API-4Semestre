@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, OneToMany, ManyToOne, JoinTable, AfterInsert } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, OneToMany, ManyToOne, JoinTable, AfterInsert, JoinColumn } from 'typeorm'
 import { Teams } from './Teams';
 import { InspectionGroup } from './InspectionGroup';
 import { User } from './Users';
@@ -38,6 +38,10 @@ export class Ticket {
 
     @ManyToOne(() => User, (user) => user.id, {onDelete: 'CASCADE'})
     user: User;
+
+    @OneToMany(() => User, (user) => user.id, {onDelete: 'CASCADE'})
+    @JoinColumn()
+    solver: User;
 
     @OneToMany(() => Log, (log) => log.id)
     logs: Array<Log>;

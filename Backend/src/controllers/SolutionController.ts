@@ -10,7 +10,7 @@ class SolutionController{
 
   public async create(req: Request, res: Response): Promise<Response> {
 
-    const {description, problem, userId, ticketId } = req.body;
+    const {ticketSolution, problem, userId, ticketId } = req.body;
 
     const ticketTable = await AppDataSource.getRepository(Ticket);
     const ticket = await ticketTable.findOneBy({id: ticketId});
@@ -18,26 +18,16 @@ class SolutionController{
     const user = await AppDataSource.getRepository(User).findOneBy({id: userId});
 
     const obj = new Solution();
-    obj.description = description;
+    obj.solution = ticketSolution;
     obj.problem = problem;
-    obj.user = user;
-    obj.ticket = [ticket];
+    obj.ticket = ticket;
 
 
     const solution: any = await AppDataSource.getRepository(Solution).save(obj).catch((e) => {
-
+      return res.json({ error: "Erro ao salvar a Solução" });
   });
-  if (solution.id) {
-    return res.json({
 
-      description: solution.description,
-      problem: solution.problem,
-      user: solution.user,
-      ticketId: solution.ticketId
-
-    });
-  }
-  return res.json({ error: "Erro ao salvar a Solução" });
+  return res.json(obj);
  
   }
 
@@ -56,6 +46,8 @@ class SolutionController{
     return res.json({ error: "Solução não encontrada" })
 
   }
+
+
   async list(req: Request, res: Response): Promise<Response> {
     const response = await AppDataSource.getRepository(Solution).find();
     return res.json(response);
@@ -63,7 +55,7 @@ class SolutionController{
 
 
     public async update(req: Request, res: Response): Promise<Response> {
-    const { id, description, problem, user, ticketId  } = req.body;   
+    const { id, ticketSolution, problem, user, ticketId  } = req.body;   
 
     const ticketTable = await AppDataSource.getRepository(Ticket);
     const ticket = await ticketTable.findOneBy({id: ticketId});
@@ -74,14 +66,12 @@ class SolutionController{
          id: id,
      })
    
-     obj.description = description;
+     obj.solution = ticketSolution;
      obj.problem = problem;
-     obj.user = user;
-     obj.ticket = [ticket];
+     obj.ticket = ticket;
 
      await solution.save(obj)
      return res.json(obj)
-     
 
   }
 

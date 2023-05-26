@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, ManyToMany, JoinTable } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, ManyToMany, JoinTable, JoinColumn, OneToOne } from "typeorm";
 import { User } from "./Users";
 import { Ticket } from "./Ticket";
 
@@ -9,18 +9,13 @@ export class Solution {
     id: number;
 
     @Column()
-    description: string;
+    solution: string;
 
     @Column()
     problem: string;
 
-    @ManyToOne(() => User, (user) => user.id)
-    user: User;
-
-    @ManyToMany(() => Ticket, (ticket) => ticket.id)
-    @JoinTable()
-    ticket: Array<Ticket>
-
-    
+    @OneToOne(() => Ticket, (ticket) => ticket.id)
+    @JoinColumn()
+    ticket: Ticket;
 
 }

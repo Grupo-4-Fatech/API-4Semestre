@@ -66,7 +66,7 @@ class TicketController {
   }
 
   public async create(req: Request, res: Response): Promise<Response> {
-    const { type, title, description, status, inspectionGroup } = req.body;
+    const { type, title, description, status} = req.body;
 
     let email = jwt.decode(req.cookies.jwt);
 
