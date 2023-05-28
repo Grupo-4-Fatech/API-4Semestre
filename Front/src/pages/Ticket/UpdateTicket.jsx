@@ -68,6 +68,7 @@ export default function UpdateTicket() {
         }
         if (id) {
             setLoading(true);
+            
             fetch("/ticket/update", {
                 method: 'PATCH',
                 headers: {
@@ -116,6 +117,7 @@ export default function UpdateTicket() {
             })
         }
     }
+    
 
     useEffect(() => { getData() }, [])
     return (

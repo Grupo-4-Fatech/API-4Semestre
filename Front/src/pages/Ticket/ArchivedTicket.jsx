@@ -69,7 +69,7 @@ const ArchivedTicket = () => {
             }
         })
     }
-
+    
     const deleteTicket = (id) => {
         fetch("/ticket/delete", {
             method: 'DELETE',

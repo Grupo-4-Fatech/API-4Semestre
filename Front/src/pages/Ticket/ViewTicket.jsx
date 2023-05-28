@@ -86,7 +86,6 @@ const ViewTicket = () => {
             }
         }).then((resposta) => resposta.json()).then((data) => {
             var tickets = []
-            console.log(data)
             data.forEach(element => {
                 tickets.push({
                     id: element.id,
@@ -202,10 +201,10 @@ const ViewTicket = () => {
             else {
                 Swal.fire(visualizarChamado[language].messageAvaliado, '', 'success')
                 if (res.aprovado || res.arquivado) {
-                    var updateData = data.filter(item => item.id != id)
-                    setLoading(false);
-                    setData(updateData); setShowModal(false)
+                    var updateData = data.filter(item => item.id != id)                    
+                    setData(updateData); setShowModal(false);                   
                 }
+                setLoading(false);
                 setShowModal(false);
             }
         })

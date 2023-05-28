@@ -1,5 +1,5 @@
 import AppDataSource from "../data-source";
-import { Request, Response } from 'express';
+import { Request, Response, response } from 'express';
 import { Ticket } from "../entities/Ticket";
 import { IsUndefined } from "../utils/global";
 import * as jwt from "jsonwebtoken";
@@ -7,6 +7,8 @@ import UserController from "./UserController";
 import { User } from "../entities/Users";
 import { Log } from "../entities/Log";
 import LogController from "./LogController";
+
+
 
 
 class TicketController {
@@ -20,7 +22,6 @@ class TicketController {
 
     return res.json(ticket);
   }
-
 
   public async update(req: Request, res: Response): Promise<Response> {
     const { id, title, type, description, status, inspectionGroup } = req.body;
@@ -39,6 +40,7 @@ class TicketController {
 
     await ticketRepository.save(ticketToUpdate).catch((e) => { })
     await TicketController.createLog(ticketToUpdate, "6", req);
+    await TicketController.notifica(ticketToUpdate, "Atualizado", req);
     return res.json(ticketToUpdate)
 
 
@@ -66,7 +68,7 @@ class TicketController {
   }
 
   public async create(req: Request, res: Response): Promise<Response> {
-    const { type, title, description, status} = req.body;
+    const { type, title, description, status } = req.body;
 
     let email = jwt.decode(req.cookies.jwt);
 
@@ -86,6 +88,7 @@ class TicketController {
     })
     if (ticket.id) {
       await TicketController.createLog(ticket, "1", req);
+      await TicketController.notifica(ticket,"Criado", req);
 
       return res.json({
         id: ticket.id,
@@ -193,12 +196,17 @@ class TicketController {
           await ticketRepository.save(ticket)
           await TicketController.createLog(ticket, '7', req, item.nota)
           await TicketController.createLog(ticket, '5', req)
+          await TicketController.notifica(ticket,'Avalidado Risco', req, item.nota)
+          await TicketController.notifica(ticket,'Arquivado',req)
+         
           return res.json({ arquivado: true })
         } else {
           ticket.risk = item.nota
           await ticketRepository.save(ticket)
           await TicketController.createLog(ticket, '7', req, item.nota)
           await TicketController.createLog(ticket, '2', req, item.nota)
+          await TicketController.notifica(ticket,'Avaliado Risco', req, item.nota)
+          await TicketController.notifica(ticket,'Aprovado Risco',req)
 
         }
 
@@ -209,12 +217,16 @@ class TicketController {
           await ticketRepository.save(ticket)
           await TicketController.createLog(ticket, '8', req, item.nota)
           await TicketController.createLog(ticket, '5', req)
+          await TicketController.notifica(ticket,'Avaliado impacto', req, item.nota)
+          await TicketController.notifica(ticket,'Arquivado',req)
           return res.json({ arquivado: true })
         } else {
           ticket.impact = item.nota
           await ticketRepository.save(ticket)
           await TicketController.createLog(ticket, '8', req, item.nota)
           await TicketController.createLog(ticket, '3', req, item.nota)
+          await TicketController.notifica(ticket,'Avaliado impacto', req, item.nota)
+          await TicketController.notifica(ticket,'Aprovado impacto',req)
         }
 
       } if (item.tipo == 3) {
@@ -224,12 +236,16 @@ class TicketController {
           await ticketRepository.save(ticket)
           await TicketController.createLog(ticket, '9', req, item.nota)
           await TicketController.createLog(ticket, '5', req)
+          await TicketController.notifica(ticket,'Avaliado custo', req, item.nota)
+          await TicketController.notifica(ticket,'Arquivado',req)
           return res.json({ true: true })
         } else {
           ticket.cost = item.nota
           await ticketRepository.save(ticket)
           await TicketController.createLog(ticket, '9', req, item.nota)
           await TicketController.createLog(ticket, '4', req, item.nota)
+          await TicketController.notifica(ticket,'Avaliado custo',req, item.nota)
+          await TicketController.notifica(ticket,'Aprovado custo',req)
         }
       }
     } if (ticket.risk && ticket.cost && ticket.impact) {
@@ -243,6 +259,40 @@ class TicketController {
 
     return res.json({ true: true });
   }
+
+  public static async notifica(ticket: any, acao: string, req: Request, value = "") {
+    var data = new Date()
+    let email = jwt.decode(req.cookies.jwt);
+    const user: any = await AppDataSource.getRepository(User).findOneBy({ email: email ? email.toString() : "" });
+    const userCriador: any = await AppDataSource.getRepository(User).findOneBy({ id: ticket.usersId });
+
+    var conteudoEmail = {
+
+      service_id: "service_3qn6qel",
+      template_id: "template_bxybvbx",
+      user_id: "OGaRTlk8Ij5luGzrf",
+      template_params: {
+        email: user.email,
+        nome: user.name,
+        acaoUsu: acao,
+        tituloTicket: ticket.title,
+        data: data.toLocaleString('pt-BR')
+      }
+    }
+
+    await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify(conteudoEmail)
+    }).then(function (response) {
+      console.log('SUCCESS!', response.status, response.statusText);
+    }, function (error) {
+      console.log('FAILED...', error);
+    });
+  }
+
   public static async createLog(ticket: any, acao: string, req: any, value = "") {
     let email = jwt.decode(req.cookies.jwt);
     const user: any = await AppDataSource.getRepository(User).findOneBy({ email: email ? email.toString() : "" });
@@ -329,13 +379,5 @@ class TicketController {
     return res.json(contagem)
 
   }
-
-
-
-
-
-
-
-
 
 } export default new TicketController();
