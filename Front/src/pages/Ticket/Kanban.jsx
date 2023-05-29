@@ -19,7 +19,7 @@ export default function Kanban() {
 
   const [showModal, setShowModal] = React.useState(false);
   const [data, setData] = useState([])
-  const [ticket, setTicket] = useState({ id:'', title: '', description: ``, classification: '' })
+  const [ticket, setTicket] = useState({ id:'', title: '', description: ``, classification: '', solution: ''})
   const [searchTerm, setSearchTerm] = useState('');
   const [solucao, setSolucao] = useState('')
   const { language } = useLanguage();
@@ -32,6 +32,7 @@ export default function Kanban() {
   const userId = usuario?.id
   const itensKanban = language === 'pt' ? kanbanGridPt : kanbanGridEn
   const isDraggable = userPermission !== 3;
+  
   function getData() {
     fetch("/ticket/getKanbanItem", {
       method: 'GET',
@@ -47,6 +48,7 @@ export default function Kanban() {
           tickets.push({
             Id: element.id,
             Title: element.title,
+            Solution: element.solution,
             Status: getStatus(element.status),
             Summary: element.description,
             Type: element.type == 1 ? "Hotfix" : "Feature",
@@ -202,7 +204,7 @@ export default function Kanban() {
           allowDragAndDrop={isDraggable}
           dialogOpen={DialogOpen.bind(this)}
           dragStop={(e) => { changeStatus(e.data[0].Id, e.data[0].Status); }}
-          cardDoubleClick={(e) => { setTicket({ id: e.data.Id, title: e.data.Title, description: e.data.Summary, classification: e.data.Type, status: e.data.Status }); setShowModal(true); }}
+          cardDoubleClick={(e) => { setTicket({ id: e.data.Id, title: e.data.Title, description: e.data.Summary, classification: e.data.Type, status: e.data.Status, solution:e.data.Solution }); setShowModal(true); }}
 
         >
           <ColumnsDirective>
@@ -267,7 +269,7 @@ export default function Kanban() {
                           </div>
                         </Tab.Panel>
                         <Tab.Panel>
-                          <Campo id="solucao" text={tradutorKanban[language].descricaoTitle} placeholder={tradutorKanban[language].placeholderDescricao} type={"text"} value={solucao} setValue={setSolucao} />
+                          <Campo id="solucao" text={tradutorKanban[language].descricaoTitle} placeholder={tradutorKanban[language].placeholderDescricao} type={"text"} value={ticket.solution} setValue={setSolucao} />
                           </Tab.Panel>
                       </Tab.Panels>
                     </Tab.Group>
