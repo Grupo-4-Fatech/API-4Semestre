@@ -2,7 +2,6 @@ import {Entity, PrimaryGeneratedColumn, Column, ManyToMany, OneToMany} from 'typ
 import { Teams } from './Teams';
 import { InspectionGroup } from './InspectionGroup';
 import { Ticket } from './Ticket';
-import { Solution } from './Solution';
 import { Log } from './Log';
 
 @Entity()
@@ -34,9 +33,6 @@ export class User{
 
     @OneToMany(() => Ticket, (ticket) => ticket.id)
     ticket: Array<Ticket>
-
-    @OneToMany(() => Solution, (solution) => solution.id)
-    solutions: Array<Solution>;
 
     @OneToMany(() => Log, (log) => log.id)
     logs : Array<Log>;

@@ -1,9 +1,6 @@
 import { Router } from "express";
 import { TicketController } from "../controllers";
 
-
-
-
 const routes = Router();
 
 routes.get("/get/:id", TicketController.one)
@@ -14,9 +11,11 @@ routes.get("/list",TicketController.list);
 routes.get("/status", TicketController.status);
 routes.get("/getAll/:status", TicketController.getAll)
 routes.patch("/updateStatus", TicketController.updateStatus)
+routes.patch("/updateSolution", TicketController.updateSolution)
 routes.get("/getKanbanItem", TicketController.getKanbanItem)
 routes.post("/deleteAll", TicketController.deleteAll)
 routes.get("/getLog/:id", TicketController.getLogs)
-routes.patch("/avaliar", TicketController.avaliar)
+routes.patch("/valiar", TicketController.avaliar)
+
 
 export default routes;

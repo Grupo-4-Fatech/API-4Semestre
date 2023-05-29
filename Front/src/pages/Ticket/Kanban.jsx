@@ -16,11 +16,11 @@ function classNames(...classes) {
 }
 
 export default function Kanban() {
+
   const [showModal, setShowModal] = React.useState(false);
   const [data, setData] = useState([])
-  const [ticket, setTicket] = useState({ id: 0, title: '', description: ``, classification: '' })
+  const [ticket, setTicket] = useState({ id:'', title: '', description: ``, classification: '' })
   const [searchTerm, setSearchTerm] = useState('');
-  const [problema, setProblema] = useState('')
   const [solucao, setSolucao] = useState('')
   const { language } = useLanguage();
   const { usuario } = useAutenticacao();
@@ -66,22 +66,9 @@ export default function Kanban() {
   }
 
 
-
-
-
   function teste() {
     const descricao = document.getElementById("solucao")
     console.log("a" + descricao);
-    const problem = document.getElementById("problema")
-    console.log("b"+ problem);
-    if (validador.estaVazio(problem.value)) {
-      Swal.fire({
-        icon: 'error',
-        title: tradutorKanban[language].errorTitle,
-        text: tradutorKanban[language].errorProblemText,
-      })
-      return
-    }
     if (validador.estaVazio(descricao.value)) {
       Swal.fire({
         icon: 'error',
@@ -90,12 +77,12 @@ export default function Kanban() {
       })
       return
     }
-    fetch("/solution/create", {
-      method: 'POST',
+    fetch("/ticket/updateSolution", {
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
       },
-      body: JSON.stringify({ ticketSolution: solucao, problem: problema, ticketId: ticket.id, solver: userId })
+      body: JSON.stringify({ id: ticket.id, solution: solucao })
     }).then((resposta) => resposta.json()).then((data) => {
       if (data.error) {
         Swal.fire({
@@ -107,13 +94,11 @@ export default function Kanban() {
         Swal.fire({
           icon: 'success',
           title: tradutorKanban[language].sucessoTitleSolution,
-        }).then((result) => result.isConfirmed ? setProblema("") + setSolucao("") : "")
+        }).then((result) => result.isConfirmed ? setSolucao("") : "")
 
       }
     })
 
-
- 
   }
 
   function getStatus(status) {
@@ -282,10 +267,8 @@ export default function Kanban() {
                           </div>
                         </Tab.Panel>
                         <Tab.Panel>
-                          <Campo id="problema" text={tradutorKanban[language].problemTitle} placeholder={tradutorKanban[language].placeholderProblem} type={"text"} value={problema} setValue={setProblema} />
                           <Campo id="solucao" text={tradutorKanban[language].descricaoTitle} placeholder={tradutorKanban[language].placeholderDescricao} type={"text"} value={solucao} setValue={setSolucao} />
-
-                        </Tab.Panel>
+                          </Tab.Panel>
                       </Tab.Panels>
                     </Tab.Group>
                   </div>

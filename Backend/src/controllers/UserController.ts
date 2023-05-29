@@ -77,7 +77,6 @@ class UserController {
         object.gender = gender;
         object.role = role;
         object.inspectionGroup = null;
-        object.solutions = null;
         object.team = null;
         object.ticket = null;
 
