@@ -3,7 +3,6 @@ import { Teams } from './Teams';
 import { InspectionGroup } from './InspectionGroup';
 import { User } from './Users';
 import { Log } from './Log';
-import { Interested } from './Interested';
 
 @Entity()
 export class Ticket {
