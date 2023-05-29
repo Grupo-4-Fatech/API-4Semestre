@@ -9,6 +9,7 @@ import Campo from '../../components/Campo'
 import { useLanguage } from "../../contexts/contextLanguage";
 import Swal from 'sweetalert2';
 import tradutorKanban from '../../utils/tradutor/kanban/tradutorKanban';
+import CampoSolution from '../../components/campoSolution';
 
 
 function classNames(...classes) {
@@ -25,7 +26,7 @@ export default function Kanban() {
   const { language } = useLanguage();
   const { usuario } = useAutenticacao();
 
-
+console.log(solucao);
 
   // let tabs = validarSolucao(ticket.status)
   const userPermission = usuario?.role
@@ -269,7 +270,7 @@ export default function Kanban() {
                           </div>
                         </Tab.Panel>
                         <Tab.Panel>
-                          <Campo id="solucao" text={tradutorKanban[language].descricaoTitle} placeholder={tradutorKanban[language].placeholderDescricao} type={"text"} value={ticket.solution} setValue={setSolucao} />
+                          <CampoSolution id="solucao" text={tradutorKanban[language].descricaoTitle} placeholder={tradutorKanban[language].placeholderDescricao} type={"text"} value={ticket.solution} setValue={setSolucao} />
                           </Tab.Panel>
                       </Tab.Panels>
                     </Tab.Group>
