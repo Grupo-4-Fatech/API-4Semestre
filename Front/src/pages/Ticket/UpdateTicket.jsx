@@ -113,6 +113,7 @@ export default function UpdateTicket() {
                     setHtmlString(data.description)
                     setType(data.type)
                     setStatus(data.status)
+                    
                 }
             })
         }
