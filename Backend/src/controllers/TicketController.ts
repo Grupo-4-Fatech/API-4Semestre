@@ -1,5 +1,5 @@
 import AppDataSource from "../data-source";
-import { Request, Response, response } from 'express';
+import { Request, Response } from 'express';
 import { Ticket } from "../entities/Ticket";
 import { IsUndefined } from "../utils/global";
 import * as jwt from "jsonwebtoken";
@@ -9,12 +9,9 @@ import { Log } from "../entities/Log";
 
 class TicketController {
   async list(req: Request, res: Response): Promise<Response> {
-    let email = jwt.decode(req.cookies.jwt);
-    const user = await AppDataSource.getRepository(User).findOneBy({ email: email ? email.toString() : "" })
-
     const ticketTable = await AppDataSource.getRepository(Ticket)
 
-    const ticket = await ticketTable.findBy({ user: false })
+    const ticket = await ticketTable.find()
 
     return res.json(ticket);
   }
@@ -397,6 +394,22 @@ class TicketController {
     const contagem: any = await AppDataSource.manager.query(query)
     return res.json(contagem)
 
+  }
+
+  async insertInterested(req: Request, res: Response): Promise<Response>{
+    const { ticketId, interestedEmails} = req.body;
+    const ticketTable = AppDataSource.getRepository(Ticket);
+
+    const interestedList = []
+
+    interestedEmails.forEach(email => interestedList.push(email))
+
+    const ticket = await ticketTable.findOneBy({id: ticketId})
+    ticket.interested = interestedList;
+
+    await ticketTable.save(ticket);
+
+    return res.json(ticket)
   }
 
 } export default new TicketController();

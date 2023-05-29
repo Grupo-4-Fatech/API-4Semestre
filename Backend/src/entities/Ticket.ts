@@ -3,6 +3,7 @@ import { Teams } from './Teams';
 import { InspectionGroup } from './InspectionGroup';
 import { User } from './Users';
 import { Log } from './Log';
+import { Interested } from './Interested';
 
 @Entity()
 export class Ticket {
@@ -32,6 +33,9 @@ export class Ticket {
 
     @Column({ nullable: true, default: "" })
     cost: string;
+
+    @Column("simple-array", {nullable: true, default: []})
+    interested: string[]
 
     @ManyToOne(() => Teams, (teams) => teams.id, {onDelete: 'CASCADE'})
     teams: Teams[]
