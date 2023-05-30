@@ -17,7 +17,7 @@ class TicketController {
   }
 
   public async update(req: Request, res: Response): Promise<Response> {
-    const { id, title, type, description, status, inspectionGroup } = req.body;
+    const { id, title, type, description, status, inspectionGroup, interessados } = req.body;
     const ticketRepository = AppDataSource.getRepository(Ticket)
     const ticketToUpdate = await ticketRepository.findOne({
       where: { id: id },
@@ -30,6 +30,7 @@ class TicketController {
     ticketToUpdate.description = description;
     ticketToUpdate.status = status;
     ticketToUpdate.inspectionGroup = inspectionGroup;
+    ticketToUpdate.interested = interessados;
 
     await ticketRepository.save(ticketToUpdate).catch((e) => { })
     await TicketController.createLog(ticketToUpdate, "6", req);
@@ -57,11 +58,12 @@ class TicketController {
     const id = parseInt(req.params.id);
     const usuario: any = await AppDataSource.manager.findOneBy(Ticket, { id }).catch((e) => {
     })
+    console.log(usuario)
     return res.json(usuario);
   }
 
   public async create(req: Request, res: Response): Promise<Response> {
-    const { type, title, description, status} = req.body;
+    const { type, title, description, status, interessados} = req.body;
 
     let email = jwt.decode(req.cookies.jwt);
 
@@ -74,6 +76,7 @@ class TicketController {
     obj.status = status;
     obj.user = user;
     obj.logs = null;
+    obj.interested = interessados;
     console.log(obj)
     const ticket: any = await AppDataSource.manager.save(Ticket, obj).catch((e) => {
       console.log(e)
@@ -163,7 +166,7 @@ class TicketController {
       if (solution !== "") {
         ticket.solution = solution;
       }
-      const r = await AppDataSource.manager.save(ticket, ticket).catch((e) => {
+      const r = await AppDataSource.manager.save(Ticket, ticket).catch((e) => {
         return e;
       })
       if (!r.error) {
@@ -288,7 +291,7 @@ class TicketController {
       template_id: "template_bxybvbx",
       user_id: "OGaRTlk8Ij5luGzrf",
       template_params: {
-        email: user.email,
+        email: userCriador.email,
         nome: user.name,
         acaoUsu: acao,
         tituloTicket: ticket.title,
@@ -307,6 +310,34 @@ class TicketController {
     }, function (error) {
       console.log('FAILED...', error);
     });
+
+    for( var Email of ticket.interested){
+      conteudoEmail = {
+        service_id: "service_3qn6qel",
+        template_id: "template_bxybvbx",
+        user_id: "OGaRTlk8Ij5luGzrf",
+        template_params: {
+          email: Email,
+          nome: user.name,
+          acaoUsu: acao,
+          tituloTicket: ticket.title,
+          data: data.toLocaleString('pt-BR')
+        }
+      }
+  
+      await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(conteudoEmail)
+      }).then(function (response) {
+        console.log('SUCCESS!', response.status, response.statusText);
+      }, function (error) {
+        console.log('FAILED...', error);
+      });
+
+    }
   }
 
   public static async createLog(ticket: any, acao: string, req: any, value = "") {
