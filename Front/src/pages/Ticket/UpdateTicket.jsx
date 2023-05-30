@@ -9,6 +9,8 @@ import { validador } from '../../utils/validador';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useLanguage } from "../../contexts/contextLanguage";
 import translationsUpdateChamado from '../../utils/tradutor/ticket/tradutorUpdateChamado';
+import translationsChamado from '../../utils/tradutor/ticket/tradutorCriarChamado';
+import Interessados from '../../components/interessados.tsx';
 
 
 const Swal = require('sweetalert2')
@@ -22,6 +24,7 @@ export default function UpdateTicket() {
     const [status, setStatus] = useState("1");
     const { language } = useLanguage();
     const [loading, setLoading] = useState(false)
+    const [interessados, setInteressados] = useState([])
 
 
     let location = useNavigate();
@@ -66,6 +69,8 @@ export default function UpdateTicket() {
             })
             return
         }
+        var inte = [];
+        interessados.map((e)=>inte.push(e.value))
         if (id) {
             setLoading(true);
             
@@ -74,7 +79,7 @@ export default function UpdateTicket() {
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
                 },
-                body: JSON.stringify({ id: id, type: type, title: title, description: hmtlString, status: status })
+                body: JSON.stringify({ id: id, type: type, title: title, description: hmtlString, status: status, interessados:inte })
             }).then((resposta) => resposta.json()).then((data) => {
                 if (data.error) {
                     Swal.fire({
@@ -113,6 +118,10 @@ export default function UpdateTicket() {
                     setHtmlString(data.description)
                     setType(data.type)
                     setStatus(data.status)
+                    console.log(data.interested)
+                    var inte = []
+                    data.interested.map((e)=>inte.push({value:e, label:e}))
+                    setInteressados(inte)
                     
                 }
             })
@@ -131,6 +140,7 @@ export default function UpdateTicket() {
                 <option value="1" >Hotfix</option>
                 <option value="2" >Feature</option>
             </select>
+            <Interessados texto={translationsChamado[language].interessadosTitle} value={interessados} setValue={setInteressados}/>
             <Descrition nome={translationsUpdateChamado[language].selectNameOption} descricao={translationsUpdateChamado[language].descriptionPlaceholder} value={hmtlString} setValue={setHtmlString} />
 
             <div className="mt-5 mb-5 flex items-center justify-end" >

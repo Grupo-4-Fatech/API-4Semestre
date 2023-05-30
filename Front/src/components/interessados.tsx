@@ -19,9 +19,8 @@ const createOption = (label: string) => ({
   value: label,
 });
 const animated = makeAnimated()
-const Interessados = ({ texto }) => {
+const Interessados = ({ texto, value, setValue }) => {
   const [inputValue, setInputValue] = useState('');
-  const [value, setValue] = useState<readonly Option[]>([]);
   const { language } = useLanguage();
 
   const handleKeyDown: KeyboardEventHandler = (event) => {

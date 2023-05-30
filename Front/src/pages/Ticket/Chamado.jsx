@@ -21,6 +21,7 @@ export default function Chamado() {
     const [type, setType] = useState("default")
     const { language } = useLanguage();
     const [loading, setLoading] = useState(false);
+    const [interessados, setInteressados] = useState([])
 
 
     let location = useNavigate();
@@ -29,6 +30,7 @@ export default function Chamado() {
     }
 
     function CreateTicket() {
+        
         const titulo = document.getElementById("Titulo");
         const classification = document.getElementById("select");
 
@@ -64,13 +66,17 @@ export default function Chamado() {
             })
             return
         }
+        var inte = [];
+        interessados.map((e)=>inte.push(e.value))
+        console.log(inte)
+    
         setLoading(true);
         fetch("/ticket/create", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
-            body: JSON.stringify({ type: type, title: title, description: hmtlString, status: 1 })
+            body: JSON.stringify({ type: type, title: title, description: hmtlString, status: 1, interessados:inte })
         }).then((resposta) => resposta.json()).then((data) => {
             if (data.error) {
                 Swal.fire({
@@ -99,7 +105,7 @@ export default function Chamado() {
                 <option value="2">Feature</option>
             </select>
             <br></br>
-            <Interessados texto={translationsChamado[language].interessadosTitle}/>
+            <Interessados texto={translationsChamado[language].interessadosTitle} value={interessados} setValue={setInteressados}/>
             <Descrition nome={translationsChamado[language].descriptionName} descricao={translationsChamado[language].descriptionPlaceholder} value={hmtlString} setValue={setHtmlString} />
 
             <div className="mt-5 mb-5 flex items-center justify-end" >

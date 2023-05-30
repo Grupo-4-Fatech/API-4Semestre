@@ -22,7 +22,7 @@ export default function Kanban() {
   const [data, setData] = useState([])
   const [ticket, setTicket] = useState({ id:'', title: '', description: ``, classification: '', solution: ''})
   const [searchTerm, setSearchTerm] = useState('');
-  const [solucao, setSolucao] = useState('')
+  const [solucao, setSolucao] = useState(ticket.Solution)
   const { language } = useLanguage();
   const { usuario } = useAutenticacao();
 
@@ -97,7 +97,7 @@ console.log(solucao);
         Swal.fire({
           icon: 'success',
           title: tradutorKanban[language].sucessoTitleSolution,
-        }).then((result) => result.isConfirmed ? setSolucao("") : "")
+        }).then((result) =>{ if(result.isConfirmed){getData(); setShowModal(false);}})
 
       }
     })
@@ -205,7 +205,7 @@ console.log(solucao);
           allowDragAndDrop={isDraggable}
           dialogOpen={DialogOpen.bind(this)}
           dragStop={(e) => { changeStatus(e.data[0].Id, e.data[0].Status); }}
-          cardDoubleClick={(e) => { setTicket({ id: e.data.Id, title: e.data.Title, description: e.data.Summary, classification: e.data.Type, status: e.data.Status, solution:e.data.Solution }); setShowModal(true); }}
+          cardDoubleClick={(e) => { console.log(e) ; setTicket({ id: e.data.Id, title: e.data.Title, description: e.data.Summary, classification: e.data.Type, status: e.data.Status, solution:e.data.Solution });  setSolucao(e.data.Solution); setShowModal(ticket.id != "");}}
 
         >
           <ColumnsDirective>
@@ -270,7 +270,7 @@ console.log(solucao);
                           </div>
                         </Tab.Panel>
                         <Tab.Panel>
-                          <CampoSolution id="solucao" text={tradutorKanban[language].descricaoTitle} placeholder={tradutorKanban[language].placeholderDescricao} type={"text"} value={ticket.solution} setValue={setSolucao} />
+                          <CampoSolution id="solucao" text={tradutorKanban[language].descricaoTitle} placeholder={tradutorKanban[language].placeholderDescricao} type={"text"} value={solucao} setValue={setSolucao} />
                           </Tab.Panel>
                       </Tab.Panels>
                     </Tab.Group>
