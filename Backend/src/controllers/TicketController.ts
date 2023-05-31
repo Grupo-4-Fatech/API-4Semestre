@@ -63,7 +63,7 @@ class TicketController {
   }
 
   public async create(req: Request, res: Response): Promise<Response> {
-    const { type, title, description, status, interessados} = req.body;
+    const { type, title, description, status, interessados } = req.body;
 
     let email = jwt.decode(req.cookies.jwt);
 
@@ -84,7 +84,7 @@ class TicketController {
     })
     if (ticket.id) {
       await TicketController.createLog(ticket, "1", req);
-      await TicketController.notifica(ticket,"Criado", req);
+      await TicketController.notifica(ticket, "Criado", req);
 
       return res.json({
         id: ticket.id,
@@ -217,17 +217,15 @@ class TicketController {
           await ticketRepository.save(ticket)
           await TicketController.createLog(ticket, '7', req, item.nota)
           await TicketController.createLog(ticket, '5', req)
-          await TicketController.notifica(ticket,'Avalidado Risco', req, item.nota)
-          await TicketController.notifica(ticket,'Arquivado',req)
-         
+          await TicketController.notifica(ticket, 'Arquivado risco', req)
+
           return res.json({ arquivado: true })
         } else {
           ticket.risk = item.nota
           await ticketRepository.save(ticket)
           await TicketController.createLog(ticket, '7', req, item.nota)
           await TicketController.createLog(ticket, '2', req, item.nota)
-          await TicketController.notifica(ticket,'Avaliado Risco', req, item.nota)
-          await TicketController.notifica(ticket,'Aprovado Risco',req)
+          await TicketController.notifica(ticket, 'Aprovado Risco', req)
 
         }
 
@@ -238,16 +236,14 @@ class TicketController {
           await ticketRepository.save(ticket)
           await TicketController.createLog(ticket, '8', req, item.nota)
           await TicketController.createLog(ticket, '5', req)
-          await TicketController.notifica(ticket,'Avaliado impacto', req, item.nota)
-          await TicketController.notifica(ticket,'Arquivado',req)
+          await TicketController.notifica(ticket, 'Arquivado impacto', req)
           return res.json({ arquivado: true })
         } else {
           ticket.impact = item.nota
           await ticketRepository.save(ticket)
           await TicketController.createLog(ticket, '8', req, item.nota)
           await TicketController.createLog(ticket, '3', req, item.nota)
-          await TicketController.notifica(ticket,'Avaliado impacto', req, item.nota)
-          await TicketController.notifica(ticket,'Aprovado impacto',req)
+          await TicketController.notifica(ticket, 'Aprovado impacto', req)
         }
 
       } if (item.tipo == 3) {
@@ -257,16 +253,14 @@ class TicketController {
           await ticketRepository.save(ticket)
           await TicketController.createLog(ticket, '9', req, item.nota)
           await TicketController.createLog(ticket, '5', req)
-          await TicketController.notifica(ticket,'Avaliado custo', req, item.nota)
-          await TicketController.notifica(ticket,'Arquivado',req)
+          await TicketController.notifica(ticket, 'Arquivado custo ', req)
           return res.json({ true: true })
         } else {
           ticket.cost = item.nota
           await ticketRepository.save(ticket)
           await TicketController.createLog(ticket, '9', req, item.nota)
           await TicketController.createLog(ticket, '4', req, item.nota)
-          await TicketController.notifica(ticket,'Avaliado custo',req, item.nota)
-          await TicketController.notifica(ticket,'Aprovado custo',req)
+          await TicketController.notifica(ticket, 'Aprovado custo', req)
         }
       }
     } if (ticket.risk && ticket.cost && ticket.impact) {
@@ -281,39 +275,15 @@ class TicketController {
     return res.json({ true: true });
   }
 
-  public static async notifica(ticket: any, acao: string, req: Request, value = "") {
+  public static async notifica(ticket: any, acao: string, req: Request) {
     var data = new Date()
     let email = jwt.decode(req.cookies.jwt);
     const user: any = await AppDataSource.getRepository(User).findOneBy({ email: email ? email.toString() : "" });
     const userCriador: any = await AppDataSource.getRepository(User).findOneBy({ id: ticket.usersId });
-    var conteudoEmail = {
-      service_id: "service_3qn6qel",
-      template_id: "template_bxybvbx",
-      user_id: "OGaRTlk8Ij5luGzrf",
-      template_params: {
-        email: userCriador.email,
-        nome: user.name,
-        acaoUsu: acao,
-        tituloTicket: ticket.title,
-        data: data.toLocaleString('pt-BR')
-      }
-    }
 
-    await fetch('https://api.emailjs.com/api/v1.0/email/send', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      body: JSON.stringify(conteudoEmail)
-    }).then(function (response) {
-      console.log('SUCCESS!', response.status, response.statusText);
-    }, function (error) {
-      console.log('FAILED...', error);
-    });
-
-    for( var Email of ticket.interested){
-      conteudoEmail = {
-        service_id: "service_3qn6qel",
+    for (var Email of ticket.interested) {
+      var conteudoEmail = {
+        service_id: "service_o2xt645",
         template_id: "template_bxybvbx",
         user_id: "OGaRTlk8Ij5luGzrf",
         template_params: {
@@ -324,7 +294,6 @@ class TicketController {
           data: data.toLocaleString('pt-BR')
         }
       }
-  
       await fetch('https://api.emailjs.com/api/v1.0/email/send', {
         method: 'POST',
         headers: {
@@ -336,7 +305,6 @@ class TicketController {
       }, function (error) {
         console.log('FAILED...', error);
       });
-
     }
   }
 
@@ -427,15 +395,15 @@ class TicketController {
 
   }
 
-  async insertInterested(req: Request, res: Response): Promise<Response>{
-    const { ticketId, interestedEmails} = req.body;
+  async insertInterested(req: Request, res: Response): Promise<Response> {
+    const { ticketId, interestedEmails } = req.body;
     const ticketTable = AppDataSource.getRepository(Ticket);
 
     const interestedList = []
 
     interestedEmails.forEach(email => interestedList.push(email))
 
-    const ticket = await ticketTable.findOneBy({id: ticketId})
+    const ticket = await ticketTable.findOneBy({ id: ticketId })
     ticket.interested = interestedList;
 
     await ticketTable.save(ticket);
