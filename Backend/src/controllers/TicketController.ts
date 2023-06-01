@@ -283,9 +283,9 @@ class TicketController {
 
 
     var conteudoEmail = {
-      service_id: "service_o2xt645",
-      template_id: "template_bxybvbx",
-      user_id: "OGaRTlk8Ij5luGzrf",
+      service_id: "service_rcapme4",
+      template_id: "template_zausmvy",
+      user_id: "64skWYeEq_nk8m4PE",
       template_params: {
         email: ticket.user.email,
         nome: user.name,
@@ -308,9 +308,9 @@ class TicketController {
 
     for (var Email of ticket.interested) {
       conteudoEmail = {
-        service_id: "service_o2xt645",
-        template_id: "template_bxybvbx",
-        user_id: "OGaRTlk8Ij5luGzrf",
+        service_id: "service_rcapme4",
+        template_id: "template_zausmvy",
+        user_id: "64skWYeEq_nk8m4PE",
         template_params: {
           email: Email,
           nome: user.name,
