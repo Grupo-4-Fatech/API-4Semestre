@@ -65,6 +65,8 @@ class UserController {
         renew.role = role;
 
         await collection.save(renew)
+        var userJwt = jwt.sign(email, process.env.JWT_SECRET)
+        res.cookie("jwt", userJwt);
         return res.json(renew)
     }
     public async createUser(req: Request, res: Response): Promise<Response> {
@@ -100,7 +102,6 @@ class UserController {
     }
     public async deleteUser(req: Request, res: Response): Promise<Response> {
         const { id } = req.body;
-
         const user: any = await AppDataSource.getRepository(User).findOneBy({ id: id }).catch((e) => {
             return { error: "Identificador inválido" }
         })
@@ -110,8 +111,11 @@ class UserController {
             if (verTime.length == 0){
                 const r = await AppDataSource.manager.remove(User, user).catch((e) => e)
                 return res.json(r)
+            }else{
+                const r = await AppDataSource.manager.remove(User, user).catch((e) => e)
+                return res.json(r)
+
             }
-            return res.json({error: "Usuário pode ser deletado"})
            
         }
         else {

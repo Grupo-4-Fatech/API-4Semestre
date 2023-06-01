@@ -22,7 +22,8 @@ class TicketController {
     const ticketToUpdate = await ticketRepository.findOne({
       where: { id: id },
       relations: {
-        inspectionGroup: true
+        inspectionGroup: true,
+        user: true
       }
     },)
     ticketToUpdate.title = title;
@@ -103,7 +104,7 @@ class TicketController {
     const { id } = req.body
 
     const ticketTable = await AppDataSource.getRepository(Ticket);
-    const ticket: Ticket = await ticketTable.findOneBy({ id: id })
+    const ticket: Ticket = await ticketTable.findOne({ where: { id: id }, relations: { user: true } })
     const log: Log[] = await AppDataSource.getRepository(Log).findBy({ tickets: id })
     await log.forEach(log => AppDataSource.getRepository(Log).remove(log))
 
@@ -206,7 +207,7 @@ class TicketController {
     const { data, id } = req.body;
     const ticketRepository = AppDataSource.getRepository(Ticket)
 
-    const ticket = await AppDataSource.getRepository(Ticket).findOneBy({ id: id })
+    const ticket = await AppDataSource.getRepository(Ticket).findOne({ where: { id: id }, relations: { user: true } })
     console.log(data)
 
     for (var item of data) {
@@ -279,10 +280,34 @@ class TicketController {
     var data = new Date()
     let email = jwt.decode(req.cookies.jwt);
     const user: any = await AppDataSource.getRepository(User).findOneBy({ email: email ? email.toString() : "" });
-    const userCriador: any = await AppDataSource.getRepository(User).findOneBy({ id: ticket.usersId });
+
+
+    var conteudoEmail = {
+      service_id: "service_o2xt645",
+      template_id: "template_bxybvbx",
+      user_id: "OGaRTlk8Ij5luGzrf",
+      template_params: {
+        email: ticket.user.email,
+        nome: user.name,
+        acaoUsu: acao,
+        tituloTicket: ticket.title,
+        data: data.toLocaleString('pt-BR')
+      }
+    }
+    await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify(conteudoEmail)
+    }).then(function (response) {
+      console.log('SUCCESS!', response.status, response.statusText);
+    }, function (error) {
+      console.log('FAILED...', error);
+    });
 
     for (var Email of ticket.interested) {
-      var conteudoEmail = {
+      conteudoEmail = {
         service_id: "service_o2xt645",
         template_id: "template_bxybvbx",
         user_id: "OGaRTlk8Ij5luGzrf",
