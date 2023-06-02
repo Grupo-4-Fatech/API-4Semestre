@@ -26,15 +26,10 @@ Com esses recursos, a single-page application de criação de tickets e usuário
 
 > Requisitos Funcionais
 
-- [X] Cadastros de grupos de usuários;
-- [X] Permissão por grupo e por usuário;
-- [X] Usuários devem ter distinção por times;
-- [X] Fila de chamados por time;
-- [X] Configuração e personalização de formulários de chamados;
-- [X] Árvore de decisão para escalonamento de chamados;
-- [ ] Cadastro de soluções para problemas conhecidos;
-- [ ] Formulário de abertura de chamado com indicação de interessados;
-
+- [X] Cadastro de soluções para problemas conhecidos;
+- [X] Formulário de abertura de chamado com indicação de interessados;
+- [X] Notificação por Email
+- 
 > Requisitos Não Funcionais
 
 - [X] React;
@@ -46,7 +41,7 @@ Com esses recursos, a single-page application de criação de tickets e usuário
  - - [X] <a href="https://github.com/Grupo-4-Fatech/API-4Semestre/tree/sprint_2">**2° Sprint:**</a>
  03/04/2023 a 23/04/2023
  - - [X] <a href="https://github.com/Grupo-4-Fatech/API-4Semestre/tree/sprint_3">**3° Sprint:**</a> 24/04/2023 a 14/05/2023
- - - [ ] **4°Sprint:** 15/05/2023 a 04/06/2023
+ - - [ ] <a href="https://github.com/Grupo-4-Fatech/API-4Semestre/tree/sprint_4">**4° Sprint:**</a>**4°Sprint:** 15/05/2023 a 04/06/2023
  - - [ ] **Feira de Soluções:** 13/06 e 14/06/2023
  
  </br>
@@ -73,25 +68,32 @@ Com esses recursos, a single-page application de criação de tickets e usuário
 
 ## Demonstração em Gif 3ª Sprint
 
-<ul> <li> <strong> Tela de análise(chamados) </strong> </li> </ul>
+<ul> <li> <strong> Cadastro de Solução de Chamados </strong> </li> </ul>
 
-![avaliar chamado](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/a71b2b87-938a-458e-9da9-5bacb63df6be)
-
-
-<ul> <li> <strong> Árvore dinâmica </strong> </li> </ul>
-
-![Arvore](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/cd73e933-a0bb-4c82-8d4e-cd2605bf0450)
+![cadastro de solução](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/c16c8659-4814-4a4e-8af5-ea6bb35ff49e)
 
 
-<ul> <li> <strong> Histórico do chamado </strong> </li> </ul>
 
-![Historico](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/748fe1b6-22ee-4876-89b9-c7ab3b3fac60)
+<ul> <li> <strong> Notificação por Email </strong> </li> </ul>
+
+![notificacao por email](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/d1742324-f34f-4354-82e7-427a3d96153b)
 
 
-<ul> <li> <strong> Opção de idioma </strong> </li> </ul>
+<ul> <li> <strong> Graficos Estatisticos </strong> </li> </ul>
 
-![idioma](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/15896a2d-bf10-4a55-af8a-8fc592336ea5)
+![Graficos](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/33713cb0-2968-425c-8652-e4505ee23170)
 
+
+
+<ul> <li> <strong> Cadastro de Usuarios Interessados </strong> </li> </ul>
+
+## Kanban
+
+![kanban interressados](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/0dd7526b-6811-4f7d-8820-96376617579d)
+
+## View Ticket
+
+![interessados pelo view ticket](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/b41a88b6-c63e-4b08-92ac-62472b5f6d43)
 
 
 ## Modelo conceitual
