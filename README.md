@@ -89,11 +89,11 @@ Com esses recursos, a single-page application de criação de tickets e usuário
 
 <ul> <li> <strong> Cadastro de Usuarios Interessados </strong> </li> </ul>
 
-## Kanban
+- Kanban
 
 ![kanban interressados](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/0dd7526b-6811-4f7d-8820-96376617579d)
 
-## View Ticket
+- View Ticket
 
 ![interessados pelo view ticket](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/b41a88b6-c63e-4b08-92ac-62472b5f6d43)
 
