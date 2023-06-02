@@ -71,6 +71,129 @@ Com esses recursos, a single-page application de criação de tickets e usuário
 
 </br>
 
+## Demonstração em Gif 1ª Sprint
+
+<ul> <li> <strong> Crud de Ticket </strong> </li> </ul>
+
+![crud ticket](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/8ca5d49a-2d2c-4286-9c47-b3d564701738)
+
+
+<ul> <li> <strong> Cadastro de Ticket </strong> </li> </ul>
+
+![Cadastro Ticket](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/9bfb293e-d42d-4fe4-9ee7-e9e5d9583bc1)
+
+
+<ul> <li> <strong> Aprovado ou Arquivado </strong> </li> </ul>
+
+![aprovado e arquivado](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/3b4c51fc-e140-4be3-afe7-5e0d2bb1766c)
+
+
+<ul> <li> <strong> Kanban </strong> </li> </ul>
+
+![kanban](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/d1c9c3c0-f838-41ff-8289-b3d265bdad75)
+
+
+<ul> <li> <strong> Arquivado </strong> </li> </ul>
+
+![arquivado](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/101ca38d-c704-4137-a165-39e241b3b7fe)
+
+
+## Demonstração em Gif 2ª Sprint
+
+ <ul> <li> <strong>Diferença de Acesso </strong> </li> </ul>
+
+![acesso 2](https://user-images.githubusercontent.com/88494278/234423871-d3f89e16-bd6d-4e34-b6bc-a781753dedcb.gif)
+
+<ul> <li> <strong> Alteração de Usuario Logado</strong> </li> </ul>
+
+![alterar usuario](https://user-images.githubusercontent.com/88494278/234423979-d78debd3-fa44-419f-a5d8-f2caba9947e3.gif)
+
+<ul> <li> <strong>Crud de Equipes</strong> </li> </ul>
+
+![equipe](https://user-images.githubusercontent.com/88494278/234424115-0382f130-44c0-402e-a4a2-9cb9eb085422.gif)
+
+ <ul> <li> <strong> Crud de Usuarios</strong> </li> </ul>
+
+![user d](https://user-images.githubusercontent.com/88494278/234424169-3d93db4d-0a81-4ea7-8580-77546297baa2.gif)
+
+ <ul> <li> <strong> Crud de Times e Equipes </strong> </li> </ul>
+
+![time e equipe](https://user-images.githubusercontent.com/88494278/234424395-568db1af-74ee-42d6-9559-c646488496fb.gif)
+
+
+## Demonstração em Gif 3ª Sprint
+
+<ul> <li> <strong> Tela de análise(chamados) </strong> </li> </ul>
+
+![avaliar chamado](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/a71b2b87-938a-458e-9da9-5bacb63df6be)
+
+
+<ul> <li> <strong> Árvore dinâmica </strong> </li> </ul>
+
+![Arvore](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/cd73e933-a0bb-4c82-8d4e-cd2605bf0450)
+
+
+<ul> <li> <strong> Histórico do chamado </strong> </li> </ul>
+
+![Historico](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/748fe1b6-22ee-4876-89b9-c7ab3b3fac60)
+
+
+<ul> <li> <strong> Opção de idioma </strong> </li> </ul>
+
+![idioma](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/15896a2d-bf10-4a55-af8a-8fc592336ea5)
+
+
+
+
+## Demonstração em Gif 4ª Sprint
+
+<ul> <li> <strong> Cadastro de Solução de Chamados </strong> </li> </ul>
+
+![cadastro de solução](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/c16c8659-4814-4a4e-8af5-ea6bb35ff49e)
+
+
+<ul> <li> <strong> Notificação por Email </strong> </li> </ul>
+
+![notificacao por email](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/d1742324-f34f-4354-82e7-427a3d96153b)
+
+
+<ul> <li> <strong> Graficos Estatisticos </strong> </li> </ul>
+
+![Graficos](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/33713cb0-2968-425c-8652-e4505ee23170)
+
+
+
+<ul> <li> <strong> Cadastro de Usuarios Interessados </strong> </li> </ul>
+
+ >Kanban
+
+![kanban interressados](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/0dd7526b-6811-4f7d-8820-96376617579d)
+
+ >View Ticket
+
+![interessados pelo view ticket](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/b41a88b6-c63e-4b08-92ac-62472b5f6d43)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Modelo Conceitual
 
 ![modelo conceitual](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/debe23d3-6bfe-4813-acd6-3dee10f7a4db)
