@@ -1,4 +1,4 @@
-# API- Projeto Integrador 4º Semestre ADS - Grupo Fatech
+# API- Projeto Integrador 4º Semestre ADS - Grupo Fatech - Sprint 4
 Projeto desenvolvido por alunos do quarto semestre do curso de análise e desenvolvimento de sistemas da Fatec - SJC, durante o primeiro semestre do ano de 2023.
 
 ## 🎯 Objetivo
