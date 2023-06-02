@@ -25,10 +25,12 @@ Com esses recursos, a single-page application de criação de tickets e usuário
 **Desenvolver um sistema web com os seguintes requisitos:**
 
 > Requisitos Funcionais
-
+- [X] Indicação de Interessados;
 - [X] Cadastro de soluções para problemas conhecidos;
 - [X] Formulário de abertura de chamado com indicação de interessados;
-- [X] Notificação por Email
+- [X] Graficos e Estatisticas 
+- [X] Testes e Correções
+- [X] Deploy
 
 > Requisitos Não Funcionais
 
@@ -66,7 +68,7 @@ Com esses recursos, a single-page application de criação de tickets e usuário
 
 </br>
 
-## Demonstração em Gif 3ª Sprint
+## Demonstração em Gif 4ª Sprint
 
 <ul> <li> <strong> Cadastro de Solução de Chamados </strong> </li> </ul>
 
@@ -98,11 +100,14 @@ Com esses recursos, a single-page application de criação de tickets e usuário
 
 ## Modelo conceitual
 
-![modelo conceitual](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/e39a6b95-345f-4a98-876d-b36abc2ec59a)
+![modelo conceitural versão final](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/4456cf5d-ccdc-4114-a2fd-d2401e94244f)
+
+
 
 ## Modelo Logico 
 
-![modelo logico](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/22e19108-1abd-45c9-9047-9f848132575c)
+![modelo logico 4 sprint](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/49e14472-6ef4-456a-9fc5-fee8e3896424)
+
 
 
 ## 📉 Gráfico Burndown
