@@ -15,7 +15,7 @@ Com esses recursos, a single-page application de criação de tickets e usuário
 
 <img src="docs/imagens/OBJETIVO.png" >
 
-> Status do Projeto: Em Desenvolvimento.
+> Status do Projeto: Finalizado.
 
 </br>
 
