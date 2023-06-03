@@ -196,13 +196,13 @@ Com esses recursos, a single-page application de criação de tickets e usuário
 
 ## Modelo Conceitual
 
-![modelo conceitual](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/debe23d3-6bfe-4813-acd6-3dee10f7a4db)
+![modelo conceitural versão final](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/6385e709-d6ad-4b39-8842-de26f3305620)
+
 
 
 ## Modelo Logico
 
-![modelo logico](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/b7df1b8d-2578-4d89-9564-b57ebd91a3b1)
-
+![modelo logico 4 sprint](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/27b1f890-9d8b-472d-b136-87922e6db5e9)
 
 
 ## 📉 Gráfico Burndown
