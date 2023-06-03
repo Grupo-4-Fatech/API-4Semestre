@@ -128,7 +128,6 @@ o processo de aprovar e arquivar tickets é uma prática que envolve uma avalia�
 
 No Kanban, as colunas geralmente incluem: "Backlog" (para tickets a serem trabalhados futuramente), "Em Progresso" (para tickets que estão sendo trabalhados atualmente), "Revisão" (para tickets concluídos aguardando revisão) e "Concluído" (para tickets que foram concluídos com sucesso).
 
-<a href="">**Detalhe sobre**</a>
 
 <ul> <li> <strong> Arquivado </strong> </li> </ul>
 
@@ -143,8 +142,6 @@ No contexto do sistema de gestão de tickets, é estabelecido que os tickets cri
 ![acesso 2](https://user-images.githubusercontent.com/88494278/234423871-d3f89e16-bd6d-4e34-b6bc-a781753dedcb.gif)
 
 A aplicação oferece aos usuários a capacidade de gerenciar usuários e controlar suas permissões de acesso. Os usuários são agrupados em hierarquias de acesso, com diferentes níveis de privilégios. Por exemplo, um administrador possui a habilidade de criar e gerenciar usuários, enquanto um usuário comum está limitado a visualizar e atualizar apenas os tickets.
-
-<a href="">**Detalhe sobre**</a>
 
 <ul> <li> <strong> Alteração de Usuário Logado</strong> </li> </ul>
 
@@ -178,15 +175,11 @@ o CRUD de Times e Equipes é uma funcionalidade abrangente que engloba todas as 
 
 Durante a avaliação de tickets, os usuários examinam detalhadamente as informações fornecidas no ticket, como descrição do problema, prioridade, categorias e outros dados relevantes. Eles também podem considerar o impacto do problema relatado ou a importância da solicitação feita.
 
-<a href="">**Detalhe sobre**</a>
-
 <ul> <li> <strong> Árvore dinâmica </strong> </li> </ul>
 
 ![Arvore](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/cd73e933-a0bb-4c82-8d4e-cd2605bf0450)
 
 A árvore dinâmica de seleção de usuários é uma funcionalidade avançada do sistema que permite determinar quais usuários podem participar em diferentes galhos de avaliação de cada chamado existente.
-
-<a href="">**Detalhe sobre**</a>
 
 <ul> <li> <strong> Histórico do chamado </strong> </li> </ul>
 
@@ -214,8 +207,6 @@ O cadastro de solução é uma funcionalidade fundamental na plataforma que perm
 ![notificacao por email](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/d1742324-f34f-4354-82e7-427a3d96153b)
 
 A funcionalidade de envio de e-mails para cada ação realizada por um usuário na plataforma de tickets é uma excelente forma de manter os usuários atualizados sobre o andamento e as alterações relacionadas aos seus processos ou aos tickets em que estão envolvidos.
-
-<a href="">**Detalhe sobre**</a>
 
 <ul> <li> <strong> Graficos Estatisticos </strong> </li> </ul>
 
