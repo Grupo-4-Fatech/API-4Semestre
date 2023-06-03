@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, OneToMany, ManyToOne, JoinTable, AfterInsert } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, OneToMany, ManyToOne, JoinTable, AfterInsert, JoinColumn, OneToOne } from 'typeorm'
 import { Teams } from './Teams';
 import { InspectionGroup } from './InspectionGroup';
 import { User } from './Users';
@@ -20,6 +20,9 @@ export class Ticket {
 
     @Column({})
     status: string;
+    
+    @Column({nullable: true, default: ''})
+    solution: string;
 
     @Column({ nullable: true, default: "" })
     risk: string;
@@ -30,6 +33,9 @@ export class Ticket {
     @Column({ nullable: true, default: "" })
     cost: string;
 
+    @Column("simple-array", {nullable: true, default: []})
+    interested: string[]
+
     @ManyToOne(() => Teams, (teams) => teams.id, {onDelete: 'CASCADE'})
     teams: Teams[]
 
@@ -38,6 +44,10 @@ export class Ticket {
 
     @ManyToOne(() => User, (user) => user.id, {onDelete: 'CASCADE'})
     user: User;
+
+    @OneToMany(() => User, (user) => user.id, {onDelete: 'CASCADE'})
+    @JoinColumn()
+    solver: User;
 
     @OneToMany(() => Log, (log) => log.id)
     logs: Array<Log>;

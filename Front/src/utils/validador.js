@@ -19,7 +19,7 @@ export const validador = {
         } return true
     },
     validarEmail(email) {
-        const emailRegex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+?$/i
+        const emailRegex = /^[a-z0-9._]+@[a-z0-9]+\.[a-z]+?$/i
         return emailRegex.test(email)
 
     },

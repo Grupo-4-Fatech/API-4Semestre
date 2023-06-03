@@ -17,6 +17,7 @@ const ArchivedTicket = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [showModalHistorico, setShowModalHistorico] = React.useState(false);
     const [ticket, setTicket] = useState({ id: '', title: '', description: ``, classification: '' });
+    const [loading, setLoading] = useState(false);
 
     function getData() {
         fetch("/ticket/getAll/2", {
@@ -41,6 +42,7 @@ const ArchivedTicket = () => {
         })
     }
     const restore = (id, status) => {
+        setLoading(true);
         fetch("/ticket/updateStatus", {
             method: 'PATCH',
             headers: {
@@ -53,6 +55,7 @@ const ArchivedTicket = () => {
                     icon: 'error',
                     title: archivedTicktes[language].swalError,
                 })
+                setLoading(false);
             }
             else {
 
@@ -60,12 +63,13 @@ const ArchivedTicket = () => {
                     icon: 'success',
                     title: archivedTicktes[language].swalSucsses,
                 })
+                setLoading(false);
                 var updateData = data.filter(item => item.id != id)
                 setData(updateData)
             }
         })
     }
-
+    
     const deleteTicket = (id) => {
         fetch("/ticket/delete", {
             method: 'DELETE',
@@ -140,7 +144,12 @@ const ArchivedTicket = () => {
                                 </td>
 
                                 <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
-                                    <button onClick={(e) => restore(dat.id, 1)} className="bg-green-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">{archivedTicktes[language].restaurarButton}</button>
+                                    <button
+                                        onClick={(e) => restore(dat.id, 1)}
+                                        disabled={loading === true}
+                                        className="bg-green-600 text-white font-bold py-2 px-4 rounded inline-flex items-center right-20">
+                                        {archivedTicktes[language].restaurarButton}
+                                    </button>
                                 </td>
 
                                 {/* <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray">
@@ -201,7 +210,7 @@ const ArchivedTicket = () => {
                                             onClick={() => setShowModalHistorico(false)}
                                         >
                                             {archivedTicktes[language].closeButton}
-                                    
+
                                         </button>
                                         <button
                                             className="text-white rounded-full bg-botaohistorico  hover:bg-green-900 font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"

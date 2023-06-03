@@ -11,6 +11,7 @@ const tradutorViewUsu = {
         headersAtualizar: "Atualizar",
         headersDeletar: "Deletar",
         errorUsuNaoDeletado: "Usuário não deletado",
+        errorUsuNaoDeletadoText: "Antes de excluir o usuário, verifique se o usuário possui um time",
         sucssesUsuDeletado: "Usuário excluído com sucesso",
 
         
@@ -28,6 +29,7 @@ const tradutorViewUsu = {
         headersAtualizar: "Update",
         headersDeletar: "Delete",
         errorUsuNaoDeletado: "User not deleted",
+        errorUsuNaoDeletadoText: "Before deleting the user, check if the user has a team",
         sucssesUsuDeletado: "User deleted successfully",
         
     }

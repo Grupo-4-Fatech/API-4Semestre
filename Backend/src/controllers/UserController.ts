@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import { User } from "../entities/Users";
 import * as jwt from "jsonwebtoken";
 import { Not } from "typeorm";
+import { Teams } from "../entities/Teams";
 
 
 class UserController {
@@ -64,6 +65,8 @@ class UserController {
         renew.role = role;
 
         await collection.save(renew)
+        var userJwt = jwt.sign(email, process.env.JWT_SECRET)
+        res.cookie("jwt", userJwt);
         return res.json(renew)
     }
     public async createUser(req: Request, res: Response): Promise<Response> {
@@ -76,7 +79,6 @@ class UserController {
         object.gender = gender;
         object.role = role;
         object.inspectionGroup = null;
-        object.solutions = null;
         object.team = null;
         object.ticket = null;
 
@@ -100,14 +102,21 @@ class UserController {
     }
     public async deleteUser(req: Request, res: Response): Promise<Response> {
         const { id } = req.body;
-
         const user: any = await AppDataSource.getRepository(User).findOneBy({ id: id }).catch((e) => {
             return { error: "Identificador inválido" }
         })
 
         if (user && user.id) {
-            const r = await AppDataSource.manager.remove(User, user).catch((e) => e)
-            return res.json(r)
+            const verTime = await AppDataSource.manager.find(Teams, {where:{users:user}})
+            if (verTime.length == 0){
+                const r = await AppDataSource.manager.remove(User, user).catch((e) => e)
+                return res.json(r)
+            }else{
+                const r = await AppDataSource.manager.remove(User, user).catch((e) => e)
+                return res.json(r)
+
+            }
+           
         }
         else {
             return res.json({ error: "Usuário não encontrado" })

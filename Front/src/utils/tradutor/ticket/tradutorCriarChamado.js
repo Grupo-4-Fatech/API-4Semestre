@@ -15,6 +15,8 @@ const translationsChamado = {
         errorSelectDefault: "Selecione um classificação",
         errorVazioDescricao: "Por favor escreva uma descrição",
         sucssesMessage: "Criado com sucesso",
+        interessadosTitle: "E-mail(s) de interessado(s)",
+        interessadosPlaceholder: "Escreva o e-mail"
 
     },
     en: {
@@ -33,6 +35,8 @@ const translationsChamado = {
         errorSelectDefault: "Please select a classification",
         errorVazioDescricao: "Please write a description",
         sucssesMessage: "Created successfully",
+        interessadosTitle: "E-mail(s) from interested party/parties.",
+        interessadosPlaceholder: "Write a e-mail"
 
     }
 };

@@ -1,8 +1,8 @@
 import React from 'react';
-import { FiEdit, FiUserPlus, FiUsers, FiUser,FiArchive,FiCheckSquare} from 'react-icons/fi';
+import { FiEdit, FiUserPlus, FiUsers, FiUser, FiArchive, FiCheckSquare } from 'react-icons/fi';
 import { MdOutlineViewAgenda, MdOutlinePermContactCalendar } from 'react-icons/md';
 import { BsKanban, } from 'react-icons/bs';
-
+import { AiOutlinePieChart, AiOutlineBarChart } from 'react-icons/ai'
 
 export const gridOrderImage = (props) => (
   <div>
@@ -62,9 +62,6 @@ export const kanbanGridEn = [
     allowToggle: true
   },
 ];
-
-
-
 
 // SideBar 
 export const linksPt = [
@@ -155,10 +152,27 @@ export const linksPt = [
     title: 'Árvore de aprovação',
     links: [
       {
-        title:'Gerenciar árvore',
+        title: 'Gerenciar árvore',
         name: 'tree/create',
-        icon: <FiCheckSquare/>,
+        icon: <FiCheckSquare />,
         permission: 1,
+      }
+    ]
+  },
+  {
+    title: 'Gráficos',
+    links: [
+      {
+        title: 'Pizza',
+        name: 'pie',
+        icon: <AiOutlinePieChart />,
+        permission: 3,
+      },
+      {
+        title: 'Barra',
+        name: 'bar',
+        icon: <AiOutlineBarChart />,
+        permission: 3
       }
     ]
   }
@@ -252,16 +266,32 @@ export const linksEn = [
     title: 'Approval tree',
     links: [
       {
-        title:'Manage tree',
+        title: 'Manage tree',
         name: 'tree/create',
-        icon: <FiCheckSquare/>,
+        icon: <FiCheckSquare />,
         permission: 1,
+      }
+    ]
+  },
+  {
+    title: 'Charts',
+    links: [
+      {
+        title: 'Pie',
+        name: 'pie',
+        icon: <AiOutlinePieChart />,
+        permission: 3,
+      },
+      {
+        title: 'Bar',
+        name: 'bar',
+        icon: <AiOutlineBarChart />,
+        permission: 3
       }
     ]
   }
 
 ];
-
 
 export const themeColors = [
   {
@@ -307,5 +337,37 @@ export const userProfileDataEn = [
     desc: 'Account setup',
     iconColor: '#03C9D7',
     iconBg: '#E5FAFB',
+  },
+];
+
+// Chart
+
+export const barPrimaryXAxis = {
+  valueType: 'Category',
+  interval: 1,
+  majorGridLines: { width: 0 },
+  labelStyle: { color: 'rgba(255, 255, 255, 0.75)' }
+};
+export const barPrimaryYAxis = {
+  majorGridLines: { width: 0.5 },
+  majorTickLines: { width: 0 },
+  //lineStyle: { width: 0 },
+};
+
+export const barCustomSeries = [
+  {
+    dataSource: [],
+    xName: 'x',
+    yName: 'y',
+    name: '',
+    type: 'Column',
+    marker: {
+      dataLabel: {
+        visible: true,
+        position: 'Top',
+        font: { fontWeight: '600', color: '#ffffff' },
+      },
+    },
+    fill: '',
   },
 ];
