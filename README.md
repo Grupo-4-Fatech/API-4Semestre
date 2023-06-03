@@ -43,20 +43,17 @@ Sprint 2
 - [X] Usuários devem ter distinção por times;
 - [X] Fila de chamados por time;
 - [X] Configuração e personalização de formulários de chamados;
-- [X] Árvore de decisão para escalonamento de chamados;
-- [X] Historio do Chamado;
-- [X] Tela de Analise (chamados);
-- [ ] Cadastro de soluções para problemas conhecidos;
-- [ ] Formulário de abertura de chamado com indicação de interessados;
+- [ ] Árvore de decisão para escalonamento de chamados;
+- [ ] Historio do Chamado;
+- [ ] Tela de Analise (chamados);
+
 
 Sprint 3
 
-- [X] Cadastros de grupos de usuários;
-- [X] Permissão por grupo e por usuário;
-- [X] Usuários devem ter distinção por times;
-- [X] Fila de chamados por time;
-- [X] Configuração e personalização de formulários de chamados;
 - [X] Árvore de decisão para escalonamento de chamados;
+- [X] Historio do Chamado;
+- [X] Tela de Analise (chamados);
+- [X] Tradução do site
 - [ ] Cadastro de soluções para problemas conhecidos;
 - [ ] Formulário de abertura de chamado com indicação de interessados;
 
