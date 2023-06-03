@@ -80,7 +80,7 @@ Sprint 4
  - - [X] <a href="https://github.com/Grupo-4-Fatech/API-4Semestre/tree/sprint_2">**2° Sprint:**</a>
  03/04/2023 a 23/04/2023
  - - [X] <a href="https://github.com/Grupo-4-Fatech/API-4Semestre/tree/sprint_3">**3° Sprint:**</a> 24/04/2023 a 14/05/2023
- - - [ ] **4°Sprint:** 15/05/2023 a 04/06/2023
+ - - [ ] <a href="https://github.com/Grupo-4-Fatech/API-4Semestre/tree/sprint_4">**4°Sprint:**</a> 15/05/2023 a 04/06/2023
  - - [ ] **Feira de Soluções:** 13/06 e 14/06/2023
  
  </br>
