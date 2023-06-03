@@ -26,6 +26,31 @@ Com esses recursos, a single-page application de criação de tickets e usuário
 
 > Requisitos Funcionais
 
+Sprint 1
+
+- [X] Cadastros de Chamados;
+- [X] Criação do Formulario de Chamados;
+- [X] Consulta de Chamados;
+- [X] Exclusão dos chamados;
+- [X] Alteração de Chamados;
+- [X] Fluxo Chamado;
+- [X] Kanban de Estados do chamado;
+
+Sprint 2
+
+- [X] Cadastros de grupos de usuários;
+- [X] Permissão por grupo e por usuário;
+- [X] Usuários devem ter distinção por times;
+- [X] Fila de chamados por time;
+- [X] Configuração e personalização de formulários de chamados;
+- [X] Árvore de decisão para escalonamento de chamados;
+- [X] Historio do Chamado;
+- [X] Tela de Analise (chamados);
+- [ ] Cadastro de soluções para problemas conhecidos;
+- [ ] Formulário de abertura de chamado com indicação de interessados;
+
+Sprint 3
+
 - [X] Cadastros de grupos de usuários;
 - [X] Permissão por grupo e por usuário;
 - [X] Usuários devem ter distinção por times;
@@ -34,6 +59,15 @@ Com esses recursos, a single-page application de criação de tickets e usuário
 - [X] Árvore de decisão para escalonamento de chamados;
 - [ ] Cadastro de soluções para problemas conhecidos;
 - [ ] Formulário de abertura de chamado com indicação de interessados;
+
+Sprint 4
+
+- [X] Indicação de Interessados;
+- [X] Cadastro de soluções para problemas conhecidos;
+- [X] Formulário de abertura de chamado com indicação de interessados;
+- [X] Graficos e Estatisticas 
+- [X] Testes e Correções
+- [X] Deploy
 
 > Requisitos Não Funcionais
 
