@@ -114,7 +114,8 @@ A aplicação oferece aos usuários a capacidade de gerenciar usuários e contro
 
 <ul> <li> <strong> Alteração de Usuário Logado</strong> </li> </ul>
 
-![updateProfile](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/89141910/62c33b50-fe43-4052-b115-7f4cf56cb8f8)
+![Design sem nome(3)](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/c8ab4d29-2e4f-467f-b1f1-fe1c39b3dc44)
+
 
 A funcionalidade de alteração de usuário logado é uma característica importante do sistema que permite aos usuários fazer modificações em suas informações de perfil e conta enquanto estão conectados.
 
