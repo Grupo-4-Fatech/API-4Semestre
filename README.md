@@ -1,4 +1,4 @@
-# API- Projeto Integrador 4º Semestre ADS - Grupo Fatech
+# API- Projeto Integrador 4º Semestre ADS - Grupo Fatech - Sprint 4
 Projeto desenvolvido por alunos do quarto semestre do curso de análise e desenvolvimento de sistemas da Fatec - SJC, durante o primeiro semestre do ano de 2023.
 
 ## 🎯 Objetivo
@@ -15,7 +15,7 @@ Com esses recursos, a single-page application de criação de tickets e usuário
 
 <img src="docs/imagens/OBJETIVO.png" >
 
-> Status do Projeto: Em Desenvolvimento.
+> Status do Projeto: Finalizado.
 
 </br>
 
@@ -140,11 +140,12 @@ o CRUD de Times é uma funcionalidade abrangente que engloba todas as etapas do 
 
 <ul> <li> <strong> Avaliação dos chamados </strong> </li> </ul>
 
-![avaliar chamado](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/a71b2b87-938a-458e-9da9-5bacb63df6be)
+![cadastro de solução](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/c16c8659-4814-4a4e-8af5-ea6bb35ff49e)
 
 Durante a avaliação de tickets, os usuários selecionados para avaliar examinam detalhadamente as informações fornecidas no ticket, como descrição do problema, prioridade, categorias e outros dados relevantes. Eles também podem considerar o impacto do problema relatado ou a importância da solicitação feita.
 
-<ul> <li> <strong> Árvore dinâmica </strong> </li> </ul>
+
+<ul> <li> <strong> Notificação por Email </strong> </li> </ul>
 
 ![Arvore](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/cd73e933-a0bb-4c82-8d4e-cd2605bf0450)
 
@@ -156,9 +157,9 @@ A árvore dinâmica de seleção de usuários é uma funcionalidade avançada do
 
 O histórico de cada ticket é uma funcionalidade essencial do sistema que registra todas as atividades, atualizações e interações relacionadas a um determinado ticket ao longo do seu ciclo de vida.
 
-<ul> <li> <strong> Opção de idioma </strong> </li> </ul>
+<ul> <li> <strong> Graficos Estatisticos </strong> </li> </ul>
 
-![idioma](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/15896a2d-bf10-4a55-af8a-8fc592336ea5)
+![Graficos](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/33713cb0-2968-425c-8652-e4505ee23170)
 
 O seletor de idioma é uma funcionalidade importante na plataforma SPA (Single-Page Application) que permite aos usuários escolherem o idioma de sua preferência para utilizar na aplicação.
 
@@ -193,6 +194,17 @@ A plataforma de tickets possui um recurso de vinculação de chamados, que permi
 
 ![modelo conceitural versão final](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/6385e709-d6ad-4b39-8842-de26f3305620)
 
+
+
+<ul> <li> <strong> Cadastro de Usuarios Interessados </strong> </li> </ul>
+
+ >Kanban
+
+![kanban interressados](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/0dd7526b-6811-4f7d-8820-96376617579d)
+
+ >View Ticket
+
+![interessados pelo view ticket](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/b41a88b6-c63e-4b08-92ac-62472b5f6d43)
 
 
 ## Modelo Lógico do Banco de Dados

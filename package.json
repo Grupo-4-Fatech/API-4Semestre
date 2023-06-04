@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "@emailjs/browser": "^3.11.0",
+    "@syncfusion/ej2-react-charts": "^21.2.5",
     "react-select": "^5.7.2"
   }
 }
