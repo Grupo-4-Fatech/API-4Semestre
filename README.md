@@ -258,6 +258,7 @@ Ambos os Caminhos Kanban e View Ticket levam ao caminho para vincular interessad
 
 ![modelo logico 4 sprint](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/27b1f890-9d8b-472d-b136-87922e6db5e9)
 
+## Manual do Usuário
 
 - <a href="https://github.com/Grupo-4-Fatech/API-4Semestre/blob/main/docs/manual/Manual.pdf">**Manual do Projeto**</a>
 
