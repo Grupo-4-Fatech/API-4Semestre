@@ -227,8 +227,6 @@ Ambos os Caminhos Kanban e View Ticket levam ao caminho para vincular interessad
 
 ![interessados pelo view ticket](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/b41a88b6-c63e-4b08-92ac-62472b5f6d43)
 
-<a href="[https://github.com/Grupo-4-Fatech/API-4Semestre/tree/sprint_4](https://github.com/Grupo-4-Fatech/API-4Semestre/blob/main/docs/manual/Manual.pdf)">**Manual do Projeto**</a> 15/05/2023 a 04/06/2023
-
 
 
 
@@ -259,6 +257,9 @@ Ambos os Caminhos Kanban e View Ticket levam ao caminho para vincular interessad
 ## Modelo Logico
 
 ![modelo logico 4 sprint](https://github.com/Grupo-4-Fatech/API-4Semestre/assets/88494278/27b1f890-9d8b-472d-b136-87922e6db5e9)
+
+
+- <a href="https://github.com/Grupo-4-Fatech/API-4Semestre/blob/main/docs/manual/Manual.pdf">**Manual do Projeto**</a>
 
 
 ## 📉 Gráfico Burndown
